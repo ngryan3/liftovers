@@ -1,4 +1,5 @@
 # Web Application for lifTOvers/lifTOvers Team 2 (Team #7)
+**NOTE**: You can also view this on our google doc: https://docs.google.com/document/d/1wURbQ0uQ0G-F7wBYAzk30UIEQ8epJ9427SYbBSfLX9M/edit?usp=sharing
 ## Product Details
 #### Q1: What are you planning to build?
 
@@ -51,11 +52,11 @@
 <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d1/Screen%20Shot%202019-10-17%20at%209.44.05%20PM.png" />
 <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d1/Screen%20Shot%202019-10-17%20at%209.44.11%20PM.png" />
 
-**Lift Request object, its attributes and life-cycle:**
+**Lift Request object, its attributes and life-cycle:**  
 <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d1/Screen%20Shot%202019-10-17%20at%209.44.32%20PM.png" />
  
  
-**Action flow of the life-cycle of a lift request:**
+**Action flow of the life-cycle of a lift request:**  
 <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d1/Screen%20Shot%202019-10-17%20at%209.44.41%20PM.png" />
 
 #### Q5: What are the user stories that make up the MVP? 
@@ -115,45 +116,47 @@
 - Communication with lifTOvers/Meeting set-up: Stacey
 - Scrum master: Ryan
 - Github Project Management: Andries
-- Testing: Fillis
+- Testing: Fillis  
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Each member on the team is expected to code and contribute to each of the categories determined above and contribute to team discussions. 
-**Faye**:
+
+**Faye**:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of making sure UX/UI Design is approved by lifTOvers and complies with user design principles, will be responsible for organizing the completion of design section from team members. Previously completed an internship at a research facility building a user portal web application. 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Python, Java, HTML/CSS, Android Studio, REST API
 - Weaknesses: C, Javascript, XML 
 
-**Tosin**
+**Tosin**:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of Front end completion and delegating front-end tasks. Responsible for organizing the completion of front end section with  team members. Previously completed a PEY at a Development Firm for the Ministry of Education.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths : Databases, Android Studio, html
 - Weaknesses: C, C++, Javascript
 
-**Angela** 
+**Angela**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of Back-end end completion and delegating back-end tasks. Responsible for organizing the completion of Back-end section with team members.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Database, anything Java (Android Studio), Python also fine
 - Weaknesses: C, Javascript
 
-**Stacey**
+**Stacey**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of communication with LiftOvers team. Responsible for taking minutes and keeping track of LiftOvers requests, data and information.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses: 
 - Strengths: Java, Python, Android
 - Weaknesses: Javascript, XML, databases
 
-**Ryan**
+**Ryan**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be the Scrum master, In charge of tracking project progress and calling meetings depending on needs for project. In charge or maintaining proper progress of project in accordance with course requirements.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Java, Python, Android, C
 - Weaknesses: Java Script
 
-**Andries**
+**Andries**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be in charge of maintaining github synchronization. Also in charge of making sure github code is able to run smoothly. Tracking errors and Recording them. Will be in charge of testing code as well.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Java, C, Android Studio, Python
 - Weaknesses: JavaScript
 
-**Fillis**
+**Fillis**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be in charge of testing code, making sure everything works. Also responsible that all functionality is tested before merging to master branch.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Java, Python, Database, Android Studio, C
@@ -161,32 +164,34 @@
 
 #### Team Rules 
 
-**Communication**:
+**Communication**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We created a group chat on messenger to schedule team meetings which will happen every Friday at 3-5pm. If team members have questions about code, instead of using messenger we will be using Slack. We are also using Slack to communicate with lifTOvers for technical and functional questions. In order to come into contact with lifTOvers to set up meetings, Stacey is responsible for sending emails to them and corresponding. 
  
-**Meetings**:
+**Meetings**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Set up an Agile Project on Github to keep track of tasks certain team members are responsible for and their progress. If a team member is struggling with their assigned task and notifies this problem to the team early, we can assign another team member to either assist or swap tasks with each other, so we meet our goals for the week. During meetings we will also have standups facilitated by the scrum master to report what we have completed and plan for the next sprint. Sprints will be 2 weeks in length. Team members are expected to attend weekly team meetings on Fridays from 3pm-5pm, as there are no class conflicts then. If there is an emergency and someone is unable to make it to the meeting, that person is expected to communicate their absence as soon as possible and prior to the meeting (by 12 hours if possible). Members will rotate taking notes during meetings for future reference, and if a member was unable to make it they are responsible for reviewing the meeting notes. 
  
-**Conflict Resolutions**:
+**Conflict Resolutions**:    
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Non-responsive team members: If a team member remains unresponsive after 24 hours, as a team we will re-delegate tasks to someone else so we won’t fall further behind. When the non-responsive team member becomes available, we are going to have a serious team discussion. If they are consistently non-response, we will inform a TA/Instructor about this
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Personality Conflicts: If team members have an issue with each other, they can talk to a neutral third person to help solve the issues they have and learn to work with each other  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Scared to ask for help: Let everyone know on the team that its ok to ask for help and that everyone is willing to help each other out. 
 
 #### Events 
 
-**Meetings with lifTOvers tech group:**
-**1st**: Oct 7th @ 6:30 p.m., on Google Hangouts
-- **Purpose**: Introduce ourselves, and get to know more about the details of the project, i.e. requirements & what has already been done.
-**2nd**: Oct 12th @ 11:30 a.m., in person @ OISE
+**Meetings with lifTOvers tech group:**   
+**1st**: Oct 7th @ 6:30 p.m., on Google Hangouts   
+- **Purpose**: Introduce ourselves, and get to know more about the details of the project, i.e. requirements & what has already been done.   
+
+**2nd**: Oct 12th @ 11:30 a.m., in person @ OISE   
  - Purpose: Discuss further on project details (as we have just received the document sent from out partner), as well as discussing on the D1 draft.
    - Post - meeting: Join Slack, receive data structure & done code from partner. 
    - Future meetings will reoccur Fridays 6-7 p.m. on Google Hangouts. (After our group meetings) on a biweekly basis. We may have meetings in person depending on the situation. 
     - Purpose: let our partner know how far are we on the project, and knowing any comments & anything we should add/change. Also for demo-ing progress to lifTOvers for approval.  
 
-**Group meetings (despite tutorial times, and after project was chosen)**:
-**1st**: Oct 10th from 4-5 p.m., @ BA 3175
-**Purpose**: discuss & split up work for D1
-**2nd**: Oct 12th @ 12:30 p.m., before & after the partner meeting, @ OISE
+**Group meetings (despite tutorial times, and after project was chosen)**:    
+**1st**: Oct 10th from 4-5 p.m., @ BA 3175    
+- **Purpose**: discuss & split up work for D1        
+
+**2nd**: Oct 12th @ 12:30 p.m., before & after the partner meeting, @ OISE    
  - Purpose: refine D1
  - Future meeting dates are currently set to Fridays 3-5 p.m. every week, and we are meeting in person at Bahen Center, hopefully room 3200.
  - Purpose mainly for a brief code review and stand-up, learning how everyone is doing, and depending on different situations, work distribution might have a small change (e.g. someone has midterms/ other assignments due all week and therefore not able to fully complete his/her part of the coding)
