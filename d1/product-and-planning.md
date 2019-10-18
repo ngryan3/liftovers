@@ -1,5 +1,6 @@
 # Web Application for lifTOvers/lifTOvers Team 2 (Team #7)
 **NOTE**: You can also view this on our google doc: https://docs.google.com/document/d/1wURbQ0uQ0G-F7wBYAzk30UIEQ8epJ9427SYbBSfLX9M/edit?usp=sharing
+**ANOTHER NOTE**: We were given a 24 hour extension by our TA Neeraja. Our deadline for D1 is Oct 17 11:59pm
 ## Product Details
 #### Q1: What are you planning to build?
 
