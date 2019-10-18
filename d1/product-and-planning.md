@@ -182,7 +182,7 @@
 - **Purpose**: Introduce ourselves, and get to know more about the details of the project, i.e. requirements & what has already been done.   
 
 **2nd**: Oct 12th @ 11:30 a.m., in person @ OISE   
- - Purpose: Discuss further on project details (as we have just received the document sent from out partner), as well as discussing on the D1 draft.
+ - **Purpose**: Discuss further on project details (as we have just received the document sent from out partner), as well as discussing on the D1 draft.
    - Post - meeting: Join Slack, receive data structure & done code from partner. 
    - Future meetings will reoccur Fridays 6-7 p.m. on Google Hangouts. (After our group meetings) on a biweekly basis. We may have meetings in person depending on the situation. 
     - Purpose: let our partner know how far are we on the project, and knowing any comments & anything we should add/change. Also for demo-ing progress to lifTOvers for approval.  
@@ -192,7 +192,7 @@
 - **Purpose**: discuss & split up work for D1        
 
 **2nd**: Oct 12th @ 12:30 p.m., before & after the partner meeting, @ OISE    
- - Purpose: refine D1
+ - **Purpose**: refine D1
  - Future meeting dates are currently set to Fridays 3-5 p.m. every week, and we are meeting in person at Bahen Center, hopefully room 3200.
  - Purpose mainly for a brief code review and stand-up, learning how everyone is doing, and depending on different situations, work distribution might have a small change (e.g. someone has midterms/ other assignments due all week and therefore not able to fully complete his/her part of the coding)
  - Also organize and report progress to lifTOvers if we are meeting with them remotely afterwards.
