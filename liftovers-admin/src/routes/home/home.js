@@ -1,11 +1,14 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Login from "../../routes/login";
 import { Grid, Layout, Boxed } from "flexibull";
 import {
   Header,
   Contain,
   ClearButton,
   Wrapper,
-  Square
+  Square,
+  ClearLink
 } from "../../components/styles";
 import Logo from "../../assets/liftovers.jpg";
 import styled from "styled-components";
@@ -34,8 +37,9 @@ const Home = () => {
                     height="100px"
                   />
                 </div>
-                <ClearButton>Home</ClearButton>
-                <ClearButton>About</ClearButton>
+                <ClearLink>Home</ClearLink>
+                <ClearLink to="/login"> Login</ClearLink>
+                <ClearLink>About</ClearLink>
               </Grid>
             </Boxed>
           </Contain>
@@ -46,3 +50,4 @@ const Home = () => {
 };
 
 export default Home;
+
