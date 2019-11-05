@@ -7,7 +7,8 @@ import {
   Contain,
   ClearButton,
   Wrapper,
-  Square
+  Square,
+  ClearLink
 } from "../../components/styles";
 import Logo from "../../assets/liftovers.jpg";
 import styled from "styled-components";
@@ -36,11 +37,12 @@ const Home = () => {
                     height="100px"
                   />
                 </div>
-                <ClearLink>Home</ClearLink>
-                    <ClearLink to="/login"> Login</ClearLink>
-                <ClearLink>About</ClearLink>
+
                 <ClearButton>Profile</ClearButton>
                 <ClearButton>About</ClearButton>
+                <ClearButton>
+                    <ClearLink to="/login">Login</ClearLink>
+                </ClearButton>
               </Grid>
             </Boxed>
           </Contain>
