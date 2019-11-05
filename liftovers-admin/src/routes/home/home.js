@@ -34,12 +34,19 @@ const Home = () => {
                     height="100px"
                   />
                 </div>
-                <ClearButton>Home</ClearButton>
+                <ClearButton>Profile</ClearButton>
                 <ClearButton>About</ClearButton>
               </Grid>
             </Boxed>
           </Contain>
         </Header>
+
+        <Contain width="1200px">
+            <Boxed pad="5px 10px">
+            <p> PROFILE HERE </p>
+            </Boxed>
+        </Contain>
+
       </Wrapper>
     </Layout>
   );

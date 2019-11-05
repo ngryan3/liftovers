@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./routes/login";
 import Home from "./routes/home";
+import Volunteers from "./routes/volunteer";
 import { AdminLayout } from "./components/admin";
 
 const openPages = ["/", "/login"];
@@ -22,6 +23,9 @@ function App() {
       ) : (
         <Switch>
           <AdminLayout>
+          <Route exact path="/volunteers">
+            <Volunteers />
+          </Route>
           </AdminLayout>
         </Switch>
       )}
