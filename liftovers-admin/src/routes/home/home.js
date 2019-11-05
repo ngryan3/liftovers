@@ -1,4 +1,6 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Login from "../../routes/login";
 import { Grid, Layout, Boxed } from "flexibull";
 import {
   Header,
@@ -34,19 +36,15 @@ const Home = () => {
                     height="100px"
                   />
                 </div>
+                <ClearLink>Home</ClearLink>
+                    <ClearLink to="/login"> Login</ClearLink>
+                <ClearLink>About</ClearLink>
                 <ClearButton>Profile</ClearButton>
                 <ClearButton>About</ClearButton>
               </Grid>
             </Boxed>
           </Contain>
         </Header>
-
-        <Contain width="1200px">
-            <Boxed pad="5px 10px">
-            <p> PROFILE HERE </p>
-            </Boxed>
-        </Contain>
-
       </Wrapper>
     </Layout>
   );

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Button, Container } from "flexibull";
+import { link } from "fs";
+import {  Link } from "react-router-dom";
 
 export const Header = styled.div`
   min-height: 70px;
@@ -37,6 +39,16 @@ export const ClearButton = styled(Button)`
     background: #eee;
   }
 `;
+
+export const ClearLink = styled(Link)`
+  background-color: none;
+  background: none;
+  color: #444;
+  &:hover {
+    background: #eee;
+  }
+`;
+
 
 export const Wrapper = styled(Container)`
   /* width: 100vw; */
