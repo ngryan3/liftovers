@@ -4,6 +4,7 @@ import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootst
 import {
   Header,
   Contain,
+  ClearLink,
   ClearButton,
   Wrapper,
   Square
@@ -35,7 +36,9 @@ const Login = () => {
                     height="100px"
                   />
                 </div>
-                <ClearButton>Home</ClearButton>
+                <ClearButton>
+                    <ClearLink to="/">Home</ClearLink>
+                </ClearButton>
                 <ClearButton>Sign in</ClearButton>
               </Grid>
             </Boxed>
