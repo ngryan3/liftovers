@@ -14,5 +14,5 @@ var VolunteerSchema = mongoose.Schema(
 );
 
 VolunteerSchema.plugin(mongoosePaginate);
-// "Volunteer" is the collections name. We are most likely creating our own and this will be changed
-module.exports = mongoose.model("Volunteer", VolunteerSchema);
+// "team2volunteers" is the collections that we are using
+module.exports = mongoose.model("Team2volunteers", VolunteerSchema);

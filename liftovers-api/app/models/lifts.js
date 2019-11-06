@@ -23,5 +23,5 @@ var LiftSchema = mongoose.Schema({
 }, {
     timestamps: true
 });
-
-module.exports = mongoose.model('Lifts', LiftSchema);
+// "team2lifts" is the collections name that we are using
+module.exports = mongoose.model('Team2lifts', LiftSchema);
