@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Login from "../../routes/login";
 import { Grid, Layout, Boxed } from "flexibull";
 import {
   Header,
@@ -37,12 +36,19 @@ const Home = () => {
                     height="100px"
                   />
                 </div>
-
-                <ClearButton>Profile</ClearButton>
-                <ClearButton>About</ClearButton>
-                <ClearButton>
+                <div>
+                  <Grid
+                    default="auto 100px 100px 140px"
+                    tablet="auto 100px 100px 140px"
+                    mobile="1fr"
+                    pad="1px"
+                    >
+                    <ClearLink>Home</ClearLink>
+                    <ClearLink to="/signup">Sign Up</ClearLink>
                     <ClearLink to="/login">Login</ClearLink>
-                </ClearButton>
+                    <ClearLink>About</ClearLink>
+                  </Grid>
+                </div>
               </Grid>
             </Boxed>
           </Contain>
@@ -52,4 +58,6 @@ const Home = () => {
   );
 };
 
+
 export default Home;
+
