@@ -6,7 +6,16 @@ var VolunteerSchema = mongoose.Schema(
     name: String,
     phone: String,
     postalCode: String,
-    availability: Object
+    availability: {
+      day: String,
+      time: {
+        hour: Number,
+        minute: Number,
+      }
+  },
+    lifts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team2lifts' }],
+    // available/ unavailable/ deleted
+    status: String
   },
   {
     timestamps: true

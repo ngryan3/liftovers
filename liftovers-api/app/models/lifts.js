@@ -1,13 +1,5 @@
 var mongoose = require('mongoose');
 
-var VolunteerSchema = mongoose.Schema({
-    name: String,
-    phone: String,
-    postalCode: String,
-    availability: Object
-}, {
-    timestamps: true
-});
 var LiftSchema = mongoose.Schema({
     origin: String,
     availability: {
@@ -17,11 +9,14 @@ var LiftSchema = mongoose.Schema({
             minute: Number,
         }
     },
-    hasVolunteer: {type: Boolean, default: false },
-    volunteer: [VolunteerSchema],
-
+    hasVolunteer: { type: Boolean, default: false },
+    volunteer: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team2volunteers' }],
+    // draft/ posted/ ongoing/ completed/ canceled/ problem
+    status: String,
+    chosenVolunteer: { type: mongoose.Schema.Types.ObjectId, ref: 'Team2volunteers' }
 }, {
     timestamps: true
 });
+
 // "team2lifts" is the collections name that we are using
 module.exports = mongoose.model('Team2lifts', LiftSchema);
