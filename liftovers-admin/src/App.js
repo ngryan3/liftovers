@@ -5,7 +5,7 @@ import Signup from "./routes/signup";
 import Home from "./routes/home";
 import Dashboard from "./routes/dashboard";
 import Volunteers from "./routes/volunteer";
-import Lifts from "./routes/lifts";
+//import Lifts from "./routes/lifts";
 import { AdminLayout } from "./components/admin";
 
 const openPages = ["/", "/login"];
@@ -28,16 +28,17 @@ function App() {
         </Switch>
       ) : (
         <Switch>
-          <AdminLayout>
-            <Route exact path="/dashboard">
+           <Route exact path="/dashboard">
               <Dashboard />
-            </Route>
+           </Route> 
+           {/* will move this under admin layout after design */}
+          <AdminLayout>
             <Route exact path="/volunteers">
               <Volunteers />
             </Route>
-            <Route exact path="/lifts">
+            {/* <Route exact path="/lifts">
               <Lifts />
-            </Route>
+            </Route> */}
           </AdminLayout>
         </Switch>
       )}
