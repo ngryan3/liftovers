@@ -1,8 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./routes/login";
+import Signup from "./routes/signup";
 import Home from "./routes/home";
+import Dashboard from "./routes/dashboard";
 import Volunteers from "./routes/volunteer";
+import Lifts from "./routes/lifts";
 import { AdminLayout } from "./components/admin";
 
 const openPages = ["/", "/login"];
@@ -16,6 +19,9 @@ function App() {
           <Route exact path="/login">
             <Login />
           </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
           <Route exact path="/">
             <Home />
           </Route>
@@ -23,9 +29,15 @@ function App() {
       ) : (
         <Switch>
           <AdminLayout>
-          <Route exact path="/volunteers">
-            <Volunteers />
-          </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/volunteers">
+              <Volunteers />
+            </Route>
+            <Route exact path="/lifts">
+              <Lifts />
+            </Route>
           </AdminLayout>
         </Switch>
       )}
@@ -34,4 +46,3 @@ function App() {
 }
 
 export default App;
-
