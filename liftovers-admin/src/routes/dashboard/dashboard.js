@@ -41,12 +41,12 @@ const Dashboard = () => {
                         </Boxed>
                     </Contain>
                 </Header>
-
+                
                 <Accordion>
                     <Card>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                Lifts Needing Approval
+                                Awaiting Approval
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
@@ -56,7 +56,7 @@ const Dashboard = () => {
                     <Card>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                Lifts With Issues
+                                Issues Found
                             </Accordion.Toggle>
                         </Card.Header>
                         <Accordion.Collapse eventKey="1">
