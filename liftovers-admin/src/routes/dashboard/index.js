@@ -1,5 +1,23 @@
-import Dashboard from "./dashboard";
+import { Dashboard } from "./dashboard";
+import { connect } from "react-redux";
+import { getLifts } from "../../actions/lifts";
+function mapStateToProps(state) {
+  return {
+    lifts: state.lifts,
+    loading: state.loading
+  };
+}
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
+function mapDispatchToProps(dispatch) {
+  return {
+    getLifts: params => dispatch(getLifts(params ))
+  };
+}
 
-export default Dashboard;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);
+
+
+// export default Dashboard;

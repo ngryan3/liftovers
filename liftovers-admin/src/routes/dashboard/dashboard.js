@@ -1,5 +1,10 @@
-import React from "react";
-import { Grid, Layout, Boxed } from "flexibull";
+import React, { useEffect } from "react";
+import { 
+    Grid, 
+    Boxed,  
+    Loader,
+    FlexiTable,
+    FlexiPagination, } from "flexibull";
 import { Accordion, Card, Button, ControlLabel } from "react-bootstrap";
 import {
     Header,
@@ -8,65 +13,89 @@ import {
     Wrapper,
     Square
 } from "../../components/styles";
-import Logo from "../../assets/liftovers.jpg";
+import { AdminLayout } from "../../components//admin";
+import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
-const LogoHolder = styled.img`
-  height: 100px !important;
+
+export const PageTitle = styled.h3`
+  color: ${Theme.PrimaryFontColor};
+  margin: 0;
+  padding: 10px 0;
 `;
 
+const pageOptions = [
+    { value: 10, label: "10 Rows" },
+    { value: 20, label: "20 Rows" },
+    { value: 50, label: "50 Rows" },
+    { value: 100, label: "100 Rows" }
+  ];
 
-const Dashboard = () => {
+const columns = [
+    { title: "Postal Code", dataIndex: "origin", key: "origin" },
+];
+
+
+export const Dashboard = (getLifts, lifts, loading) => {
+    useEffect(() => {}, []);
+    let { docs, totalDocs, page } = lifts;
     return (
-        <Layout>
+        <AdminLayout>
             <Wrapper>
                 <Square />
                 <Header>
                     <Contain width="1200px">
-                        <Boxed pad="5px 10px">
+                        <Boxed pad="5px 10px" align="right">
                             <Grid
-                                default="auto 100px 100px 140px"
-                                tablet="auto 100px 100px 140px"
-                                mobile="1fr"
+                                default="100%" tablet="100%" mobile="100%"
                                 pad="10px"
                             >
                                 <div>
-                                    <LogoHolder
-                                        src={Logo}
-                                        alt="National Examinations Council logo"
-                                        height="100px"
-                                    />
+                                    <ClearButton>Sign Out</ClearButton>
                                 </div>
-                                <ClearButton>Sign Out</ClearButton>
+
                             </Grid>
                         </Boxed>
                     </Contain>
                 </Header>
-                
-                <Accordion>
-                    <Card>
-                        <Card.Header>
-                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                Awaiting Approval
-                            </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>Hello! I'm the body</Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                    <Card>
-                        <Card.Header>
-                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                                Issues Found
-                            </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="1">
-                            <Card.Body>Hello! I'm another body</Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
+
+                <Boxed pad="5px 0">
+                    <PageTitle data-test="title">Lifts: Awaiting Approval</PageTitle>
+                </Boxed>
+
+                <Boxed>
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                            <FlexiTable columns={columns} data={docs || []}>
+                                <FlexiPagination
+                                    total={totalDocs}
+                                    onChange={page => getLifts({ page, limit: 10 })}
+                                    current={page}
+                                    pageCounts={pageOptions}
+                                    pageSize={10}
+                                    showTotal={(total, range) => {
+                                        return `${range[0]} - ${range[1]} of ${total} items`;
+                                    }}
+                                />
+                            </FlexiTable>
+                        )}
+                </Boxed>
+
+                <Boxed pad="5px 0">
+                    <PageTitle data-test="title">Lifts: Issues Found</PageTitle>
+                </Boxed>
+
+                <Boxed pad="5px 0">
+                    <PageTitle data-test="title">Lifts: Posted</PageTitle>
+                </Boxed>
+
+
+                <Boxed pad="5px 0">
+                    <PageTitle data-test="title">Volunteers Needing Approval</PageTitle>
+                </Boxed>
             </Wrapper>
-        </Layout>
+        </AdminLayout>
     );
 };
 
-export default Dashboard;
+// export default Dashboard;
