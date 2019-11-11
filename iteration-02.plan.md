@@ -1,4 +1,4 @@
-# YOUR PRODUCT/TEAM NAME
+# YOUR PRODUCT/Liftovers Team 2
 
  > _Note:_ This document is meant to be written during (or shortly after) your initial planning meeting.     
  > It does not really make sense for you to edit this document much (if at all) while working on the project - Instead, at the end of the planning phase, you can refer back to this document and decide which parts of your plan you are happy with and which parts you would like to change.
@@ -6,8 +6,8 @@
 
 ## Iteration XX
 
- * Start date: FILL IN THE DATE WHEN YOU HAD YOUR FIRST TEAM PLANNING MEETING
- * End date: FILL IN THE DATE WHEN YOU ARE PLANNING TO HAVE YOUR REVIEW MEETING
+ * Start date: November 01, 2019
+ * End date: November 11, 2019
 
 ## Process
 
@@ -75,8 +75,13 @@ Describe your Git / GitHub workflow. Essentially, we want to understand how your
 
 ## Product
 
-#### Goals and tasks
+#### Goals and tasks (From most to least important)
 
+ * On the webpages that display model information about volunteers and administrators, there should be functionality to display models in a table, annd create/delete models in a form by making GET, POST, and DELETE request to the api. 
+ * Create the main functionality of the dashboard by displaying priority information such as: lifts with issues, lifts that need approval, and new volunteer accounts that need approval 
+ * Create the sign up page with validation by creating certain requirements for each information field such as: alphanumeric characters only, must be exactly 6 characters... etc. 
+ * Create the sign in page (no authentication)
+ * Create mongoDB collections for volunteers, lifts and users. Connect the api to the database and create corresponding objects (i.e. models).
  * Describe your goals for this iteration and the tasks that you will have to complete in order to achieve these goals.
  * Order the items from most to least important.
  * Feel free (but not obligated) to specify some/all tasks as user stories.
