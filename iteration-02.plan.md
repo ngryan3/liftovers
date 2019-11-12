@@ -35,7 +35,8 @@ List each team member and:
 
 **Faye**:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of making sure UX/UI Design is approved by lifTOvers and complies with user design principles, will be responsible for organizing the completion of design section from team members.  Previously completed an internship at a research facility building a user portal web application. 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This iteration worked on: creating model pages for Volunteers and Admin, and the form used to make POST requests for creating new instances in the database. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+This iteration worked on: creating model pages for Volunteers and Admin, and the form used to make POST requests for creating new instances in the database. 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Python, Java, HTML/CSS, Android Studio, REST API
 - Weaknesses: C, Javascript, XML 
