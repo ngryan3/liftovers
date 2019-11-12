@@ -58,7 +58,7 @@ List each team member and:
 - Weaknesses: Javascript, XML, databases
 
 **Ryan**:   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be the Scrum master, In charge of tracking project progress and calling meetings depending on needs for project. In charge or maintaining proper progress of project in accordance with course requirements. This iteration worked on: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be the Scrum master, In charge of tracking project progress and calling meetings depending on needs for project. In charge or maintaining proper progress of project in accordance with course requirements. This iteration worked on: creating sign in and sign up page with validation for users (with Tosin)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Java, Python, Android, C
 - Weaknesses: Java Script
