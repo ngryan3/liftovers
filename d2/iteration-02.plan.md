@@ -40,7 +40,7 @@ List each team member and:
 - Weaknesses: C, Javascript, XML 
 
 **Tosin**:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of Front end completion and delegating front-end tasks. Responsible for organizing the completion of front end section with  team members. Previously completed a PEY at a Development Firm for the Ministry of Education. This iteration worked on: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of Front end completion and delegating front-end tasks. Responsible for organizing the completion of front end section with  team members. Previously completed a PEY at a Development Firm for the Ministry of Education. This iteration worked on: Creating front end pages for the sign up and Log in pages, also working on itegrating data captured with backend requirements. 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths : Databases, Android Studio, html
 - Weaknesses: C, C++, Javascript
