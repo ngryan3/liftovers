@@ -28,42 +28,50 @@ After help from our project partner, we were able to get a basic React web app r
 
 **Faye**:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of making sure UX/UI Design is approved by lifTOvers and complies with user design principles, will be responsible for organizing the completion of design section from team members.  Previously completed an internship at a research facility building a user portal web application. This iteration worked on: creating model pages for Volunteers and Admin, and the form used to make POST requests for creating new instances in the database. 
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Python, Java, HTML/CSS, Android Studio, REST API
 - Weaknesses: C, Javascript, XML 
 
 **Tosin**:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of Front end completion and delegating front-end tasks. Responsible for organizing the completion of front end section with  team members. Previously completed a PEY at a Development Firm for the Ministry of Education. This iteration worked on: Creating front end pages for the sign up and Log in pages, also working on itegrating data captured with backend requirements. 
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths : Databases, Android Studio, html
 - Weaknesses: C, C++, Javascript
 
 **Angela**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of Back-end end completion and delegating back-end tasks. Responsible for organizing the completion of Back-end section with team members. This iteration worked on: database design (with fillis); create mongoDB collections for lifts, volunteers, and users; deploy both api and web app to heroku.
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Database, anything Java (Android Studio), Python also fine
 - Weaknesses: C, Javascript
 
 **Stacey**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of communication with LiftOvers team. Responsible for taking minutes and keeping track of LiftOvers requests, data and information. This iteration worked on: added get requests for lifts, worked on dashboard front-end and functionality to display priority information.
-Technical strengths and weaknesses: 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses: 
 - Strengths: Java, Python, Android
 - Weaknesses: Javascript, XML, databases
 
 **Ryan**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be the Scrum master, In charge of tracking project progress and calling meetings depending on needs for project. In charge or maintaining proper progress of project in accordance with course requirements. This iteration worked on: creating sign in and sign up page with validation for users (with Tosin)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses: 
 - Strengths: Java, Python, Android, C
 - Weaknesses: Java Script
 
 **Andries**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be in charge of maintaining github synchronization. Also in charge of making sure github code is able to run smoothly. Tracking errors and Recording them. Will be in charge of testing code as well. This iteration worked on: 
-Technical strengths and weaknesses:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses: 
 - Strengths: Java, C, Android Studio, Python
 - Weaknesses: JavaScript
 
 **Fillis (Zhuozi Zou)**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be in charge of testing code, making sure everything works. Also responsible that all functionality is tested before merging to master branch. This iteration worked on: implement Liftovers-api: models for volunteers, lifts, and users; database design (with Angela).
-Technical strengths and weaknesses:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses: 
 - Strengths: Java, Python, Database, Android Studio, C
 - Weaknesses: HTML, JavaScript, XML
 
@@ -77,7 +85,9 @@ Technical strengths and weaknesses:
  
 **Conflict Resolutions**:    
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Non-responsive team members: If a team member remains unresponsive after 24 hours, as a team we will re-delegate tasks to someone else so we won’t fall further behind. When the non-responsive team member becomes available, we are going to have a serious team discussion. If they are consistently non-response, we will inform a TA/Instructor about this
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Personality Conflicts: If team members have an issue with each other, they can talk to a neutral third person to help solve the issues they have and learn to work with each other. If it stems from a technical issue in the code, it may require discussion among the group about the best route to take. If needed a poll will be conducted. For personality issues, if two members seem to clash frequently, other paired combinations may be an alternative to avoid unmediated partnership between them, or a third group member can work with them to mediate. 
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Scared to ask for help: Let everyone know on the team that its ok to ask for help and that everyone is willing to help each other out. No one has all the knowledge required for the project, but we all have our own specialties. If we notice team members who seem to struggle with a task, someone with confidence working in that area will reach out and work with them. 
 
 
@@ -90,6 +100,7 @@ Technical strengths and weaknesses:
  * Some members paired up to work on larger tasks together
  * Sharing knowledge to clarify questions about the code base, since each team member has a different skill set and understood separate parts of the code
  * See Artifact 1 at the bottom of the document
+ 
 **Team Meeting 2**: 
 * BA3200 @ November 11th, 6pm
 * Group coding session, worked on Deliverable 2
@@ -114,7 +125,8 @@ Technical strengths and weaknesses:
 List/describe the artifacts you will produce in order to organize your team.       
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  The main project management tool we will be utilizing is Github’s Project Management(https://github.com/orgs/csc301-fall-2019/teams/liftovers-team-2). 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  We chose this because it is located where the repository is and is convenient and cohesive for keeping all the information together.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We chose this because it is located where the repository is and is convenient and cohesive for keeping all the information together.
  - Keep a detailed log of important tasks that need to be completed for each project milestone
  - Each team member will be assigned tasks based on what we perceive to be the required skill set for the given task
     - The teammates more apt to working with that set of skills will complete that task
