@@ -77,7 +77,7 @@ class Login extends Component{
           </Header>
           <Form  onSubmit={this.displayLogin}>
             <Form.Group row>
-                <h2 style={{marginLeft: '90px'}}>Login</h2>
+                <h2 style={{marginLeft: '140px', color: '#444' }}>Login to liftovers</h2>
             </Form.Group>
             <br />
             <Form.Group>
@@ -88,7 +88,7 @@ class Login extends Component{
                   value={this.state.email}
                   onChange={this.update}
                   name="email"
-                  style={{marginLeft: '50px'}}
+                  style={{marginLeft: '50px', width: "370px" , height: "30px"}}
                 />
 					    </div>
               <br />
@@ -102,17 +102,17 @@ class Login extends Component{
                   value={this.state.password}
                   onChange={this.update}
                   name="password"
-                  style={{marginLeft: '50px'}}
+                  style={{marginLeft: '50px', width: "370px" , height: "30px"}}
                 />
               </div>
             </Form.Group>
             <br />
             <Form.Group row>
-              <input type="submit" value="Login" style={{marginLeft: '100px'}}/>
+              <input type="submit" value="Login" style={{marginLeft: '200px', color: 'blue' }}/>
             </Form.Group>
           </Form>
           <br />
-          <ClearLink to="/signup" style={{marginLeft: '60px'}}>Create an account</ClearLink>
+          <ClearLink to="/signup" style={{marginLeft: '160px'}}>Create an account</ClearLink>
         </Wrapper>
       </Layout>
     );
