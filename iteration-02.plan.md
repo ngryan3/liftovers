@@ -89,6 +89,18 @@ Meetings:
 Conflict Resolution:
  * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
 
+**Communication**:   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We created a group chat on messenger to schedule team meetings which will happen every Friday at 3-5pm. If team members have questions about code, instead of using messenger we will be using Slack. We are also using Slack to communicate with lifTOvers for technical and functional questions. In order to come into contact with lifTOvers to set up meetings, Stacey is responsible for sending emails to them and corresponding. 
+ 
+**Meetings**:   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Set up an Agile Project on Github to keep track of tasks certain team members are responsible for and their progress. If a team member is struggling with their assigned task and notifies this problem to the team early, we can assign another team member to either assist or swap tasks with each other, so we meet our goals for the week. During meetings we will also have standups facilitated by the scrum master to report what we have completed and plan for the next sprint. Sprints will be 2 weeks in length. Team members are expected to attend weekly team meetings on Fridays from 3pm-5pm, as there are no class conflicts then. If there is an emergency and someone is unable to make it to the meeting, that person is expected to communicate their absence as soon as possible and prior to the meeting (by 12 hours if possible). Members will rotate taking notes during meetings for future reference, and if a member was unable to make it they are responsible for reviewing the meeting notes. 
+ 
+**Conflict Resolutions**:    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Non-responsive team members: If a team member remains unresponsive after 24 hours, as a team we will re-delegate tasks to someone else so we won’t fall further behind. When the non-responsive team member becomes available, we are going to have a serious team discussion. If they are consistently non-response, we will inform a TA/Instructor about this
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Personality Conflicts: If team members have an issue with each other, they can talk to a neutral third person to help solve the issues they have and learn to work with each other  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Scared to ask for help: Let everyone know on the team that its ok to ask for help and that everyone is willing to help each other out. 
+
+
 
 #### Events
 
