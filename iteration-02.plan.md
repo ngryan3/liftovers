@@ -1,10 +1,10 @@
-# YOUR PRODUCT/Liftovers Team 2
+# Web Application for lifTOvers/Liftovers Team 2
 
  > _Note:_ This document is meant to be written during (or shortly after) your initial planning meeting.     
  > It does not really make sense for you to edit this document much (if at all) while working on the project - Instead, at the end of the planning phase, you can refer back to this document and decide which parts of your plan you are happy with and which parts you would like to change.
 
 
-## Iteration XX
+## Iteration 02
 
  * Start date: November 01, 2019
  * End date: November 11, 2019
@@ -69,7 +69,7 @@ List each team member and:
 - Strengths: Java, C, Android Studio, Python
 - Weaknesses: JavaScript
 
-**Fillis**:   
+**Fillis (Zhuozi Zou)**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be in charge of testing code, making sure everything works. Also responsible that all functionality is tested before merging to master branch. This iteration worked on: implement Liftovers-api: models for volunteers, lifts, and users; database design (with Angela).
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths: Java, Python, Database, Android Studio, C
@@ -90,7 +90,7 @@ Conflict Resolution:
  * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
 
 **Communication**:   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We created a group chat on messenger to schedule team meetings which will happen every Friday at 3-5pm. If team members have questions about code, instead of using messenger we will be using Slack. We are also using Slack to communicate with lifTOvers for technical and functional questions. In order to come into contact with lifTOvers to set up meetings, Stacey is responsible for sending emails to them and corresponding. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We created a group chat on messenger to schedule team meetings which will happen every Friday at 3-5pm. If multiple members need clarification and help, we will set up group coding meetings in BA3200 so we can communicate face-to-face in order to resolve issues faster. If team members have questions about code, we will be using Slack, either through direct messaging or our team slack channel. We are also using Slack to communicate with lifTOvers for technical and functional questions. For technical questions, we will be directly messaging Abu, who is the technical lead of lifTOvers, and if we have questions about the product, we will be messaging the main slack channel. In order to come into contact with lifTOvers to set up meetings, Stacey is responsible for sending emails to them and corresponding. 
  
 **Meetings**:   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Set up an Agile Project on Github to keep track of tasks certain team members are responsible for and their progress. If a team member is struggling with their assigned task and notifies this problem to the team early, we can assign another team member to either assist or swap tasks with each other, so we meet our goals for the week. During meetings we will also have standups facilitated by the scrum master to report what we have completed and plan for the next sprint. Sprints will be 2 weeks in length. Team members are expected to attend weekly team meetings on Fridays from 3pm-5pm, as there are no class conflicts then. If there is an emergency and someone is unable to make it to the meeting, that person is expected to communicate their absence as soon as possible and prior to the meeting (by 12 hours if possible). Members will rotate taking notes during meetings for future reference, and if a member was unable to make it they are responsible for reviewing the meeting notes. 
@@ -130,10 +130,24 @@ List/describe the artifacts you will produce in order to organize your team.
 
 Describe your Git / GitHub workflow. Essentially, we want to understand how your team members shares a codebase, avoid conflicts and deploys the application.
 
+  We've asked our TA to disable direct push to master, but we have not heard back yet. Since it is the beginning of the application, we have not experienced conflicts since we are all responsible 
+
  * Be concise, yet precise. For example, "we use pull-requests" is not a precise statement since it leaves too many open questions - Pull-requests from where to where? Who reviews the pull-requests? Who is responsible for merging them? etc.
  * If applicable, specify any naming conventions or standards you decide to adopt.
+ 
  * Describe your overall deployment process from writing code to viewing a live applicatioon
+ 
+ The mongoDB database, provided by our partners, is already deployed on heroku using mLab. With permission, we were able to directly use this database and create collections for our own use.
+ Before actual deployment, all code is run and tested locally using "yarn start". The api is run on localhost port 7000, and the web app is run on localhost 3000. When we run both at the same time, the web app can be used.
+ To be clear: the web app (liftovers-admin) connects to the api (liftovers-api), and the api connects to the mongo database which is already deployed on heroku.
+ Once all parts of the code for part 2 is done, and the web app works locally, it will be deployed on heroku directly through git. More details of how it's used is explained below.
+ 
  * What deployment tool(s) are you using and why
+ 
+ We are using heroku for deployment. 
+ Reason #1: our partners are using heroku to deploy the mongo database and their old api.
+ Reason #2: we can use heroku directly through git which is very convenient. Also, since we do need to deploy the api and web app separately, heroku allows us to do so by creating multiple heroku git remotes, and use different sub-folders for the different remotes. This way, it is easy to control and update separate deployments, and deployment history & log files can be accessed using the heroku account used for deployment. 
+ 
  * Don't forget to **explain why** you chose this workflow or particular aspects of it!
 
 
