@@ -168,26 +168,26 @@ Describe your Git / GitHub workflow. Essentially, we want to understand how your
  * Create the sign in page (no authentication). An essential feature that we began working on in Deliverable 2.
  * Familiarize ourselves with deployment process through Heroku so we aren't caught off guard when it comes to deployment time for Deliverable 2 Part 2. 
 
-#### Artifacts
+## Artifacts
 
-## Artifact 1 
+** Artifact 1 **
 * This was the result of a team meeting. Link: (https://docs.google.com/document/d/1dMFKZrWy7_yQVfRMiFlUXHb3ec_xz6-6OjFASG-LS3k/edit)
 * Purpose: We wanted to make sure all team members were on the same page about what information was necessary for volunteer users and
 admin users. We drew diagrams of the main app to make sure that the models were constructed correctly. This determined what each type of user can see so that as a later TODO we can verify using this artifact that we achieved what we set out to do. 
 
-## Artifact 2 
+** Artifact 2 **
 * To create user models in the database, we used this diagram from D1. Link: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d1/Screen%20Shot%202019-10-17%20at%209.44.05%20PM.png) and (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d1/Screen%20Shot%202019-10-17%20at%209.44.11%20PM.png)
 * Purpose: These model specifications were created using the descriptions Liftovers provided us and was reviewed by them. As such, they serve as a cohesive guide to what we want our models to look like and what attributes/permissions each has. 
 
-## Artifact 3
+** Artifact 3 **
  * To create lift models in the database, we used this diagram from D1. Link: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d1/Screen%20Shot%202019-10-17%20at%209.44.11%20PM.png)
  * Purpose: This was useful in filtering out specific lifts for the dashboard since we wanted to view lifts based on their status so that an admin can see what lifts need action taken on them. This was also created using the description Liftovers provided us and was reviewed by them. 
  
-## Artifact 4
+** Artifact 4 **
  * Create Volunteer Form. Link: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Screen%20Shot%202019-11-11%20at%2010.45.43%20PM.png)
  * Purpose: Created using Artifact 2 as specifications for fields of the form. The fields have to match up with the user object because it creates an instance of a volunteer in the database using a POST request 
  
- ## Artifact 5
+ ** Artifact 5 **
  * API for volunteers. Link: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Screen%20Shot%202019-11-11%20at%2010.48.33%20PM.png)
  * Purpose: Showcases the link from the server side that contains the API for the models of our web app. The objects were created using Artifact 2 as reference and the link is where the POST request goes when a new instance is created. 
 
