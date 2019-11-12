@@ -33,7 +33,7 @@ After help from our project partner, we were able to get a basic React web app r
 - Weaknesses: C, Javascript, XML 
 
 **Tosin**:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of Front end completion and delegating front-end tasks. Responsible for organizing the completion of front end section with  team members. Previously completed a PEY at a Development Firm for the Ministry of Education. This iteration worked on: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In charge of Front end completion and delegating front-end tasks. Responsible for organizing the completion of front end section with  team members. Previously completed a PEY at a Development Firm for the Ministry of Education. This iteration worked on: Creating front end pages for the sign up and Log in pages, also working on itegrating data captured with backend requirements. 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses:
 - Strengths : Databases, Android Studio, html
 - Weaknesses: C, C++, Javascript
@@ -51,8 +51,7 @@ Technical strengths and weaknesses:
 - Weaknesses: Javascript, XML, databases
 
 **Ryan**:   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be the Scrum master, In charge of tracking project progress and calling meetings depending on needs for project. In charge or maintaining proper progress of project in accordance with course requirements. This iteration worked on: 
-Technical strengths and weaknesses:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be the Scrum master, In charge of tracking project progress and calling meetings depending on needs for project. In charge or maintaining proper progress of project in accordance with course requirements. This iteration worked on: creating sign in and sign up page with validation for users (with Tosin)
 - Strengths: Java, Python, Android, C
 - Weaknesses: Java Script
 
