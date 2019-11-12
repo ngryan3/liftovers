@@ -58,7 +58,7 @@ After help from our project partner, we were able to get a basic React web app r
 - Weaknesses: Java Script
 
 **Andries**:   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be in charge of maintaining github synchronization. Also in charge of making sure github code is able to run smoothly. Tracking errors and Recording them. Will be in charge of testing code as well. This iteration worked on: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Will be in charge of maintaining github synchronization. Also in charge of making sure github code is able to run smoothly. Tracking errors and Recording them. Will be in charge of testing code as well. This iteration worked on: implementation of Lifts to be created by admins and stored in the database.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Technical strengths and weaknesses: 
 - Strengths: Java, C, Android Studio, Python
