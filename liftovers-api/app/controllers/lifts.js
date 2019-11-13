@@ -23,6 +23,17 @@ sendText = (phone, pickupAddress) => {
 getVolunteers = (origin, dest) => {
     return Volunteer.find()
 }
+
+exports.findAll = function(req, res) {
+    // Retrieve and return all notes from the database.
+    let { page = 1, limit = 10 } = req.query;
+    Lifts.paginate({}, { page, limit }).then(lifts => {
+      if (!lifts)
+        return res.status(404).send({ message: "No lifts found." });
+      return res.status(200).send(lifts);
+    });
+  };
+
 exports.requestLift = function (req, res) {
     var postalCodes = []
     let liftId = null

@@ -11,6 +11,8 @@ module.exports = function(app) {
   app.post("/lift/request", lift.requestLift);
   app.post("/volunteer/availability", volunteer.acceptText);
 
+  app.get("/lifts", lift.findAll);
   app.get("/volunteer", volunteer.findAll);
   app.get("/user", user.findAll);
 };
+

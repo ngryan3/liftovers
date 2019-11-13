@@ -40,114 +40,90 @@ class Signup extends React.Component {
 
     submituserRegistrationForm(e) {
       e.preventDefault();
-      if (this.validateForm()) {
-          let fields = {};
-          fields["firstname"] = "";
-          fields["lastname"] = "";
-          fields["phonenumber"] = "";
-          fields["address"] = "";
-          fields["postalcode"] = "";
-          fields["email"] = "";
-          fields["password"] = "";
-          fields["passconfirmed"] = "";
-          this.setState({fields:fields});
+      if (this.validateForm() | true) {   
+          // fetch('https://localhost:7000/')
+          // .then(response => response.json())
+          // .then(data => this.setState({ data }));     
+          // First push values to server using this.stae.feilds["firstname"], switch page to hom or login
+          alert(this.state.fields["firstname"])
+          alert(this.state.fields["email"])
           alert("Form submitted");
+          //TODO: PUSH TO SERVER
       }
 
     }
 
+
     validateForm() {
-        let fields = this.state.fields;
-        let errors = {};
-        let formIsValid = true;
 
-        if (!fields["firstname"]) {
-            formIsValid = false;
-            errors["firstname"] = "*Please enter your first name.";
-        }
+      let fields = this.state.fields;
+      let errors = {};
+      let formIsValid = true;
 
-        if (!fields["lastname"]) {
-            formIsValid = false;
-            errors["lastname"] = "*Please enter your last name.";
-        }
+      if (!fields["firstname"]) {
+        formIsValid = false;
+        errors["firstname"] = "*Please enter your firstname.";
+      }
+      if (!fields["lastname"]) {
+        formIsValid = false;
+        errors["lastname"] = "*Please enter your lastname.";
+      }
 
-        if (typeof fields["firstname"] !== "undefined" || typeof fields["lastname"] !== "undefined") {
-            if (!fields["firstname"].match(/^[a-zA-Z]*$/)) {
-              formIsValid = false;
-              errors["firstname"] = "*Please enter alphabet characters only.";
-            }
-              if (!fields["lastname"].match(/^[a-zA-Z]*$/)) {
-                  formIsValid = false;
-                  errors["lastname"] = "*Please enter alphabet characters only.";
-              }
+      if (typeof fields["firstname"] !== "undefined") {
+        if (!fields["firstname"].match(/^[a-zA-Z ]*$/)) {
+          formIsValid = false;
+          errors["firstname"] = "*Please enter alphabet characters only.";
         }
+      }
+      if (typeof fields["lastname"] !== "undefined") {
+        if (!fields["lastname"].match(/^[a-zA-Z ]*$/)) {
+          formIsValid = false;
+          errors["lastname"] = "*Please enter alphabet characters only.";
+        }
+      }
 
-        if (!fields["phonenumber"]) {
-            formIsValid = false;
-            errors["phonenumber"] = "*Please enter your phone number.";
-        }
+      if (!fields["emailid"]) {
+        formIsValid = false;
+        errors["emailid"] = "*Please enter your email-ID.";
+      }
 
-        if (typeof fields["phonenumber"] !== "undefined") {
-            if (!fields["phonenumber"].match(/^[0-9]{10}$/)) {
-                formIsValid = false;
-                errors["phonenumber"] = "*Please enter a valid mobile no.";
-            }
-        }
+      if (!fields["address"]) {
+        formIsValid = false;
+        errors["address"] = "*Please enter your Main Resident address.";
+      }
 
-        if (!fields["address"]) {
-            formIsValid = false;
-            errors["address"] = "*Please enter your address.";
+      if (typeof fields["email"] !== "undefined") {
+        //regular expression for email validation
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if (!pattern.test(fields["email"])) {
+          formIsValid = false;
+          errors["email"] = "*Please enter valid email-ID.";
         }
+      }
 
-        if (typeof fields["address"] !== "undefined") {
-            if (!fields["address"].match(/^[a-zA-Z0-9]*$/)) {
-                formIsValid = false;
-                errors["address"] = "*Please enter alphanumeric characters only.";
-            }
-        }
+      if (!fields["mobileno"]) {
+        formIsValid = false;
+        errors["mobileno"] = "*Please enter your mobile no.";
+      }
 
-        if (!fields["postalcode"]) {
-            formIsValid = false;
-            errors["postalcode"] = "*Please enter your postal code.";
+      if (typeof fields["mobileno"] !== "undefined") {
+        if (!fields["mobileno"].match(/^[0-9]{10}$/)) {
+          formIsValid = false;
+          errors["mobileno"] = "*Please enter valid mobile no.";
         }
+      }
 
-        if (typeof fields["postalcode"] !== "undefined") {
-            if (!fields["postalcode"].match(/^[a-zA-Z0-9]{6}$/)) {
-                formIsValid = false;
-                errors["postalcode"] = "*Please enter a valid postal code.";
-            }
-        }
+      if (!fields["password"]) {
+        formIsValid = false;
+        errors["password"] = "*Please enter your password.";
+      }
 
-        if (!fields["email"]) {
-            formIsValid = false;
-            errors["email"] = "*Please enter your email.";
-        }
-
-        if (typeof fields["email"] !== "undefined") {
-            //regular expression for email validation
-            let pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-            if (!pattern.test(fields["email"])) {
-              formIsValid = false;
-              errors["email"] = "*Please enter valid email.";
-            }
-        }
-
-        if (!fields["password"] || !fields["passconfirmed"]) {
-            formIsValid = false;
-            errors["password"] = "*Please enter your password.";
-        }
-
-        if (typeof fields["password"] !== "undefined") {
-            if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
-              formIsValid = false;
-              errors["password"] = "*Please enter secure and strong password.";
-            }
-        }
-
-        if (fields["password"] !== fields["passconfirmed"]){
-            formIsValid = false;
-            errors["passconfirmed"] = "*Not matching passwords"
-        }
+      if (typeof fields["password"] !== "undefined") {
+        // if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
+        //   formIsValid = false;
+        //   errors["password"] = "*Please enter secure and strong password.";
+        // }
+      }
 
       this.setState({
         errors: errors
@@ -188,22 +164,21 @@ class Signup extends React.Component {
             </Header>
             <div id="main-registration-container">
                 <div id="register">
-                    <h3>Registration page</h3>
+                    <h2 style={{marginLeft: '140px', color: '#444' }}>Sign up for liftovers</h2>
                     <Form method="post"  name="userRegistrationForm"  onSubmit= {this.submituserRegistrationForm}>
                     <br />
                     <Form.Group>
                         <label style={{marginLeft: '10px'}}>
                         First Name:
-                            <input style={{marginLeft: '30px'}}  size="lg" type="text" name="firstname" value={this.state.fields.username} onChange={this.handleChange} />
+                            <input style={{marginLeft: '50px', width: "370px" , height: "30px"}}  size="lg" type="text" name="firstname" value={this.state.fields.firstname} onChange={this.handleChange} />
                         </label>
                         <div className="errorMsg"  style={{ color: 'red' }}>{this.state.errors.firstname}</div>
-                        <br />
                     </Form.Group>
                     <br />
                     <Form.Group>
                         <label style={{marginLeft: '10px'}}>
                         Last Name:
-                            <input style={{marginLeft: '30px'}}  size="lg" type="text" name="lastname" value={this.state.fields.username} onChange={this.handleChange} />
+                        <input style={{marginLeft: '52px', width: "370px" , height: "30px"}}  type="text" name="lastname" value={this.state.fields.lastname} onChange={this.handleChange}  />
                         </label>
                         <div className="errorMsg"  style={{ color: 'red' }}>{this.state.errors.lastname}</div>
                     </Form.Group>
@@ -211,17 +186,17 @@ class Signup extends React.Component {
                     <Form.Group row>
                         <label  style={{marginLeft: '10px'}}>
                         Phone Number:
-                        <input style={{marginLeft: '1px'}} type="text" name="phonenumber" value={this.state.fields.mobileno} onChange={this.handleChange} />
+                        <input style={{marginLeft: '20px', width: "370px" , height: "30px"}} type="text" name="mobileno" value={this.state.fields.mobileno} onChange={this.handleChange} />
                         </label>
-                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.phonenumber}</div>
+                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.mobileno}</div>
                     </Form.Group>
                     <br />
                     <Form.Group row>
                         <label  style={{marginLeft: '10px'}}>
                         Main Address:
-                            <input style={{marginLeft: '30px'}}  size="lg" type="text" name="address" value={this.state.fields.username} onChange={this.handleChange} />
-                            <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.address}</div>
+                        <input   style={{marginLeft: '30px', width: "370px" , height: "30px"}} type="text" name="address" value={this.state.fields.address} onChange={this.handleChange} />
                         </label> <br />
+                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.address}</div>
                         <Form.Text className="text-muted">
                         We'll never share your address with anyone else.
                         </Form.Text>
@@ -231,8 +206,7 @@ class Signup extends React.Component {
                         <label  style={{marginLeft: '10px'}}>
                         Main Address Postal Code:
                         <br />
-                            <input style={{marginLeft: '30px'}}  size="lg" type="text" name="postalcode" value={this.state.fields.username} onChange={this.handleChange} />
-                            <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.postalcode}</div>
+                        <input  style={{marginLeft: '140px', width: "370px" , height: "30px"}} type="text" name="postalcode" value={this.state.fields.postalcode} onChange={this.handleChange} />
                         </label> <br />
                         <Form.Text className="text-muted">
                         We'll never share your Postal code with anyone else.
@@ -242,7 +216,7 @@ class Signup extends React.Component {
                     <Form.Group row>
                         <label  style={{marginLeft: '10px'}}>
                         Email Address:
-                        <input  style={{marginLeft: '8px'}} type="text" name="email" value={this.state.fields.email} onChange={this.handleChange}/>
+                        <input  style={{marginLeft: '28px', width: "370px" , height: "30px"}} type="text" name="email" value={this.state.fields.email} onChange={this.handleChange}/>
                         </label>
                         <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.email}</div>
                          <br />
@@ -255,7 +229,7 @@ class Signup extends React.Component {
                     <Form.Group row>
                         <label  style={{marginLeft: '10px'}}>
                         Password:
-                        <input  style={{marginLeft: '40px'}} type="password" name="password"  value={this.state.fields.password} onChange={this.handleChange}  />
+                        <input  style={{marginLeft: '60px', width: "370px" , height: "30px"}} type="text" name="password"  value={this.state.fields.password} onChange={this.handleChange}  />
                         </label>
                         <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.password}</div>
                     </Form.Group>
@@ -266,16 +240,18 @@ class Signup extends React.Component {
                     <br />
                     <Form.Group row>
                         <label  style={{marginLeft: '10px'}}>
-                        Re-enter Password:
-                            <input style={{marginLeft: '30px'}}  size="lg" type="password" name="passconfirmed" value={this.state.fields.username} onChange={this.handleChange} />
-                            <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.passconfirmed}</div>
+                        Retype Password:
+                        <input  style={{marginLeft: '9px', width: "370px" , height: "30px"}} type="text" name="passConf" />
                         </label>
                     </Form.Group>
                     <br />
                     <Form.Group row>
-                        <input style={{marginLeft: '10px'}} type="submit" className="button"  value="Register"/>
+                        <input  to="/login" style={{marginLeft: '50px', width: "370px" , height: "30px"}} type="submit" className="button" onClick={this.submituserRegistrationForm} value="Register"/>
                     </Form.Group>
                     </Form>
+                    <br />
+                    <br />
+                    <br />
                 </div>
             </div>
           </Wrapper>
@@ -284,6 +260,5 @@ class Signup extends React.Component {
   }
 
 
-}
-
+};
 export default Signup;

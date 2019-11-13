@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 var LiftSchema = mongoose.Schema({
     origin: String,
@@ -10,13 +11,14 @@ var LiftSchema = mongoose.Schema({
         }
     },
     hasVolunteer: { type: Boolean, default: false },
-    volunteer: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team2volunteers' }],
-    // draft/ posted/ ongoing/ completed/ canceled/ problem
+    volunteer: [{ type: mongoose.Schema.Types.ObjectId, ref: 'team2volunteers' }],
+    // draft/ requested/ posted/ ongoing/ completed/ canceled/ problem
     status: String,
-    chosenVolunteer: { type: mongoose.Schema.Types.ObjectId, ref: 'Team2volunteers' }
+    chosenVolunteer: { type: mongoose.Schema.Types.ObjectId, ref: 'team2volunteers' }
 }, {
     timestamps: true
 });
 
+LiftSchema.plugin(mongoosePaginate);
 // "team2lifts" is the collections name that we are using
-module.exports = mongoose.model('Team2lifts', LiftSchema);
+module.exports = mongoose.model('team2lifts', LiftSchema);
