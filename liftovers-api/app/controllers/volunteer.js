@@ -20,9 +20,19 @@ exports.create = function(req, res) {
 
   var volunteer = new Volunteer({
     name: req.body.name,
+    surname: req.body.surname,
+    email: req.body.email,
     phone: req.body.phone,
+    methodOfCommunication: req.body.methodOfCommunication,
     postalCode: req.body.postalCode,
-    availability: req.body.availability
+    secondaryPostalCode: req.body.secondaryPostalCode,
+    availability: req.body.availability,
+    licensed: req.body.licensed,
+    hasVehicle: req.body.licensed,
+    additionalNotes: req.body.additionalNotes,
+    lifts: req.body.lifts,
+    waiverSigned: req.body.waiverSigned,
+    status: req.body.status
   });
 
   volunteer.save(function(err, data) {
@@ -223,7 +233,7 @@ exports.getDistanceBanks = function(req, res) {
 
 exports.findAll = function(req, res) {
   // Retrieve and return all notes from the database.
-  let { page = 1, limit = 10 } = req.query;
+  let { page = 1, limit = 100 } = req.query;
   Volunteer.paginate({}, { page, limit }).then(volunteers => {
     if (!volunteers)
       return res.status(404).send({ message: "No Volunteers found." });
