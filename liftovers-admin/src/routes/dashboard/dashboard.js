@@ -35,7 +35,7 @@ const columns = [
 ];
 
 
-export const Dashboard = (getLifts, lifts, loading) => {
+export const Dashboard = ({getLifts, lifts, loading}) => {
     useEffect(() => {}, []);
     let { docs, totalDocs, page } = lifts;
     return (
