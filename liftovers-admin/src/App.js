@@ -5,6 +5,7 @@ import Signup from "./routes/signup";
 import Home from "./routes/home";
 import Dashboard from "./routes/dashboard";
 import Volunteers from "./routes/volunteer";
+import CreateVolunteers from "./routes/volunteer/create/create";
 //import Lifts from "./routes/lifts";
 import { AdminLayout } from "./components/admin";
 
@@ -35,6 +36,9 @@ function App() {
           <AdminLayout>
             <Route exact path="/volunteers">
               <Volunteers />
+            </Route>
+            <Route exact path="/volunteers/create">
+                <CreateVolunteers />
             </Route>
             {/* <Route exact path="/lifts">
               <Lifts />
