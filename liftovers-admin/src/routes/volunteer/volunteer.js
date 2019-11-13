@@ -6,7 +6,9 @@ import {
   Boxed,
   Grid,
   Input,
-  Button
+  Button,
+  PaleButton,
+  ModalComponent
 } from "flexibull";
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
@@ -62,7 +64,7 @@ export const Volunteer = ({ getVolunteers, volunteers, loading }) => {
             <Boxed pad="0.2rem" align="right">
               <Button>
                 <i className=" icon-plus" />
-                <a href="./volunteer/create">Create Volunteer</a>
+                <a href="./volunteers/create">Create Volunteer</a>
               </Button>
             </Boxed>
           </Grid>
