@@ -1,5 +1,4 @@
 import { Volunteer } from "./volunteer";
-// import { CreateVolunteer } from "./volunteer/create"
 import { connect } from "react-redux";
 import { getVolunteers } from "../../actions/volunteer";
 function mapStateToProps(state) {
