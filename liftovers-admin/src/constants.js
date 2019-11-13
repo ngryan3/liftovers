@@ -1,4 +1,5 @@
 export const SET_VOLUNTEERS = "SET_VOLUNTEERS";
+export const SET_LIFTS = "SET_LIFTS";
 export const TOGGLE_LOADER = "TOGGLE_LOADER";
 
 //USER CONSTANTS
