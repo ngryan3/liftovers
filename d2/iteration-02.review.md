@@ -51,10 +51,10 @@ List any process-related changes you are planning to make (if there are any)
  * If a goal/task was not part of the original iteration plan, please mention it.
 
 #### Goals and/or tasks that were planned but not met/completed:
-
- * From most to least important. Say why they are important/not that important.
- * For each goal/task, explain why it was not met/completed.      
-   e.g. Did you change your mind, or did you just not get to it yet?
+ * Authentication for the user login page was not implemented, which is very important to the user, allowing them to properly log in to the app. This was because we lacked the time to include it.
+ * Filtering objects was not yet included. This would allow us to display specific lifts with problems, as well as lifts and volunteer accounts awaiting approval. We similarly could not complete it in time.
+ * The creation pages for admin and volunteer accounts do not have the same UI/UX, which would make navigating the app straightforward for users via a standardized, streamlined layout. The functionality of the pages were a more important feature to implement, so more time was focussed on that as opposed to their visual layout.
+ * Deleting models (volunteers, admins, etc.) from the database has not been incorporated, because the test database we use is very small and there is no current need to begin deleting entries. For a large-scale database, this would be useful in filtering out inactive accounts so that there is less clutter in the entry list.
 
 
 #### How was your product demo?
