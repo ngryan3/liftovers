@@ -17,7 +17,10 @@
 #### Decisions that turned out well
 
 List process-related (i.e. team organization) decisions that, in retrospect, turned out to be successful.
-
+ * Decision about models: Relationship between user and volunteer objects, where user has an attribute role which is either "admin, "volunteer", or "superAdmin". After having a conversation with liftovers' team lead, he really supported the decision and commended us on the industry standard we followed. 
+ * Team organization: we made an effort to isolate different areas so we could work without overlap or conflict
+ * Group coding sessions:
+ * Help from liftovers teach lead: 
 
  * 2 - 4 decisions.
  * Ordered from most to least important.
@@ -27,7 +30,10 @@ List process-related (i.e. team organization) decisions that, in retrospect, tur
 #### Decisions that did not turn out as well as we hoped
 
 List process-related (i.e. team organization) decisions that, in retrospect, were not as successful as you thought they would be.
-
+ * Struggling to get started with unfamiliar code, as we chose to create a NodeJS React app 
+ * Jumping too fast into creating forms, now we have to change the Sign Up and Create Volunteer form. 
+ * Team roles not being fulfilled as planned
+ 
  * 2 - 4 decisions.
  * Ordered from most to least important.
  * Feel free to refer/link to process artifact(s).
