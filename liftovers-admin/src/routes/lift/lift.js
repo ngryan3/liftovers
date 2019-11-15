@@ -17,11 +17,13 @@ export const PageTitle = styled.h3`
   padding: 10px 0;
 `;
 const columns = [
-  { title: "Name", dataIndex: "name", key: "name" },
-  { title: "Surname", dataIndex: "surname", key: "surname"},
+  { title: "Last Name", dataIndex: "lastName", key: "lastName" },
+  { title: "First Name", dataIndex: "firstName", key: "firstName"},
   { title: "Phone", dataIndex: "phone", key: "phone" },
+  { title: "Email", dataIndex: "email", key: "email"},
   { title: "Postal Code", dataIndex: "postalCode", key: "postalCode" },
-  { title: "Email", dataIndex: "email", key: "email"}
+  { title: "Date", dataIndex: "date", key: "date"},
+  { title: "Volunteer", dataIndex: "volunteer", key: "volunteer"}
 ];
 const pageOptions = [
   { value: 10, label: "10 Rows" },
