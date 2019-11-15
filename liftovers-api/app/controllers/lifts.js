@@ -38,14 +38,56 @@ exports.findAll = function(req, res) {
 
 
 exports.requestLift = function(req, res) {
+    if (!req.body) {
+        return res.status(400).send({ message: "Body can not be empty" });
+    }
+
+    let body = req.body
+
+    var lift = new Lifts({ 
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: body.email,
+        phone: body.phone,
+        postalCode: body.postalCode,
+        date: body.date,
+        // email or phone
+        commmunicationMethod: body.commmunicationMethod,
+        // time when food is served
+        serveTime: body.serveTime,
+        // time when food should be picked up
+        pickupTime: body.pickupTime,   
+        // pickup address
+        address: body.address,
+        // description of food
+        description: body.description,
+        // Additional details (e.g. Buzzer code, specific directions, etc.)
+        details: body.details,
+        disclaimerChecked: body.disclaimerChecked
+    });
+
+    lift.save(function (err, data) {
+        if (err) {
+            console.log(err);
+            res
+              .status(500)
+              .send({ message: "Some error occurred while creating the Volunteer." });
+        } else {
+            res.send(data);
+        }
+    });
+}
+
+
+exports.postLift = function(req, res) {
     var postalCodes = []
-    let liftId = null
     let volunteersTexted = []
 
     if (!req.body) {
         return res.status(400).send({ message: "Body can not be empty" });
     }
 
+    let liftId = req.body._id
     let distancevolunteers = this.getVolunteers()
     
     distancevolunteers.then((vol) => {
@@ -111,19 +153,13 @@ exports.requestLift = function(req, res) {
                 return item.volunteer
             })
 
-            let lift = new Lifts({ 
-                origin: req.body.origin, 
-                availability: req.body.availability, 
-                volunteer: volunteersTexted, 
-                status: "requested"
-            });
-
-            lift.save(function (err, data) {
-                if (err) {
-                    console.log(err);
-                    res.status(400).send({ message: "Some error occurred while creating the Lift." });
-                }
-            });
+            Lifts.findOneAndUpdate({ _id: liftId }, { status: "posted",  volunteer: volunteersTexted})
+                .then(ll => {
+                    console.log("changed lift status to posted");
+                })
+                .catch(error => {
+                    console.log(error);
+                });
 
             return res.status(200).send(timeSorted)
         })

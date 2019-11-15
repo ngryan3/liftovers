@@ -10,6 +10,7 @@ module.exports = function(app) {
   app.post("/volunteers/donors", volunteer.getDistance);
   app.post("/volunteers/foodbank", volunteer.getDistanceBanks);
   app.post("/lift/request", lift.requestLift);
+  app.post("/lift/post", lift.postLift);
   app.post("/lift/cancel", lift.cancelLift);
 
   app.get("/lifts", lift.findAll);
