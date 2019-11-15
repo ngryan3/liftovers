@@ -39,23 +39,7 @@ exports.findAll = function(req, res) {
 
 exports.findRequested = function(req, res) {
     // Retrieve and return all notes whose status == "requested" from the database.
-    // var limit = 10
-    // var page = 0
-
-    // Lifts.find({ status: "requested" })
-    //     // .paginate({}, { page: 1, limit: 10 })
-    //     .limit(limit)
-    //     .skip(limit * page)
-    //     .exec()
-    //     .then(lifts => {
-    //         if (!lifts)
-    //             return res.status(404).send({ message: "No lifts found." });
-    //         return res.status(200).send(lifts);
-    //     })
-
-    let requestedLifts = Lifts.find({ status: "requested" });
-
-    requestedLifts.paginate({}, { page: 1, limit: 10 }).then(lifts => {
+    Lifts.paginate({status: "requested"}, { page: 1, limit: 10 }).then(lifts => {
         if (!lifts)
           return res.status(404).send({ message: "No lifts found." });
         return res.status(200).send(lifts);
