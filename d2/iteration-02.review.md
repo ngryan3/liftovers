@@ -87,3 +87,9 @@ Going into the next iteration, our main insights are:
  * High-level concepts that should guide your work for the next iteration.
  * These concepts should help you decide on where to focus your efforts.
  * Can be related to product and/or process.
+ 
+ * Complete action flow of website is determined and will be strictly followed with minimal changes.
+    - User (as a volunteer):
+      <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/User%20Flow.png" />
+    - User (as an admin/ super admin):
+      <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Admin%20Flow.png" />
