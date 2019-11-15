@@ -8,7 +8,7 @@
 ## Iteration 02 - Review & Retrospect
 
  * When: Nov 13, 2019
- * Where: Robarts 5th floor, Study Room 3 
+ * Where: Robarts 5th floor, Study Room 3 @ 5pm EDT
 
 ## Process - Reflection
 
@@ -18,13 +18,8 @@
 
 List process-related (i.e. team organization) decisions that, in retrospect, turned out to be successful.
  * Team organization: we made an effort to isolate different areas so we could work without overlap or conflict. For example: Stacey worked on the dashboard, Andries worked on lift objects, Ryan and Tosin worked on the sign up/login, Faye worked on the volunteer create form, and Angela and Fillis worked on creating the database/deployment. This division helped us avoid conflicts in code. 
- * Group coding sessions: we had two group coding sessions which was really helpful in catching each other up on what we were doing as well as swapping problems for a new prespective when we were stuck on bugs/compile issues. This was a recent decision we made and seemed to streamline our progress quicker than before. 
- * Help from liftovers teach lead: Abu from liftovers is the teach lead and when we were stuck with making API requests to get user obejcts, we asked him for help and he was able to spot the problem quickly. This was a successful decision as instead of struggling with it ourselves in a language we weren't comfortable in, we reached out, described the problem and diagnosis, and he was able to propose a solution. Screenshot of chat here: ()
-
- * 2 - 4 decisions.
- * From most to least important. Say why they are important/not that important.
- * Explain why (i.e. give a supporting argument) you consider a decision to be successful.
- * Feel free to refer/link to process artifact(s).
+ * Group coding sessions: we had two group coding sessions which was really helpful in catching each other up on what we were doing as well as swapping problems for a new prespective when we were stuck on bugs/compile issues. This was a recent decision we made and seemed to streamline our progress quicker than before. Our group coding sessions were on Nov 1 and Nov 13, both at Bahen 3200. 
+ * Help from liftovers teach lead: Abu from liftovers is the teach lead and when we were stuck with making API requests to get user obejcts, we asked him for help and he was able to spot the problem quickly. This was a successful decision as instead of struggling with it ourselves in a language we weren't comfortable in, we reached out, described the problem and diagnosis, and he was able to propose a solution. Screenshot of chat here: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Screen%20Shot%202019-11-15%20at%203.45.55%20PM.png)
 
 #### Decisions that did not turn out as well as we hoped
 
