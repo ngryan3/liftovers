@@ -11,6 +11,26 @@ const accountSid = "AC29bd8166067d95be88f6ce44ce53df5a";
 const authToken = "329955eb209335d85af876937107502c";
 const client = new twilio(accountSid, authToken);
 
+mapsCall = (origin, dest) => {
+  return axios({
+    method: "get",
+    url: `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${dest}&key=AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ`
+  });
+};
+
+sendText = (phone, pickupAddress) => {
+  return client.messages.create({
+    body: `Can you pick up the food item at ${pickupAddress}, reply coming soon...`,
+    to: `+1${phone}`, // Text this number
+    from: "+16476994801" // From a valid Twilio number
+  });
+};
+
+getVolunteers = (origin, dest) => {
+  return Volunteer.find();
+};
+
+
 // Create and Save a new Note
 exports.create = function(req, res) {
   // Create and Save a new Note
@@ -45,25 +65,6 @@ exports.create = function(req, res) {
       res.send(data);
     }
   });
-};
-
-mapsCall = (origin, dest) => {
-  return axios({
-    method: "get",
-    url: `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${dest}&key=AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ`
-  });
-};
-
-sendText = (phone, pickupAddress) => {
-  return client.messages.create({
-    body: `Can you pick up the food item at ${pickupAddress}, reply coming soon...`,
-    to: `+1${phone}`, // Text this number
-    from: "+16476994801" // From a valid Twilio number
-  });
-};
-
-getVolunteers = (origin, dest) => {
-  return Volunteer.find();
 };
 
 
@@ -265,7 +266,7 @@ exports.getDistanceBanks = function(req, res) {
 exports.findAll = function(req, res) {
   // Retrieve and return all notes from the database.
   let { page = 1, limit = 100 } = req.query;
-  
+
   Volunteer.paginate({}, { page, limit }).then(volunteers => {
     if (!volunteers)
       return res.status(404).send({ message: "No Volunteers found." });
