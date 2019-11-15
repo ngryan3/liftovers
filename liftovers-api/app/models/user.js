@@ -7,7 +7,6 @@ var UserSchema = mongoose.Schema({
     email: String,
     phone: String,
     methodOfCommunication: String,
-    userName: String,
     password: String,
     // volunteer/ admin/ superAdmin
     role: String,

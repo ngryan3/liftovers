@@ -13,7 +13,6 @@ exports.create = function(req, res) {
     email: req.body.email,
     phone: req.body.phone,
     methodOfCommunication: req.body.methodOfCommunication,
-    userName: req.body.userName,
     password: req.body.password,
     // volunteer/ admin/ superAdmin
     role: req.body.role,
