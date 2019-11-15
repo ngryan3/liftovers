@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { setVolunteers } from "./volunteers";
 import { setLoader } from "./auxilliary";
+import { setAdmins } from "./admins";
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -8,7 +9,8 @@ import { setLoader } from "./auxilliary";
  * */
 const allReducers = combineReducers({
   volunteers: setVolunteers,
-  loading: setLoader
+  loading: setLoader,
+  admins: setAdmins
 });
 
 export default allReducers;

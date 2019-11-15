@@ -14,7 +14,7 @@ export function getAdmins(params) {
   console.log(params);
   return function(dispatch) {
     dispatch(toggleLoader(true));
-    return axios.get(`${ApiUrl}/admins`, { params }).then(({ data }) => {
+    return axios.get(`${ApiUrl}/user`, { params }).then(({ data }) => {
       dispatch(toggleLoader(false));
       dispatch(setAdmins(data));
     });

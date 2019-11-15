@@ -6,7 +6,9 @@ import {
   Boxed,
   Grid,
   Input,
-  Button
+  Button,
+  PaleButton,
+  ModalComponent
 } from "flexibull";
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
@@ -20,8 +22,8 @@ const columns = [
   { title: "Name", dataIndex: "name", key: "name" },
   { title: "Surname", dataIndex: "surname", key: "surname"},
   { title: "Phone", dataIndex: "phone", key: "phone" },
-  { title: "Email", dataIndex: "email", key: "email"},
-  { title: "Super Admin?", dataIndex: "superadmin", key: "superadmin" },
+  { title: "Postal Code", dataIndex: "postalCode", key: "postalCode" },
+  { title: "Email", dataIndex: "email", key: "email"}
 ];
 const pageOptions = [
   { value: 10, label: "10 Rows" },
@@ -34,6 +36,7 @@ export const Admin = ({ getAdmins, admins, loading }) => {
   useEffect(() => {
     getAdmins({ page: 1, limit: 10 });
   }, []);
+  console.log(admins);
   let { docs, totalDocs, page } = admins;
   return (
     <div data-test="admin">
@@ -61,7 +64,8 @@ export const Admin = ({ getAdmins, admins, loading }) => {
           <Grid default="100%" tablet="100%" mobile="100%">
             <Boxed pad="0.2rem" align="right">
               <Button>
-                <i className=" icon-plus" /> Create Admin
+                <i className=" icon-plus" />
+                <a href="./admins/create">Create Administrator</a>
               </Button>
             </Boxed>
           </Grid>
