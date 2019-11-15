@@ -11,7 +11,6 @@ const accountSid = 'AC29bd8166067d95be88f6ce44ce53df5a'
 const authToken = '329955eb209335d85af876937107502c'
 const client = new twilio(accountSid, authToken)
 
-
 sendText = (phone, pickupAddress) => {
     console.log('sendingg texttt', phone, pickupAddress)
     return client.messages.create({
@@ -21,7 +20,6 @@ sendText = (phone, pickupAddress) => {
     })
 }
 
-
 getVolunteers = (origin, dest) => {
     return Volunteer.find()
 }
@@ -30,6 +28,7 @@ getVolunteers = (origin, dest) => {
 exports.findAll = function(req, res) {
     // Retrieve and return all notes from the database.
     let { page = 1, limit = 10 } = req.query;
+    
     Lifts.paginate({}, { page, limit }).then(lifts => {
       if (!lifts)
         return res.status(404).send({ message: "No lifts found." });
@@ -38,7 +37,7 @@ exports.findAll = function(req, res) {
   };
 
 
-exports.requestLift = function (req, res) {
+exports.requestLift = function(req, res) {
     var postalCodes = []
     let liftId = null
     let volunteersTexted = []
@@ -64,7 +63,8 @@ exports.requestLift = function (req, res) {
                     data: item.data.rows[0].elements[0],
                     volunteer: vol[index]
                 }
-            }).sort(function (a, b) {
+            })
+            .sort(function (a, b) {
                 let itemA = a.data.duration.value // ignore upper and lowercase
                 let itemB = b.data.duration.value // ignore upper and lowercase
                 if (itemA < itemB) {
@@ -84,7 +84,8 @@ exports.requestLift = function (req, res) {
                         }
                     })
                 return bool
-            }).filter((item) => {
+            })
+            .filter((item) => {
                 let bool = false
                     item.volunteer.availability.forEach((volAvail) => {
                         if (volAvail.day.toLowerCase() === req.body.availability.day.toLowerCase()) {
@@ -110,7 +111,12 @@ exports.requestLift = function (req, res) {
                 return item.volunteer
             })
 
-            let lift = new Lifts({ origin: req.body.origin, availability: req.body.availability, volunteer: volunteersTexted });
+            let lift = new Lifts({ 
+                origin: req.body.origin, 
+                availability: req.body.availability, 
+                volunteer: volunteersTexted, 
+                status: "requested"
+            });
 
             lift.save(function (err, data) {
                 if (err) {
@@ -120,8 +126,24 @@ exports.requestLift = function (req, res) {
             });
 
             return res.status(200).send(timeSorted)
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.log(error)
         });
     })
+};
+
+
+exports.cancelLift = function(req, res) {
+    if (!req.body) {
+        return res.status(400).send({ message: "Body can not be empty" });
+    }
+
+    Lifts.findOneAndUpdate({ _id: req.body._id }, { status: "cancelled" })
+        .then(ll => {
+            console.log("changed lift status to cancelled");
+        })
+        .catch(error => {
+            console.log(error);
+        });
 };

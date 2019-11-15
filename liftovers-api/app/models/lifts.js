@@ -12,7 +12,7 @@ var LiftSchema = mongoose.Schema({
     },
     hasVolunteer: { type: Boolean, default: false },
     volunteer: [{ type: mongoose.Schema.Types.ObjectId, ref: 'team2volunteers' }],
-    // draft/ requested/ posted/ ongoing/ completed/ canceled/ problem
+    // draft/ requested/ posted/ ongoing/ completed/ cancelled/ problem
     status: String,
     chosenVolunteer: { type: mongoose.Schema.Types.ObjectId, ref: 'team2volunteers' }
 }, {
