@@ -56,12 +56,27 @@ List any process-related changes you are planning to make (if there are any)
  * For each goal/task, explain why it was not met/completed.      
    e.g. Did you change your mind, or did you just not get to it yet?
 
+
 #### How was your product demo?
  * How did you prepare your demo?
+    - Before meeting up with our partner, we double checked to make sure all our 
+    features that we were presenting were working properly. Then we launched our 
+    application from Faye's laptop to show our partners our current progress on 
+    the project. 
  * What did you manage to demo to your partner?
+    - Sign in page
+    - Sign up page with validation
+    - Lift/Volunteer page for admins
+    - Demonstrated Post request when creating a volunteer
+    - Demonstrated a Get request when displaying all volunteers
  * Did your partner accept the features?
+    - Our partner had no complaints on the presented features 
  * Were there change requests?
+    - No, our partner really liked what we have done so far 
  * What did you learn from the demo from either a process or product perspective?
+    - We followed industry standard for creating a user and volunteer object and linking these objects after the user 
+    signs up 
+    - We also learned that we need test cases for our application 
 
 ## Meeting Highlights
 
