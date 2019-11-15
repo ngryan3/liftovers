@@ -81,15 +81,18 @@ List any process-related changes you are planning to make (if there are any)
 ## Meeting Highlights
 
 Going into the next iteration, our main insights are:
-
- * 2 - 4 items
- * Short (no more than one short paragraph per item)
- * High-level concepts that should guide your work for the next iteration.
- * These concepts should help you decide on where to focus your efforts.
- * Can be related to product and/or process.
  
- * Complete action flow of website is determined and will be strictly followed with minimal changes.
+ * Complete action flow of website is determined and will be followed with minimal changes
+    - The flow has been generally discussed with our partners and gotten approval. 
     - User (as a volunteer):
       <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/User%20Flow.png" />
     - User (as an admin/ super admin):
       <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Admin%20Flow.png" />
+ * Priority: focus on backend & for the above flow to work correctly
+    - will have more people focus on backend coding (liftovers-api, especially controller)
+    - tasks will be strict i.e. frontend only working on frontend, backend only working on backend. This is for max. efficiency and min. conflict. 
+    - detailed tasks such as password encryption, distance algorithm optimization, will NOT be prioritized. Depending on how much time we have, we may or may not complete these tasks.
+ * Roles may need to be changed/ emphasized
+    - Each team member was assigned a major role at the beginning of the project (i.e. backend, fontend, testing, etc.)
+    - However, due to the relatively small amount of coding and simple website features that we focused on for D2, the roles seem to be relatively "useless". 
+    - Decisions may need to be made to modify roles. And as D3 starts and a more complicated web app will eventually be made, it seems necessary for these roles and corresponding resposibilities to be followed and met. 
