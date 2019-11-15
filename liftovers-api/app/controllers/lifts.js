@@ -34,7 +34,19 @@ exports.findAll = function(req, res) {
         return res.status(404).send({ message: "No lifts found." });
       return res.status(200).send(lifts);
     });
-  };
+};
+
+
+exports.findRequested = function(req, res) {
+    // Retrieve and return all notes whose status == "requested" from the database.
+    Lifts.find({ status: "requested" })
+        .paginate({}, { page: 1, limit: 10 })
+        .then(lifts => {
+            if (!lifts)
+                return res.status(404).send({ message: "No lifts found." });
+            return res.status(200).send(lifts);
+        })
+}
 
 
 exports.requestLift = function(req, res) {

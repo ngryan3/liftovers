@@ -14,6 +14,7 @@ module.exports = function(app) {
   app.post("/lift/cancel", lift.cancelLift);
 
   app.get("/lifts", lift.findAll);
+  app.get("/lifts/requested", lift.findRequested);
   app.get("/volunteer", volunteer.findAll);
   app.get("/user", user.findAll);
 };
