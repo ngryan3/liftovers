@@ -51,17 +51,32 @@ List any process-related changes you are planning to make (if there are any)
  * If a goal/task was not part of the original iteration plan, please mention it.
 
 #### Goals and/or tasks that were planned but not met/completed:
+ * Authentication for the user login page was not implemented, which is very important to the user, allowing them to properly log in to the app. This was because we lacked the time to include it.
+ * Filtering objects was not yet included. This would allow us to display specific lifts with problems, as well as lifts and volunteer accounts awaiting approval. We similarly could not complete it in time.
+ * The creation pages for admin and volunteer accounts do not have the same UI/UX, which would make navigating the app straightforward for users via a standardized, streamlined layout. The functionality of the pages were a more important feature to implement, so more time was focussed on that as opposed to their visual layout.
+ * Deleting models (volunteers, admins, etc.) from the database has not been incorporated, because the test database we use is very small and there is no current need to begin deleting entries. For a large-scale database, this would be useful in filtering out inactive accounts so that there is less clutter in the entry list.
 
- * From most to least important. Say why they are important/not that important.
- * For each goal/task, explain why it was not met/completed.      
-   e.g. Did you change your mind, or did you just not get to it yet?
 
 #### How was your product demo?
  * How did you prepare your demo?
+    - Before meeting up with our partner, we double checked to make sure all our 
+    features that we were presenting were working properly. Then we launched our 
+    application from Faye's laptop to show our partners our current progress on 
+    the project. 
  * What did you manage to demo to your partner?
+    - Sign in page
+    - Sign up page with validation
+    - Lift/Volunteer page for admins
+    - Demonstrated Post request when creating a volunteer
+    - Demonstrated a Get request when displaying all volunteers
  * Did your partner accept the features?
+    - Our partner had no complaints on the presented features 
  * Were there change requests?
+    - No, our partner really liked what we have done so far 
  * What did you learn from the demo from either a process or product perspective?
+    - We followed industry standard for creating a user and volunteer object and linking these objects after the user 
+    signs up 
+    - We also learned that we need test cases for our application 
 
 ## Meeting Highlights
 
@@ -72,3 +87,9 @@ Going into the next iteration, our main insights are:
  * High-level concepts that should guide your work for the next iteration.
  * These concepts should help you decide on where to focus your efforts.
  * Can be related to product and/or process.
+ 
+ * Complete action flow of website is determined and will be strictly followed with minimal changes.
+    - User (as a volunteer):
+      <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/User%20Flow.png" />
+    - User (as an admin/ super admin):
+      <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Admin%20Flow.png" />
