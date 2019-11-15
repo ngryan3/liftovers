@@ -13,16 +13,19 @@ const client = new twilio(accountSid, authToken)
 
 
 sendText = (phone, pickupAddress) => {
-    console.log('sendingg texttt',phone,pickupAddress)
+    console.log('sendingg texttt', phone, pickupAddress)
     return client.messages.create({
         body: `Can you pick up the food item at ${pickupAddress}, reply with yes or no`,
         to: `+1${phone}`,  // Text this number
         from: '+16476952333' // From a valid Twilio number
     })
 }
+
+
 getVolunteers = (origin, dest) => {
     return Volunteer.find()
 }
+
 
 exports.findAll = function(req, res) {
     // Retrieve and return all notes from the database.
@@ -34,22 +37,27 @@ exports.findAll = function(req, res) {
     });
   };
 
+
 exports.requestLift = function (req, res) {
     var postalCodes = []
     let liftId = null
     let volunteersTexted = []
+
     if (!req.body) {
         return res.status(400).send({ message: "Body can not be empty" });
     }
 
     let distancevolunteers = this.getVolunteers()
+    
     distancevolunteers.then((vol) => {
         vol.forEach((volunteer) => {
             postalCodes.push(volunteer.postalCode)
         })
+
         let promises = postalCodes.map((postalcode) => {
             return this.mapsCall(req.body.origin, postalcode)
         })
+
         Promise.all(promises).then((values) => {
             let valData = values.map((item, index) => {
                 return {
@@ -87,13 +95,17 @@ exports.requestLift = function (req, res) {
                     })
                 return bool
             })
+
             console.log('timesorted', timeSorted)
+
             let textPromises = timeSorted.map((item) => {
                 return this.sendText(item.volunteer.phone, req.body.origin)
             })
+
             Promise.all(textPromises).then((promiseitem) => {}).catch((error) => {
                 console.log(error)
             })
+
             volunteersTexted = timeSorted.map((item) => {
                 return item.volunteer
             })
@@ -104,7 +116,6 @@ exports.requestLift = function (req, res) {
                 if (err) {
                     console.log(err);
                     res.status(400).send({ message: "Some error occurred while creating the Lift." });
-                } else {
                 }
             });
 
@@ -113,5 +124,4 @@ exports.requestLift = function (req, res) {
             console.log(error)
         });
     })
-
 };
