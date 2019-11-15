@@ -41,9 +41,9 @@ exports.findRequested = function(req, res) {
     // Retrieve and return all notes whose status == "requested" from the database.
     Lifts.paginate({ status: "requested" }, { page: 1, limit: 10 }).then(lifts => {
         if (!lifts)
-          return res.status(404).send({ message: "No lifts found." });
+          return res.status(404).send({ message: "No requested lifts found." });
         return res.status(200).send(lifts);
-      });
+    });
 };
 
 
