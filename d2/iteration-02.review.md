@@ -36,7 +36,7 @@
  * If a goal/task was not part of the original iteration plan, please mention it.
 
 #### Goals and/or tasks that were planned but not met/completed:
- * The dashboard does not display all information as planned such as posted requests, since there were some issues trying to display multiple function results. The focus was on implementing the controllers and models of the API and retrieving the information from the database. 
+ * The dashboard does not display all information as planned such as posted requests, since there were some issues trying to display multiple function results. The focus was on implementing the controllers and models of the API and retrieving the information from the database. Displaying requested lifts was deemed more important since those lifts need to be approved by an admin.
  * The creation pages for admin and volunteer accounts do not have the same UI/UX, which would make navigating the app straightforward for users via a standardized, streamlined layout. The functionality of the pages were a more important feature to implement, so more time was focussed on that as opposed to their visual layout.
  * Deleting models (volunteers, admins, etc.) from the database has not been incorporated, because the test database we use is very small and there is no current need to begin deleting entries. For a large-scale database, this would be useful in filtering out inactive accounts so that there is less clutter in the entry list.
 
