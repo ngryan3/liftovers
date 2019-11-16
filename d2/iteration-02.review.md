@@ -10,26 +10,18 @@
 
 #### Decisions that turned out well
 
-List process-related (i.e. team organization) decisions that, in retrospect, turned out to be successful.
  * Team organization: we made an effort to isolate different areas so we could work without overlap or conflict. For example: Stacey worked on the dashboard, Andries worked on lift objects, Ryan and Tosin worked on the sign up/login, Faye worked on the volunteer create form, and Angela and Fillis worked on creating the database/deployment. This division helped us avoid conflicts in code. 
  * Group coding sessions: we had two group coding sessions which was really helpful in catching each other up on what we were doing as well as swapping problems for a new prespective when we were stuck on bugs/compile issues. This was a recent decision we made and seemed to streamline our progress quicker than before. Our group coding sessions were on Nov 1 and Nov 13, both at Bahen 3200. 
  * Help from liftovers teach lead: Abu from liftovers is the teach lead and when we were stuck with making API requests to get user obejcts, we asked him for help and he was able to spot the problem quickly. This was a successful decision as instead of struggling with it ourselves in a language we weren't comfortable in, we reached out, described the problem and diagnosis, and he was able to propose a solution. Screenshot of chat here: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Screen%20Shot%202019-11-15%20at%203.45.55%20PM.png)
 
 #### Decisions that did not turn out as well as we hoped
 
-List process-related (i.e. team organization) decisions that, in retrospect, were not as successful as you thought they would be.
- * Struggling to get started with unfamiliar code, as we chose to create a NodeJS React app 
- * Jumping too fast into creating forms, now we have to change the Sign Up and Create Volunteer form. 
- * Team roles not being fulfilled as planned
+ * Getting started quickly: We all struggled to get started with the code as our web app uses React and Express, and none of us had any prior experience with Javascript and these technologies. We had hoped to start coding earlier on but we had to learn a lot of new things such as the code structure and familiarize ourselves with the code base. This was most important because we often found ourselves behind schedule for certain features due to our lack of knowledge and experience. 
+ * Team roles not being fulfilled as planned: We had specified team roles earlier on, and although some roles were useful, we realized that having a prior understanding of the code would have enabled us to create more specific and relevant roles for team members. For example, we had members in charge of front-end and back-end, but we ended up working more on specific features. 
+ * Small design decisions: We were not familiar with React and packages, so we did not figure out a specific package we wanted to use, so we ended up using two separate packages. This made the UI inconsistent. For example, the "sign up" page and the "create volunteer" page used 2 different packages, and we had to change them. This was least important because it did not take a large amount of time to make the UI consistent. 
  
- * 2 - 4 decisions.
- * From most to least important. Say why they are important/not that important.
- * Feel free to refer/link to process artifact(s).
-
-
 #### Planned changes
 
-List any process-related changes you are planning to make (if there are any)
  * Have regular group coding sessions so we can keep on task with our progress and provide help/support as well as answer questions for for each other immediately. It's also a good way to plan set times to work on this project so we can have consistent progress. 
  * We haven't been using the project board extensively, but once the basics are laid down we will be creating issues for specific tasks such as: checking form validation for Create Volunteers form, checking form validation for Create Admin form, checking validation for Sign Up form, adding user authentication to the Sign In form. We will also be assigning people to these tasks and moving them through the project board based on status of the task.
 
@@ -50,23 +42,23 @@ List any process-related changes you are planning to make (if there are any)
 
 
 #### How was your product demo?
- * How did you prepare your demo?
+ * Preparation for Demo
     - Before meeting up with our partner, we double checked to make sure all our 
     features that we were presenting were working properly. Then we launched our 
     application from Faye's laptop to show our partners our current progress on 
     the project. 
- * What did you manage to demo to your partner?
+ * Features Demoed
     - Sign in page
     - Sign up page with validation
     - Lift/Volunteer page for admins
     - Demonstrated Post request when creating a volunteer
     - Demonstrated a Get request when displaying all volunteers
- * Did your partner accept the features?
+ * Partner Acceptance of Features
     - Our partner had no complaints on the presented features 
- * Were there change requests?
-    - No, our partner really liked what we have done so far 
+ * Change Requests from Partner
+    - No, our partner really liked what we have done so far.
  * What did you learn from the demo from either a process or product perspective?
-    - We (inadvetantly) followed industry standard for creating a user and volunteer object and linking these objects after the user 
+    - We (inadvertently) followed industry standard for creating a user and volunteer object and linking these objects after the user 
     signs up 
     - We also learned that we need test cases for our application 
 
