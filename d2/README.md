@@ -14,6 +14,8 @@ To access the product, go to the product URL listed below. We have included the 
 * https://liftovers-admin.herokuapp.com/login
 * https://liftovers-admin.herokuapp.com/signup
 * https://liftovers-admin.herokuapp.com/dashboard
+  * Displays priority information for admins
+  * Gets lifts which have the status "requested"
 * https://liftovers-admin.herokuapp.com/lifts 
 * https://liftovers-admin.herokuapp.com/volunteers
   * Displays a table of information about Volunteers
