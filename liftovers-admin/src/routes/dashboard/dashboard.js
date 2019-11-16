@@ -43,13 +43,13 @@ const columns = [
 ];
 
 
-export const Dashboard = ({ getRequestedLifts, getLifts, lifts, getPostedLifts, postedLifts, requestedLifts, loading }) => {
+export const Dashboard = ({ getRequestedLifts, getPostedLifts, postedLifts, requestedLifts, loading }) => {
     useEffect(() => {
         getRequestedLifts({ page: 1, limit: 10 });
-        getLifts({ page: 1, limit: 10 });
+        getPostedLifts({ page: 1, limit: 10 });
       }, []);
     let { docs, totalDocs, page } = requestedLifts;
-    let { secondDocs, secondTotalDocs, secondPage } =  lifts;
+    let { secondDocs, secondTotalDocs, secondPage } =  postedLifts;
 
 
     return (
@@ -99,7 +99,7 @@ export const Dashboard = ({ getRequestedLifts, getLifts, lifts, getPostedLifts, 
                         <FlexiTable columns={columns} data={secondDocs || []}>
                             <FlexiPagination
                                 total={secondTotalDocs}
-                                onChange={secondPage => getLifts({ secondPage, limit: 10 })}
+                                onChange={secondPage => getPostedLifts({ secondPage, limit: 10 })}
                                 current={secondPage}
                                 pageCounts={pageOptions}
                                 pageSize={10}
@@ -118,11 +118,11 @@ export const Dashboard = ({ getRequestedLifts, getLifts, lifts, getPostedLifts, 
                 {loading ? (
                     <Loader />
                 ) : (
-                        <FlexiTable columns={columns} data={docs || []}>
+                        <FlexiTable columns={columns} data={secondDocs || []}>
                             <FlexiPagination
-                                total={totalDocs}
-                                onChange={page => getRequestedLifts({ page, limit: 10 })}
-                                current={page}
+                                total={secondTotalDocs}
+                                onChange={secondPage => getPostedLifts({ secondPage, limit: 10 })}
+                                current={secondPage}
                                 pageCounts={pageOptions}
                                 pageSize={10}
                                 showTotal={(total, range) => {
@@ -136,6 +136,24 @@ export const Dashboard = ({ getRequestedLifts, getLifts, lifts, getPostedLifts, 
 
             <Boxed pad="5px 0">
                 <PageTitle data-test="title">Volunteers: Awaiting Approval</PageTitle>
+            </Boxed>
+            <Boxed>
+                {loading ? (
+                    <Loader />
+                ) : (
+                        <FlexiTable columns={columns} data={secondDocs || []}>
+                            <FlexiPagination
+                                total={secondTotalDocs}
+                                onChange={secondPage => getPostedLifts({ secondPage, limit: 10 })}
+                                current={secondPage}
+                                pageCounts={pageOptions}
+                                pageSize={10}
+                                showTotal={(total, range) => {
+                                    return `${range[0]} - ${range[1]} of ${total} items`;
+                                }}
+                            />
+                        </FlexiTable>
+                    )}
             </Boxed>
         </div>
 
