@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { setVolunteers } from "./volunteers";
+import { setLifts } from "./lifts"
 import { setLoader } from "./auxilliary";
 import { setAdmins } from "./admins";
 
@@ -10,7 +11,8 @@ import { setAdmins } from "./admins";
 const allReducers = combineReducers({
   volunteers: setVolunteers,
   loading: setLoader,
-  admins: setAdmins
+  admins: setAdmins,
+  lifts: setLifts
 });
 
 export default allReducers;

@@ -11,6 +11,26 @@ const accountSid = "AC29bd8166067d95be88f6ce44ce53df5a";
 const authToken = "329955eb209335d85af876937107502c";
 const client = new twilio(accountSid, authToken);
 
+mapsCall = (origin, dest) => {
+  return axios({
+    method: "get",
+    url: `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${dest}&key=AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ`
+  });
+};
+
+sendText = (phone, pickupAddress) => {
+  return client.messages.create({
+    body: `Can you pick up the food item at ${pickupAddress}, reply coming soon...`,
+    to: `+1${phone}`, // Text this number
+    from: "+16476994801" // From a valid Twilio number
+  });
+};
+
+getVolunteers = (origin, dest) => {
+  return Volunteer.find();
+};
+
+
 // Create and Save a new Note
 exports.create = function(req, res) {
   // Create and Save a new Note
@@ -46,35 +66,26 @@ exports.create = function(req, res) {
     }
   });
 };
-mapsCall = (origin, dest) => {
-  return axios({
-    method: "get",
-    url: `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${dest}&key=AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ`
-  });
-};
-sendText = (phone, pickupAddress) => {
-  return client.messages.create({
-    body: `Can you pick up the food item at ${pickupAddress}, reply coming soon...`,
-    to: `+1${phone}`, // Text this number
-    from: "+16476994801" // From a valid Twilio number
-  });
-};
-getVolunteers = (origin, dest) => {
-  return Volunteer.find();
-};
+
+
 exports.getDistance = function(req, res) {
   var postalCodes = [];
+
   if (!req.body) {
     return res.status(400).send({ message: "Body can not be empty" });
   }
+
   let distancevolunteers = this.getVolunteers();
+
   distancevolunteers.then(vol => {
     vol.forEach(volunteer => {
       postalCodes.push(volunteer.postalCode);
     });
+
     let promises = postalCodes.map(postalcode => {
       return this.mapsCall(req.body.origin, postalcode);
     });
+
     Promise.all(promises)
       .then(values => {
         let valData = values
@@ -99,6 +110,7 @@ exports.getDistance = function(req, res) {
         let timeSorted = valData
           .filter(item => {
             let bool = false;
+
             req.body.availability.forEach(available => {
               item.volunteer.availability.forEach(volAvail => {
                 if (
@@ -112,6 +124,7 @@ exports.getDistance = function(req, res) {
           })
           .filter(item => {
             let bool = false;
+
             req.body.availability.forEach(available => {
               item.volunteer.availability.forEach(volAvail => {
                 if (
@@ -128,10 +141,13 @@ exports.getDistance = function(req, res) {
             });
             return bool;
           });
+
         let textPromises = timeSorted.map(item => {
           return this.sendText(item.volunteer.phone, req.body.origin);
         });
+
         console.log(textPromises);
+
         Promise.all(textPromises)
           .then(promiseitem => {
             console.log(promiseitem);
@@ -146,25 +162,32 @@ exports.getDistance = function(req, res) {
       });
   });
 };
+
+
 exports.acceptText = function(req, res) {
   let body = req.body.body;
   let fromPhone = req.body.from;
   var twiml = new twilio.twiml.MessagingResponse();
+
   if (body === "yes") {
     console.log("//////// response is yes");
+
     // if body is yes && hasvolunteer is false , change lift model hasvolunteer to true and change volunteer number to formPhone
     Lifts.find({ hasVolunteer: false, "volunteer.phone": fromPhone })
       .then(item => {
         console.log(item);
+
         if (item.length === 0) {
           twiml.message(`Thanks but there is already a volunteer`);
           res.writeHead(200, { "Content-Type": "text/xml" });
           res.end(twiml.toString());
           return;
         }
+
         let chosenVolunteer = item[0].volunteer.filter(vol => {
           return vol.phone === fromPhone;
         });
+
         Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true })
           .then(ll => {
             console.log("updated");
@@ -190,19 +213,25 @@ exports.acceptText = function(req, res) {
   }
 };
 
+
 exports.getDistanceBanks = function(req, res) {
   var postalCodes = [];
+
   if (!req.body) {
     return res.status(400).send({ message: "Body can not be empty" });
   }
+
   let distancevolunteers = this.getVolunteers();
+
   distancevolunteers.then(vol => {
     vol.forEach(volunteer => {
       postalCodes.push(volunteer.postalCode);
     });
+
     let promises = postalCodes.map(postalcode => {
       return this.mapsCall(req.body.origin, postalcode);
     });
+
     Promise.all(promises)
       .then(values => {
         let valData = values
@@ -215,6 +244,7 @@ exports.getDistanceBanks = function(req, res) {
           .sort(function(a, b) {
             let itemA = a.data.duration.value; // ignore upper and lowercase
             let itemB = b.data.duration.value; // ignore upper and lowercase
+
             if (itemA < itemB) {
               return -1;
             }
@@ -223,6 +253,7 @@ exports.getDistanceBanks = function(req, res) {
             }
             return 0;
           });
+
         return res.status(200).send(valData);
       })
       .catch(error => {
@@ -231,9 +262,11 @@ exports.getDistanceBanks = function(req, res) {
   });
 };
 
+
 exports.findAll = function(req, res) {
   // Retrieve and return all notes from the database.
   let { page = 1, limit = 100 } = req.query;
+
   Volunteer.paginate({}, { page, limit }).then(volunteers => {
     if (!volunteers)
       return res.status(404).send({ message: "No Volunteers found." });

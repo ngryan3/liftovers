@@ -9,7 +9,7 @@ var UserSchema = mongoose.Schema({
     methodOfCommunication: String,
     password: String,
     // volunteer/ admin/ superAdmin
-    role: String,
+    role: {type: String, default: "volunteer"},
     // waitingApproval/ active/ deleted
     status: String,
     volunteerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Team2volunteers' }

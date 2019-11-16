@@ -7,6 +7,7 @@ import Dashboard from "./routes/dashboard";
 import Volunteers from "./routes/volunteer";
 import Admins from "./routes/admin";
 import CreateAdmin from "./routes/admin/create/create"
+import Lifts from "./routes/lift";
 import CreateVolunteers from "./routes/volunteer/create/create";
 //import Lifts from "./routes/lifts";
 import { AdminLayout } from "./components/admin";
@@ -31,13 +32,15 @@ function App() {
         </Switch>
       ) : (
         <Switch>
-           <Route exact path="/dashboard">
+          <AdminLayout>
+          <Route exact path="/dashboard">
               <Dashboard />
            </Route> 
-           {/* will move this under admin layout after design */}
-          <AdminLayout>
             <Route exact path="/volunteers">
               <Volunteers />
+            </Route>
+            <Route exact path="/lifts">
+              <Lifts />
             </Route>
             <Route exact path="/volunteers/create">
                 <CreateVolunteers />

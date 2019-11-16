@@ -1,42 +1,37 @@
-# YOUR PRODUCT/TEAM NAME
+# lifTOvers Team 2 - Team # 7
 
- > _Note:_ This document is meant to be written during (or shortly after) your review meeting, which should happen fairly close to the due date.      
- >      
- > _Suggestion:_ Have your review meeting a day or two before the due date. This way you will have some time to go over (and edit) this document, and all team members should have a chance to make their contribution.
+## Iteration 02 - Review & Retrospect
 
-
-## Iteration XX - Review & Retrospect
-
- * When: FILL IN THE DATE WHEN YOU ACTUALLY HAD YOUR REVIEW MEETING
- * Where: PHYSICAL LOCATION AND/OR ONLINE
+ * When: Nov 13, 2019
+ * Where: Robarts 5th floor, Study Room 3 @ 5pm EDT
 
 ## Process - Reflection
 
-(Optional) Short introduction
 
 #### Decisions that turned out well
 
 List process-related (i.e. team organization) decisions that, in retrospect, turned out to be successful.
-
-
- * 2 - 4 decisions.
- * Ordered from most to least important.
- * Explain why (i.e. give a supporting argument) you consider a decision to be successful.
- * Feel free to refer/link to process artifact(s).
+ * Team organization: we made an effort to isolate different areas so we could work without overlap or conflict. For example: Stacey worked on the dashboard, Andries worked on lift objects, Ryan and Tosin worked on the sign up/login, Faye worked on the volunteer create form, and Angela and Fillis worked on creating the database/deployment. This division helped us avoid conflicts in code. 
+ * Group coding sessions: we had two group coding sessions which was really helpful in catching each other up on what we were doing as well as swapping problems for a new prespective when we were stuck on bugs/compile issues. This was a recent decision we made and seemed to streamline our progress quicker than before. Our group coding sessions were on Nov 1 and Nov 13, both at Bahen 3200. 
+ * Help from liftovers teach lead: Abu from liftovers is the teach lead and when we were stuck with making API requests to get user obejcts, we asked him for help and he was able to spot the problem quickly. This was a successful decision as instead of struggling with it ourselves in a language we weren't comfortable in, we reached out, described the problem and diagnosis, and he was able to propose a solution. Screenshot of chat here: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Screen%20Shot%202019-11-15%20at%203.45.55%20PM.png)
 
 #### Decisions that did not turn out as well as we hoped
 
 List process-related (i.e. team organization) decisions that, in retrospect, were not as successful as you thought they would be.
-
+ * Struggling to get started with unfamiliar code, as we chose to create a NodeJS React app 
+ * Jumping too fast into creating forms, now we have to change the Sign Up and Create Volunteer form. 
+ * Team roles not being fulfilled as planned
+ 
  * 2 - 4 decisions.
- * Ordered from most to least important.
+ * From most to least important. Say why they are important/not that important.
  * Feel free to refer/link to process artifact(s).
 
 
 #### Planned changes
 
 List any process-related changes you are planning to make (if there are any)
-
+ * Have regular group coding sessions so we can keep on task with our progress and provide help/support for each other immediately.
+ 
  * Ordered from most to least important.
  * Explain why you are making a change.
 
@@ -44,30 +39,54 @@ List any process-related changes you are planning to make (if there are any)
 ## Product - Review
 
 #### Goals and/or tasks that were met/completed:
-
- * From most to least important.
+ *  * Decision about models: Relationship between user and volunteer objects, where user has an attribute role which is either "admin, "volunteer", or "superAdmin". After having a conversation with liftovers' team lead, he really supported the decision and commended us on the industry standard we followed. 
+ * From most to least important. Say why they are important/not that important.
  * Refer/link to artifact(s) that show that a goal/task was met/completed.
  * If a goal/task was not part of the original iteration plan, please mention it.
 
 #### Goals and/or tasks that were planned but not met/completed:
+ * Authentication for the user login page was not implemented, which is very important to the user, allowing them to properly log in to the app. This was because we lacked the time to include it.
+ * Filtering objects was not yet included. This would allow us to display specific lifts with problems, as well as lifts and volunteer accounts awaiting approval. We similarly could not complete it in time.
+ * The creation pages for admin and volunteer accounts do not have the same UI/UX, which would make navigating the app straightforward for users via a standardized, streamlined layout. The functionality of the pages were a more important feature to implement, so more time was focussed on that as opposed to their visual layout.
+ * Deleting models (volunteers, admins, etc.) from the database has not been incorporated, because the test database we use is very small and there is no current need to begin deleting entries. For a large-scale database, this would be useful in filtering out inactive accounts so that there is less clutter in the entry list.
 
- * From most to least important.
- * For each goal/task, explain why it was not met/completed.      
-   e.g. Did you change your mind, or did you just not get to it yet?
 
 #### How was your product demo?
  * How did you prepare your demo?
+    - Before meeting up with our partner, we double checked to make sure all our 
+    features that we were presenting were working properly. Then we launched our 
+    application from Faye's laptop to show our partners our current progress on 
+    the project. 
  * What did you manage to demo to your partner?
+    - Sign in page
+    - Sign up page with validation
+    - Lift/Volunteer page for admins
+    - Demonstrated Post request when creating a volunteer
+    - Demonstrated a Get request when displaying all volunteers
  * Did your partner accept the features?
+    - Our partner had no complaints on the presented features 
  * Were there change requests?
+    - No, our partner really liked what we have done so far 
  * What did you learn from the demo from either a process or product perspective?
+    - We followed industry standard for creating a user and volunteer object and linking these objects after the user 
+    signs up 
+    - We also learned that we need test cases for our application 
 
 ## Meeting Highlights
 
 Going into the next iteration, our main insights are:
-
- * 2 - 4 items
- * Short (no more than one short paragraph per item)
- * High-level concepts that should guide your work for the next iteration.
- * These concepts should help you decide on where to focus your efforts.
- * Can be related to product and/or process.
+ 
+ * Complete action flow of website is determined and will be followed with minimal changes
+    - The flow has been generally discussed with our partners and gotten approval. 
+    - User (as a volunteer):
+      <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/User%20Flow.png" />
+    - User (as an admin/ super admin):
+      <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/Admin%20Flow.png" />
+ * Priority: focus on backend & for the above flow to work correctly
+    - will have more people focus on backend coding (liftovers-api, especially controller)
+    - tasks will be strict i.e. frontend only working on frontend, backend only working on backend. This is for max. efficiency and min. conflict. 
+    - detailed tasks such as password encryption, distance algorithm optimization, will NOT be prioritized. Depending on how much time we have, we may or may not complete these tasks.
+ * Roles may need to be changed/ emphasized
+    - Each team member was assigned a major role at the beginning of the project (i.e. backend, fontend, testing, etc.)
+    - However, due to the relatively small amount of coding and simple website features that we focused on for D2, the roles seem to be relatively "useless". 
+    - Decisions may need to be made to modify roles. And as D3 starts and a more complicated web app will eventually be made, it seems necessary for these roles and corresponding resposibilities to be followed and met. 

@@ -7,7 +7,7 @@
     "bootstrap": "^4.3.1",
     "flexibull": "^1.0.32",
     "nodemon": "^1.19.4",
-    "react": "^16.11.2",
+    "react": "^16.11.0",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
