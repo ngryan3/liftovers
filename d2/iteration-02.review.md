@@ -37,7 +37,7 @@ List any process-related changes you are planning to make (if there are any)
 ## Product - Review
 
 #### Goals and/or tasks that were met/completed:
- *  * Decision about models: Relationship between user and volunteer objects, where user has an attribute role which is either "admin, "volunteer", or "superAdmin". After having a conversation with liftovers' team lead, he really supported the decision and commended us on the industry standard we followed. 
+ * Decision about models: Relationship between user and volunteer objects, where user has an attribute role which is either "admin, "volunteer", or "superAdmin". After having a conversation with liftovers' team lead, he really supported the decision and commended us on the industry standard we followed. 
  * From most to least important. Say why they are important/not that important.
  * Refer/link to artifact(s) that show that a goal/task was met/completed.
  * If a goal/task was not part of the original iteration plan, please mention it.
