@@ -27,12 +27,19 @@ For our current deployment, we focus on having basic features such as having a l
 ### Product URL (Client): https://liftovers-admin.herokuapp.com/
 #### Available routes: 
 * https://liftovers-admin.herokuapp.com/ 
-* https://liftovers-admin.herokuapp.com/login
+  * The home page
+  * The Sign Up button directs /signup which is a form that creates new Users
+  * The Login button directs /login which is a form that let user login
 * https://liftovers-admin.herokuapp.com/signup
+  * A form that creates new Users
+  * When submitted, makes a POST request to the API to create a new User
+* https://liftovers-admin.herokuapp.com/login
+  * A form that let user login
 * https://liftovers-admin.herokuapp.com/dashboard
   * Displays priority information for admins
   * Gets lifts which have the status "requested"
 * https://liftovers-admin.herokuapp.com/lifts 
+  * Displays a table of information about Lifts
 * https://liftovers-admin.herokuapp.com/volunteers
   * Displays a table of information about Volunteers
   * Button on right side of screen directs /volunteer/create which is a form that creates new Volunteers
