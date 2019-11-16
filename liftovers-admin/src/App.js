@@ -30,11 +30,10 @@ function App() {
         </Switch>
       ) : (
         <Switch>
-           <Route exact path="/dashboard">
+          <AdminLayout>
+          <Route exact path="/dashboard">
               <Dashboard />
            </Route> 
-           {/* will move this under admin layout after design */}
-          <AdminLayout>
             <Route exact path="/volunteers">
               <Volunteers />
             </Route>
@@ -44,9 +43,6 @@ function App() {
             <Route exact path="/volunteers/create">
                 <CreateVolunteers />
             </Route>
-            {/* <Route exact path="/lifts">
-              <Lifts />
-            </Route> */}
           </AdminLayout>
         </Switch>
       )}
