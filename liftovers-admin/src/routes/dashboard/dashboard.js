@@ -43,9 +43,15 @@ const columns = [
 ];
 
 
-export const Dashboard = ({ getLifts, lifts, loading }) => {
-    useEffect(() => { }, []);
-    let { docs, totalDocs, page } = lifts;
+export const Dashboard = ({ getRequestedLifts, getLifts, lifts, getPostedLifts, postedLifts, requestedLifts, loading }) => {
+    useEffect(() => {
+        getRequestedLifts({ page: 1, limit: 10 });
+        getLifts({ page: 1, limit: 10 });
+      }, []);
+    let { docs, totalDocs, page } = requestedLifts;
+    let { secondDocs, secondTotalDocs, secondPage } =  lifts;
+
+
     return (
         <div data-test="lift">
             <Boxed>
@@ -72,7 +78,7 @@ export const Dashboard = ({ getLifts, lifts, loading }) => {
                         <FlexiTable columns={columns} data={docs || []}>
                             <FlexiPagination
                                 total={totalDocs}
-                                onChange={page => getLifts({ page, limit: 10 })}
+                                onChange={page => getRequestedLifts({ page, limit: 10 })}
                                 current={page}
                                 pageCounts={pageOptions}
                                 pageSize={10}
@@ -90,11 +96,11 @@ export const Dashboard = ({ getLifts, lifts, loading }) => {
                 {loading ? (
                     <Loader />
                 ) : (
-                        <FlexiTable columns={columns} data={docs || []}>
+                        <FlexiTable columns={columns} data={secondDocs || []}>
                             <FlexiPagination
-                                total={totalDocs}
-                                onChange={page => getLifts({ page, limit: 10 })}
-                                current={page}
+                                total={secondTotalDocs}
+                                onChange={secondPage => getLifts({ secondPage, limit: 10 })}
+                                current={secondPage}
                                 pageCounts={pageOptions}
                                 pageSize={10}
                                 showTotal={(total, range) => {
@@ -115,7 +121,7 @@ export const Dashboard = ({ getLifts, lifts, loading }) => {
                         <FlexiTable columns={columns} data={docs || []}>
                             <FlexiPagination
                                 total={totalDocs}
-                                onChange={page => getLifts({ page, limit: 10 })}
+                                onChange={page => getRequestedLifts({ page, limit: 10 })}
                                 current={page}
                                 pageCounts={pageOptions}
                                 pageSize={10}
