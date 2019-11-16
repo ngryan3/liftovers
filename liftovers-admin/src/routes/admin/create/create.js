@@ -14,7 +14,7 @@ import {
 import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
-import ApiUrl from "../../api/config";
+import ApiUrl from "../../../api/config";
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};

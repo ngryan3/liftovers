@@ -22,7 +22,7 @@ const columns = [
   { title: "Name", dataIndex: "name", key: "name" },
   { title: "Surname", dataIndex: "surname", key: "surname"},
   { title: "Phone", dataIndex: "phone", key: "phone" },
-  { title: "Postal Code", dataIndex: "postalCode", key: "postalCode" },
+  { title: "Role", dataIndex: "role", key: "role" },
   { title: "Email", dataIndex: "email", key: "email"}
 ];
 const pageOptions = [
