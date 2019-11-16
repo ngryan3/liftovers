@@ -1,5 +1,7 @@
 # PRODUCT INFORMATION
 
+To access the product, go to the product URL listed below. We have included the deployed API URL as well. The routes that are relevant to Deliverable 2 are listed below each URL, as well as a brief description of what's going on at that page. 
+
 ### API URL (Server): https://liftovers-api.herokuapp.com/
 #### Available routes: 
 * https://liftovers-api.herokuapp.com/lifts
