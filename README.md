@@ -14,6 +14,14 @@
 * https://liftovers-admin.herokuapp.com/dashboard
 * https://liftovers-admin.herokuapp.com/lifts 
 * https://liftovers-admin.herokuapp.com/volunteers
+  * Displays a table of information about Volunteers
+  * Button on right side of screen directs /volunteer/create which is a form that creates new Volunteers
 * https://liftovers-admin.herokuapp.com/volunteers/create
-* https://liftovers-admin.herokuapp.com/admin
-* https://liftovers-admin.herokuapp.com/admin/create
+  * A form that creates a new Volunteer
+  * When submitted, makes a POST request to the API to create a new Volunteer
+* https://liftovers-admin.herokuapp.com/admins
+  * Displays a table of information about Admins
+  * Button on right side of screen directs /admins/create which is a form that creates new Volunteers
+* https://liftovers-admin.herokuapp.com/admins/create
+  * A form that creates a new Admin
+  * When submitted, makes a POST request to the API to create a new Admin
