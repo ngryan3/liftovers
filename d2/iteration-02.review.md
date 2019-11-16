@@ -18,7 +18,7 @@
 
  * Getting started quickly: We all struggled to get started with the code as our web app uses React and Express, and none of us had any prior experience with Javascript and these technologies. We had hoped to start coding earlier on but we had to learn a lot of new things such as the code structure and familiarize ourselves with the code base. This was most important because we often found ourselves behind schedule for certain features due to our lack of knowledge and experience. 
  * Team roles not being fulfilled as planned: We had specified team roles earlier on, and although some roles were useful, we realized that having a prior understanding of the code would have enabled us to create more specific and relevant roles for team members. For example, we had members in charge of front-end and back-end, but we ended up working more on specific features. 
- * Small design decisions: We were not familiar with React and packages, so we did not figure out a specific package we wanted to use, so we ended up using two separate packages. This made the UI inconsistent. For example, the "sign up" page and the "create volunteer" page used 2 different packages, and we had to change them. This was least important because it did not take a large amount of time to make the UI consistent. 
+ * Small design decisions: We were not familiar with React and packages, so we did not figure out a specific package we wanted to use, so we ended up using two separate packages. This made the UI inconsistent. For example, the "sign up" page and the "create volunteer" page used 2 different packages, and we need to change them. This was least important because it is not as important as a main feature. 
  
 #### Planned changes
 
@@ -35,8 +35,7 @@
  * If a goal/task was not part of the original iteration plan, please mention it.
 
 #### Goals and/or tasks that were planned but not met/completed:
- * Authentication for the user login page was not implemented, which is very important to the user, allowing them to properly log in to the app. This was because we lacked the time to include it.
- * Filtering objects was not yet included. This would allow us to display specific lifts with problems, as well as lifts and volunteer accounts awaiting approval. We similarly could not complete it in time.
+ * The dashboard does not display all information as planned such as posted requests, since there were some issues trying to display multiple function results. The focus was on implementing the controllers and models of the API and retrieving the information from the database. 
  * The creation pages for admin and volunteer accounts do not have the same UI/UX, which would make navigating the app straightforward for users via a standardized, streamlined layout. The functionality of the pages were a more important feature to implement, so more time was focussed on that as opposed to their visual layout.
  * Deleting models (volunteers, admins, etc.) from the database has not been incorporated, because the test database we use is very small and there is no current need to begin deleting entries. For a large-scale database, this would be useful in filtering out inactive accounts so that there is less clutter in the entry list.
 
@@ -56,7 +55,7 @@
  * Partner Acceptance of Features
     - Our partner had no complaints on the presented features 
  * Change Requests from Partner
-    - No, our partner really liked what we have done so far.
+    - Our partner really liked what we have done so far and didn't specify any changes that needed to be made.
  * What did you learn from the demo from either a process or product perspective?
     - We (inadvertently) followed industry standard for creating a user and volunteer object and linking these objects after the user 
     signs up 
