@@ -30,10 +30,8 @@ List process-related (i.e. team organization) decisions that, in retrospect, wer
 #### Planned changes
 
 List any process-related changes you are planning to make (if there are any)
- * Have regular group coding sessions so we can keep on task with our progress and provide help/support for each other immediately.
- 
- * Ordered from most to least important.
- * Explain why you are making a change.
+ * Have regular group coding sessions so we can keep on task with our progress and provide help/support as well as answer questions for for each other immediately. It's also a good way to plan set times to work on this project so we can have consistent progress. 
+ * We haven't been using the project board extensively, but once the basics are laid down we will be creating issues for specific tasks such as: checking form validation for Create Volunteers form, checking form validation for Create Admin form, checking validation for Sign Up form, adding user authentication to the Sign In form. We will also be assigning people to these tasks and moving them through the project board based on status of the task.
 
 
 ## Product - Review
@@ -68,7 +66,7 @@ List any process-related changes you are planning to make (if there are any)
  * Were there change requests?
     - No, our partner really liked what we have done so far 
  * What did you learn from the demo from either a process or product perspective?
-    - We followed industry standard for creating a user and volunteer object and linking these objects after the user 
+    - We (inadvetantly) followed industry standard for creating a user and volunteer object and linking these objects after the user 
     signs up 
     - We also learned that we need test cases for our application 
 
