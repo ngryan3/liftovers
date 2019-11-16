@@ -30,10 +30,23 @@
 ## Product - Review
 
 #### Goals and/or tasks that were met/completed:
- * Decision about models: Relationship between user and volunteer objects, where user has an attribute role which is either "admin, "volunteer", or "superAdmin". After having a conversation with liftovers' team lead, he really supported the decision and commended us on the industry standard we followed. 
- * From most to least important. Say why they are important/not that important.
- * Refer/link to artifact(s) that show that a goal/task was met/completed.
- * If a goal/task was not part of the original iteration plan, please mention it.
+ * Familiarize ourselves with the code base liftovers provided. This is obviously the most important as we had to understand a lot of new technology such as: Javascript, React web app structure, MongoDB, Express, etc.
+ * Create mongoDB collections for volunteers, lifts and users. Connect the api to the database and create corresponding objects (i.e. models). We determined that this is most important after familiarizing ourselves with the code liftovers provided as we need data to work with and populate the views of our web app. Decision about models: Relationship between user and volunteer objects, where user has an attribute role which is either "admin", "volunteer", or "superAdmin". After having a conversation with liftovers' team lead, he really supported the decision and commended us on the industry standard we followed. 
+ * On the webpages that display model information about volunteers and administrators, there are functionalities to display models in a table, and create models in a form by making GET and POST request to the api. The POST request has been done through a Create Volunteer/Admin form that includes form validation. As the web app is primarily an administrative tool, this was determined to be the next most important goal.
+ * Create the main functionality of the dashboard by displaying priority information (filtering objects was not yet included). Similar reasoning as the point above, this is important for administrative workflows. 
+ * (Not part of the original iteration plan) On the webpages that display model information about lifts, there are functionalities to display models in a table. This is important for future implementations such as post lifts, cancel lifts, etc.
+ * Create the sign up page with form validation by creating certain requirements for each information field such as: alphanumeric characters only, must be exactly 6 characters... etc. An essential feature that we began working on in Deliverable 2.
+ * Create the login page (no authentication). An essential feature that we began working on in Deliverable 2.
+ * Familiarize ourselves with deployment process through Heroku so we aren't caught off guard when it comes to deployment time for Deliverable 2 Part 2. 
+
+ **Links to Artifacts**
+ * Create mongoDB collections. Volunteers: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/volunteer%20models.JPG). Lifts: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/lift%20models.JPG). Users: (https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d2/user%20models.JPG).
+ * Volunteers table, Create Volunteer form: (https://liftovers-admin.herokuapp.com/volunteers).
+ * Admins table, Create Admin form: (https://liftovers-admin.herokuapp.com/admins).
+ * Dashboard: (https://liftovers-admin.herokuapp.com/dashboard).
+ * Lifts table: (https://liftovers-admin.herokuapp.com/lifts).
+ * Home page, Sign up form, Login form: (https://liftovers-admin.herokuapp.com).
+
 
 #### Goals and/or tasks that were planned but not met/completed:
  * The dashboard does not display all information as planned such as posted requests, since there were some issues trying to display multiple function results. The focus was on implementing the controllers and models of the API and retrieving the information from the database. Displaying requested lifts was deemed more important since those lifts need to be approved by an admin.
