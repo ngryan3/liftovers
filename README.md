@@ -4,7 +4,7 @@
 #### Available routes: 
 * https://liftovers-api.herokuapp.com/lifts
 * https://liftovers-api.herokuapp.com/volunteer
-* * https://liftovers-api.herokuapp.com/user
+* https://liftovers-api.herokuapp.com/user
 
 ### Product URL (Client): https://liftovers-admin.herokuapp.com/
 #### Available routes: 
