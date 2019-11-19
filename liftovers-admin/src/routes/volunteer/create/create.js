@@ -59,6 +59,7 @@ class CreateVolunteer extends Component{
         method: 'POST',
         body: json, // JSON.stringify
       });
+      window.location = "/volunteers"
     }
 
     render() {

@@ -59,6 +59,7 @@ class CreateProvider extends Component{
         method: 'POST',
         body: json, // JSON.stringify
       });
+      window.location = "/providers"
     }
 
     render() {

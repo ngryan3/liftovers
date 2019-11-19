@@ -59,6 +59,7 @@ class CreateDonor extends Component{
         method: 'POST',
         body: json, // JSON.stringify
       });
+      window.location = "/donors"
     }
 
     render() {
