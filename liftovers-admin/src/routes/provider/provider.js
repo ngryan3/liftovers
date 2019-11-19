@@ -17,10 +17,10 @@ export const PageTitle = styled.h3`
   padding: 10px 0;
 `;
 const columns = [
-  { title: "Contact Name", dataIndex: "name", key: "name" },
-  { title: "Contact Surname", dataIndex: "surname", key: "surname"},
-  { title: "Contact Phone", dataIndex: "phone", key: "phone" },
-  { title: "Contact Email", dataIndex: "email", key: "email"}
+  { title: "Contact Name", dataIndex: "contactName", key: "name" },
+  { title: "Contact Surname", dataIndex: "contactSurname", key: "surname"},
+  { title: "Contact Phone", dataIndex: "contactPhone", key: "phone" },
+  { title: "Contact Email", dataIndex: "contactEmail", key: "email"}
 ];
 const pageOptions = [
   { value: 10, label: "10 Rows" },
@@ -29,11 +29,11 @@ const pageOptions = [
   { value: 100, label: "100 Rows" }
 ];
 
-export const Provider = ({ getProvider, providers, loading }) => {
+export const Provider = ({ getProviders, providers, loading }) => {
   useEffect(() => {
-    getProvider({ page: 1, limit: 10 });
+    getProviders({ page: 1, limit: 10 });
   }, []);
-  let { docs, totalDocs, page } = admins;
+  let { docs, totalDocs, page } = providers;
   return (
     <div data-test="provider">
       <Boxed pad="5px 0">
@@ -73,7 +73,7 @@ export const Provider = ({ getProvider, providers, loading }) => {
           <FlexiTable columns={columns} data={docs || []}>
             <FlexiPagination
               total={totalDocs}
-              onChange={page => getProvider({ page, limit: 10 })}
+              onChange={page => getProviders({ page, limit: 10 })}
               current={page}
               pageCounts={pageOptions}
               pageSize={10}

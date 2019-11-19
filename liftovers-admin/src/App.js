@@ -9,7 +9,8 @@ import Admins from "./routes/admin";
 import CreateAdmin from "./routes/admin/create/create"
 import Lifts from "./routes/lift";
 import CreateVolunteers from "./routes/volunteer/create/create";
-//import Lifts from "./routes/lifts";
+import Donors from "./routes/donor";
+import Providers from "./routes/provider";
 import { AdminLayout } from "./components/admin";
 
 const openPages = ["/", "/login"];
@@ -50,6 +51,12 @@ function App() {
             </Route>
             <Route exact path="/admins/create">
                 <CreateAdmin />
+            </Route>
+            <Route exact path="/donors">
+                <Donors />
+            </Route>
+            <Route exact path="/providers">
+                <Providers />
             </Route>
             {/* <Route exact path="/lifts">
               <Lifts />
