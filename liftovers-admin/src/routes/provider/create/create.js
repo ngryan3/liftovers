@@ -26,21 +26,21 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
-class CreateAdmin extends Component{
+class CreateProvider extends Component{
 
   constructor(props) {
       super(props);
       this.state = {'name': ''};
 
       this.handleChange = this.handleChange.bind(this);
-      this.createAdmin = this.createAdmin.bind(this);
+      this.createProvider = this.createProvider.bind(this);
     }
 
     handleChange(event) {
       this.setState({value: event.target.value});
     }
 
-    createAdmin(event) {
+    createProvider(event) {
       event.preventDefault();
       const data = new FormData(event.target);
 
@@ -51,7 +51,7 @@ class CreateAdmin extends Component{
       var json = JSON.stringify(object);
       console.log(json);
 
-      fetch(ApiUrl + "/user", { //Change to deployed website
+      fetch(ApiUrl + "/provider", { //Change to deployed website
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -63,15 +63,15 @@ class CreateAdmin extends Component{
 
     render() {
       return (
-        <form onSubmit={this.createAdmin}>
+        <form onSubmit={this.createProvider}>
         <Boxed pad="5px 0">
-                    <PageTitle data-test="title">Create Administrator</PageTitle>
+                    <PageTitle data-test="title">Create Provider</PageTitle>
         </Boxed>
         <Boxed pad="50px">
-          <Input name="name" type="text" label="First Name" required forminput/><br/>
-          <Input name="surname" type="text" label="Last Name" required forminput/><br/>
-          <Input name="email" type="text" label="Email Address" required forminput/><br/>
-          <Input name="phone" type="phone" label="Phone Number" required forminput/><br/>
+          <Input name="contactName" type="text" label="Contact's First Name" required forminput/><br/>
+          <Input name="contactSurname" type="text" label="Contact's Last Name" required forminput/><br/>
+          <Input name="contactEmail" type="text" label="Contact's Email Address" required forminput/><br/>
+          <Input name="contactPhone" type="phone" label="Contact's Phone Number" required forminput/><br/>
           <SimpleSelect
             options={[
             { value: "email", label: "Email"},
@@ -79,18 +79,14 @@ class CreateAdmin extends Component{
             ]}
             name="methodOfCommunication" type="select" label="Preferred Method of Communication" required forminput
           /><br/>
-          <SimpleSelect
-            options={[
-            { value: "admin", label: "Administrator"},
-            { value: "superAdmin", label: "Super Administrator"}
-            ]}
-            name="role" type="select" label="Admin Role" required forminput
-            /><br/>
-          <Input type="submit" value="Submit" />
-          </Boxed>
+          <Input name="location" type="text" label="Location" required forminput/><br/>
+          <Input name="acceptedFoods" type="text" label="Accepted Foods" required forminput/><br/>
+          <Input name="unacceptableFoods" type="text" label="Unacceptable Foods" required forminput/><br/>
+          <Input type="submit" value="Submit"/>
+        </Boxed>
         </form>
       );
     }
 
 }
-export default CreateAdmin;
+export default CreateProvider;

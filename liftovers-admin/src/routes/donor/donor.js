@@ -62,7 +62,7 @@ export const Donor = ({ getDonors, donors, loading }) => {
             <Boxed pad="0.2rem" align="right">
               <Button>
                 <i className=" icon-plus" />
-                <a href="">Create Donor</a>
+                <a href="./donors/create">Create Donor</a>
               </Button>
             </Boxed>
           </Grid>

@@ -1,4 +1,4 @@
-// FOR VOLUNTEER DATABASE NOT USER DATABASE
+// FOR USER DATABASE
 
 import React, {Component} from "react";
 import { Grid, Button, Layout, Boxed, Input, SimpleSelect } from "flexibull";
@@ -26,21 +26,21 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
-class CreateVolunteer extends Component{
+class CreateDonor extends Component{
 
   constructor(props) {
       super(props);
       this.state = {'name': ''};
 
       this.handleChange = this.handleChange.bind(this);
-      this.createVolunteer = this.createVolunteer.bind(this);
+      this.createDonor = this.createDonor.bind(this);
     }
 
     handleChange(event) {
       this.setState({value: event.target.value});
     }
 
-    createVolunteer(event) {
+    createDonor(event) {
       event.preventDefault();
       const data = new FormData(event.target);
 
@@ -51,7 +51,7 @@ class CreateVolunteer extends Component{
       var json = JSON.stringify(object);
       console.log(json);
 
-      fetch(ApiUrl + "/volunteer", {
+      fetch(ApiUrl + "/donor", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -63,15 +63,15 @@ class CreateVolunteer extends Component{
 
     render() {
       return (
-        <form onSubmit={this.createVolunteer}>
+        <form onSubmit={this.createDonor}>
         <Boxed pad="5px 0">
-                    <PageTitle data-test="title">Create Volunteer</PageTitle>
+                    <PageTitle data-test="title">Create Donor</PageTitle>
         </Boxed>
         <Boxed pad="50px">
-          <Input name="name" type="text" label="First Name" required forminput/><br/>
-          <Input name="surname" type="text" label="Last Name" required forminput/><br/>
-          <Input name="email" type="text" label="Email Address" required forminput/><br/>
-          <Input name="phone" type="phone" label="Phone Number" required forminput/><br/>
+          <Input name="contactName" type="text" label="Contact's First Name" required forminput/><br/>
+          <Input name="contactSurname" type="text" label="Contact's Last Name" required forminput/><br/>
+          <Input name="contactEmail" type="text" label="Contact's Email Address" required forminput/><br/>
+          <Input name="contactPhone" type="phone" label="Contact's Phone Number" required forminput/><br/>
           <SimpleSelect
             options={[
             { value: "email", label: "Email"},
@@ -79,35 +79,20 @@ class CreateVolunteer extends Component{
             ]}
             name="methodOfCommunication" type="select" label="Preferred Method of Communication" required forminput
           /><br/>
-          <Input name="postalCode" type="text" label="Postal Code" required forminput/><br/>
-          <Input name="secondaryPostalCode" type="text" label="Secondary Postal Code"/><br/>
+          <Input name="location" type="text" label="Location" required forminput/><br/>
+          <Input nmae="typeOfFood" type="text" label="Type of Food Donation" required forminput/> <br/>
           <SimpleSelect
             options={[
             { value: "true", label: "Yes"},
             { value: "false", label: "No"}
             ]}
-            name="licensed" type="select" label="Valid Driver's License?" required forminput
-           /><br/>
-           <SimpleSelect
-            options={[
-            { value: "true", label: "Yes"},
-            { value: "false", label: "No"}
-            ]}
-            name="hasVehicle" type="select" label="Do They Own a Vehicle?" required forminput
-            /><br/>
-          <Input name="additionalNotes" type="text" label="Additional Notes"/><br/>
-          <SimpleSelect
-            options={[
-            { value: "true", label: "Yes"},
-            { value: "false", label: "No"}
-            ]}
-            name="waiverSigned" type="select" label="Waiver Signed?" required forminput
-            /><br/>
-          <Input type="submit" value="Submit" />
+            name="recurring" type="select" label="Recurring Donation?" required forminput/><br/>
+          <Input name="accessNotes" type="text" label="Access Notes" required forminput/><br/>
+          <Input type="submit" value="Submit"/>
           </Boxed>
         </form>
       );
     }
 
 }
-export default CreateVolunteer;
+export default CreateDonor;
