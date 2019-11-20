@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Layout, Boxed } from "flexibull";
+import { Grid, Layout, Boxed, Input, SimpleSelect  } from "flexibull";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import {
   Header,
@@ -39,16 +39,28 @@ class Signup extends React.Component {
     }
 
     submituserRegistrationForm(e) {
-      e.preventDefault();
+      e.preventDefault()
       if (this.validateForm() | true) {   
-          // fetch('https://localhost:7000/')
-          // .then(response => response.json())
-          // .then(data => this.setState({ data }));     
-          // First push values to server using this.stae.feilds["firstname"], switch page to hom or login
-          alert(this.state.fields["firstname"])
-          alert(this.state.fields["email"])
-          alert("Form submitted");
-          //TODO: PUSH TO SERVER
+          //
+          let myForm = document.getElementById('myForm');
+          const data = new FormData(myForm);
+
+          var object = {};
+          data.forEach(function(value, key) {
+            object[key] = value;
+          });
+          var json = JSON.stringify(object);
+          console.log(json);
+
+          /*fetch("http://localhost:7000/volunteer", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: json, // JSON.stringify
+          });
+          */
       }
 
     }
@@ -163,95 +175,74 @@ class Signup extends React.Component {
               </Contain>
             </Header>
             <div id="main-registration-container">
-                <div id="register">
-                    <h2 style={{marginLeft: '140px', color: '#444' }}>Sign up for liftovers</h2>
-                    <Form method="post"  name="userRegistrationForm"  onSubmit= {this.submituserRegistrationForm}>
+                <div id="register">  
+                <Boxed pad="50px">
+                    <h2 style={{marginLeft: '1px', color: '#444' }}>Sign up for liftovers</h2>
+                    <form id="myForm" name="userRegistrationForm"  onSubmit= {this.submituserRegistrationForm}>
                     <br />
                     <Form.Group>
-                        <label style={{marginLeft: '10px'}}>
-                        First Name:
-                            <input style={{marginLeft: '50px', width: "370px" , height: "30px"}}  size="lg" type="text" name="firstname" value={this.state.fields.firstname} onChange={this.handleChange} />
-                        </label>
+                        <Input  name="firstname" type="text" label="First Name"  value={this.state.fields.firstname} onChange={this.handleChange} required forminput/><br/>
                         <div className="errorMsg"  style={{ color: 'red' }}>{this.state.errors.firstname}</div>
                     </Form.Group>
                     <br />
                     <Form.Group>
-                        <label style={{marginLeft: '10px'}}>
-                        Last Name:
-                        <input style={{marginLeft: '52px', width: "370px" , height: "30px"}}  type="text" name="lastname" value={this.state.fields.lastname} onChange={this.handleChange}  />
-                        </label>
+                        <Input  type="text" name="lastname" label="Last Name"  value={this.state.fields.lastname} onChange={this.handleChange} required forminput />
                         <div className="errorMsg"  style={{ color: 'red' }}>{this.state.errors.lastname}</div>
                     </Form.Group>
                     <br />
-                    <Form.Group row>
-                        <label  style={{marginLeft: '10px'}}>
-                        Phone Number:
-                        <input style={{marginLeft: '20px', width: "370px" , height: "30px"}} type="text" name="mobileno" value={this.state.fields.mobileno} onChange={this.handleChange} />
-                        </label>
+                    <Form.Group row>  
+                        <Input  type="text" label="Phone Number" name="mobileno" value={this.state.fields.mobileno} onChange={this.handleChange} required forminput />
                         <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.mobileno}</div>
                     </Form.Group>
                     <br />
                     <Form.Group row>
-                        <label  style={{marginLeft: '10px'}}>
-                        Main Address:
-                        <input   style={{marginLeft: '30px', width: "370px" , height: "30px"}} type="text" name="address" value={this.state.fields.address} onChange={this.handleChange} />
-                        </label> <br />
-                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.address}</div>
+                        <Input label="Main Address"   type="text" name="address" value={this.state.fields.address} onChange={this.handleChange} required forminput />
                         <Form.Text className="text-muted">
                         We'll never share your address with anyone else.
                         </Form.Text>
-                    </Form.Group>
-                    <br />
-                    <Form.Group row>
-                        <label  style={{marginLeft: '10px'}}>
-                        Main Address Postal Code:
+                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.address}</div>
                         <br />
-                        <input  style={{marginLeft: '140px', width: "370px" , height: "30px"}} type="text" name="postalcode" value={this.state.fields.postalcode} onChange={this.handleChange} />
-                        </label> <br />
+                    </Form.Group>
+                    <Form.Group row>
+                        <Input  label="Main Address Postal Code" type="text" name="postalcode" value={this.state.fields.postalcode} onChange={this.handleChange} required forminput />
                         <Form.Text className="text-muted">
                         We'll never share your Postal code with anyone else.
                         </Form.Text>
+                        <br />
                     </Form.Group>
-                    <br />
                     <Form.Group row>
-                        <label  style={{marginLeft: '10px'}}>
-                        Email Address:
-                        <input  style={{marginLeft: '28px', width: "370px" , height: "30px"}} type="text" name="email" value={this.state.fields.email} onChange={this.handleChange}/>
-                        </label>
-                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.email}</div>
-                         <br />
+                        <Input  label="Secondary Postal Code" type="text" name="secpostalcode" value={this.state.fields.secpostalcode} onChange={this.handleChange} />
+                        <Form.Text className="text-muted">
+                         Enter secondary postal code if needed.
+                        </Form.Text>
+                        <br />
+                    </Form.Group>
+                    <Form.Group row>
+                        <Input  label="Email Address" type="text" name="email" value={this.state.fields.email} onChange={this.handleChange} required forminput/>
                         <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                         </Form.Text>
+                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.email}</div>
+                        <br />
                     </Form.Group>
-                    <br />
-                    <br />
                     <Form.Group row>
-                        <label  style={{marginLeft: '10px'}}>
-                        Password:
-                        <input  style={{marginLeft: '60px', width: "370px" , height: "30px"}} type="text" name="password"  value={this.state.fields.password} onChange={this.handleChange}  />
-                        </label>
-                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.password}</div>
-                    </Form.Group>
-                    <Form.Text className="text-muted">
+                        <Input  label="Password" type="text" name="password"  value={this.state.fields.password} onChange={this.handleChange} required forminput />
+                        <Form.Text className="text-muted">
                         Password should be a combination of numbers and text.
-                    </Form.Text>
-                    <br />
-                    <br />
+                        </Form.Text>
+                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.password}</div>
+                        <br />
+                    </Form.Group>
                     <Form.Group row>
-                        <label  style={{marginLeft: '10px'}}>
-                        Retype Password:
-                        <input  style={{marginLeft: '9px', width: "370px" , height: "30px"}} type="text" name="passConf" />
-                        </label>
+                        <Input  label="Re-enter Password" type="text" name="passConf" onChange={this.handleChange} required forminput/>
                     </Form.Group>
                     <br />
                     <Form.Group row>
-                        <input  to="/login" style={{marginLeft: '50px', width: "370px" , height: "30px"}} type="submit" className="button" onClick={this.submituserRegistrationForm} value="Register"/>
+                        <Input  style={{ backgroundColor: '#00ffd9' }} to="/login" type="submit" className="button" onClick={this.submituserRegistrationForm} value="Register"/>
                     </Form.Group>
-                    </Form>
                     <br />
-                    <br />
-                    <br />
+                    </form>
+                    </Boxed>
                 </div>
             </div>
           </Wrapper>
