@@ -116,7 +116,7 @@ class Login extends React.Component{
           <form id="myForm" onSubmit={this.displayLogin}>
           <Boxed pad="50px">
             <Form.Group row>
-                <h2 style={{marginLeft: '10px', color: '#444' }}>Login to liftovers</h2>
+                <h2 style={{marginLeft: '10px', color: '#5e5e5e' }}>Login to liftovers</h2>
             </Form.Group>
             <br />
             <Form.Group>
@@ -131,9 +131,7 @@ class Login extends React.Component{
                 />
 					    </div>
               <div className="errorMsg"  style={{ color: 'red' }}>{this.state.errors.email}</div>
-              <br />
             </Form.Group>
-            <br />
             <Form.Group>
               <div className="password">
                 <Input
