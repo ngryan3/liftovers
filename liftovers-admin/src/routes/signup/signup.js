@@ -177,7 +177,7 @@ class Signup extends React.Component {
             <div id="main-registration-container">
                 <div id="register">  
                 <Boxed pad="50px">
-                    <h2 style={{marginLeft: '1px', color: '#444' }}>Sign up for liftovers</h2>
+                    <h2 style={{marginLeft: '1px', color: '#5e5e5e' }}>Sign up for liftovers</h2>
                     <form id="myForm" name="userRegistrationForm"  onSubmit= {this.submituserRegistrationForm}>
                     <br />
                     <Form.Group>
