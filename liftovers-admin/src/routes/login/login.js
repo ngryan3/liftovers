@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Grid, Layout, Boxed } from "flexibull";
+import { Grid, Layout, Boxed, Input } from "flexibull";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import {
   Header,
@@ -15,39 +15,77 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
-class Login extends Component{
+class Login extends React.Component{
 
   constructor(props){
       super(props);
 
       this.state = {
-          email: '',
-          password: ''
+          fields: {},
+          errors: {}
       };
 
       this.update = this.update.bind(this)
-      this.displayLogin = this.displayLogin
+      this.attemptLogin = this.attemptLogin.bind(this)
 
 
   }
 
   update(e) {
-		let name = e.target.name;
-		let value = e.target.value;
-		this.setState({
-			[name]: value
-		});
+    let fields = this.state.fields;
+    fields[e.target.name] = e.target.value;
+    this.setState({
+      fields
+    });
 	}
 
-	displayLogin(e) {
-		e.preventDefault();
-		console.log('You are logged in');
-		console.log(this.state);
-		this.setState({
-			email: '',
-			password: ''
-		});
-	}
+  validateForm() {
+    let fields = this.state.fields;
+    let errors = {};
+    let formIsValid = true;
+
+    if (!fields["email"]) {
+      formIsValid = false;
+      errors["email"] = "*Please enter your Username/Email.";
+    }
+    if (!fields["password"]) {
+      formIsValid = false;
+      errors["password"] = "*Please enter your Password.";
+    }
+
+    this.setState({
+      errors: errors
+    });
+    return formIsValid;
+
+  }
+
+  attemptLogin(e) {
+		e.preventDefault()
+    if (this.validateForm() | true) {   
+      //TODO: PUSH TO SERVER
+      localStorage.setItem('currentUserEmail', this.state.fields["email"])
+      let myForm = document.getElementById('myForm');
+      const data = new FormData(myForm);
+
+      var object = {};
+      data.forEach(function(value, key) {
+        object[key] = value;
+      });
+      var json = JSON.stringify(object);
+      console.log(json);
+
+      /*fetch("http://localhost:7000/login", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: json, // JSON.stringify
+      });
+      */
+    }
+  }
   render() {
     return (
       <Layout>
@@ -75,44 +113,48 @@ class Login extends Component{
               </Boxed>
             </Contain>
           </Header>
-          <Form  onSubmit={this.displayLogin}>
+          <form id="myForm" onSubmit={this.displayLogin}>
+          <Boxed pad="50px">
             <Form.Group row>
-                <h2 style={{marginLeft: '140px', color: '#444' }}>Login to liftovers</h2>
+                <h2 style={{marginLeft: '10px', color: '#444' }}>Login to liftovers</h2>
             </Form.Group>
             <br />
             <Form.Group>
               <div className="username">
-                <input
+                <Input
                   type="text"
-                  placeholder="Username..."
-                  value={this.state.email}
+                  label="Username/Email"
+                  value={this.state.fields.email}
                   onChange={this.update}
                   name="email"
-                  style={{marginLeft: '50px', width: "370px" , height: "30px"}}
+                  required forminput
                 />
 					    </div>
+              <div className="errorMsg"  style={{ color: 'red' }}>{this.state.errors.email}</div>
               <br />
             </Form.Group>
             <br />
             <Form.Group>
               <div className="password">
-                <input
+                <Input
                   type="password"
-                  placeholder="Password..."
-                  value={this.state.password}
+                  label="Password"
+                  value={this.state.fields.password}
                   onChange={this.update}
                   name="password"
-                  style={{marginLeft: '50px', width: "370px" , height: "30px"}}
+                  required forminput
                 />
               </div>
+              <div className="errorMsg"  style={{ color: 'red' }}>{this.state.errors.password}</div>
             </Form.Group>
             <br />
             <Form.Group row>
-              <input type="submit" value="Login" style={{marginLeft: '200px', color: 'blue' }}/>
+              <Input type="submit" value="Login" style={{ backgroundColor: '#00ffd9' }} onClick={this.attemptLogin}/>
             </Form.Group>
-          </Form>
-          <br />
-          <ClearLink to="/signup" style={{marginLeft: '160px'}}>Create an account</ClearLink>
+            <ClearLink to="/signup" style={{marginLeft: '160px'}}>Create an account</ClearLink>
+            <ClearLink to="/signup" style={{marginLeft: '660px'}}>Forgot Password</ClearLink>
+            </Boxed>
+          </form>
         </Wrapper>
       </Layout>
     );
