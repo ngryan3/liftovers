@@ -37,7 +37,7 @@ exports.create = function(req, res) {
         }
       });
     } else {
-      res.send("email address already exists please use a different email")
+      res.status(400).send({message: 'Email already exists in database'})
     }
 
   })
