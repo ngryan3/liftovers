@@ -40,8 +40,9 @@ class Signup extends React.Component {
     }
 
     submituserRegistrationForm(e) {
+        var check = 0;
         e.preventDefault()
-        if (this.validateForm() | true) {
+        if (this.validateForm() || true) {
             //
             let myForm = document.getElementById('myForm');
             const data = new FormData(myForm);
@@ -50,7 +51,7 @@ class Signup extends React.Component {
             data.forEach(function(value, key) {
                 object[key] = value;
             });
-            object['status'] = 'waitingApproval'
+            object['status'] = 'waitingApproval';
             var json = JSON.stringify(object);
             console.log(json);
 
@@ -61,8 +62,20 @@ class Signup extends React.Component {
                 },
                 method: 'POST',
                 body: json, // JSON.stringify
-            });
-            window.location = "/"
+            })
+                .then(response => {
+                    if (response.status === 400){
+                        alert('Email already used, please use a different email');
+                    }else{
+                        alert('Successfully registered, please wait for one of our admins to review your registration');
+                        window.location.replace('http://localhost:3000')
+                    }
+                    return response.json()})
+                .then(responseData => {console.log(responseData); return responseData})
+                .then(data => {this.setState({"question:": data});})
+                .catch(err => {
+                    console.log("fetch error" + err);
+                });
         }
 
     }
@@ -242,7 +255,7 @@ class Signup extends React.Component {
                                         name="methodOfCommunication" type="select" label="Preferred Method of Communication" required forminput
                                     />
                                     <Form.Group row>
-                                        <Input  style={{ backgroundColor: '#00ffd9' }} to="/login" type="submit" className="button" onClick={this.submituserRegistrationForm} value="Register"/>
+                                        <Input  style={{ backgroundColor: '#00ffd9' }} to="/login" type="submit" className="button"  value="Register"/>
                                     </Form.Group>
                                     <br />
                                 </form>
