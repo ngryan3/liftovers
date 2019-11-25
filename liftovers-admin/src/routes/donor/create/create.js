@@ -26,21 +26,21 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
-class CreateAdmin extends Component{
+class CreateDonor extends Component{
 
   constructor(props) {
       super(props);
       this.state = {'name': ''};
 
       this.handleChange = this.handleChange.bind(this);
-      this.createAdmin = this.createAdmin.bind(this);
+      this.createDonor = this.createDonor.bind(this);
     }
 
     handleChange(event) {
       this.setState({value: event.target.value});
     }
 
-    createAdmin(event) {
+    createDonor(event) {
       event.preventDefault();
       const data = new FormData(event.target);
 
@@ -51,7 +51,7 @@ class CreateAdmin extends Component{
       var json = JSON.stringify(object);
       console.log(json);
 
-      fetch(ApiUrl + "/user", { //Change to deployed website
+      fetch(ApiUrl + "/donor", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -59,20 +59,20 @@ class CreateAdmin extends Component{
         method: 'POST',
         body: json, // JSON.stringify
       });
-      window.location = "/admins"
+      window.location = "/donors"
     }
 
     render() {
       return (
-        <form onSubmit={this.createAdmin}>
+        <form onSubmit={this.createDonor}>
         <Boxed pad="5px 0">
-                    <PageTitle data-test="title">Create Administrator</PageTitle>
+                    <PageTitle data-test="title">Create Donor</PageTitle>
         </Boxed>
         <Boxed pad="50px">
-          <Input name="name" type="text" label="First Name" required forminput/><br/>
-          <Input name="surname" type="text" label="Last Name" required forminput/><br/>
-          <Input name="email" type="text" label="Email Address" required forminput/><br/>
-          <Input name="phone" type="phone" label="Phone Number" required forminput/><br/>
+          <Input name="contactName" type="text" label="Contact's First Name" required forminput/><br/>
+          <Input name="contactSurname" type="text" label="Contact's Last Name" required forminput/><br/>
+          <Input name="contactEmail" type="text" label="Contact's Email Address" required forminput/><br/>
+          <Input name="contactPhone" type="phone" label="Contact's Phone Number" required forminput/><br/>
           <SimpleSelect
             options={[
             { value: "email", label: "Email"},
@@ -80,18 +80,20 @@ class CreateAdmin extends Component{
             ]}
             name="methodOfCommunication" type="select" label="Preferred Method of Communication" required forminput
           /><br/>
+          <Input name="location" type="text" label="Location" required forminput/><br/>
+          <Input nmae="typeOfFood" type="text" label="Type of Food Donation" required forminput/> <br/>
           <SimpleSelect
             options={[
-            { value: "admin", label: "Administrator"},
-            { value: "superAdmin", label: "Super Administrator"}
+            { value: "true", label: "Yes"},
+            { value: "false", label: "No"}
             ]}
-            name="role" type="select" label="Admin Role" required forminput
-            /><br/>
-          <Input type="submit" value="Submit" />
+            name="recurring" type="select" label="Recurring Donation?" required forminput/><br/>
+          <Input name="accessNotes" type="text" label="Access Notes" required forminput/><br/>
+          <Input type="submit" value="Submit"/>
           </Boxed>
         </form>
       );
     }
 
 }
-export default CreateAdmin;
+export default CreateDonor;

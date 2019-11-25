@@ -51,7 +51,7 @@ class CreateVolunteer extends Component{
       var json = JSON.stringify(object);
       console.log(json);
 
-      fetch(ApiUrl, {
+      fetch(ApiUrl + "/volunteer", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -59,6 +59,7 @@ class CreateVolunteer extends Component{
         method: 'POST',
         body: json, // JSON.stringify
       });
+      window.location = "/volunteers"
     }
 
     render() {

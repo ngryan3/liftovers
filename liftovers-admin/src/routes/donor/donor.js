@@ -17,10 +17,10 @@ export const PageTitle = styled.h3`
   padding: 10px 0;
 `;
 const columns = [
-  { title: "Contact Name", dataIndex: "name", key: "name" },
-  { title: "Contact Surname", dataIndex: "surname", key: "surname"},
-  { title: "Contact Phone", dataIndex: "phone", key: "phone" },
-  { title: "Contact Email", dataIndex: "email", key: "email"}
+  { title: "Contact Name", dataIndex: "contactName", key: "name" },
+  { title: "Contact Surname", dataIndex: "contactSurname", key: "surname"},
+  { title: "Contact Phone", dataIndex: "contactPhone", key: "phone" },
+  { title: "Contact Email", dataIndex: "contactEmail", key: "email"}
 ];
 const pageOptions = [
   { value: 10, label: "10 Rows" },
@@ -33,7 +33,8 @@ export const Donor = ({ getDonors, donors, loading }) => {
   useEffect(() => {
     getDonors({ page: 1, limit: 10 });
   }, []);
-  let { docs, totalDocs, page } = admins;
+  console.log(donors);
+  let { docs, totalDocs, page } = donors;
   return (
     <div data-test="donor">
       <Boxed pad="5px 0">
@@ -60,7 +61,8 @@ export const Donor = ({ getDonors, donors, loading }) => {
           <Grid default="100%" tablet="100%" mobile="100%">
             <Boxed pad="0.2rem" align="right">
               <Button>
-                <i className=" icon-plus" /> Create Donor
+                <i className=" icon-plus" />
+                <a href="./donors/create">Create Donor</a>
               </Button>
             </Boxed>
           </Grid>
