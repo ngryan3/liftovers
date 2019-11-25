@@ -17,6 +17,11 @@ module.exports = function(app) {
 
   app.get("/lifts", lift.findAll);
   app.get("/lifts/requested", lift.findRequested);
+  app.get("/lifts/posted", lift.findPosted);
+  app.get("/lifts/ongoing", lift.findOngoing);
+  app.get("/lifts/completed", lift.findCompleted);
+  app.get("/lifts/cancelled", lift.findCancelled);
+  app.get("/lifts/problem", lift.findProblem);
   app.get("/volunteer", volunteer.findAll);
   app.get("/user", user.findAll);
 };
