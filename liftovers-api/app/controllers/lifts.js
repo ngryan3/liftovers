@@ -178,25 +178,36 @@ exports.postLift = function(req, res) {
                 return 0;
             })
 
-            let timeSorted = valData.filter((item) => {
-                let bool = false
-                    item.volunteer.availability.forEach((volAvail) => {
-                        if (weekdays[req.body.date.getDay()] === volAvail.day.toLowerCase()) {
-                            bool = true
-                        }
-                    })
-                return bool
-            })
+            let timeSorted = valData
+            // .filter((item) => {
+            //     let bool = false
+            //         item.volunteer.availability.forEach((volAvail) => {
+            //             if (weekdays[req.body.date.getDay()] === volAvail.day.toLowerCase()) {
+            //                 bool = true
+            //             }
+            //         })
+            //     return bool
+            // })
+            // .filter((item) => {
+            //     let bool = false
+            //         item.volunteer.availability.forEach((volAvail) => {
+            //             if (volAvail.day.toLowerCase() === weekdays[req.body.date.getDay()]) {
+            //                 if ((volAvail.timeStart.hour <= req.body.pickupTime.hour)) {
+            //                     bool = true
+            //                 }
+            //             }
+            //         })
+            //     return bool
+            // })
             .filter((item) => {
-                let bool = false
-                    item.volunteer.availability.forEach((volAvail) => {
-                        if (volAvail.day.toLowerCase() === weekdays[req.body.date.getDay()]) {
-                            if ((volAvail.timeStart.hour <= req.body.pickupTime.hour)) {
-                                bool = true
-                            }
+                item.volunteer.availability.forEach((volAvail) => {
+                    if (volAvail.day.toLowerCase() === weekdays[req.body.date.getDay()]) {
+                        if ((volAvail.timeStart.hour <= req.body.pickupTime.hour)) {
+                            return true
                         }
-                    })
-                return bool
+                    }
+                })
+                return false
             })
 
             console.log('timesorted', timeSorted)
