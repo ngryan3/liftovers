@@ -107,8 +107,12 @@ class Login extends React.Component{
                       height="100px"
                     />
                   </div>
-                  <ClearLink to="/">Home</ClearLink>
-                  <ClearLink to="/signup">Sign Up</ClearLink>
+                  <ClearButton>
+                    <ClearLink to="/">Home</ClearLink>
+                  </ClearButton>
+                  <ClearButton>
+                    <ClearLink to="/signup">Sign Up</ClearLink>
+                  </ClearButton>
                 </Grid>
               </Boxed>
             </Contain>

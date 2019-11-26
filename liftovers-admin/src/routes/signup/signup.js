@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Layout, Boxed, Input, SimpleSelect  } from "flexibull";
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Form, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import {
     Header,
     Contain,
@@ -178,8 +178,12 @@ class Signup extends React.Component {
                                             height="100px"
                                         />
                                     </div>
-                                    <ClearLink to="/">Home</ClearLink>
-                                    <ClearLink to="/login">Login</ClearLink>
+                                    <ClearButton>
+                                        <ClearLink to="/">Home</ClearLink>
+                                    </ClearButton>
+                                    <ClearButton>
+                                        <ClearLink to="/login">Login</ClearLink>
+                                    </ClearButton>
                                 </Grid>
                             </Boxed>
                         </Contain>
@@ -266,7 +270,5 @@ class Signup extends React.Component {
             </Layout>
         );
     }
-
-
 };
 export default Signup;
