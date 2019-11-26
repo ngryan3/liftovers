@@ -12,9 +12,13 @@ var VolunteerSchema = mongoose.Schema(
     secondaryPostalCode: String,
     availability: {
       day: String,
-      time: {
+      timeStart: {
         hour: Number,
-        minute: Number,
+        minute: Number
+      },
+      timeFinish: {
+        hour: Number,
+        minute: Number
       }
   },
     licensed: Boolean,
