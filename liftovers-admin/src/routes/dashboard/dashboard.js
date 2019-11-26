@@ -43,13 +43,16 @@ const columns = [
 ];
 
 
-export const Dashboard = ({ getRequestedLifts, getPostedLifts, postedLifts, requestedLifts, loading }) => {
+export const Dashboard = ({ getRequestedLifts, getPostedLifts, 
+    postedLifts, requestedLifts, getProblemLifts, problemLifts, loading }) => {
     useEffect(() => {
         getRequestedLifts({ page: 1, limit: 10 });
         getPostedLifts({ page: 1, limit: 10 });
+        getProblemLifts({ page: 1, limit: 10 });
       }, []);
     let { docs, totalDocs, page } = requestedLifts;
-    let { secondDocs, secondTotalDocs, secondPage } =  postedLifts;
+    let { docs:secondDocs, totalDocs:secondTotalDocs, page:secondPage } =  postedLifts;
+    let { docs:thirdDocs, totalDocs:thirdTotalDocs, page:thirdPage } =  problemLifts;
 
 
     return (
@@ -96,11 +99,11 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts, postedLifts, requ
                 {loading ? (
                     <Loader />
                 ) : (
-                        <FlexiTable columns={columns} data={secondDocs || []}>
+                        <FlexiTable columns={columns} data={thirdDocs || []}>
                             <FlexiPagination
-                                total={secondTotalDocs}
-                                onChange={secondPage => getPostedLifts({ secondPage, limit: 10 })}
-                                current={secondPage}
+                                total={thirdTotalDocs}
+                                onChange={thirdPage => getProblemLifts({ thirdPage, limit: 10 })}
+                                current={thirdPage}
                                 pageCounts={pageOptions}
                                 pageSize={10}
                                 showTotal={(total, range) => {
