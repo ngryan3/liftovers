@@ -43,10 +43,21 @@ const Home = () => {
                     mobile="1fr"
                     pad="1px"
                     >
-                    <ClearLink>Home</ClearLink>
-                    <ClearLink to="/signup">Sign Up</ClearLink>
-                    <ClearLink to="/login">Login</ClearLink>
-                    <ClearLink>About</ClearLink>
+                    <ClearButton>
+                        <ClearLink to= "/">Home</ClearLink>
+                    </ClearButton>
+                    <ClearButton>
+                        <ClearLink to="/signup">Sign Up</ClearLink>
+                    </ClearButton>
+                    <ClearButton>
+                        <ClearLink to="/login">Login</ClearLink>
+                    </ClearButton>
+                    <ClearButton>
+                        <ClearLink to="/dashboard">Dashboard</ClearLink>
+                    </ClearButton>
+                    <ClearButton>
+                        <ClearLink to="/about">About</ClearLink>
+                    </ClearButton>
                   </Grid>
                 </div>
               </Grid>

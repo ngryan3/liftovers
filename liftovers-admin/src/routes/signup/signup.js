@@ -168,8 +168,12 @@ class Signup extends React.Component {
                         height="100px"
                       />
                     </div>
-                    <ClearLink to="/">Home</ClearLink>
-                    <ClearLink to="/login">Login</ClearLink>
+                    <ClearButton>
+                        <ClearLink to="/">Home</ClearLink>
+                    </ClearButton>
+                    <ClearButton>
+                        <ClearLink to="/login">Login</ClearLink>
+                    </ClearButton>
                   </Grid>
                 </Boxed>
               </Contain>
