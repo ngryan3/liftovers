@@ -11,6 +11,14 @@ const accountSid = 'AC29bd8166067d95be88f6ce44ce53df5a'
 const authToken = '329955eb209335d85af876937107502c'
 const client = new twilio(accountSid, authToken)
 
+mapsCall = (origin, dest) => {
+    return axios({
+      method: "get",
+      url: `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${dest}&key=AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ`
+    });
+  };
+
+
 sendText = (phone, pickupAddress) => {
     console.log('sendingg texttt', phone, pickupAddress)
     return client.messages.create({
@@ -19,6 +27,7 @@ sendText = (phone, pickupAddress) => {
         from: '+16476952333' // From a valid Twilio number
     })
 }
+
 
 getVolunteers = (origin, dest) => {
     return Volunteer.find()
@@ -178,36 +187,24 @@ exports.postLift = function(req, res) {
                 return 0;
             })
 
-            let timeSorted = valData
-            // .filter((item) => {
-            //     let bool = false
-            //         item.volunteer.availability.forEach((volAvail) => {
-            //             if (weekdays[req.body.date.getDay()] === volAvail.day.toLowerCase()) {
-            //                 bool = true
-            //             }
-            //         })
-            //     return bool
-            // })
-            // .filter((item) => {
-            //     let bool = false
-            //         item.volunteer.availability.forEach((volAvail) => {
-            //             if (volAvail.day.toLowerCase() === weekdays[req.body.date.getDay()]) {
-            //                 if ((volAvail.timeStart.hour <= req.body.pickupTime.hour)) {
-            //                     bool = true
-            //                 }
-            //             }
-            //         })
-            //     return bool
-            // })
-            .filter((item) => {
+            let timeSorted = valData.filter((item) => {
+                let weekday = weekdays[req.body.date.getDay()];
+                let pickupTime = parseInt(req.body.pickupTime.hour.toString() + 
+                                    req.body.pickupTime.minute.toString());
+
                 item.volunteer.availability.forEach((volAvail) => {
-                    if (volAvail.day.toLowerCase() === weekdays[req.body.date.getDay()]) {
-                        if ((volAvail.timeStart.hour <= req.body.pickupTime.hour)) {
-                            return true
+                    if (volAvail.day.toLowerCase() === weekday) {
+                        let volTimeStart = parseInt(volAvail.timeStart.hour.toString() + 
+                                            volAvail.timeStart.minute.toString());
+                        let volTimeFinish = parseInt(volAvail.volTimeFinish.hour.toString() +
+                                                volAvail.volTimeFinish.minute.toString());
+
+                        if (volTimeStart <= pickupTime && volTimeFinish >= pickupTime) {
+                            return true;
                         }
                     }
                 })
-                return false
+                return false;
             })
 
             console.log('timesorted', timeSorted)
