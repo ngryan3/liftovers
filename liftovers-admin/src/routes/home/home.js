@@ -15,6 +15,50 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
+function Greeting() {
+  const name = localStorage.getItem('currentUsername');
+  if (name) {
+    let splice = name.slice(1)
+    const username = name[0] + splice.toLowerCase();
+    return <Boxed pad="5px 10px">
+    <Grid
+        default="auto 100px 100px 140px"
+        tablet="auto 100px 100px 140px"
+        mobile="1fr"
+        pad="10px"
+      >
+      <div>
+        
+          <h2 style={{marginLeft: '10px', color: '#5e5e5e' }}>Welcome {username}</h2>
+      </div>
+    </Grid>
+    </Boxed>;
+  }
+  return <br />
+}
+function clearStorage(){
+  localStorage.clear()
+}
+
+function LogInout(){
+  let name = localStorage.getItem('currentUsername');
+  if(name != null){
+    if(name.length > 0){
+      return <ClearButton>
+          <ClearLink onClick={() => { clearStorage()}}  to="/login">Logout</ClearLink>
+      </ClearButton>  
+    }
+  }
+    return <div>
+       <ClearButton>
+            <ClearLink to="/login">Login</ClearLink>
+        </ClearButton>
+        <ClearButton>
+            <ClearLink to="/signup">Sign Up</ClearLink>
+        </ClearButton>
+    </div> 
+}
+
 const Home = () => {
   return (
     <Layout>
@@ -46,12 +90,7 @@ const Home = () => {
                     <ClearButton>
                         <ClearLink to= "/">Home</ClearLink>
                     </ClearButton>
-                    <ClearButton>
-                        <ClearLink to="/signup">Sign Up</ClearLink>
-                    </ClearButton>
-                    <ClearButton>
-                        <ClearLink to="/login">Login</ClearLink>
-                    </ClearButton>
+                    <LogInout />
                     <ClearButton>
                         <ClearLink to="/dashboard">Dashboard</ClearLink>
                     </ClearButton>
@@ -64,6 +103,7 @@ const Home = () => {
             </Boxed>
           </Contain>
         </Header>
+        <Greeting />
       </Wrapper>
     </Layout>
   );

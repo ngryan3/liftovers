@@ -75,15 +75,32 @@ class Login extends React.Component{
       var json = JSON.stringify(object);
       console.log(json);
 
-      /*fetch("http://localhost:7000/login", {
+      fetch("http://localhost:7000/user/login", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         method: 'POST',
         body: json, // JSON.stringify
-      });
-      */
+      })
+          .then(response => {
+            if (response.status === 400){
+                alert('Email does not exist in our database, please recheck and try again');
+            } if (response.status === 500){
+                alert('Username and password do not match our records');
+            }if (response.status === 300){
+              window.location.replace('http://localhost:3000')
+            } 
+            return response.json()})
+          .then(data => {
+            localStorage.setItem('currentUser', data.item[0])
+            localStorage.setItem('currentUserID', data.item[0]._id)
+            localStorage.setItem('currentUsername', data.item[0].name)
+          })
+          .catch(err => {
+              console.log("fetch error" + err);
+          });
+
     }
   }
   render() {

@@ -66,6 +66,8 @@ class Signup extends React.Component {
                 .then(response => {
                     if (response.status === 400){
                         alert('Email already used, please use a different email');
+                    } if (response.status === 500){
+                        alert('Some error occurred while creating the User');
                     }else{
                         alert('Successfully registered, please wait for one of our admins to review your registration');
                         window.location.replace('http://localhost:3000')

@@ -5,6 +5,7 @@ module.exports = function(app) {
   var donor = require("../controllers/donor.js");
   var provider = require("../controllers/provider.js");
 
+
   app.get("/donor", donor.findAll);
   app.post("/donor", donor.create);
 
@@ -26,6 +27,7 @@ module.exports = function(app) {
 
   app.get("/user", user.findAll);
   app.post("/user", user.create);
+  app.post("/user/login", user.login);
 
   app.get("/volunteer", volunteer.findAll);
   app.post("/volunteer", volunteer.create);
