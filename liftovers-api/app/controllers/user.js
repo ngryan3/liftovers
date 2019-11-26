@@ -1,4 +1,5 @@
 var User = require("../models/user.js");
+var bcrypt = require('bcryptjs');
 
 // Create and Save a new Note
 exports.create = function(req, res) {
@@ -41,6 +42,42 @@ exports.create = function(req, res) {
     }
 
   })
+};
+
+exports.login = function(req, res) {
+  // Retrieve and return all notes from the database.
+  if (!req.body.email) {
+    return res.status(400).send({ message: "Email can not be empty" });
+  }
+
+  User.findOne({email: req.body.email}, function (err, user_email) {
+    if (err) {
+      return callback(err)
+    } if (user_email){
+      User.find({ email: req.body.email})
+      .then(item => {
+        let password = item[0].password
+        let auth = null
+        bcrypt.compare(req.body.password, password, function(err, result) {
+          if (result){
+            res.status(300).send({item})
+          } else {
+            res.status(500).send({message: "Email and password do not match"})
+          }
+        });
+       })
+      .catch(error => {
+        console.log(error);
+      });
+    } else {
+      res.status(400).send({message: 'User Does not exist in our database'})
+    }
+
+  })
+};
+
+getUsers = (origin, dest) => {
+  return User.find();
 };
 
 exports.findAll = function(req, res) {
