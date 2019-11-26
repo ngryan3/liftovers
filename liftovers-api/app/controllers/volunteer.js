@@ -70,6 +70,7 @@ exports.create = function(req, res) {
 
 exports.getDistance = function(req, res) {
   var postalCodes = [];
+  let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
   if (!req.body) {
     return res.status(400).send({ message: "Body can not be empty" });
@@ -108,37 +109,39 @@ exports.getDistance = function(req, res) {
           });
 
         let timeSorted = valData
+          // .filter(item => {
+          //   let bool = false;
+
+          //   req.body.availability.forEach(available => {
+          //     item.volunteer.availability.forEach(volAvail => {
+          //       if (
+          //         weekdays[available.date.getDay()] === volAvail.day.toLowerCase()
+          //       ) {
+          //         bool = true;
+          //       }
+          //     });
+          //   });
+          //   return bool;
+          // })
           .filter(item => {
             let bool = false;
 
-            req.body.availability.forEach(available => {
-              item.volunteer.availability.forEach(volAvail => {
+            // req.body.availability.forEach(available => {
+            item.volunteer.availability.forEach(volAvail => {
+              if ( volAvail.day.toLowerCase() === weekdays[available.date.getDay()] ) {
                 if (
-                  available.day.toLowerCase() === volAvail.day.toLowerCase()
+                  (volAvail.timeFinish.hour > req.body.pickupTime.hour &&
+                    volAvail.timeStart.hour < req.body.pickupTime.hour) ||
+                  (volAvail.timeFinish.hour === req.body.pickupTime.hour &&
+                    volAvail.timeFinish.minute > req.body.pickupTime.minute) ||
+                  (volAvail.timeStart.hour === req.body.pickupTime.hour &&
+                    volAvail.timeStart.minute < req.body.pickupTime.minute)
                 ) {
                   bool = true;
                 }
-              });
+              }
             });
-            return bool;
-          })
-          .filter(item => {
-            let bool = false;
-
-            req.body.availability.forEach(available => {
-              item.volunteer.availability.forEach(volAvail => {
-                if (
-                  volAvail.day.toLowerCase() === available.day.toLowerCase()
-                ) {
-                  if (
-                    volAvail.timeStart.hour >= available.timeStart.hour &&
-                    volAvail.timeStart.hour < available.timeFinish.hour
-                  ) {
-                    bool = true;
-                  }
-                }
-              });
-            });
+            // });
             return bool;
           });
 
@@ -188,7 +191,7 @@ exports.acceptText = function(req, res) {
           return vol.phone === fromPhone;
         });
 
-        Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true })
+        Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: chosenVolunteer })
           .then(ll => {
             console.log("updated");
           })

@@ -37,16 +37,18 @@ function Greeting() {
   return <br />
 }
 function clearStorage(){
-  //localStorage.clear()
+  localStorage.clear()
 }
 
 function LogInout(){
   let name = localStorage.getItem('currentUsername');
-  if(name){
-    return <ClearButton>
-        <ClearLink onClick={clearStorage()}  to="/login">Logout</ClearLink>
-    </ClearButton>    
-  }else{
+  if(name != null){
+    if(name.length > 0){
+      return <ClearButton>
+          <ClearLink onClick={() => { clearStorage()}}  to="/login">Logout</ClearLink>
+      </ClearButton>  
+    }
+  }
     return <div>
        <ClearButton>
             <ClearLink to="/login">Login</ClearLink>
@@ -55,7 +57,6 @@ function LogInout(){
             <ClearLink to="/signup">Sign Up</ClearLink>
         </ClearButton>
     </div> 
-  }
 }
 
 const Home = () => {
