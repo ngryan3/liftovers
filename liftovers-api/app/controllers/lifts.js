@@ -47,6 +47,56 @@ exports.findRequested = function(req, res) {
 };
 
 
+exports.findPosted = function(req, res) {
+    // Retrieve and return all notes whose status == "posted" from the database.
+    Lifts.paginate({ status: "posted" }, { page: 1, limit: 10 }).then(lifts => {
+        if (!lifts)
+          return res.status(404).send({ message: "No posted lifts found." });
+        return res.status(200).send(lifts);
+    });
+};
+
+
+exports.findOngoing = function(req, res) {
+    // Retrieve and return all notes whose status == "ongoing" from the database.
+    Lifts.paginate({ status: "ongoing" }, { page: 1, limit: 10 }).then(lifts => {
+        if (!lifts)
+          return res.status(404).send({ message: "No ongoing lifts found." });
+        return res.status(200).send(lifts);
+    });
+};
+
+
+exports.findCompleted = function(req, res) {
+    // Retrieve and return all notes whose status == "completed" from the database.
+    Lifts.paginate({ status: "completed" }, { page: 1, limit: 10 }).then(lifts => {
+        if (!lifts)
+          return res.status(404).send({ message: "No completed lifts found." });
+        return res.status(200).send(lifts);
+    });
+};
+
+
+exports.findCancelled = function(req, res) {
+    // Retrieve and return all notes whose status == "cancelled" from the database.
+    Lifts.paginate({ status: "cancelled" }, { page: 1, limit: 10 }).then(lifts => {
+        if (!lifts)
+          return res.status(404).send({ message: "No cancelled lifts found." });
+        return res.status(200).send(lifts);
+    });
+};
+
+
+exports.findProblem = function(req, res) {
+    // Retrieve and return all notes whose status == "problem" from the database.
+    Lifts.paginate({ status: "problem" }, { page: 1, limit: 10 }).then(lifts => {
+        if (!lifts)
+          return res.status(404).send({ message: "No problem lifts found." });
+        return res.status(200).send(lifts);
+    });
+};
+
+
 exports.requestLift = function(req, res) {
     if (!req.body) {
         return res.status(400).send({ message: "Body can not be empty" });
@@ -90,15 +140,15 @@ exports.requestLift = function(req, res) {
 
 
 exports.postLift = function(req, res) {
-    var postalCodes = []
-    let volunteersTexted = []
-
     if (!req.body) {
         return res.status(400).send({ message: "Body can not be empty" });
     }
 
+    var postalCodes = []
+    let volunteersTexted = []
     let liftId = req.body._id
     let distancevolunteers = this.getVolunteers()
+    let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     
     distancevolunteers.then((vol) => {
         vol.forEach((volunteer) => {
@@ -106,7 +156,7 @@ exports.postLift = function(req, res) {
         })
 
         let promises = postalCodes.map((postalcode) => {
-            return this.mapsCall(req.body.origin, postalcode)
+            return this.mapsCall(req.body.postalCode, postalcode)
         })
 
         Promise.all(promises).then((values) => {
@@ -128,25 +178,36 @@ exports.postLift = function(req, res) {
                 return 0;
             })
 
-            let timeSorted = valData.filter((item) => {
-                let bool = false
-                    item.volunteer.availability.forEach((volAvail) => {
-                        if (req.body.availability.day.toLowerCase() === volAvail.day.toLowerCase()) {
-                            bool = true
-                        }
-                    })
-                return bool
-            })
+            let timeSorted = valData
+            // .filter((item) => {
+            //     let bool = false
+            //         item.volunteer.availability.forEach((volAvail) => {
+            //             if (weekdays[req.body.date.getDay()] === volAvail.day.toLowerCase()) {
+            //                 bool = true
+            //             }
+            //         })
+            //     return bool
+            // })
+            // .filter((item) => {
+            //     let bool = false
+            //         item.volunteer.availability.forEach((volAvail) => {
+            //             if (volAvail.day.toLowerCase() === weekdays[req.body.date.getDay()]) {
+            //                 if ((volAvail.timeStart.hour <= req.body.pickupTime.hour)) {
+            //                     bool = true
+            //                 }
+            //             }
+            //         })
+            //     return bool
+            // })
             .filter((item) => {
-                let bool = false
-                    item.volunteer.availability.forEach((volAvail) => {
-                        if (volAvail.day.toLowerCase() === req.body.availability.day.toLowerCase()) {
-                            if ((volAvail.timeStart.hour <= req.body.availability.time.hour)) {
-                                bool = true
-                            }
+                item.volunteer.availability.forEach((volAvail) => {
+                    if (volAvail.day.toLowerCase() === weekdays[req.body.date.getDay()]) {
+                        if ((volAvail.timeStart.hour <= req.body.pickupTime.hour)) {
+                            return true
                         }
-                    })
-                return bool
+                    }
+                })
+                return false
             })
 
             console.log('timesorted', timeSorted)

@@ -7,30 +7,40 @@ exports.create = function(req, res) {
     return res.status(400).send({ message: "Name can not be empty" });
   }
 
-  var user = new User({
-    name: req.body.name,
-    surname: req.body.surname,
-    email: req.body.email,
-    phone: req.body.phone,
-    methodOfCommunication: req.body.methodOfCommunication,
-    password: req.body.password,
-    // volunteer/ admin/ superAdmin
-    role: req.body.role,
-    // waitingApproval/ active/ deleted
-    status: req.body.status,
-    volunteerId: req.body.volunteerId
-  });
-
-  user.save(function(err, data) {
+  User.findOne({email: req.body.email}, function (err, user_email) {
     if (err) {
-      console.log(err);
-      res
-        .status(500)
-        .send({ message: "Some error occurred while creating the User." });
+      return callback(err)
+    } else if (!user_email){
+      var user = new User({
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
+        phone: req.body.phone,
+        methodOfCommunication: req.body.methodOfCommunication,
+        password: req.body.password,
+        // volunteer/ admin/ superAdmin
+        // default will be volunteer when creating a user object
+        // role: req.body.role,
+        // waitingApproval/ active/ deleted
+        status: req.body.status,
+        volunteerId: req.body.volunteerId
+      });
+
+      user.save(function(err, data) {
+        if (err) {
+          console.log(err);
+          res
+              .status(500)
+              .send({ message: "Some error occurred while creating the User." });
+        } else {
+          res.send(data);
+        }
+      });
     } else {
-      res.send(data);
+      res.status(400).send({message: 'Email already exists in database'})
     }
-  });
+
+  })
 };
 
 exports.findAll = function(req, res) {
