@@ -7,8 +7,14 @@ var googleMapsClient = require('@google/maps').createClient({
     key: 'AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ'
 });
 
-const accountSid = 'AC29bd8166067d95be88f6ce44ce53df5a'
-const authToken = '329955eb209335d85af876937107502c'
+// liftover's twilio account id and token -- does not work for us
+// const accountSid = "AC29bd8166067d95be88f6ce44ce53df5a";
+// const authToken = "329955eb209335d85af876937107502c";
+
+// this is our id and token -- the account however is connected to the deployed api link
+// BUT it is only connected to the accept text function which shouldn't affect much
+const accountSid = "AC1ae501eeef695a160370f76a11896ea1";
+const authToken = "052155e3e011700d7d835fc18ee592f3";
 const client = new twilio(accountSid, authToken)
 
 mapsCall = (origin, dest) => {
