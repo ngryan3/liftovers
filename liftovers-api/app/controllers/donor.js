@@ -56,3 +56,14 @@ exports.findId = function(req, res) {
       return res.status(200).send(donors);
   });
 };
+
+
+exports.deleteDonor = function(req, res) {
+  Donor.findOneAndUpdate({ _id: req.params.id }, { status: "deleted" })
+      .then(ll => {
+          console.log("changed donor status to deleted");
+      })
+      .catch(error => {
+          console.log(error);
+      });
+};

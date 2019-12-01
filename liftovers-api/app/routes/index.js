@@ -9,6 +9,7 @@ module.exports = function (app) {
   app.get("/donor", donor.findAll);
   app.get("/donor/:id", donor.findId);
   app.post("/donor", donor.create);
+  app.post("/donor/:id/delete", donor.deleteDonor);
 
   app.get("/lifts", lift.findAll);
   app.get("/lifts/requested", lift.findRequested);
@@ -27,6 +28,7 @@ module.exports = function (app) {
   app.get("/provider", provider.findAll);
   app.get("/provider/:id", provider.findId);
   app.post("/provider", provider.create);
+  app.post("/provider/:id/delete", provider.deleteProvider);
 
   app.get("/user", user.findAll);
   app.get("/user/waiting", user.findWait);

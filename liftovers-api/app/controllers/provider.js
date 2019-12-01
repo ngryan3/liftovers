@@ -54,3 +54,14 @@ exports.findId = function(req, res) {
       return res.status(200).send(poviders);
   });
 };
+
+
+exports.deleteProvider = function(req, res) {
+  Provider.findOneAndUpdate({ _id: req.params.id }, { status: "deleted" })
+      .then(ll => {
+          console.log("changed provider status to deleted");
+      })
+      .catch(error => {
+          console.log(error);
+      });
+};
