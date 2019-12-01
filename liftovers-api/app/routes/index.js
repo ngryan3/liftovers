@@ -29,8 +29,7 @@ module.exports = function (app) {
     app.get("/user/waiting", user.findWait);
     app.get("/user/:id", user.getOne);
     app.get("/reset/:token", user.reset);
-    // not 100% sure this one works yet
-    app.post("/user/:id", user.updateUser);
+    app.post("/user/:id/approve", user.approveUser);
     app.post("/user/:id/delete", user.deleteUser);
     app.post("/user", user.create);
     app.post("/user/login", user.login);

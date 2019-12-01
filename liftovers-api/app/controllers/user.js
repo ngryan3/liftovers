@@ -225,13 +225,13 @@ exports.deleteUser = function (req, res) {
         });
 }
 
-exports.updateUser = function (req, res) {
-    User.findByIdAndUpdate(req.params.id, req.body)
+exports.approveUser = function (req, res) {
+    User.findByIdAndUpdate(req.params.id, { status: "active" })
         .then(ll => {
-            console.log("updated user");
+            console.log("changed user status to active");
         })
         .catch(error => {
             console.log(error);
-        })
+        });
 }
 
