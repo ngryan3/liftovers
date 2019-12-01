@@ -17,10 +17,12 @@ import CreateDonor from "./routes/donor/create/create";
 import Providers from "./routes/provider";
 import CreateProvider from "./routes/provider/create/create";
 import { AdminLayout } from "./components/admin";
+import Forgot from "./routes/login/forgot";
+import Reset from "./routes/login/resetpassword";
 
 const openPages = ["/", "/login"];
 console.log(window.location.pathname);
-let open = openPages.includes(window.location.pathname);
+let open = openPages.push(window.location.pathname);
 function App() {
   return (
     <Router>
@@ -35,6 +37,10 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route exact path="/forgot">
+            <Forgot />
+          </Route>
+          <Route path="/reset/:token" component={Reset}/>
         </Switch>
       ) : (
         <Switch>
