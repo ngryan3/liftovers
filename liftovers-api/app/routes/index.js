@@ -25,6 +25,7 @@ module.exports = function (app) {
   app.post("/lift/:id/problem", lift.problemLift);
 
   app.get("/provider", provider.findAll);
+  app.get("/provider/:id", provider.findId);
   app.post("/provider", provider.create);
 
   app.get("/user", user.findAll);
