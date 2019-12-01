@@ -37,10 +37,10 @@ exports.create = function(req, res) {
 
 
 exports.findAll = function(req, res) {
-  // Retrieve and return all notes from the database.
+  // Retrieve and return all donors (not deleted) from the database.
   let { page = 1, limit = 100 } = req.query;
 
-  Donor.paginate({}, { page, limit }).then(donors => {
+  Donor.paginate({ status: {'$ne': "deleted"} }, { page, limit }).then(donors => {
     if (!donors)
       return res.status(404).send({ message: "No Donors found." });
     return res.status(200).send(donors);
