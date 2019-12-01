@@ -44,8 +44,10 @@ module.exports = function (app) {
   app.get("/volunteer", volunteer.findAll);
   app.get("/volunteer/:id", volunteer.getOne);
   app.post("/volunteer", volunteer.create);
+  app.post("/volunteer/:id", volunteer.updateVolunteer);
+  app.post("/volunteer/:id/available", volunteer.availVolunteer);
+  app.post("/volunteer/:id/unavailable", volunteer.unavailVolunteer);
   app.post("/volunteer/availability", volunteer.acceptText);
-  //app.post("/volunteers/donors", volunteer.getDistance);
   app.post("/volunteers/foodbank", volunteer.getDistanceBanks);
 };
 
