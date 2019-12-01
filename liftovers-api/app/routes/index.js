@@ -32,7 +32,7 @@ module.exports = function(app) {
   app.get("/volunteer", volunteer.findAll);
   app.post("/volunteer", volunteer.create);
   app.post("/volunteer/availability", volunteer.acceptText);
-  app.post("/volunteers/donors", volunteer.getDistance);
+  //app.post("/volunteers/donors", volunteer.getDistance);
   app.post("/volunteers/foodbank", volunteer.getDistanceBanks);
 };
 
