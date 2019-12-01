@@ -1,5 +1,3 @@
-// FOR VOLUNTEER DATABASE NOT USER DATABASE
-
 import React, {Component} from "react";
 import { Grid, Button, Layout, Boxed, Input, SimpleSelect } from "flexibull";
 import { Theme } from "flexibull/build/theme";
@@ -26,21 +24,21 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
-class CreateVolunteer extends Component{
+class EditVolunteer extends Component{
 
   constructor(props) {
       super(props);
       this.state = {'name': ''};
 
       this.handleChange = this.handleChange.bind(this);
-      this.createVolunteer = this.createVolunteer.bind(this);
+      this.editVolunteer = this.editVolunteer.bind(this);
     }
 
     handleChange(event) {
       this.setState({value: event.target.value});
     }
 
-    createVolunteer(event) {
+    editVolunteer(event) {
       event.preventDefault();
       const data = new FormData(event.target);
 
@@ -64,10 +62,10 @@ class CreateVolunteer extends Component{
 
     render() {
       return (
-        <form onSubmit={this.createVolunteer}>
+        <form onSubmit={this.editVolunteer}>
         <Boxed pad="5px 0">
                     <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
-                        Create Volunteer
+                        Edit Volunteer
                     </PageTitle>
         </Boxed>
         <Boxed pad="50px">
@@ -107,7 +105,7 @@ class CreateVolunteer extends Component{
             name="waiverSigned" type="select" label="Waiver Signed?" required forminput
             /><br/>
           <Button type="submit" value="Submit">
-            Submit
+          Submit
           </Button>
           </Boxed>
         </form>
@@ -115,4 +113,4 @@ class CreateVolunteer extends Component{
     }
 
 }
-export default CreateVolunteer;
+export default EditVolunteer;

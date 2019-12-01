@@ -5,19 +5,24 @@ import Signup from "./routes/signup";
 import Home from "./routes/home";
 import Dashboard from "./routes/dashboard";
 import Volunteers from "./routes/volunteer";
+import CreateVolunteers from "./routes/volunteer/create/create";
+import EditVolunteers from "./routes/volunteer/edit/edit";
+import ViewVolunteers from "./routes/volunteer/view/view"
+import DeleteVolunteers from "./routes/volunteer/delete/delete";
 import Admins from "./routes/admin";
 import CreateAdmin from "./routes/admin/create/create"
 import Lifts from "./routes/lift";
-import CreateVolunteers from "./routes/volunteer/create/create";
 import Donors from "./routes/donor";
 import CreateDonor from "./routes/donor/create/create";
 import Providers from "./routes/provider";
 import CreateProvider from "./routes/provider/create/create";
 import { AdminLayout } from "./components/admin";
+import Forgot from "./routes/login/forgot";
+import Reset from "./routes/login/resetpassword";
 
 const openPages = ["/", "/login"];
 console.log(window.location.pathname);
-let open = openPages.includes(window.location.pathname);
+let open = openPages.push(window.location.pathname);
 function App() {
   return (
     <Router>
@@ -32,6 +37,10 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route exact path="/forgot">
+            <Forgot />
+          </Route>
+          <Route path="/reset/:token" component={Reset}/>
         </Switch>
       ) : (
         <Switch>
@@ -47,6 +56,15 @@ function App() {
             </Route>
             <Route exact path="/volunteers/create">
                 <CreateVolunteers />
+            </Route>
+            <Route path="/volunteers/view/:volunteer_id" component={Volunteers}>
+                <ViewVolunteers />
+            </Route>
+            <Route path="/volunteers/edit/:volunteer_id" component={Volunteers}>
+                <EditVolunteers />
+            </Route>
+            <Route path="/volunteers/delete/:volunteer_id" component={Volunteers}>
+                <DeleteVolunteers />
             </Route>
             <Route exact path="/admins">
                 <Admins />

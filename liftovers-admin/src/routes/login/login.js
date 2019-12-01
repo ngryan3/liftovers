@@ -25,7 +25,7 @@ class Login extends React.Component{
           errors: {}
       };
 
-      this.update = this.update.bind(this)
+      this.update = this.update.bind(this);
       this.attemptLogin = this.attemptLogin.bind(this)
 
 
@@ -171,7 +171,8 @@ class Login extends React.Component{
               <Input type="submit" value="Login" style={{ backgroundColor: '#00ffd9' }} onClick={this.attemptLogin}/>
             </Form.Group>
             <ClearLink to="/signup" style={{marginLeft: '160px'}}>Create an account</ClearLink>
-            <ClearLink to="/signup" style={{marginLeft: '660px'}}>Forgot Password</ClearLink>
+              <br/>
+            <ClearLink to="/forgot" style={{marginLeft: '160px'}}>Forgot Password</ClearLink>
             </Boxed>
           </form>
         </Wrapper>
