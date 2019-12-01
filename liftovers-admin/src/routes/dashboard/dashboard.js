@@ -5,6 +5,7 @@ import {
     Loader,
     FlexiTable,
     FlexiPagination,
+    Button
 } from "flexibull";
 import {
     Header,
@@ -29,6 +30,24 @@ const pageOptions = [
     { value: 100, label: "100 Rows" }
 ];
 
+const buttonColumns = [
+    { title: "First Name", dataIndex: "firstName", key: "firstName" },
+    { title: "Last Name", dataIndex: "lastName", key: "lastName" },
+    { title: "Email", dataIndex: "email", key: "email" },
+    { title: "Phone", dataIndex: "phone", key: "phone" },
+    { title: "Pickup Address", dataIndex: "address", key: "address" },
+    { title: "Date", dataIndex: "date", key: "date" },
+    { title: "Serve Time", dataIndex: "serveTime", key: "serveTime" },
+    { title: "Pickup Time", dataIndex: "pickupTime", key: "pickupTime" },
+    { title: "Description", dataIndex: "description", key: "description" },
+    {
+        header: '',
+        id: 'approve-button',
+        render: ({ row }) => (<Button onClick={(e) => this.handleButtonClick(e, row)}>Approve</Button>)
+    },
+
+];
+
 const columns = [
     { title: "First Name", dataIndex: "firstName", key: "firstName" },
     { title: "Last Name", dataIndex: "lastName", key: "lastName" },
@@ -42,17 +61,38 @@ const columns = [
 
 ];
 
+const userColumns = [
+    { title: "First Name", dataIndex: "name", key: "name" },
+    { title: "Last Name", dataIndex: "surname", key: "surname" },
+    { title: "Role", dataIndex: "role", key: "role" },
+    { title: "Email", dataIndex: "email", key: "email" },
+    { title: "Phone", dataIndex: "phone", key: "phone" },
+    {   
+        header: '',
+        id: 'approve-button',
+        render: ({ row }) => (<Button onClick={(e) => this.handleButtonClick(e, row)}>Approve</Button>)
+    },
+    {   
+        header: '',
+        id: 'reject-button',
+        render: ({ row }) => (<Button onClick={(e) => this.handleButtonClick(e, row)}>Reject</Button>)
+    },
+]
+
 
 export const Dashboard = ({ getRequestedLifts, getPostedLifts, 
-    postedLifts, requestedLifts, getProblemLifts, problemLifts, loading }) => {
+    postedLifts, requestedLifts, getProblemLifts, problemLifts, 
+    unapprovedUsers, getUnapprovedUsers, loading }) => {
     useEffect(() => {
         getRequestedLifts({ page: 1, limit: 10 });
         getPostedLifts({ page: 1, limit: 10 });
         getProblemLifts({ page: 1, limit: 10 });
+        getUnapprovedUsers({ page: 1, limit: 10 });
       }, []);
     let { docs, totalDocs, page } = requestedLifts;
     let { docs:secondDocs, totalDocs:secondTotalDocs, page:secondPage } =  postedLifts;
     let { docs:thirdDocs, totalDocs:thirdTotalDocs, page:thirdPage } =  problemLifts;
+    let { docs:fourthDocs, totalDocs:fourthTotalDocs, page:fourthPage } =  unapprovedUsers;
 
 
     return (
@@ -78,7 +118,7 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                 {loading ? (
                     <Loader />
                 ) : (
-                        <FlexiTable columns={columns} data={docs || []}>
+                        <FlexiTable columns={buttonColumns} data={docs || []}>
                             <FlexiPagination
                                 total={totalDocs}
                                 onChange={page => getRequestedLifts({ page, limit: 10 })}
@@ -115,6 +155,28 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
             </Boxed>
 
             <Boxed pad="5px 0">
+                <PageTitle data-test="title">Users Awaiting Approval</PageTitle>
+            </Boxed>
+            <Boxed>
+                {loading ? (
+                    <Loader />
+                ) : (
+                        <FlexiTable columns={userColumns} data={fourthDocs || []}>
+                            <FlexiPagination
+                                total={fourthTotalDocs}
+                                onChange={fourthPage => getUnapprovedUsers({ fourthPage, limit: 10 })}
+                                current={fourthPage}
+                                pageCounts={pageOptions}
+                                pageSize={10}
+                                showTotal={(total, range) => {
+                                    return `${range[0]} - ${range[1]} of ${total} items`;
+                                }}
+                            />
+                        </FlexiTable>
+                    )}
+            </Boxed>
+
+            <Boxed pad="5px 0">
                 <PageTitle data-test="title">Lifts: Posted</PageTitle>
             </Boxed>
             <Boxed>
@@ -136,28 +198,6 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                     )}
             </Boxed>
 
-
-            <Boxed pad="5px 0">
-                <PageTitle data-test="title">Volunteers: Awaiting Approval</PageTitle>
-            </Boxed>
-            <Boxed>
-                {loading ? (
-                    <Loader />
-                ) : (
-                        <FlexiTable columns={columns} data={secondDocs || []}>
-                            <FlexiPagination
-                                total={secondTotalDocs}
-                                onChange={secondPage => getPostedLifts({ secondPage, limit: 10 })}
-                                current={secondPage}
-                                pageCounts={pageOptions}
-                                pageSize={10}
-                                showTotal={(total, range) => {
-                                    return `${range[0]} - ${range[1]} of ${total} items`;
-                                }}
-                            />
-                        </FlexiTable>
-                    )}
-            </Boxed>
         </div>
 
     );
