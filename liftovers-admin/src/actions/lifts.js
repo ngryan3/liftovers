@@ -82,3 +82,8 @@ export function getProblemLifts(params) {
     });
   };
 }
+
+export function handleClick () {
+  axios.post('https://api.github.com/users/maecapozzi')
+    .then(response => console.log(response))
+}
