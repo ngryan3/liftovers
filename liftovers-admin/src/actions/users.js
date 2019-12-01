@@ -15,7 +15,7 @@ export function getUnapprovedUsers(params) {
     console.log(params);
     return function(dispatch) {
     dispatch(toggleLoader(true));
-    return axios.get(`${ApiUrl}/user/waiting-approval`, { params  }).then(({ data }) => {
+    return axios.get(`${ApiUrl}/user/waiting`, { params  }).then(({ data }) => {
         dispatch(toggleLoader(false));
         dispatch(setUnapprovedUsers(data));
         console.log(data);
