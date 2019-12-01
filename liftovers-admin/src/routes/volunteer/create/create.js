@@ -15,6 +15,7 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+//import TimePicker from "react-time-picker";
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -98,6 +99,19 @@ class CreateVolunteer extends Component{
             ]}
             name="hasVehicle" type="select" label="Do They Own a Vehicle?" required forminput
             /><br/>
+          
+          <label for="">Availability
+            <Input name="mon" type ="checkbox" label="Monday" forminput/><br/>
+            <Input name="tue" type ="checkbox" label="Tuesday" forminput/><br/>
+            <Input name="wed" type ="checkbox" label="Wednesday" forminput/><br/>
+            <Input name="thu" type ="checkbox" label="Thursday" forminput/><br/>
+            <Input name="fri" type ="checkbox" label="Friday" forminput/><br/>
+            <Input name="sat" type ="checkbox" label="Saturday" forminput/><br/>
+            <Input name="sun" type ="checkbox" label="Sunday" forminput/><br/>
+          </label>
+          
+          
+
           <Input name="additionalNotes" type="text" label="Additional Notes"/><br/>
           <SimpleSelect
             options={[
