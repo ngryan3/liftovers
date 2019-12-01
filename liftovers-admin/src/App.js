@@ -5,10 +5,13 @@ import Signup from "./routes/signup";
 import Home from "./routes/home";
 import Dashboard from "./routes/dashboard";
 import Volunteers from "./routes/volunteer";
+import CreateVolunteers from "./routes/volunteer/create/create";
+import EditVolunteers from "./routes/volunteer/edit/edit";
+import ViewVolunteers from "./routes/volunteer/view/view"
+import DeleteVolunteers from "./routes/volunteer/delete/delete";
 import Admins from "./routes/admin";
 import CreateAdmin from "./routes/admin/create/create"
 import Lifts from "./routes/lift";
-import CreateVolunteers from "./routes/volunteer/create/create";
 import Donors from "./routes/donor";
 import CreateDonor from "./routes/donor/create/create";
 import Providers from "./routes/provider";
@@ -47,6 +50,15 @@ function App() {
             </Route>
             <Route exact path="/volunteers/create">
                 <CreateVolunteers />
+            </Route>
+            <Route path="/volunteers/view/:volunteer_id" component={Volunteers}>
+                <ViewVolunteers />
+            </Route>
+            <Route path="/volunteers/edit/:volunteer_id" component={Volunteers}>
+                <EditVolunteers />
+            </Route>
+            <Route path="/volunteers/delete/:volunteer_id" component={Volunteers}>
+                <DeleteVolunteers />
             </Route>
             <Route exact path="/admins">
                 <Admins />
