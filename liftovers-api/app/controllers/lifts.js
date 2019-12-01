@@ -165,15 +165,17 @@ exports.requestLift = function(req, res) {
 
 
 exports.postLift = function(req, res) {
-    if (!req.body) {
-        return res.status(400).send({ message: "Body can not be empty" });
-    }
+    var postalCodes = [];
+    let volunteersTexted = [];
+    let liftId = req.params.id;
+    let distancevolunteers = this.getVolunteers();
+    let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-    var postalCodes = []
-    let volunteersTexted = []
-    let liftId = req.body._id
-    let distancevolunteers = this.getVolunteers()
-    let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    let lift = Lifts.find({ _id: liftId }).then(lift => {
+        if (!lift)
+          return res.status(404).send({ message: "No lifts with given id found." });
+        return lift;
+    });
     
     distancevolunteers.then((vol) => {
         vol.forEach((volunteer) => {
@@ -181,7 +183,7 @@ exports.postLift = function(req, res) {
         })
 
         let promises = postalCodes.map((postalcode) => {
-            return this.mapsCall(req.body.postalCode, postalcode)
+            return this.mapsCall(lift.postalCode, postalcode)
         })
 
         Promise.all(promises).then((values) => {
@@ -204,9 +206,9 @@ exports.postLift = function(req, res) {
             })
 
             let timeSorted = valData.filter((item) => {
-                let weekday = weekdays[req.body.date.getDay()];
-                let pickupTime = parseInt(req.body.pickupTime.hour.toString() + 
-                                    req.body.pickupTime.minute.toString());
+                let weekday = weekdays[lift.date.getDay()];
+                let pickupTime = parseInt(lift.pickupTime.hour.toString() + 
+                                    lift.pickupTime.minute.toString());
 
                 item.volunteer.availability.forEach((volAvail) => {
                     if (volAvail.day.toLowerCase() === weekday) {
@@ -226,7 +228,7 @@ exports.postLift = function(req, res) {
             console.log('timesorted', timeSorted)
 
             let textPromises = timeSorted.map((item) => {
-                return this.sendText(item.volunteer.phone, req.body.origin)
+                return this.sendText(item.volunteer.phone, lift.address)
             })
 
             Promise.all(textPromises).then((promiseitem) => {}).catch((error) => {
