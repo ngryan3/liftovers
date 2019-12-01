@@ -112,6 +112,16 @@ exports.findProblem = function(req, res) {
 };
 
 
+exports.findId = function(req, res) {
+    // Return lift whose id == id given in url.
+    Lifts.find({ _id: req.params.id }).then(lifts => {
+        if (!lifts)
+          return res.status(404).send({ message: "No lifts with given id found." });
+        return res.status(200).send(lifts);
+    });
+};
+
+
 exports.requestLift = function(req, res) {
     if (!req.body) {
         return res.status(400).send({ message: "Body can not be empty" });

@@ -16,6 +16,7 @@ module.exports = function(app) {
   app.get("/lifts/completed", lift.findCompleted);
   app.get("/lifts/cancelled", lift.findCancelled);
   app.get("/lifts/problem", lift.findProblem);
+  app.get("/lift/:id", lift.findId);
   app.post("/lift/request", lift.requestLift);
   app.post("/lift/post", lift.postLift);
   app.post("/lift/:id/complete", lift.completeLift);
