@@ -112,6 +112,16 @@ exports.findProblem = function(req, res) {
 };
 
 
+exports.findId = function(req, res) {
+    // Return lift whose id == id given in url.
+    Lifts.find({ _id: req.params.id }).then(lifts => {
+        if (!lifts)
+          return res.status(404).send({ message: "No lifts with given id found." });
+        return res.status(200).send(lifts);
+    });
+};
+
+
 exports.requestLift = function(req, res) {
     if (!req.body) {
         return res.status(400).send({ message: "Body can not be empty" });
@@ -155,15 +165,17 @@ exports.requestLift = function(req, res) {
 
 
 exports.postLift = function(req, res) {
-    if (!req.body) {
-        return res.status(400).send({ message: "Body can not be empty" });
-    }
+    var postalCodes = [];
+    let volunteersTexted = [];
+    let liftId = req.params.id;
+    let distancevolunteers = this.getVolunteers();
+    let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-    var postalCodes = []
-    let volunteersTexted = []
-    let liftId = req.body._id
-    let distancevolunteers = this.getVolunteers()
-    let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    let lift = Lifts.find({ _id: liftId }).then(lift => {
+        if (!lift)
+          return res.status(404).send({ message: "No lifts with given id found." });
+        return lift;
+    });
     
     distancevolunteers.then((vol) => {
         vol.forEach((volunteer) => {
@@ -171,7 +183,7 @@ exports.postLift = function(req, res) {
         })
 
         let promises = postalCodes.map((postalcode) => {
-            return this.mapsCall(req.body.postalCode, postalcode)
+            return this.mapsCall(lift.postalCode, postalcode)
         })
 
         Promise.all(promises).then((values) => {
@@ -194,9 +206,9 @@ exports.postLift = function(req, res) {
             })
 
             let timeSorted = valData.filter((item) => {
-                let weekday = weekdays[req.body.date.getDay()];
-                let pickupTime = parseInt(req.body.pickupTime.hour.toString() + 
-                                    req.body.pickupTime.minute.toString());
+                let weekday = weekdays[lift.date.getDay()];
+                let pickupTime = parseInt(lift.pickupTime.hour.toString() + 
+                                    lift.pickupTime.minute.toString());
 
                 item.volunteer.availability.forEach((volAvail) => {
                     if (volAvail.day.toLowerCase() === weekday) {
@@ -216,7 +228,7 @@ exports.postLift = function(req, res) {
             console.log('timesorted', timeSorted)
 
             let textPromises = timeSorted.map((item) => {
-                return this.sendText(item.volunteer.phone, req.body.origin)
+                return this.sendText(item.volunteer.phone, lift.address)
             })
 
             Promise.all(textPromises).then((promiseitem) => {}).catch((error) => {
@@ -270,6 +282,56 @@ exports.problemLift = function(req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "problem" })
         .then(ll => {
             console.log("changed lift status to problem");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
+
+exports.updateLift = function (req, res) {
+    let update = {}
+
+    if (req.body.firstName) {
+        update.firstName = req.body.firstName
+    }
+    if (req.body.lastName) {
+        update.lastName = req.body.lastName
+    }
+    if (req.body.email) {
+        update.email = req.body.email
+    }
+    if (req.body.phone) {
+        update.phone = req.body.phone
+    }
+    if (req.body.postalCode) {
+        update.postalCode = req.body.postalCode
+    }
+    if (req.body.date) {
+        update.date = req.body.date
+    }
+    if (req.body.commmunicationMethod) {
+        update.commmunicationMethod = req.body.commmunicationMethod
+    }
+    if (req.body.serveTime) {
+        update.serveTime = req.body.serveTime
+    }
+    if (req.body.pickupTime) {
+        update.pickupTime = req.body.pickupTime
+    }
+    if (req.body.address) {
+        update.address = req.body.address
+    }
+    if (req.body.description) {
+        update.description = req.body.description
+    }
+    if (req.body.details) {
+        update.details = req.body.details
+    }
+
+    Lifts.findByIdAndUpdate(req.params.id, update)
+        .then(ll => {
+            console.log("updated lifts");
         })
         .catch(error => {
             console.log(error);

@@ -1,5 +1,6 @@
 var Provider = require("../models/provider.js");
 
+
 // Create and Save a new Note
 exports.create = function(req, res) {
   // Create and Save a new Note
@@ -19,6 +20,7 @@ exports.create = function(req, res) {
     unacceptableFoods: req.body.unacceptableFoods,
   });
 
+
   provider.save(function(err, data) {
     if (err) {
       console.log(err);
@@ -31,12 +33,35 @@ exports.create = function(req, res) {
   });
 };
 
+
 exports.findAll = function(req, res) {
-  // Retrieve and return all notes from the database.
+  // Retrieve and return all providers (not deleted) from the database.
   let { page = 1, limit = 100 } = req.query;
-  Provider.paginate({}, { page, limit }).then(providers => {
+
+  Provider.paginate({ status: {'$ne': "deleted"} }, { page, limit }).then(providers => {
     if (!providers)
       return res.status(404).send({ message: "No Providers found." });
     return res.status(200).send(providers);
   });
+};
+
+
+exports.findId = function(req, res) {
+  // Return povider whose id == id given in url.
+  Provider.find({ _id: req.params.id }).then(poviders => {
+      if (!poviders)
+        return res.status(404).send({ message: "No poviders with given id found." });
+      return res.status(200).send(poviders);
+  });
+};
+
+
+exports.deleteProvider = function(req, res) {
+  Provider.findOneAndUpdate({ _id: req.params.id }, { status: "deleted" })
+      .then(ll => {
+          console.log("changed provider status to deleted");
+      })
+      .catch(error => {
+          console.log(error);
+      });
 };

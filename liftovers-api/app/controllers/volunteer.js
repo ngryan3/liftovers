@@ -33,252 +33,237 @@ const client = new twilio(accountSid, authToken);
 // };
 
 getVolunteers = (origin, dest) => {
-  return Volunteer.find();
+    return Volunteer.find();
 };
 
 
 // Create and Save a new Note
-exports.create = function(req, res) {
-  // Create and Save a new Note
-  if (!req.body.name) {
-    return res.status(400).send({ message: "Name can not be empty" });
-  }
-
-  var volunteer = new Volunteer({
-    name: req.body.name,
-    surname: req.body.surname,
-    email: req.body.email,
-    phone: req.body.phone,
-    methodOfCommunication: req.body.methodOfCommunication,
-    postalCode: req.body.postalCode,
-    secondaryPostalCode: req.body.secondaryPostalCode,
-    availability: req.body.availability,
-    licensed: req.body.licensed,
-    hasVehicle: req.body.licensed,
-    additionalNotes: req.body.additionalNotes,
-    lifts: req.body.lifts,
-    waiverSigned: req.body.waiverSigned,
-    status: req.body.status
-  });
-
-  volunteer.save(function(err, data) {
-    if (err) {
-      console.log(err);
-      res
-        .status(500)
-        .send({ message: "Some error occurred while creating the Volunteer." });
-    } else {
-      res.send(data);
+exports.create = function (req, res) {
+    // Create and Save a new Note
+    if (!req.body.name) {
+        return res.status(400).send({ message: "Name can not be empty" });
     }
-  });
+
+    var volunteer = new Volunteer({
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
+        phone: req.body.phone,
+        methodOfCommunication: req.body.methodOfCommunication,
+        postalCode: req.body.postalCode,
+        secondaryPostalCode: req.body.secondaryPostalCode,
+        availability: req.body.availability,
+        licensed: req.body.licensed,
+        hasVehicle: req.body.licensed,
+        additionalNotes: req.body.additionalNotes,
+        lifts: req.body.lifts,
+        waiverSigned: req.body.waiverSigned,
+        status: req.body.status
+    });
+
+    volunteer.save(function (err, data) {
+        if (err) {
+            console.log(err);
+            res
+                .status(500)
+                .send({ message: "Some error occurred while creating the Volunteer." });
+        } else {
+            res.send(data);
+        }
+    });
 };
 
 
- exports.getDistance = function(req, res) {
-   var postalCodes = [];
-   let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+exports.acceptText = function (req, res) {
+    let body = req.body.body;
+    let fromPhone = req.body.from;
+    var twiml = new twilio.twiml.MessagingResponse();
 
-   if (!req.body) {
-     return res.status(400).send({ message: "Body can not be empty" });
-   }
+    if (body === "yes") {
+        console.log("//////// response is yes");
 
-   let distancevolunteers = this.getVolunteers();
+        // if body is yes && hasvolunteer is false , change lift model hasvolunteer to true and change volunteer number to formPhone
+        Lifts.find({ hasVolunteer: false, "volunteer.phone": fromPhone })
+            .then(item => {
+                console.log(item);
 
-   distancevolunteers.then(vol => {
-     vol.forEach(volunteer => {
-       postalCodes.push(volunteer.postalCode);
-     });
+                if (item.length === 0) {
+                    twiml.message(`Thanks but there is already a volunteer`);
+                    res.writeHead(200, { "Content-Type": "text/xml" });
+                    res.end(twiml.toString());
+                    return;
+                }
 
-     let promises = postalCodes.map(postalcode => {
-       return this.mapsCall(req.body.origin, postalcode);
-     });
+                let chosenVolunteer = item[0].volunteer.filter(vol => {
+                    return vol.phone === fromPhone;
+                });
 
-     Promise.all(promises)
-       .then(values => {
-         let valData = values
-           .map((item, index) => {
-             return {
-               data: item.data.rows[0].elements[0],
-               volunteer: vol[index]
-             };
-           })
-           .sort(function(a, b) {
-             let itemA = a.data.duration.value; // ignore upper and lowercase
-             let itemB = b.data.duration.value; // ignore upper and lowercase
-             if (itemA < itemB) {
-               return -1;
-             }
-             if (itemA > itemB) {
-               return 1;
-             }
-             return 0;
-           });
+                Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: chosenVolunteer })
+                    .then(ll => {
+                        console.log("updated");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
 
-         let timeSorted = valData
-           // .filter(item => {
-           //   let bool = false;
-
-           //   req.body.availability.forEach(available => {
-           //     item.volunteer.availability.forEach(volAvail => {
-           //       if (
-           //         weekdays[available.date.getDay()] === volAvail.day.toLowerCase()
-           //       ) {
-           //         bool = true;
-           //       }
-           //     });
-           //   });
-           //   return bool;
-           // })
-           .filter(item => {
-             let bool = false;
-
-             // req.body.availability.forEach(available => {
-             item.volunteer.availability.forEach(volAvail => {
-               if ( volAvail.day.toLowerCase() === weekdays[available.date.getDay()] ) {
-                 if (
-                   (volAvail.timeFinish.hour > req.body.pickupTime.hour &&
-                     volAvail.timeStart.hour < req.body.pickupTime.hour) ||
-                   (volAvail.timeFinish.hour === req.body.pickupTime.hour &&
-                     volAvail.timeFinish.minute > req.body.pickupTime.minute) ||
-                   (volAvail.timeStart.hour === req.body.pickupTime.hour &&
-                     volAvail.timeStart.minute < req.body.pickupTime.minute)
-                 ) {
-                   bool = true;
-                 }
-               }
-             });
-             // });
-             return bool;
-           });
-
-         let textPromises = timeSorted.map(item => {
-           return this.sendText(item.volunteer.phone, req.body.origin);
-         });
-
-         console.log(textPromises);
-
-         Promise.all(textPromises)
-           .then(promiseitem => {
-             console.log(promiseitem);
-           })
-           .catch(error => {
-             console.log(error);
-           });
-         return res.status(200).send(timeSorted);
-       })
-       .catch(error => {
-         console.log(error);
-       });
-   });
- };
+                twiml.message(
+                    `You have been confirmed as the volunteer at ${item[0].origin}`
+                );
+                res.writeHead(200, { "Content-Type": "text/xml" });
+                res.end(twiml.toString());
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    } else {
+        // volunteer said no they cant do the lift
+        //   twiml.message('Got your response, replying you...');
+        //   res.writeHead(200, {'Content-Type': 'text/xml'});
+        //   res.end(twiml.toString());
+    }
+};
 
 
-exports.acceptText = function(req, res) {
-  let body = req.body.body;
-  let fromPhone = req.body.from;
-  var twiml = new twilio.twiml.MessagingResponse();
+exports.getDistanceBanks = function (req, res) {
+    var postalCodes = [];
 
-  if (body === "yes") {
-    console.log("//////// response is yes");
+    if (!req.body) {
+        return res.status(400).send({ message: "Body can not be empty" });
+    }
 
-    // if body is yes && hasvolunteer is false , change lift model hasvolunteer to true and change volunteer number to formPhone
-    Lifts.find({ hasVolunteer: false, "volunteer.phone": fromPhone })
-      .then(item => {
-        console.log(item);
+    let distancevolunteers = this.getVolunteers();
 
-        if (item.length === 0) {
-          twiml.message(`Thanks but there is already a volunteer`);
-          res.writeHead(200, { "Content-Type": "text/xml" });
-          res.end(twiml.toString());
-          return;
-        }
-
-        let chosenVolunteer = item[0].volunteer.filter(vol => {
-          return vol.phone === fromPhone;
+    distancevolunteers.then(vol => {
+        vol.forEach(volunteer => {
+            postalCodes.push(volunteer.postalCode);
         });
 
-        Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: chosenVolunteer })
-          .then(ll => {
-            console.log("updated");
-          })
-          .catch(error => {
+        let promises = postalCodes.map(postalcode => {
+            return this.mapsCall(req.body.origin, postalcode);
+        });
+
+        Promise.all(promises)
+            .then(values => {
+                let valData = values
+                    .map((item, index) => {
+                        return {
+                            data: item.data.rows[0].elements[0],
+                            volunteer: vol[index]
+                        };
+                    })
+                    .sort(function (a, b) {
+                        let itemA = a.data.duration.value; // ignore upper and lowercase
+                        let itemB = b.data.duration.value; // ignore upper and lowercase
+
+                        if (itemA < itemB) {
+                            return -1;
+                        }
+                        if (itemA > itemB) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+
+                return res.status(200).send(valData);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    });
+};
+
+
+exports.findAll = function (req, res) {
+    // Retrieve and return all volunteers (not deleted) from the database.
+    let { page = 1, limit = 100 } = req.query;
+
+    Volunteer.paginate({ status: {'$ne': "deleted"} }, { page, limit }).then(volunteers => {
+        if (!volunteers)
+            return res.status(404).send({ message: "No Volunteers found." });
+        return res.status(200).send(volunteers);
+    });
+};
+
+exports.getOne = function (req, res) {
+    Volunteer.findById(req.params.id, function (err, volunteer) {
+        if (err) {
+            return res.status(404).send({ message: "No such volunteer." });
+        } else {
+            return res.status(200).send(volunteer);
+        }
+    })
+}
+
+exports.deleteVolunteer = function (req, res) {
+    Volunteer.findByIdAndUpdate(req.params.id, { status: "deleted" })
+        .then(ll => {
+            console.log("changed volunteer status to deleted");
+        })
+        .catch(error => {
             console.log(error);
-          });
+        });
+}
 
-        twiml.message(
-          `You have been confirmed as the volunteer at ${item[0].origin}`
-        );
-        res.writeHead(200, { "Content-Type": "text/xml" });
-        res.end(twiml.toString());
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  } else {
-    // volunteer said no they cant do the lift
-    //   twiml.message('Got your response, replying you...');
-    //   res.writeHead(200, {'Content-Type': 'text/xml'});
-    //   res.end(twiml.toString());
-  }
-};
+exports.unavailVolunteer = function (req, res) {
+    Volunteer.findByIdAndUpdate(req.params.id, { status: "unavailable" })
+        .then(ll => {
+            console.log("changed volunteer status to unavailable");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
 
+exports.availVolunteer = function (req, res) {
+    Volunteer.findByIdAndUpdate(req.params.id, { status: "available" })
+        .then(ll => {
+            console.log("changed volunteer status to available");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
 
-exports.getDistanceBanks = function(req, res) {
-  var postalCodes = [];
-
-  if (!req.body) {
-    return res.status(400).send({ message: "Body can not be empty" });
-  }
-
-  let distancevolunteers = this.getVolunteers();
-
-  distancevolunteers.then(vol => {
-    vol.forEach(volunteer => {
-      postalCodes.push(volunteer.postalCode);
-    });
-
-    let promises = postalCodes.map(postalcode => {
-      return this.mapsCall(req.body.origin, postalcode);
-    });
-
-    Promise.all(promises)
-      .then(values => {
-        let valData = values
-          .map((item, index) => {
-            return {
-              data: item.data.rows[0].elements[0],
-              volunteer: vol[index]
-            };
-          })
-          .sort(function(a, b) {
-            let itemA = a.data.duration.value; // ignore upper and lowercase
-            let itemB = b.data.duration.value; // ignore upper and lowercase
-
-            if (itemA < itemB) {
-              return -1;
-            }
-            if (itemA > itemB) {
-              return 1;
-            }
-            return 0;
-          });
-
-        return res.status(200).send(valData);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  });
-};
-
-
-exports.findAll = function(req, res) {
-  // Retrieve and return all notes from the database.
-  let { page = 1, limit = 100 } = req.query;
-
-  Volunteer.paginate({}, { page, limit }).then(volunteers => {
-    if (!volunteers)
-      return res.status(404).send({ message: "No Volunteers found." });
-    return res.status(200).send(volunteers);
-  });
-};
+exports.updateVolunteer = function (req, res) {
+    let update = {}
+    if (req.body.name) {
+        update.name = req.body.name;
+    }
+    if (req.body.surname) {
+        update.surname = req.body.surname;
+    }
+    if (req.body.email) {
+        update.email = req.body.email;
+    }
+    if (req.body.phone) {
+        update.phone = req.body.phone;
+    }
+    if (req.body.methodOfCommunication) {
+        update.methodOfCommunication = req.body.methodOfCommunication;
+    }
+    if (req.body.postalCode) {
+        update.postalCode = req.body.postalCode;
+    }
+    if (req.body.secondaryPostalCode) {
+        update.secondaryPostalCode = req.body.secondaryPostalCode;
+    }
+    if (req.body.availability) {
+        update.availability = req.body.availability;
+    }
+    if (req.body.additionalNotes) {
+        update.additionalNotes = req.body.additionalNotes;
+    }
+    if (req.body.licensed) {
+        update.licensed = req.body.licensed;
+    }
+    if (req.body.hasVehicle) {
+        update.hasVehicle = req.body.hasVehicle;
+    }
+    Volunteer.findByIdAndUpdate(req.params.id, update)
+        .then(ll => {
+            console.log("updated volunteer");
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}

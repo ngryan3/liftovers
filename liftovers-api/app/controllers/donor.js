@@ -1,5 +1,6 @@
 var Donor = require("../models/donor.js");
 
+
 // Create and Save a new Note
 exports.create = function(req, res) {
   // Create and Save a new Note
@@ -21,6 +22,7 @@ exports.create = function(req, res) {
     accessNotes: req.body.accessNotes,
   });
 
+
   donor.save(function(err, data) {
     if (err) {
       console.log(err);
@@ -33,12 +35,35 @@ exports.create = function(req, res) {
   });
 };
 
+
 exports.findAll = function(req, res) {
-  // Retrieve and return all notes from the database.
+  // Retrieve and return all donors (not deleted) from the database.
   let { page = 1, limit = 100 } = req.query;
-  Donor.paginate({}, { page, limit }).then(donors => {
+
+  Donor.paginate({ status: {'$ne': "deleted"} }, { page, limit }).then(donors => {
     if (!donors)
       return res.status(404).send({ message: "No Donors found." });
     return res.status(200).send(donors);
   });
+};
+
+
+exports.findId = function(req, res) {
+  // Return donor whose id == id given in url.
+  Donor.find({ _id: req.params.id }).then(donors => {
+      if (!donors)
+        return res.status(404).send({ message: "No donors with given id found." });
+      return res.status(200).send(donors);
+  });
+};
+
+
+exports.deleteDonor = function(req, res) {
+  Donor.findOneAndUpdate({ _id: req.params.id }, { status: "deleted" })
+      .then(ll => {
+          console.log("changed donor status to deleted");
+      })
+      .catch(error => {
+          console.log(error);
+      });
 };

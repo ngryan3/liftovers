@@ -13,7 +13,9 @@ var UserSchema = mongoose.Schema({
     role: {type: String, default: "volunteer"},
     // waitingApproval/ active/ deleted
     status: String,
-    volunteerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Team2volunteers' }
+    volunteerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Team2volunteers' },
+    resetPasswordToken: String,
+    resetPasswordExpires: String
 }, {
     timestamps: true
 });

@@ -2,11 +2,10 @@ import { combineReducers } from "redux";
 import { setVolunteers } from "./volunteers";
 import { setLifts, setRequestedLifts, setPostedLifts, setProblemLifts } from "./lifts"
 import { setLoader } from "./auxilliary";
-// import { setRequestedLifts } from "./requested-lifts";
-// import { setPostedLifts } from "./posted-lifts";
 import { setAdmins } from "./admins";
 import { setDonors } from "./donors";
 import { setProviders } from "./providers";
+import { setUnapprovedUsers } from "./users";
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -21,6 +20,7 @@ const allReducers = combineReducers({
   requestedLifts: setRequestedLifts,
   postedLifts: setPostedLifts,
   problemLifts: setProblemLifts,
+  unapprovedUsers: setUnapprovedUsers,
   loading: setLoader
 });
 

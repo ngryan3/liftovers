@@ -17,6 +17,8 @@ var ProviderSchema = mongoose.Schema({
             closingMinute: Number,
             }
         },
+    // active/ deleted
+    status: {type: String, default: "active"},
     acceptedFoods: [String],
     unacceptableFoods: [String],
     },

@@ -15,6 +15,8 @@ var DonorSchema = mongoose.Schema({
             minute: Number,
             }
         },
+    // active/ deleted
+    status: {type: String, default: "active"},
     typeOfFood: [String],
     recurring: Boolean,
     recurringTimes: {
