@@ -235,3 +235,29 @@ exports.approveUser = function (req, res) {
         });
 }
 
+exports.updateUser = function (req, res) {
+    let update = {}
+    if (req.body.name) {
+        update.name = req.body.name
+    }
+    if (req.body.surname) {
+        update.surname = req.body.surname
+    }
+    if (req.body.phone) {
+        update.phone = req.body.phone
+    }
+    if (req.body.methodOfCommunication) {
+        update.methodOfCommunication = req.body.methodOfCommunication
+    }
+    if (req.body.role) {
+        update.role = req.body.role
+    }
+    User.findByIdAndUpdate(req.params.id, update)
+        .then(ll => {
+            console.log("updated user");
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}
+

@@ -40,6 +40,7 @@ module.exports = function (app) {
   app.post("/reset/:token", user.changepassword);
 
   app.get("/volunteer", volunteer.findAll);
+  app.get("/volunteer/:id", volunteer.getOne);
   app.post("/volunteer", volunteer.create);
   app.post("/volunteer/availability", volunteer.acceptText);
   //app.post("/volunteers/donors", volunteer.getDistance);
