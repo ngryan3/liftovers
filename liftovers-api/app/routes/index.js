@@ -18,9 +18,9 @@ module.exports = function(app) {
   app.get("/lifts/problem", lift.findProblem);
   app.post("/lift/request", lift.requestLift);
   app.post("/lift/post", lift.postLift);
-  app.post("/lift/complete", lift.completeLift);
-  app.post("/lift/cancel", lift.cancelLift);
-  app.post("/lift/problem", lift.problemLift);
+  app.post("/lift/:id/complete", lift.completeLift);
+  app.post("/lift/:id/cancel", lift.cancelLift);
+  app.post("/lift/:id/problem", lift.problemLift);
 
   app.get("/provider", provider.findAll);
   app.post("/provider", provider.create);
