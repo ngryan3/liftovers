@@ -74,103 +74,103 @@ exports.create = function(req, res) {
 };
 
 
-// exports.getDistance = function(req, res) {
-//   var postalCodes = [];
-//   let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+ exports.getDistance = function(req, res) {
+   var postalCodes = [];
+   let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-//   if (!req.body) {
-//     return res.status(400).send({ message: "Body can not be empty" });
-//   }
+   if (!req.body) {
+     return res.status(400).send({ message: "Body can not be empty" });
+   }
 
-//   let distancevolunteers = this.getVolunteers();
+   let distancevolunteers = this.getVolunteers();
 
-//   distancevolunteers.then(vol => {
-//     vol.forEach(volunteer => {
-//       postalCodes.push(volunteer.postalCode);
-//     });
+   distancevolunteers.then(vol => {
+     vol.forEach(volunteer => {
+       postalCodes.push(volunteer.postalCode);
+     });
 
-//     let promises = postalCodes.map(postalcode => {
-//       return this.mapsCall(req.body.origin, postalcode);
-//     });
+     let promises = postalCodes.map(postalcode => {
+       return this.mapsCall(req.body.origin, postalcode);
+     });
 
-//     Promise.all(promises)
-//       .then(values => {
-//         let valData = values
-//           .map((item, index) => {
-//             return {
-//               data: item.data.rows[0].elements[0],
-//               volunteer: vol[index]
-//             };
-//           })
-//           .sort(function(a, b) {
-//             let itemA = a.data.duration.value; // ignore upper and lowercase
-//             let itemB = b.data.duration.value; // ignore upper and lowercase
-//             if (itemA < itemB) {
-//               return -1;
-//             }
-//             if (itemA > itemB) {
-//               return 1;
-//             }
-//             return 0;
-//           });
+     Promise.all(promises)
+       .then(values => {
+         let valData = values
+           .map((item, index) => {
+             return {
+               data: item.data.rows[0].elements[0],
+               volunteer: vol[index]
+             };
+           })
+           .sort(function(a, b) {
+             let itemA = a.data.duration.value; // ignore upper and lowercase
+             let itemB = b.data.duration.value; // ignore upper and lowercase
+             if (itemA < itemB) {
+               return -1;
+             }
+             if (itemA > itemB) {
+               return 1;
+             }
+             return 0;
+           });
 
-//         let timeSorted = valData
-//           // .filter(item => {
-//           //   let bool = false;
+         let timeSorted = valData
+           // .filter(item => {
+           //   let bool = false;
 
-//           //   req.body.availability.forEach(available => {
-//           //     item.volunteer.availability.forEach(volAvail => {
-//           //       if (
-//           //         weekdays[available.date.getDay()] === volAvail.day.toLowerCase()
-//           //       ) {
-//           //         bool = true;
-//           //       }
-//           //     });
-//           //   });
-//           //   return bool;
-//           // })
-//           .filter(item => {
-//             let bool = false;
+           //   req.body.availability.forEach(available => {
+           //     item.volunteer.availability.forEach(volAvail => {
+           //       if (
+           //         weekdays[available.date.getDay()] === volAvail.day.toLowerCase()
+           //       ) {
+           //         bool = true;
+           //       }
+           //     });
+           //   });
+           //   return bool;
+           // })
+           .filter(item => {
+             let bool = false;
 
-//             // req.body.availability.forEach(available => {
-//             item.volunteer.availability.forEach(volAvail => {
-//               if ( volAvail.day.toLowerCase() === weekdays[available.date.getDay()] ) {
-//                 if (
-//                   (volAvail.timeFinish.hour > req.body.pickupTime.hour &&
-//                     volAvail.timeStart.hour < req.body.pickupTime.hour) ||
-//                   (volAvail.timeFinish.hour === req.body.pickupTime.hour &&
-//                     volAvail.timeFinish.minute > req.body.pickupTime.minute) ||
-//                   (volAvail.timeStart.hour === req.body.pickupTime.hour &&
-//                     volAvail.timeStart.minute < req.body.pickupTime.minute)
-//                 ) {
-//                   bool = true;
-//                 }
-//               }
-//             });
-//             // });
-//             return bool;
-//           });
+             // req.body.availability.forEach(available => {
+             item.volunteer.availability.forEach(volAvail => {
+               if ( volAvail.day.toLowerCase() === weekdays[available.date.getDay()] ) {
+                 if (
+                   (volAvail.timeFinish.hour > req.body.pickupTime.hour &&
+                     volAvail.timeStart.hour < req.body.pickupTime.hour) ||
+                   (volAvail.timeFinish.hour === req.body.pickupTime.hour &&
+                     volAvail.timeFinish.minute > req.body.pickupTime.minute) ||
+                   (volAvail.timeStart.hour === req.body.pickupTime.hour &&
+                     volAvail.timeStart.minute < req.body.pickupTime.minute)
+                 ) {
+                   bool = true;
+                 }
+               }
+             });
+             // });
+             return bool;
+           });
 
-//         let textPromises = timeSorted.map(item => {
-//           return this.sendText(item.volunteer.phone, req.body.origin);
-//         });
+         let textPromises = timeSorted.map(item => {
+           return this.sendText(item.volunteer.phone, req.body.origin);
+         });
 
-//         console.log(textPromises);
+         console.log(textPromises);
 
-//         Promise.all(textPromises)
-//           .then(promiseitem => {
-//             console.log(promiseitem);
-//           })
-//           .catch(error => {
-//             console.log(error);
-//           });
-//         return res.status(200).send(timeSorted);
-//       })
-//       .catch(error => {
-//         console.log(error);
-//       });
-//   });
-// };
+         Promise.all(textPromises)
+           .then(promiseitem => {
+             console.log(promiseitem);
+           })
+           .catch(error => {
+             console.log(error);
+           });
+         return res.status(200).send(timeSorted);
+       })
+       .catch(error => {
+         console.log(error);
+       });
+   });
+ };
 
 
 exports.acceptText = function(req, res) {

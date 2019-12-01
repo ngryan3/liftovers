@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function (app) {
   var volunteer = require("../controllers/volunteer.js");
   var user = require("../controllers/user.js");
   var lift = require("../controllers/lifts.js");
@@ -7,6 +7,7 @@ module.exports = function(app) {
 
 
   app.get("/donor", donor.findAll);
+  app.get("/donor/:id", donor.findId);
   app.post("/donor", donor.create);
 
   app.get("/lifts", lift.findAll);
@@ -27,13 +28,20 @@ module.exports = function(app) {
   app.post("/provider", provider.create);
 
   app.get("/user", user.findAll);
+  app.get("/user/waiting", user.findWait);
+  app.get("/user/:id", user.getOne);
+  app.get("/reset/:token", user.reset);
+  app.post("/user/:id/approve", user.approveUser);
+  app.post("/user/:id/delete", user.deleteUser);
   app.post("/user", user.create);
   app.post("/user/login", user.login);
+  app.post("/forgot", user.forgot);
+  app.post("/reset/:token", user.changepassword);
 
   app.get("/volunteer", volunteer.findAll);
   app.post("/volunteer", volunteer.create);
   app.post("/volunteer/availability", volunteer.acceptText);
-  // app.post("/volunteers/donors", volunteer.getDistance);
+  //app.post("/volunteers/donors", volunteer.getDistance);
   app.post("/volunteers/foodbank", volunteer.getDistanceBanks);
 };
 
