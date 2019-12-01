@@ -245,11 +245,7 @@ exports.postLift = function(req, res) {
 
 
 exports.completeLift = function(req, res) {
-    if (!req.body) {
-        return res.status(400).send({ message: "Body can not be empty" });
-    }
-
-    Lifts.findOneAndUpdate({ _id: req.body._id }, { status: "completed" })
+    Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "completed" })
         .then(ll => {
             console.log("changed lift status to completed");
         })
@@ -260,11 +256,7 @@ exports.completeLift = function(req, res) {
 
 
 exports.cancelLift = function(req, res) {
-    if (!req.body) {
-        return res.status(400).send({ message: "Body can not be empty" });
-    }
-
-    Lifts.findOneAndUpdate({ _id: req.body._id }, { status: "cancelled" })
+    Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "cancelled" })
         .then(ll => {
             console.log("changed lift status to cancelled");
         })
@@ -275,11 +267,7 @@ exports.cancelLift = function(req, res) {
 
 
 exports.problemLift = function(req, res) {
-    if (!req.body) {
-        return res.status(400).send({ message: "Body can not be empty" });
-    }
-
-    Lifts.findOneAndUpdate({ _id: req.body._id }, { status: "problem" })
+    Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "problem" })
         .then(ll => {
             console.log("changed lift status to problem");
         })
