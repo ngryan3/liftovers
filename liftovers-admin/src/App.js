@@ -7,10 +7,13 @@ import Dashboard from "./routes/dashboard";
 import Volunteers from "./routes/volunteer";
 import CreateVolunteers from "./routes/volunteer/create/create";
 import EditVolunteers from "./routes/volunteer/edit/edit";
-import ViewVolunteers from "./routes/volunteer/view/view"
+import ViewVolunteers from "./routes/volunteer/view/view";
 import DeleteVolunteers from "./routes/volunteer/delete/delete";
 import Admins from "./routes/admin";
-import CreateAdmin from "./routes/admin/create/create"
+import CreateAdmin from "./routes/admin/create/create";
+import EditAdmin from "./routes/admin/edit/edit";
+import ViewAdmin from "./routes/admin/view/view";
+import DeleteAdmin from "./routes/admin/delete/delete";
 import Lifts from "./routes/lift";
 import Donors from "./routes/donor";
 import CreateDonor from "./routes/donor/create/create";
@@ -71,6 +74,15 @@ function App() {
             </Route>
             <Route exact path="/admins/create">
                 <CreateAdmin />
+            </Route>
+            <Route path="/admins/view/:admin_id" component={Admins}>
+                <ViewAdmin />
+            </Route>
+            <Route path="/admins/edit/:admin_id" component={Admins}>
+                <EditAdmin />
+            </Route>
+            <Route path="/admins/delete/:admin_id" component={Admins}>
+                <DeleteAdmin />
             </Route>
             <Route exact path="/donors">
                 <Donors />

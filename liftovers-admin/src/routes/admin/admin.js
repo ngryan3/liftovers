@@ -23,7 +23,40 @@ const columns = [
   { title: "Surname", dataIndex: "surname", key: "surname"},
   { title: "Phone", dataIndex: "phone", key: "phone" },
   { title: "Role", dataIndex: "role", key: "role" },
-  { title: "Email", dataIndex: "email", key: "email"}
+  { title: "Email", dataIndex: "email", key: "email"},
+  {
+      header: '',
+      accessor: "_id",
+      dataIndex: "_id",
+      id: 'view-button',
+      render: accessor => (<Button>
+                              <a href={"./admins/view/" + accessor}>
+                                  View
+                              </a>
+                           </Button>)
+      },
+    {
+      header: '',
+      accessor: "_id",
+      dataIndex: "_id",
+      id: 'edit-button',
+      render: accessor => (<Button style={{background:"#A6CBFF"}}>
+                              <a href={"./admins/edit/" + accessor}>
+                                  Edit
+                              </a>
+                           </Button>)
+      },
+    {
+      header: '',
+      accessor: "_id",
+      dataIndex: "_id",
+      id: 'delete-button',
+      render: accessor => (<Button style={{background:"#FF8C83"}}>
+                              <a href={"./admins/delete/" + accessor}>
+                                  Delete
+                              </a>
+                            </Button>)
+    }
 ];
 const pageOptions = [
   { value: 10, label: "10 Rows" },

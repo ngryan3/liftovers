@@ -11,7 +11,6 @@ import {
 } from "flexibull";
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
-import { VolunteerProfileModal } from "../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -72,7 +71,6 @@ export const Volunteer = ({ getVolunteers, volunteers, loading }) => {
   let { docs, totalDocs, page } = volunteers;
   return (
     <div data-test="volunteer">
-      <VolunteerProfileModal />
       <Boxed pad="5px 0">
         <PageTitle data-test="title">Volunteers</PageTitle>
       </Boxed>
