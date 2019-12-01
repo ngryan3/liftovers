@@ -293,6 +293,36 @@ exports.getOne = function (req, res) {
     })
 }
 
+exports.deleteVolunteer = function (req, res) {
+    Volunteer.findByIdAndUpdate(req.params.id, { status: "deleted" })
+        .then(ll => {
+            console.log("changed volunteer status to deleted");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+exports.unavailVolunteer = function (req, res) {
+    Volunteer.findByIdAndUpdate(req.params.id, { status: "unavailable" })
+        .then(ll => {
+            console.log("changed volunteer status to unavailable");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+exports.availVolunteer = function (req, res) {
+    Volunteer.findByIdAndUpdate(req.params.id, { status: "available" })
+        .then(ll => {
+            console.log("changed volunteer status to available");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
 exports.updateVolunteer = function (req, res) {
     let update = {}
     if (req.body.name) {
