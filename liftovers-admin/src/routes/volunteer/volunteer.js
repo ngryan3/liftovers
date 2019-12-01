@@ -29,7 +29,7 @@ const columns = [
     dataIndex: "_id",
     id: 'view-button',
     render: accessor => (<Button>
-                            <a href={"./volunteers/view/" + accessor}>
+                            <a href={"/volunteers/view/" + accessor}>
                                 View
                             </a>
                          </Button>)
@@ -40,7 +40,7 @@ const columns = [
     dataIndex: "_id",
     id: 'edit-button',
     render: accessor => (<Button style={{background:"#A6CBFF"}}>
-                            <a href={"./volunteers/edit/" + accessor}>
+                            <a href={"/volunteers/edit/" + accessor}>
                                 Edit
                             </a>
                          </Button>)
@@ -51,7 +51,7 @@ const columns = [
     dataIndex: "_id",
     id: 'delete-button',
     render: accessor => (<Button style={{background:"#FF8C83"}}>
-                            <a href={"./volunteers/delete/" + accessor}>
+                            <a href={"/volunteers/delete/" + accessor}>
                                 Delete
                             </a>
                           </Button>)
