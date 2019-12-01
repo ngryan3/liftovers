@@ -195,3 +195,43 @@ exports.findAll = function(req, res) {
         return res.status(200).send(users);
     });
 };
+
+exports.findWait = function(req, res) {
+    let { page = 1, limit = 100 } = req.query;
+    User.paginate({status: "waitingApproval"}, { page, limit }).then(users => {
+        if (!users)
+            return res.status(404).send({ message: "No Users waiting for approval." });
+        return res.status(200).send(users);
+    });
+}
+
+exports.getOne = function (req, res) {
+    User.findById(req.params.id, function (err, user) {
+        if (err) {
+            return res.status(404).send({ message: "No such user." });
+        } else {
+            return res.status(200).send(user);
+        }
+    })
+}
+
+exports.deleteUser = function (req, res) {
+    User.findByIdAndUpdate(req.params.id, { status: "deleted" })
+        .then(ll => {
+            console.log("changed user status to deleted");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+exports.updateUser = function (req, res) {
+    User.findByIdAndUpdate(req.params.id, req.body)
+        .then(ll => {
+            console.log("updated user");
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}
+
