@@ -23,9 +23,9 @@ import { AdminLayout } from "./components/admin";
 import Forgot from "./routes/login/forgot";
 import Reset from "./routes/login/resetpassword";
 
-const openPages = ["/", "/login"];
+const openPages = ["/", "/login", "/signup", "/forgot"];
 console.log(window.location.pathname);
-let open = openPages.push(window.location.pathname);
+let open = openPages.includes(window.location.pathname);
 function App() {
   return (
     <Router>
@@ -43,10 +43,10 @@ function App() {
           <Route exact path="/forgot">
             <Forgot />
           </Route>
-          <Route path="/reset/:token" component={Reset}/>
         </Switch>
       ) : (
         <Switch>
+          <Route path="/reset/:token" component={Reset}/>
           <AdminLayout>
           <Route exact path="/dashboard">
               <Dashboard />
