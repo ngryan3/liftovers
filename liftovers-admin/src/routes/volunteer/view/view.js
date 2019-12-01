@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Grid, Button, Layout, Boxed, Input, SimpleSelect } from "flexibull";
 import { Theme } from "flexibull/build/theme";
+import {withRouter} from 'react-router-dom';
 import {
   Header,
   Contain,
@@ -13,6 +14,7 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+// import getVolunteer from "../../../actions/volunteer";
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -29,7 +31,21 @@ var name = "Faye"
 var lastName = "Tan"
 
 class ViewVolunteer extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {'name': ''};
 
+        // extract the id from the URL
+        const volunteerId = this.props.match.params.volunteer_id
+        console.log(volunteerId);
+
+        var volunteer = fetch(ApiUrl + "/volunteer/" + volunteerId)
+            .then(results => {
+                return results.json();
+            })
+
+        console.log(volunteer)
+    };
     render() {
       return (
         <div>
@@ -63,4 +79,4 @@ class ViewVolunteer extends Component{
     }
 
 }
-export default ViewVolunteer;
+export default withRouter (ViewVolunteer);
