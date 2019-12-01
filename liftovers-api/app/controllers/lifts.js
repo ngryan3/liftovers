@@ -285,3 +285,53 @@ exports.problemLift = function(req, res) {
             console.log(error);
         });
 };
+
+
+exports.updateLift = function (req, res) {
+    let update = {}
+
+    if (req.body.firstName) {
+        update.firstName = req.body.firstName
+    }
+    if (req.body.lastName) {
+        update.lastName = req.body.lastName
+    }
+    if (req.body.email) {
+        update.email = req.body.email
+    }
+    if (req.body.phone) {
+        update.phone = req.body.phone
+    }
+    if (req.body.postalCode) {
+        update.postalCode = req.body.postalCode
+    }
+    if (req.body.date) {
+        update.date = req.body.date
+    }
+    if (req.body.commmunicationMethod) {
+        update.commmunicationMethod = req.body.commmunicationMethod
+    }
+    if (req.body.serveTime) {
+        update.serveTime = req.body.serveTime
+    }
+    if (req.body.pickupTime) {
+        update.pickupTime = req.body.pickupTime
+    }
+    if (req.body.address) {
+        update.address = req.body.address
+    }
+    if (req.body.description) {
+        update.description = req.body.description
+    }
+    if (req.body.details) {
+        update.details = req.body.details
+    }
+
+    Lifts.findByIdAndUpdate(req.params.id, update)
+        .then(ll => {
+            console.log("updated lifts");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
