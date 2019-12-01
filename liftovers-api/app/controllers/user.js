@@ -187,9 +187,9 @@ getUsers = (origin, dest) => {
 };
 
 exports.findAll = function(req, res) {
-    // Retrieve and return all notes from the database.
+    // Retrieve and return all users (not deleted) from the database.
     let { page = 1, limit = 100 } = req.query;
-    User.paginate({}, { page, limit }).then(users => {
+    User.paginate({ status: {'$ne': "deleted"} }, { page, limit }).then(users => {
         if (!users)
             return res.status(404).send({ message: "No Users found." });
         return res.status(200).send(users);

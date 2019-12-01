@@ -273,10 +273,10 @@ exports.getDistanceBanks = function (req, res) {
 
 
 exports.findAll = function (req, res) {
-    // Retrieve and return all notes from the database.
+    // Retrieve and return all volunteers (not deleted) from the database.
     let { page = 1, limit = 100 } = req.query;
 
-    Volunteer.paginate({}, { page, limit }).then(volunteers => {
+    Volunteer.paginate({ status: {'$ne': "deleted"} }, { page, limit }).then(volunteers => {
         if (!volunteers)
             return res.status(404).send({ message: "No Volunteers found." });
         return res.status(200).send(volunteers);
