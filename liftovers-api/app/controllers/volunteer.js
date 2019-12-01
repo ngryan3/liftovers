@@ -328,9 +328,9 @@ exports.updateVolunteer = function (req, res) {
     if (req.body.hasVehicle) {
         update.hasVehicle = req.body.hasVehicle
     }
-    User.findByIdAndUpdate(req.params.id, update)
+    Volunteer.findByIdAndUpdate(req.params.id, update)
         .then(ll => {
-            console.log("updated user");
+            console.log("updated volunteer");
         })
         .catch(error => {
             console.log(error);
