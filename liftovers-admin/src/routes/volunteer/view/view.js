@@ -14,7 +14,6 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
-// import getVolunteer from "../../../actions/volunteer";
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -26,52 +25,90 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
-// dummy variables
-var name = "Faye"
-var lastName = "Tan"
-
 class ViewVolunteer extends Component{
     constructor(props) {
         super(props);
-        this.state = {'name': ''};
+        this.state = {
+            volunteer: {}
+        };
+    };
 
+    componentDidMount() {
+        this.getVolunteer();
+    }
+
+    getVolunteer() {
         // extract the id from the URL
         const volunteerId = this.props.match.params.volunteer_id
-        console.log(volunteerId);
 
-        var volunteer = fetch(ApiUrl + "/volunteer/" + volunteerId)
-            .then(results => {
-                return results.json();
-            })
+        fetch(ApiUrl + "/volunteer/" + volunteerId, {
+            method: "GET"
+        }).then(result => result.json())
+        .then (result => this.setState ({ volunteer: result }))
+    }
 
-        console.log(volunteer)
-    };
     render() {
+    // TODO: fix display of availability
+    // TODO: fix display of lifts
+
+    // Conditional Rendering for true/false values
+    let licensedLabel;
+    if (this.state.volunteer.licensed == true) {
+        licensedLabel = "Yes";
+    } else {
+        licensedLabel = "No";
+    }
+
+    let hasVehicleLabel;
+    if (this.state.volunteer.hasVehicle == true) {
+        hasVehicleLabel = "Yes";
+    } else {
+       hasVehicleLabel = "No";
+    }
+
+    let waiverSignedLabel;
+    if (this.state.volunteer.waiverSigned == true) {
+        waiverSignedLabel = "Yes";
+    } else {
+       waiverSignedLabel = "No";
+    }
+
       return (
         <div>
             <Boxed pad="5px 0">
                         <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
-                            Volunteer: { name } { lastName }
+                            Volunteer: { this.state.volunteer.name } { this.state.volunteer.surname }
                         </PageTitle>
             </Boxed>
             <Boxed pad="50px">
-              Name: { name } { lastName }<br />
-              Surname: <br />
-              Email: <br />
-              Phone: <br />
-              Preferred Method of Communication: <br />
-              Postal Code: <br />
-              Secondary Postal Code: <br />
-              Availability: <br />
-              Licensed: <br />
-              Has A Vehicle: <br />
-              Additional Notes: <br />
-              Lifts: <br />
-              Waiver Signed? <br />
-              Status: <br />
+              <b>Name:</b> { this.state.volunteer.name }<br />
+              <b>Surname:</b> { this.state.volunteer.surname } <br />
+              <b>Email:</b> { this.state.volunteer.email } <br />
+              <b>Phone:</b> { this.state.volunteer.phone } <br />
+              <b>Preferred Method of Communication:</b> { this.state.volunteer.methodOfCommunication } <br />
+              <b>Postal Code:</b> { this.state.volunteer.postalCode } <br />
+              <b>Secondary Postal Code:</b> { this.state.volunteer.secondaryPostalCode } <br />
+              <b>Availability:</b>  <br />
+              <b>Licensed:</b> { licensedLabel } <br />
+              <b>Has A Vehicle:</b> { hasVehicleLabel } <br />
+              <b>Additional Notes:</b> { this.state.volunteer.additionalNotes } <br />
+              <b>Lifts:</b> <br />
+              <b>Waiver Signed?</b> { waiverSignedLabel } <br />
               <br />
-              <Button type="submit" value="Submit">
-              Submit
+              <Button type="submit" value="Back">
+                <a href="../">
+                    Back
+                </a>
+              </Button>
+              <Button style={{background:"#A6CBFF"}} type="submit" value="Edit">
+                <a href={"../edit/" + this.props.match.params.volunteer_id} >
+                    Edit
+                </a>
+              </Button>
+              <Button style={{background:"#FF8C83"}} type="submit" value="Delete">
+                <a href={"../delete/" + this.props.match.params.volunteer_id} >
+                    Delete
+                </a>
               </Button>
               </Boxed>
         </div>

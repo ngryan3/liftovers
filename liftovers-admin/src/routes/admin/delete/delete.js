@@ -61,7 +61,6 @@ class DeleteAdmin extends Component{
         event.preventDefault();
       // extract the id from the URL
       const adminId = this.props.match.params.admin_id
-      console.log(adminId);
 
       fetch(ApiUrl + "/user/" + adminId + "/delete", {
         method: 'POST'

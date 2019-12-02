@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Grid, Button, Layout, Boxed, Input, SimpleSelect } from "flexibull";
 import { Theme } from "flexibull/build/theme";
+import {withRouter} from 'react-router-dom';
 import {
   Header,
   Contain,
@@ -28,10 +29,12 @@ const LogoHolder = styled.img`
 var name = "Faye"
 
 class DeleteVolunteer extends Component{
-
   constructor(props) {
       super(props);
-      this.state = {'name': ''};
+      this.state = {
+        volunteer: {},
+        requestFullfilled: false
+      };
 
       this.handleChange = this.handleChange.bind(this);
       this.deleteVolunteer = this.deleteVolunteer.bind(this);
@@ -41,48 +44,56 @@ class DeleteVolunteer extends Component{
       this.setState({value: event.target.value});
     }
 
+    componentDidMount() {
+        this.getVolunteer();
+    }
+
+    getVolunteer() {
+        // extract the id from the URL
+        const volunteerId = this.props.match.params.volunteer_id
+        console.log(volunteerId);
+
+        fetch(ApiUrl + "/volunteer/" + volunteerId, {
+            method: "GET"
+        }).then(result => result.json())
+        .then (result => this.setState ({ volunteer: result }))
+
+    }
+
     deleteVolunteer(event) {
-      event.preventDefault();
-      const data = new FormData(event.target);
+        event.preventDefault();
+        // extract the id from the URL
+        const volunteerId = this.props.match.params.volunteer_id
 
-      var object = {};
-      data.forEach(function(value, key) {
-        object[key] = value;
-      });
-      var json = JSON.stringify(object);
-      console.log(json);
+        fetch(ApiUrl + "/volunteer/" + volunteerId + "/delete", {
+            method: 'POST'
+        }).then(result => result.json())
 
-      fetch(ApiUrl + "/volunteer", {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: json, // JSON.stringify
-      });
-      window.location = "/volunteers"
+        window.location = "/volunteers"
     }
 
     render() {
       return (
-        <form onSubmit={this.deleteVolunteer}>
-        <Boxed pad="5px 0">
-                    <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
-                        Delete Volunteer { name }
-                    </PageTitle>
-        </Boxed>
-        <Boxed pad="50px">
-          <p> Are you sure you want to delete this volunteer? </p>
-          <Button type="submit" value="Cancel">
-            Cancel
-          </Button>
-          <Button style={{background:"#FF8C83"}} value="Submit">
-            Delete
-          </Button>
-          </Boxed>
-        </form>
+        <div>
+            <Boxed pad="5px 0">
+                        <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
+                            Delete Volunteer { this.state.volunteer.name } { this.state.volunteer.surname }
+                        </PageTitle>
+            </Boxed>
+            <Boxed pad="50px">
+              <p> Are you sure you want to delete this volunteer? </p>
+              <Button type="submit" value="Cancel">
+                <a href="../">
+                    Cancel
+                </a>
+              </Button>
+              <Button onClick={this.deleteVolunteer} style={{background:"#FF8C83"}} value="Submit">
+                Delete
+              </Button>
+              </Boxed>
+        </div>
       );
     }
 
 }
-export default DeleteVolunteer;
+export default withRouter (DeleteVolunteer);

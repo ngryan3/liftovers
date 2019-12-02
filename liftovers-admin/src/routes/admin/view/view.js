@@ -49,7 +49,6 @@ class ViewAdmin extends Component{
     }
 
     render() {
-      // console.log(this.state.admin.name);
       return (
         <div>
             <Boxed pad="5px 0">

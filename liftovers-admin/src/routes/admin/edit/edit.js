@@ -96,20 +96,20 @@ class EditAdmin extends Component{
     render() {
 
       // Conditional rendering for default values of the drop downs on the form
-      const originalRole = this.state.admin.role
+      const originalRole = this.state.admin.role;
       let originalRoleLabel;
       if (originalRole === "superAdmin") {
-        originalRoleLabel = "Super Administrator"
+        originalRoleLabel = "Super Administrator";
       } else {
-        originalRoleLabel = "Administrator"
+        originalRoleLabel = "Administrator";
       }
 
-      const originalMethodOfCommmunication = this.state.admin.methodOfCommunication
+      const originalMethodOfCommmunication = this.state.admin.methodOfCommunication;
       let originalMethodOfCommmunicationLabel;
       if (originalMethodOfCommmunication === "email") {
-        originalMethodOfCommmunicationLabel = "Email"
+        originalMethodOfCommmunicationLabel = "Email";
       } else {
-        originalMethodOfCommmunicationLabel = "Phone"
+        originalMethodOfCommmunicationLabel = "Phone";
       }
 
       return (
