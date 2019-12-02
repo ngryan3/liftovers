@@ -60,8 +60,8 @@ export const Donor = ({ getDonors, donors, loading }) => {
           </Grid>
           <Grid default="100%" tablet="100%" mobile="100%">
             <Boxed pad="0.2rem" align="right">
-              <Button>
-                <i className=" icon-plus" />
+              <Button iconLeft>
+                <i className="icon-user-add" />
                 <a href="./donors/create">Create Donor</a>
               </Button>
             </Boxed>

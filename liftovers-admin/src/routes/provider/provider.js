@@ -59,7 +59,8 @@ export const Provider = ({ getProviders, providers, loading }) => {
           </Grid>
           <Grid default="100%" tablet="100%" mobile="100%">
             <Boxed pad="0.2rem" align="right">
-              <Button>
+              <Button iconLeft>
+                <i className="icon-user-add" />
                 <a href="./providers/create">Create Provider</a>
               </Button>
             </Boxed>

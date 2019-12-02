@@ -96,8 +96,8 @@ export const Admin = ({ getAdmins, admins, loading }) => {
           </Grid>
           <Grid default="100%" tablet="100%" mobile="100%">
             <Boxed pad="0.2rem" align="right">
-              <Button>
-                <i className=" icon-plus" />
+              <Button iconLeft>
+                <i className="icon-user-add" />
                 <a href="./admins/create">Create Administrator</a>
               </Button>
             </Boxed>
