@@ -1,6 +1,6 @@
 import { Dashboard } from "./dashboard";
 import { connect } from "react-redux";
-import { getRequestedLifts, getPostedLifts, getProblemLifts } from "../../actions/lifts";
+import { getRequestedLifts, getPostedLifts, getProblemLifts} from "../../actions/lifts";
 import { getUnapprovedUsers } from "../../actions/users";
 
 function mapStateToProps(state) {

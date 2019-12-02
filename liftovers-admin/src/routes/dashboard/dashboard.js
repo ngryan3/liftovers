@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import ApiUrl from "../../api/config";
 import {
     Grid,
     Boxed,
@@ -17,6 +18,7 @@ import {
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
 
+
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
   margin: 0;
@@ -30,7 +32,47 @@ const pageOptions = [
     { value: 100, label: "100 Rows" }
 ];
 
+
+
+function handleApproveClick(accessor) {
+    console.log(accessor)
+    fetch(ApiUrl + "/user/" + accessor + "/approve", {
+        method: 'POST'
+      }).then(result => result.json())
+    
+}
+
+function handleDeleteClick(accessor) {
+    console.log(accessor)
+    fetch(ApiUrl + "/user/" + accessor + "/delete", {
+        method: 'POST'
+      }).then(result => result.json())
+    
+}
+
+function handleCancelClick(accessor) {
+    console.log(accessor)
+    fetch(ApiUrl + "/lift/" + accessor + "/cancel", {
+        method: 'POST'
+      }).then(result => result.json())
+    
+}
+
+function handlePostLiftClick(e, accessor) {
+    console.log(accessor)
+    fetch(ApiUrl + "/lift/" + accessor + "/post", {
+        method: 'POST'
+      }).then(result => result.json())
+    // var id = e.target.id;
+    // console.log(id);
+    // var table = document.getElementById("table");
+    // var row = document.getElementById(id);
+    // console.log(row);
+    // row.parentNode.removeChild(row);
+}
+
 const buttonColumns = [
+    { dataIndex: "_id", key: "_id"},
     { title: "First Name", dataIndex: "firstName", key: "firstName" },
     { title: "Last Name", dataIndex: "lastName", key: "lastName" },
     { title: "Email", dataIndex: "email", key: "email" },
@@ -42,8 +84,22 @@ const buttonColumns = [
     { title: "Description", dataIndex: "description", key: "description" },
     {
         header: '',
-        id: 'approve-button',
-        render: ({ row }) => (<Button onClick={(e) => this.handleButtonClick(e, row)}>Approve</Button>)
+        id: 'post-button',
+        accessor: '_id',
+        dataIndex: '_id',
+        render: accessor => (<Button 
+            onClick={
+                (e) => handlePostLiftClick(e, accessor)
+            }>Post</Button>)
+    },
+    {   
+        header: '',
+        accessor: '_id',
+        dataIndex: '_id',
+        render: accessor => (<Button 
+            onClick={
+                (e) => handleCancelClick(accessor)
+            }>Cancel</Button>)
     },
 
 ];
@@ -58,10 +114,19 @@ const columns = [
     { title: "Serve Time", dataIndex: "serveTime", key: "serveTime" },
     { title: "Pickup Time", dataIndex: "pickupTime", key: "pickupTime" },
     { title: "Description", dataIndex: "description", key: "description" },
-
+    {   
+        header: '',
+        accessor: '_id',
+        dataIndex: '_id',
+        render: accessor => (<Button 
+            onClick={
+                (e) => handleCancelClick(accessor)
+            }>Cancel</Button>)
+    },
 ];
 
 const userColumns = [
+    { dataIndex: "_id", key: "_id"},
     { title: "First Name", dataIndex: "name", key: "name" },
     { title: "Last Name", dataIndex: "surname", key: "surname" },
     { title: "Role", dataIndex: "role", key: "role" },
@@ -69,13 +134,21 @@ const userColumns = [
     { title: "Phone", dataIndex: "phone", key: "phone" },
     {   
         header: '',
-        id: 'approve-button',
-        render: ({ row }) => (<Button onClick={(e) => this.handleButtonClick(e, row)}>Approve</Button>)
+        accessor: '_id',
+        dataIndex: '_id',
+        render: accessor => (<Button 
+            onClick={
+                (e) => handleApproveClick(accessor)
+            }>Approve</Button>)
     },
     {   
         header: '',
-        id: 'reject-button',
-        render: ({ row }) => (<Button onClick={(e) => this.handleButtonClick(e, row)}>Reject</Button>)
+        accessor: '_id',
+        dataIndex: '_id',
+        render: accessor => (<Button 
+            onClick={
+                (e) => handleDeleteClick(accessor)
+            }>Delete</Button>)
     },
 ]
 
@@ -118,7 +191,7 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                 {loading ? (
                     <Loader />
                 ) : (
-                        <FlexiTable columns={buttonColumns} data={docs || []}>
+                        <FlexiTable columns={buttonColumns.slice(1)} data={docs || []}>
                             <FlexiPagination
                                 total={totalDocs}
                                 onChange={page => getRequestedLifts({ page, limit: 10 })}
@@ -161,7 +234,7 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                 {loading ? (
                     <Loader />
                 ) : (
-                        <FlexiTable columns={userColumns} data={fourthDocs || []}>
+                        <FlexiTable columns={userColumns.slice(1)} data={fourthDocs || []}>
                             <FlexiPagination
                                 total={fourthTotalDocs}
                                 onChange={fourthPage => getUnapprovedUsers({ fourthPage, limit: 10 })}
@@ -202,5 +275,3 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
 
     );
 };
-
-// export default Dashboard;
