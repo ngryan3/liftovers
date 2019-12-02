@@ -19,10 +19,10 @@ const client = new twilio(accountSid, authToken)
 
 mapsCall = (origin, dest) => {
     return axios({
-      method: "get",
-      url: `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${dest}&key=AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ`
+        method: "get",
+        url: `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${dest}&key=AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ`
     });
-  };
+};
 
 
 sendText = (phone, pickupAddress) => {
@@ -30,106 +30,106 @@ sendText = (phone, pickupAddress) => {
     return client.messages.create({
         body: `Can you pick up the food item at ${pickupAddress}, reply with yes or no`,
         to: `+1${phone}`,  // Text this number
-        from: '+16476952333' // From a valid Twilio number
+        from: '+16479301776' // From a valid Twilio number
     })
 }
 
 
 getVolunteers = (origin, dest) => {
-    return Volunteer.find()
+    return Volunteer.find({ status: "available" });
 }
 
 
-exports.findAll = function(req, res) {
+exports.findAll = function (req, res) {
     // Retrieve and return all notes from the database.
     let { page = 1, limit = 10 } = req.query;
-    
+
     Lifts.paginate({}, { page, limit }).then(lifts => {
-      if (!lifts)
-        return res.status(404).send({ message: "No lifts found." });
-      return res.status(200).send(lifts);
+        if (!lifts)
+            return res.status(404).send({ message: "No lifts found." });
+        return res.status(200).send(lifts);
     });
 };
 
 
-exports.findRequested = function(req, res) {
+exports.findRequested = function (req, res) {
     // Retrieve and return all notes whose status == "requested" from the database.
     Lifts.paginate({ status: "requested" }, { page: 1, limit: 10 }).then(lifts => {
         if (!lifts)
-          return res.status(404).send({ message: "No requested lifts found." });
+            return res.status(404).send({ message: "No requested lifts found." });
         return res.status(200).send(lifts);
     });
 };
 
 
-exports.findPosted = function(req, res) {
+exports.findPosted = function (req, res) {
     // Retrieve and return all notes whose status == "posted" from the database.
     Lifts.paginate({ status: "posted" }, { page: 1, limit: 10 }).then(lifts => {
         if (!lifts)
-          return res.status(404).send({ message: "No posted lifts found." });
+            return res.status(404).send({ message: "No posted lifts found." });
         return res.status(200).send(lifts);
     });
 };
 
 
-exports.findOngoing = function(req, res) {
+exports.findOngoing = function (req, res) {
     // Retrieve and return all notes whose status == "ongoing" from the database.
     Lifts.paginate({ status: "ongoing" }, { page: 1, limit: 10 }).then(lifts => {
         if (!lifts)
-          return res.status(404).send({ message: "No ongoing lifts found." });
+            return res.status(404).send({ message: "No ongoing lifts found." });
         return res.status(200).send(lifts);
     });
 };
 
 
-exports.findCompleted = function(req, res) {
+exports.findCompleted = function (req, res) {
     // Retrieve and return all notes whose status == "completed" from the database.
     Lifts.paginate({ status: "completed" }, { page: 1, limit: 10 }).then(lifts => {
         if (!lifts)
-          return res.status(404).send({ message: "No completed lifts found." });
+            return res.status(404).send({ message: "No completed lifts found." });
         return res.status(200).send(lifts);
     });
 };
 
 
-exports.findCancelled = function(req, res) {
+exports.findCancelled = function (req, res) {
     // Retrieve and return all notes whose status == "cancelled" from the database.
     Lifts.paginate({ status: "cancelled" }, { page: 1, limit: 10 }).then(lifts => {
         if (!lifts)
-          return res.status(404).send({ message: "No cancelled lifts found." });
+            return res.status(404).send({ message: "No cancelled lifts found." });
         return res.status(200).send(lifts);
     });
 };
 
 
-exports.findProblem = function(req, res) {
+exports.findProblem = function (req, res) {
     // Retrieve and return all notes whose status == "problem" from the database.
     Lifts.paginate({ status: "problem" }, { page: 1, limit: 10 }).then(lifts => {
         if (!lifts)
-          return res.status(404).send({ message: "No problem lifts found." });
+            return res.status(404).send({ message: "No problem lifts found." });
         return res.status(200).send(lifts);
     });
 };
 
 
-exports.findId = function(req, res) {
+exports.findId = function (req, res) {
     // Return lift whose id == id given in url.
     Lifts.find({ _id: req.params.id }).then(lifts => {
         if (!lifts)
-          return res.status(404).send({ message: "No lifts with given id found." });
+            return res.status(404).send({ message: "No lifts with given id found." });
         return res.status(200).send(lifts);
     });
 };
 
 
-exports.requestLift = function(req, res) {
+exports.requestLift = function (req, res) {
     if (!req.body) {
         return res.status(400).send({ message: "Body can not be empty" });
     }
 
     let body = req.body
 
-    var lift = new Lifts({ 
+    var lift = new Lifts({
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
@@ -141,7 +141,7 @@ exports.requestLift = function(req, res) {
         // time when food is served
         serveTime: body.serveTime,
         // time when food should be picked up
-        pickupTime: body.pickupTime,   
+        pickupTime: body.pickupTime,
         // pickup address
         address: body.address,
         // description of food
@@ -155,8 +155,8 @@ exports.requestLift = function(req, res) {
         if (err) {
             console.log(err);
             res
-              .status(500)
-              .send({ message: "Some error occurred while creating the Volunteer." });
+                .status(500)
+                .send({ message: "Some error occurred while creating the Volunteer." });
         } else {
             res.send(data);
         }
@@ -164,99 +164,106 @@ exports.requestLift = function(req, res) {
 }
 
 
-exports.postLift = function(req, res) {
+exports.postLift = function (req, res) {
     var postalCodes = [];
     let volunteersTexted = [];
     let liftId = req.params.id;
     let distancevolunteers = this.getVolunteers();
     let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-    let lift = Lifts.find({ _id: liftId }).then(lift => {
-        if (!lift)
-          return res.status(404).send({ message: "No lifts with given id found." });
-        return lift;
+    let lift = Lifts.findById(liftId, function (err, ll) {
+        if (err) {
+            return res.status(404).send({ message: "No lifts with given id found." });
+        } else {
+            return ll;
+        }
     });
-    
-    distancevolunteers.then((vol) => {
-        vol.forEach((volunteer) => {
-            postalCodes.push(volunteer.postalCode)
-        })
 
-        let promises = postalCodes.map((postalcode) => {
-            return this.mapsCall(lift.postalCode, postalcode)
-        })
-
-        Promise.all(promises).then((values) => {
-            let valData = values.map((item, index) => {
-                return {
-                    data: item.data.rows[0].elements[0],
-                    volunteer: vol[index]
-                }
-            })
-            .sort(function (a, b) {
-                let itemA = a.data.duration.value // ignore upper and lowercase
-                let itemB = b.data.duration.value // ignore upper and lowercase
-                if (itemA < itemB) {
-                    return -1;
-                }
-                if (itemA > itemB) {
-                    return 1;
-                }
-                return 0;
+    lift.then((lift) => {
+        distancevolunteers.then((vol) => {
+            vol.forEach((volunteer) => {
+                postalCodes.push(volunteer.postalCode)
             })
 
-            let timeSorted = valData.filter((item) => {
-                let weekday = weekdays[lift.date.getDay()];
-                let pickupTime = parseInt(lift.pickupTime.hour.toString() + 
-                                    lift.pickupTime.minute.toString());
+            let promises = postalCodes.map((postalcode) => {
+                return this.mapsCall(lift.postalCode, postalcode);
+            })
 
-                item.volunteer.availability.forEach((volAvail) => {
+            Promise.all(promises).then((values) => {
+                let valData = values.map((item, index) => {
+                    return {
+                        data: item.data.rows[0].elements[0],
+                        volunteer: vol[index]
+                    }
+                })
+                    .sort(function (a, b) {
+                        let itemA = a.data.duration.value // ignore upper and lowercase
+                        let itemB = b.data.duration.value // ignore upper and lowercase
+                        if (itemA < itemB) {
+                            return -1;
+                        }
+                        if (itemA > itemB) {
+                            return 1;
+                        }
+                        return 0;
+                    })
+
+                let timeSorted = valData.filter((item) => {
+                    let weekday = weekdays[lift.date.getDay()];
+                    let pickupTime = parseInt(lift.pickupTime.hour.toString() +
+                        lift.pickupTime.minute.toString());
+
+                    let volAvail = item.volunteer.availability;
+                    console.log(pickupTime);
                     if (volAvail.day.toLowerCase() === weekday) {
-                        let volTimeStart = parseInt(volAvail.timeStart.hour.toString() + 
-                                            volAvail.timeStart.minute.toString());
-                        let volTimeFinish = parseInt(volAvail.volTimeFinish.hour.toString() +
-                                                volAvail.volTimeFinish.minute.toString());
+                        let volTimeStart = parseInt(volAvail.timeStart.hour.toString() +
+                            ("0" + volAvail.timeStart.minute.toString()).slice(-2));
+                        let volTimeFinish = parseInt(volAvail.timeFinish.hour.toString() +
+                            ("0" + volAvail.timeFinish.minute.toString()).slice(-2));
+                        console.log(volTimeStart);
+                        console.log(volTimeFinish);
 
                         if (volTimeStart <= pickupTime && volTimeFinish >= pickupTime) {
                             return true;
                         }
                     }
+                    return false;
                 })
-                return false;
-            })
 
-            console.log('timesorted', timeSorted)
+                console.log('timesorted', timeSorted)
 
-            let textPromises = timeSorted.map((item) => {
-                return this.sendText(item.volunteer.phone, lift.address)
-            })
-
-            Promise.all(textPromises).then((promiseitem) => {}).catch((error) => {
-                console.log(error)
-            })
-
-            volunteersTexted = timeSorted.map((item) => {
-                return item.volunteer
-            })
-
-            Lifts.findOneAndUpdate({ _id: liftId }, { status: "posted",  volunteer: volunteersTexted})
-                .then(ll => {
-                    console.log("changed lift status to posted");
+                let textPromises = timeSorted.map((item) => {
+                    return this.sendText(item.volunteer.phone, lift.address)
                 })
-                .catch(error => {
-                    console.log(error);
+
+                Promise.all(textPromises).then((promiseitem) => { }).catch((error) => {
+                    console.log(error)
+                })
+
+                volunteersTexted = timeSorted.map((item) => {
+                    return item.volunteer
+                })
+
+                Lifts.findOneAndUpdate({ _id: liftId }, { status: "posted", volunteer: volunteersTexted })
+                    .then(ll => {
+                        console.log("changed lift status to posted");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+                return res.status(200).send(timeSorted)
+            })
+                .catch((error) => {
+                    console.log(error)
                 });
-
-            return res.status(200).send(timeSorted)
         })
-        .catch((error) => {
-            console.log(error)
-        });
-    })
+    });
+
 };
 
 
-exports.completeLift = function(req, res) {
+exports.completeLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "completed" })
         .then(ll => {
             console.log("changed lift status to completed");
@@ -267,7 +274,7 @@ exports.completeLift = function(req, res) {
 };
 
 
-exports.cancelLift = function(req, res) {
+exports.cancelLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "cancelled" })
         .then(ll => {
             console.log("changed lift status to cancelled");
@@ -278,7 +285,7 @@ exports.cancelLift = function(req, res) {
 };
 
 
-exports.problemLift = function(req, res) {
+exports.problemLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "problem" })
         .then(ll => {
             console.log("changed lift status to problem");
