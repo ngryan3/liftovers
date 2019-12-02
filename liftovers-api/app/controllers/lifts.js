@@ -1,4 +1,5 @@
 var Lifts = require('../models/lifts.js');
+var Volunteers = require('../models/volunteer.js');
 var axios = require('axios')
 const twilio = require('twilio')
 
@@ -265,8 +266,16 @@ exports.postLift = function (req, res) {
 
 exports.completeLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "completed" })
-        .then(ll => {
+        .then(lift => {
             console.log("changed lift status to completed");
+
+            Volunteers.findOneAndUpdate({ _id: lift.chosenVolunteer._id }, { $push: {lifts: lift} })
+            .then(vol => {
+                console.log("added lift to chosen volunteer's lifts list");
+            })
+            .catch(err => {
+                console.log(err);
+            });
         })
         .catch(error => {
             console.log(error);
