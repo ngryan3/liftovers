@@ -31,6 +31,8 @@ var LiftSchema = mongoose.Schema({
     // Additional details (e.g. Buzzer code, specific directions, etc.)
     details: String,
     disclaimerChecked: Boolean,
+    // if the lift has to cancel/ has a problem, what's the reason
+    message: String,
     chosenVolunteer: { type: mongoose.Schema.Types.ObjectId, ref: 'team2volunteers' }
 }, {
     timestamps: true
