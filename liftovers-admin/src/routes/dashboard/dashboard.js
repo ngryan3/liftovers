@@ -18,7 +18,6 @@ import {
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
 
-
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
   margin: 0;
@@ -39,6 +38,7 @@ function handleApproveClick(accessor) {
     fetch(ApiUrl + "/user/" + accessor + "/approve", {
         method: 'POST'
       }).then(result => result.json())
+      window.location = "/dashboard"
     
 }
 
@@ -47,7 +47,8 @@ function handleDeleteClick(accessor) {
     fetch(ApiUrl + "/user/" + accessor + "/delete", {
         method: 'POST'
       }).then(result => result.json())
-    
+    window.location = "/dashboard"
+       
 }
 
 function handleCancelClick(accessor) {
@@ -55,21 +56,19 @@ function handleCancelClick(accessor) {
     fetch(ApiUrl + "/lift/" + accessor + "/cancel", {
         method: 'POST'
       }).then(result => result.json())
-    
+    window.location = "/dashboard"
+      
 }
 
-function handlePostLiftClick(e, accessor) {
+function handlePostLiftClick(accessor) {
     console.log(accessor)
     fetch(ApiUrl + "/lift/" + accessor + "/post", {
         method: 'POST'
       }).then(result => result.json())
-    // var id = e.target.id;
-    // console.log(id);
-    // var table = document.getElementById("table");
-    // var row = document.getElementById(id);
-    // console.log(row);
-    // row.parentNode.removeChild(row);
+    window.location = "/dashboard"
+   
 }
+
 
 const buttonColumns = [
     { dataIndex: "_id", key: "_id"},
@@ -89,7 +88,7 @@ const buttonColumns = [
         dataIndex: '_id',
         render: accessor => (<Button 
             onClick={
-                (e) => handlePostLiftClick(e, accessor)
+                (e) => handlePostLiftClick(accessor)
             }>Post</Button>)
     },
     {   
