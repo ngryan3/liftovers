@@ -41,7 +41,7 @@ module.exports = function (app) {
   app.post("/user/:id/approve", user.approveUser);
   app.post("/user/:id/delete", user.deleteUser);
   app.post("/user", user.create);
-  app.post("/user/login", user.login);
+  app.post("/login", user.login);
   app.post("/forgot", user.forgot);
   app.post("/reset/:token", user.changepassword);
 
