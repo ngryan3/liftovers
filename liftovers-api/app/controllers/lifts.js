@@ -283,7 +283,7 @@ exports.completeLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id, status: "ongoing" }, { status: "completed" })
         .then(lift => {
             if (!lift) {
-                console.log("no ongoing lifts found");
+                console.log("no ongoing lifts with given id found");
             }
             else {
                 console.log("changed lift status to completed");
@@ -305,8 +305,13 @@ exports.completeLift = function (req, res) {
 
 exports.cancelLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "cancelled" })
-        .then(ll => {
-            console.log("changed lift status to cancelled");
+        .then(lift => {
+            if (!lift) {
+                console.log("no lifts with given id found");
+            }
+            else {
+                console.log("changed lift status to cancelled");
+            }
         })
         .catch(error => {
             console.log(error);
@@ -316,8 +321,13 @@ exports.cancelLift = function (req, res) {
 
 exports.problemLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "problem" })
-        .then(ll => {
-            console.log("changed lift status to problem");
+        .then(lift => {
+            if (!lift) {
+                console.log("no lifts with given id found");
+            }
+            else {
+                console.log("changed lift status to problem");
+            }
         })
         .catch(error => {
             console.log(error);
@@ -366,8 +376,13 @@ exports.updateLift = function (req, res) {
     }
 
     Lifts.findByIdAndUpdate(req.params.id, update)
-        .then(ll => {
-            console.log("updated lifts");
+        .then(lift => {
+            if (!lift) {
+                console.log("no lifts with given id found");
+            }
+            else {
+                console.log("updated lifts");
+            }
         })
         .catch(error => {
             console.log(error);
