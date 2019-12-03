@@ -27,13 +27,35 @@
  * Volunteers will be able to see their dashboard with the lifts they have completed and the lifts they are currently volunteering for.
  * Volunteers will be able to see their profile and they can edit it by clicking on the "Edit" button. 
  * Admins and Superadmins will be able to see their dashboard with posted and ongoing lifts as well as lifts with issues and users that need to be approved. 
-  -Posting Lifts: click the "Post" button for lifts in the Lifts: Awaiting Approval table in the dashboard. 
-  -Cancelling Lifts: click the "Cancel" button for lifts in the Lifts: Awaiting Approval, Lifts: Posted, Lifts: Issues Found, Lifts: Ongoing tables in the dashboard. 
-  -Approving Users: click the "Approve" button for users in the Users: Awaiting Approval table in the dashboard.
-  -Deleting Users: click the "Delete" button for invalid users in the Users: Awaiting Approval table in the dashboard.
- * Admins:
- 
- 
+   - Posting Lifts: click the "Post" button for lifts in the Lifts: Awaiting Approval table in the dashboard. 
+   - Cancelling Lifts: click the "Cancel" button for lifts in the Lifts: Awaiting Approval, Lifts: Posted, Lifts: Issues Found, Lifts: Ongoing tables in the dashboard. 
+   - Approving Users: click the "Approve" button for users in the Users: Awaiting Approval table in the dashboard.
+   - Deleting Users: click the "Delete" button for invalid users in the Users: Awaiting Approval table in the dashboard.
+ * Admins and Superadmins can click the Lifts tab to view completed lifts.
+ * Admins and Superadmins can click the Volunteers tab to view all volunteers and relevant information. 
+   - Clicking the "Create Volunteer" button will redirect to a page that will allow the creation of a new volunteer. All necessary informtion must be filled in. 
+   - Clicking the "View" button for a specific volunteer in the table will redirect to a page where all information about the volunteer can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific volunteer in the table will redirect to a page where all information about the volunteer can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Clicking the "Delete" button for a specific volunteer in the table will redirect to a page that asks whether the admin/superadmin wants to delete the volunteer. There are "Cancel" and "Delete Volunteer" buttons.
+  
+ * Admins and Superadmins can click the Donors tab to view all donors and relevant information. 
+   - Clicking the "Create Donor" button will redirect to a page that will allow the creation of a new donor. All necessary informtion must be filled in. 
+   - Clicking the "View" button for a specific donor in the table will redirect to a page where all information about the donor can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific donor in the table will redirect to a page where all information about the donor can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Clicking the "Delete" button for a specific donor in the table will redirect to a page that asks whether the admin/superadmin wants to delete the donor. There are "Cancel" and "Delete Donor" buttons.
+   
+* Admins and Superadmins can click the Admins tab to view all admins and relevant information. 
+   - Clicking the "Create Donor" button will redirect to a page that will allow the creation of a new admin. All necessary informtion must be filled in. 
+   - Clicking the "View" button for a specific admin in the table will redirect to a page where all information about the admin can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific admin in the table will redirect to a page where all information about the admin can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Only Superadmins: Clicking the "Delete" button for a specific admin in the table will redirect to a page that asks whether the superadmin wants to delete the admin. There are "Cancel" and "Delete Admin" buttons.
+
+* Admins and Superadmins can click the Providers tab to view all providers and relevant information. 
+   - Clicking the "Create Provider" button will redirect to a page that will allow the creation of a new provider. All necessary informtion must be filled in. 
+   - Clicking the "View" button for a specific provider in the table will redirect to a page where all information about the provider can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific provider in the table will redirect to a page where all information about the provider can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Clicking the "Delete" button for a specific provider in the table will redirect to a page that asks whether the admin/superadmin wants to delete the provider. There are "Cancel" and "Delete Provider" buttons.
+    
  ## Development requirements
  * For a developer to set this up on their machine, they will need to have Node.js installed. 
  * Instructions for setting up and running the lifTOvers application:
