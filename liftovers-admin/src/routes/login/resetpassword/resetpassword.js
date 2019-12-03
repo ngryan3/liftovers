@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Grid, Layout, Boxed, Input } from "flexibull";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import ApiUrl from "../../../api/config";
 import {
     Header,
     Contain,
@@ -40,7 +41,7 @@ class Reset extends React.Component{
     }
 
     componentDidMount() {
-        fetch('http://localhost:7000' + this.props.location.pathname, {
+        fetch(ApiUrl + this.props.location.pathname, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -67,7 +68,7 @@ class Reset extends React.Component{
             var json = JSON.stringify(object);
             console.log(json);
 
-            fetch("http://localhost:7000" + this.props.location.pathname, {
+            fetch(ApiUrl + this.props.location.pathname, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
