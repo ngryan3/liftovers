@@ -14,7 +14,7 @@
    * Users Awaiting Approval: Users can be approved or declined at the push of a button. 
    * Posting a Lift: Posting a lift on the dashboard wll send out a test message to volunteers (see image below), which they can accept following directions on the text to respond. The first volunteer who accepts the lift request will then be assigned to the lift, and the lifts status is set to "ongoing". 
     <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d3/78051292_1421566994676210_3516332576123912192_n.png" />
- * Login/Signup: Users can login using the login page, and signup using the signup page. After users sign up, they will recieve.
+ * Login/Signup: Users can login using the login page, and signup using the signup page.
  * Forgot Password: If a user forgets their password, they can retrive it using the forgot password page, which upon completion will send them an email similar to the one in the image below to reset a password (see image below). 
  <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d3/Forgot%20Password%20Email.png" /> 
  * View/Edit/Delete Volunteer: On the page for volunteers, there is a green view button to view all details, a blue edit button that directs to a form where a user can edit information, and a red delete button that asks for confirmation of deletion.
@@ -73,7 +73,7 @@
   2) Navigate to the liftovers-api directory (i.e. using `cd liftovers-api`) and then run `npm install` to install all necessary packages for the API. 
   3) Run "npm start" to start the server. 
   4) Navigate back to the root directory (i.e. using `cd ..`) and then to the liftovers-admin directory (i.e. using `cd liftovers-admin`). Run "npm install" to install all necessary packages for the client.
-  5) Run "npm start" to start the client.
+  5) Run "npm start" to start the client on http://localhost:3000
   6) OPTIONAL: For testing changes to the API, the server needs to be run locally. To do this, navigate to liftovers-admin/api/config.js and comment out the line: `export default "https://liftovers-api.herokuapp.com";` and then uncomment the line: `export default "http://localhost:7000";`. Then restart the server and client by running `npm start` in their respective directories. 
 
  ## Licenses 
