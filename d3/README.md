@@ -8,15 +8,14 @@
 
 ## Key Features - General
  * Profile: A user who has login access can view their profile and edit their own information to keep it updated.
- * Dashboard: The dashboard contains information that currently have high priority, and needs action taken by admins. These actions involve: approving new users, viewing lifts that have problems, posting lifts awaiting approval so that a volunteers recieve text messages asking if they would like to complete a lift delivery
+ * Dashboard: The dashboard contains information that currently have high priority, and needs action taken by admins. These actions involve: approving new users, viewing lifts that have problems, posting lifts awaiting approval so that volunteers receive text messages asking if they would like to complete a lift delivery.
    * Approving New Users: individuals who are newly acquainted with liftovers can be approved by pressing the "Approve" button on the table titled "Users Awaiting Approval" 
    * Lifts with Issues: Lifts with a status of "problem" will appear here for investigation from the admins.  
    * Users Awaiting Approval: Users can be approved or declined at the push of a button. 
    * Posting a Lift: Posting a lift on the dashboard wll send out a test message to volunteers (see image below), which they can accept following directions on the text to respond. The first volunteer who accepts the lift request will then be assigned to the lift, and the lifts status is set to "ongoing". 
     <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d3/78051292_1421566994676210_3516332576123912192_n.png" />
  * Login/Signup: Users can login using the login page, and signup using the signup page.
- * Forgot Password: If a user forgets their password, they can retrive it using the forgot password page, which upon completion will send them an email similar to the one in the image below to reset a password (see image below). 
- <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d3/Forgot%20Password%20Email.png" /> 
+ * Forgot Password: If a user forgets their password, they can retrive it using the forgot password page, which upon completion will send them an email similar to the one in the image below to reset a password (see image below). <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d3/Forgot%20Password%20Email.png" /> 
  * View/Edit/Delete Volunteer: On the page for volunteers, there is a green view button to view all details, a blue edit button that directs to a form where a user can edit information, and a red delete button that asks for confirmation of deletion.
  * View/Edit/Delete Admin: On the page for admins, there is a green view button to view all details, a blue edit button that directs to a form where a user can edit information, and a red delete button that asks for confirmation of deletion.
  * View/Edit/Delete Donor: On the page for donors, there is a green view button to view all details, a blue edit button that directs to a form where a user can edit information, and a red delete button that asks for confirmation of deletion.
@@ -33,7 +32,8 @@
 
 
 ## Instructions
- * All users must register for the application by clicking the "Sign Up" button. After a user signed up, and an admin or superadmin has approved the user as a valid user (i.e. volunteer, admin, superadmin of lifTOvers), they will be able to login to the application. 
+ * All users must register for the application by clicking the "Sign Up" button which redirects to the signup page. After a user has signed up, and an admin or superadmin has approved the user as a valid user (i.e. volunteer, admin, superadmin of lifTOvers), they will be able to login to the application. 
+ * Users that have signed up can log in by clicking the "Login" button which redirects to the login page. If they have forgotten their password, they can click "Forgot Password" to reset their password. An email will be sent with further instructions. 
  * Volunteers will be able to see their dashboard with the lifts they have completed and the lifts they are currently volunteering for.
  * Volunteers will be able to see their profile and they can edit it by clicking on the "Edit" button. 
  * Admins and Superadmins will be able to see their dashboard with posted and ongoing lifts as well as lifts with issues and users that need to be approved. 
@@ -47,18 +47,18 @@
    - Clicking the "View" button for a specific volunteer in the table will redirect to a page where all information about the volunteer can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
    - Clicking the "Edit" button for a specific volunteer in the table will redirect to a page where all information about the volunteer can be edit. There are "Cancel" and "Save Changes" buttons.
    - Clicking the "Delete" button for a specific volunteer in the table will redirect to a page that asks whether the admin/superadmin wants to delete the volunteer. There are "Cancel" and "Delete Volunteer" buttons.
+   
+ * Admins and Superadmins can click the Admins tab to view all admins and relevant information. 
+   - Clicking the "Create Donor" button will redirect to a page that will allow the creation of a new admin. All necessary information must be filled in. 
+   - Clicking the "View" button for a specific admin in the table will redirect to a page where all information about the admin can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific admin in the table will redirect to a page where all information about the admin can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Only Superadmins: Clicking the "Delete" button for a specific admin in the table will redirect to a page that asks whether the superadmin wants to delete the admin. There are "Cancel" and "Delete Admin" buttons.
 
  * Admins and Superadmins can click the Donors tab to view all donors and relevant information. 
    - Clicking the "Create Donor" button will redirect to a page that will allow the creation of a new donor. All necessary information must be filled in. 
    - Clicking the "View" button for a specific donor in the table will redirect to a page where all information about the donor can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
    - Clicking the "Edit" button for a specific donor in the table will redirect to a page where all information about the donor can be edit. There are "Cancel" and "Save Changes" buttons.
    - Clicking the "Delete" button for a specific donor in the table will redirect to a page that asks whether the admin/superadmin wants to delete the donor. There are "Cancel" and "Delete Donor" buttons.
-
-* Admins and Superadmins can click the Admins tab to view all admins and relevant information. 
-   - Clicking the "Create Donor" button will redirect to a page that will allow the creation of a new admin. All necessary information must be filled in. 
-   - Clicking the "View" button for a specific admin in the table will redirect to a page where all information about the admin can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
-   - Clicking the "Edit" button for a specific admin in the table will redirect to a page where all information about the admin can be edit. There are "Cancel" and "Save Changes" buttons.
-   - Only Superadmins: Clicking the "Delete" button for a specific admin in the table will redirect to a page that asks whether the superadmin wants to delete the admin. There are "Cancel" and "Delete Admin" buttons.
 
 * Admins and Superadmins can click the Providers tab to view all providers and relevant information. 
    - Clicking the "Create Provider" button will redirect to a page that will allow the creation of a new provider. All necessary information must be filled in. 
