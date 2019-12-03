@@ -29,7 +29,7 @@ mapsCall = (origin, dest) => {
 sendText = (phone, pickupAddress, date) => {
     console.log('sendingg texttt', phone, pickupAddress)
     return client.messages.create({
-        body: `Can you pick up the food item at ${pickupAddress}, on ${date}, reply with "yes" to accept`,
+        body: `Can you pick up the food item at ${pickupAddress}, on ${date}, reply with "yes" or "no"`,
         to: `+1${phone}`,  // Text this number
         from: '+16479301776' // From a valid Twilio number
     })
