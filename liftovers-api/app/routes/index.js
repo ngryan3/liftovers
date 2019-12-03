@@ -7,7 +7,7 @@ module.exports = function (app) {
 
 
   app.get("/donor", donor.findAll);
-  app.get("/donor/:id", donor.findId);
+  app.get("/donor/:id", donor.getOne);
   app.post("/donor", donor.create);
   app.post("/donor/:id/delete", donor.deleteDonor);
 
@@ -34,7 +34,7 @@ module.exports = function (app) {
   app.get("/user/waiting", user.findWait);
   app.get("/user/:id", user.getOne);
   app.get("/reset/:token", user.reset);
-   app.post("/user/:id", user.updateUser);
+  app.post("/user/:id", user.updateUser);
   app.post("/user/:id/approve", user.approveUser);
   app.post("/user/:id/delete", user.deleteUser);
   app.post("/user", user.create);
