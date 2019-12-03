@@ -209,8 +209,6 @@ exports.acceptText = function (req, res) {
     var twiml = new twilio.twiml.MessagingResponse();
 
     if (body.toLowerCase() === "yes" || body.toLowerCase() === "no") {
-        console.log("response is yes");
-
         Volunteer.findOne({ phone: fromPhone }, function (err, vol) {
             if (err) {
                 console.log(err);
@@ -220,16 +218,16 @@ exports.acceptText = function (req, res) {
                     .then(item => {
 
                         if (body.toLowerCase() === "yes") {
+                            console.log("response is yes");
                             if (item.length === 0) {
                                 twiml.message(`Thanks but there is already a volunteer`);
                                 //res.writeHead(200, { "Content-Type": "text/xml" });
                                 res.status(200).send(twiml.toString());
                                 return;
                             }
-                            item[0].volunteer.pull(vol);
-                            Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: vol, status: "ongoing" })
+                            console.log("volunteer confirmed");
+                            Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: vol, status: "ongoing", "$pull": { "volunteer": vol._id } })
                                 .then(ll => {
-                                    console.log(ll.volunteer);
                                     console.log("updated");
                                 })
                                 .catch(error => {
@@ -240,14 +238,31 @@ exports.acceptText = function (req, res) {
                                 `You have been confirmed as the volunteer at ${item[0].address}`
                             );
                         } else {
+                            console.log("response is no");
                             twiml.message(
                                 `Got your response.`
                             );
                             if (item.length === 0) {
-                                return;
-                            }
-                            else {
-                                
+                                return res.status(200).send("no valid lift");
+                            } else {
+                                if (item[0].volunteer.length === 1) {
+                                    Lifts.findOneAndUpdate({ _id: item[0]._id }, { status: "problem", message: "no volunteer accepted", "$pull": { "volunteer": vol._id } })
+                                        .then(ll => {
+                                            console.log("No one accepted, changed lift status to problem");
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                        });
+                                    return res.status(200).send({ message: "No volunteer accepted. Lift status is now problem." })
+                                } else {
+                                    Lifts.findOneAndUpdate({ _id: item[0]._id }, { $pull: { volunteer: vol._id } })
+                                        .then(ll => {
+                                            console.log("updated");
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                        });
+                                }
                             }
                         }
 
