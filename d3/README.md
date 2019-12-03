@@ -1,7 +1,5 @@
 # Web Application for lifTOvers/lifTOvers team 2 (Team #: 7)
 
-> _Note:_ This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical. 
-
 ## Description 
  * The administrative web application we have built for lifTOvers will allow their management to view/edit/delete information about all participating parties involved in their organization, as well as manage food deliveries (AKA lifts). They are also able to approve of new users and facilitate the flow of lifts from beginning to end by changing their statuses (requested/posted/ongoing/completed/cancelled/problem). A dashboard presents a cohesive view of items that require attention, and an overview of the state of their organization. 
  * For volunteers, it serves as a platform where they can view their volunteer history through their past lifts, as well keep their profile updated with current, accurate personal information. 
@@ -35,20 +33,38 @@
 
 
 ## Instructions
- * Clear instructions for how to use the application from the end-user's perspective
- * How do you access it? Are accounts pre-created or does a user register? Where do you start? etc. 
- * Provide clear steps for using each feature described above
- * If you cannot deploy your application for technical reasons, please let your TA know at the beginning of the iteration. You will need to demo the application to your partner either way.
  * All users must register for the application by clicking the "Sign Up" button. After a user signed up, and an admin or superadmin has approved the user as a valid user (i.e. volunteer, admin, superadmin of lifTOvers), they will be able to login to the application. 
  * Volunteers will be able to see their dashboard with the lifts they have completed and the lifts they are currently volunteering for.
  * Volunteers will be able to see their profile and they can edit it by clicking on the "Edit" button. 
  * Admins and Superadmins will be able to see their dashboard with posted and ongoing lifts as well as lifts with issues and users that need to be approved. 
-  -Posting Lifts: click the "Post" button for lifts in the Lifts: Awaiting Approval table in the dashboard. 
-  -Cancelling Lifts: click the "Cancel" button for lifts in the Lifts: Awaiting Approval, Lifts: Posted, Lifts: Issues Found, Lifts: Ongoing tables in the dashboard. 
-  -Approving Users: click the "Approve" button for users in the Users: Awaiting Approval table in the dashboard.
-  -Deleting Users: click the "Delete" button for invalid users in the Users: Awaiting Approval table in the dashboard.
- * Admins:
- 
+   - Posting Lifts: click the "Post" button for lifts in the Lifts: Awaiting Approval table in the dashboard. 
+   - Cancelling Lifts: click the "Cancel" button for lifts in the Lifts: Awaiting Approval, Lifts: Posted, Lifts: Issues Found, Lifts: Ongoing tables in the dashboard. 
+   - Approving Users: click the "Approve" button for users in the Users: Awaiting Approval table in the dashboard.
+   - Deleting Users: click the "Delete" button for invalid users in the Users: Awaiting Approval table in the dashboard.
+ * Admins and Superadmins can click the Lifts tab to view completed lifts.
+ * Admins and Superadmins can click the Volunteers tab to view all volunteers and relevant information. 
+   - Clicking the "Create Volunteer" button will redirect to a page that will allow the creation of a new volunteer. All necessary information must be filled in. 
+   - Clicking the "View" button for a specific volunteer in the table will redirect to a page where all information about the volunteer can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific volunteer in the table will redirect to a page where all information about the volunteer can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Clicking the "Delete" button for a specific volunteer in the table will redirect to a page that asks whether the admin/superadmin wants to delete the volunteer. There are "Cancel" and "Delete Volunteer" buttons.
+
+ * Admins and Superadmins can click the Donors tab to view all donors and relevant information. 
+   - Clicking the "Create Donor" button will redirect to a page that will allow the creation of a new donor. All necessary information must be filled in. 
+   - Clicking the "View" button for a specific donor in the table will redirect to a page where all information about the donor can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific donor in the table will redirect to a page where all information about the donor can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Clicking the "Delete" button for a specific donor in the table will redirect to a page that asks whether the admin/superadmin wants to delete the donor. There are "Cancel" and "Delete Donor" buttons.
+
+* Admins and Superadmins can click the Admins tab to view all admins and relevant information. 
+   - Clicking the "Create Donor" button will redirect to a page that will allow the creation of a new admin. All necessary information must be filled in. 
+   - Clicking the "View" button for a specific admin in the table will redirect to a page where all information about the admin can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific admin in the table will redirect to a page where all information about the admin can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Only Superadmins: Clicking the "Delete" button for a specific admin in the table will redirect to a page that asks whether the superadmin wants to delete the admin. There are "Cancel" and "Delete Admin" buttons.
+
+* Admins and Superadmins can click the Providers tab to view all providers and relevant information. 
+   - Clicking the "Create Provider" button will redirect to a page that will allow the creation of a new provider. All necessary information must be filled in. 
+   - Clicking the "View" button for a specific provider in the table will redirect to a page where all information about the provider can be viewed. There are "Edit", "Back", and "Delete" buttons on this page as well which will be described below. 
+   - Clicking the "Edit" button for a specific provider in the table will redirect to a page where all information about the provider can be edit. There are "Cancel" and "Save Changes" buttons.
+   - Clicking the "Delete" button for a specific provider in the table will redirect to a page that asks whether the admin/superadmin wants to delete the provider. There are "Cancel" and "Delete Provider" buttons.
  
  ## Development requirements
  * For a developer to set this up on their machine, they will need to have Node.js installed. 
@@ -61,8 +77,6 @@
   6) OPTIONAL: For testing changes to the API, the server needs to be run locally. To do this, navigate to liftovers-admin/api/config.js and comment out the line: `export default "https://liftovers-api.herokuapp.com";` and then uncomment the line: `export default "http://localhost:7000";`. Then restart the server and client by running `npm start` in their respective directories. 
 
  ## Licenses 
-
- Keep this section as brief as possible. You may read this [Github article](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository) for a start.
 
  * The type of license we chose to apply to our codebase is The MIT License. 
  * The effects that this license has includes:
