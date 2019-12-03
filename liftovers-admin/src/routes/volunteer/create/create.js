@@ -15,7 +15,6 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
-//import TimePicker from "react-time-picker";
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -46,9 +45,25 @@ class CreateVolunteer extends Component{
       const data = new FormData(event.target);
 
       var object = {};
+      var avail = {};
       data.forEach(function(value, key) {
         object[key] = value;
+        if (key == "day" || key == "timeStartH" || key == "timeStartM" ||
+         key == "timeFinishH" || key == "timeFinishM") {
+          avail[key] = value;
+        }
       });
+      //Create timeStart and timeFinish objects:
+      var timeStart = {};
+      var timeFinish = {};
+      timeStart["hour"] = avail["timeStartH"];
+      timeStart["minute"] = avail["timeStartM"];
+      timeFinish["hour"] = avail["timeFinishH"];
+      timeFinish["minute"] = avail["timeFinishM"];
+      avail["timeStart"] = timeStart;
+      avail["timeFinish"] = timeFinish;
+      object["availability"] = avail;
+
       var json = JSON.stringify(object);
       console.log(json);
 
@@ -98,20 +113,110 @@ class CreateVolunteer extends Component{
             { value: "false", label: "No"}
             ]}
             name="hasVehicle" type="select" label="Do They Own a Vehicle?" required forminput
+          /><br/>
+
+          <SimpleSelect
+            options={[
+            { value: "monday", label: "Monday"},
+            { value: "tuesday", label: "Tuesday"},
+            { value: "wednesday", label: "Wednesday"},
+            { value: "thursday", label: "Thursday"},
+            { value: "friday", label: "Friday"},
+            { value: "saturday", label: "Saturday"},
+            { value: "sunday", label: "Sunday"},
+            ]}
+            name="day" type="select" label="Availability" required forminput
             /><br/>
           
-          <label for="">Availability
-            <Input name="mon" type ="checkbox" label="Monday" forminput/><br/>
-            <Input name="tue" type ="checkbox" label="Tuesday" forminput/><br/>
-            <Input name="wed" type ="checkbox" label="Wednesday" forminput/><br/>
-            <Input name="thu" type ="checkbox" label="Thursday" forminput/><br/>
-            <Input name="fri" type ="checkbox" label="Friday" forminput/><br/>
-            <Input name="sat" type ="checkbox" label="Saturday" forminput/><br/>
-            <Input name="sun" type ="checkbox" label="Sunday" forminput/><br/>
-          </label>
-          
-          
-
+        <label for="">Time:</label>
+        <div>
+        <label for="">From </label>
+        <select name="timeStartH">
+          <option value="0">00</option>
+          <option value="1">01</option>
+          <option value="2">02</option>
+          <option value="3">03</option>
+          <option value="4">04</option>
+          <option value="5">05</option>
+          <option value="6">06</option>
+          <option value="7">07</option>
+          <option value="8">08</option>
+          <option value="9">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+        </select>
+        <label for="">:</label>
+        <select name="timeStartM">
+          <option value="0">00</option>
+          <option value="5">05</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+          <option value="35">35</option>
+          <option value="40">40</option>
+          <option value="45">45</option>
+          <option value="50">50</option>
+          <option value="55">55</option>
+        </select>
+        <label for=""> to </label>
+        <select name="timeFinishH">
+          <option value="0">00</option>
+          <option value="1">01</option>
+          <option value="2">02</option>
+          <option value="3">03</option>
+          <option value="4">04</option>
+          <option value="5">05</option>
+          <option value="6">06</option>
+          <option value="7">07</option>
+          <option value="8">08</option>
+          <option value="9">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+        </select>
+        <label for="">:</label>
+        <select name="timeFinishM">
+          <option value="0">00</option>
+          <option value="5">05</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+          <option value="35">35</option>
+          <option value="40">40</option>
+          <option value="45">45</option>
+          <option value="50">50</option>
+          <option value="55">55</option>
+        </select>
+        </div>  
+          <label for="">-----</label>
+                    
           <Input name="additionalNotes" type="text" label="Additional Notes"/><br/>
           <SimpleSelect
             options={[

@@ -55,7 +55,7 @@ class Signup extends React.Component {
             var json = JSON.stringify(object);
             console.log(json);
 
-            fetch("http://localhost:7000/user", {
+            fetch(ApiUrl + "/user", {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
