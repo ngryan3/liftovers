@@ -65,3 +65,49 @@ exports.deleteProvider = function(req, res) {
           console.log(error);
       });
 };
+
+
+exports.updateProvider = function (req, res) {
+  let update = {}
+
+  if (req.body.contactName) {
+      update.contactName = req.body.contactName
+  }
+  if (req.body.contactSurname) {
+      update.contactSurname = req.body.contactSurname
+  }
+  if (req.body.contactEmail) {
+      update.contactEmail = req.body.contactEmail
+  }
+  if (req.body.contactPhone) {
+      update.contactPhone = req.body.contactPhone
+  }
+  if (req.body.methodOfCommunication) {
+      update.methodOfCommunication = req.body.methodOfCommunication
+  }
+  if (req.body.location) {
+      update.location = req.body.location
+  }
+  if (req.body.hours) {
+      update.hours = req.body.hours
+  }
+  if (req.body.acceptedFoods) {
+      update.acceptedFoods = req.body.acceptedFoods
+  }
+  if (req.body.unacceptableFoods) {
+      update.unacceptableFoods = req.body.unacceptableFoods
+  }
+
+  Provider.findByIdAndUpdate(req.params.id, update)
+      .then(provider => {
+          if (!provider) {
+              console.log("no providers with given id found");
+          }
+          else {
+              console.log("updated providers");
+          }
+      })
+      .catch(error => {
+          console.log(error);
+      });
+};

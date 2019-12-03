@@ -31,6 +31,7 @@ module.exports = function (app) {
   app.get("/provider/:id", provider.findId);
   app.post("/provider", provider.create);
   app.post("/provider/:id/delete", provider.deleteProvider);
+  app.post("/provider/:id/update", provider.updateProvider);
 
   app.get("/user", user.findAll);
   app.get("/user/waiting", user.findWait);
