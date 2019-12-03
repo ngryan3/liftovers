@@ -10,6 +10,7 @@ import {
   ClearLink
 } from "../../components/styles";
 import Logo from "../../assets/liftovers.jpg";
+import ApiUrl from "../../api/config";
 import styled from "styled-components";
 const LogoHolder = styled.img`
   height: 100px !important;
@@ -75,7 +76,7 @@ class Login extends React.Component{
       var json = JSON.stringify(object);
       console.log(json);
 
-      fetch("http://localhost:7000/user/login", {
+      fetch(ApiUrl + "/user/login", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
