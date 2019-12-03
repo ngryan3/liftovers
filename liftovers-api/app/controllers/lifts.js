@@ -213,6 +213,7 @@ exports.postLift = function (req, res) {
                     let weekday = weekdays[lift.date.getDay()];
                     let pickupTime = parseInt(lift.pickupTime.hour.toString() +
                         lift.pickupTime.minute.toString());
+                    let result = false;
 
                     item.volunteer.availability.forEach((volAvail) => {
                         if (volAvail.day.toLowerCase() === weekday) {
@@ -220,19 +221,18 @@ exports.postLift = function (req, res) {
                                 ("0" + volAvail.timeStart.minute.toString()).slice(-2));
                             let volTimeFinish = parseInt(volAvail.timeFinish.hour.toString() +
                                 ("0" + volAvail.timeFinish.minute.toString()).slice(-2));
-    
                             if (volTimeStart <= pickupTime && volTimeFinish >= pickupTime) {
-                                return true;
+                                result = true;
                             }
                         }
                     })
-                    return false;
+                    return result;
                 })
 
                 console.log('timesorted', timeSorted)
 
-                if (timeSorted == []) {
-                    Lifts.findOneAndUpdate({ _id: liftId }, { status: "problem", volunteer: volunteersTexted, message: "no available volunteer" })
+                if (timeSorted.length === 0) {
+                    Lifts.findOneAndUpdate({ _id: liftId }, { status: "problem", message: "no available volunteer" })
                         .then(ll => {
                             console.log("changed lift status to problem");
                         })

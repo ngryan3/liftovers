@@ -17,21 +17,6 @@ const accountSid = "AC1ae501eeef695a160370f76a11896ea1";
 const authToken = "052155e3e011700d7d835fc18ee592f3";
 const client = new twilio(accountSid, authToken);
 
-// mapsCall = (origin, dest) => {
-//   return axios({
-//     method: "get",
-//     url: `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${dest}&key=AIzaSyD_LPYQsjwLnEh1fcK74vSsytYgvWHndZQ`
-//   });
-// };
-
-// sendText = (phone, pickupAddress) => {
-//   return client.messages.create({
-//     body: `Can you pick up the food item at ${pickupAddress}, reply coming soon...`,
-//     to: `+1${phone}`, // Text this number
-//     from: "+16476994801" // From a valid Twilio number
-//   });
-// };
-
 getVolunteers = (origin, dest) => {
     return Volunteer.find();
 };
@@ -77,51 +62,49 @@ exports.create = function (req, res) {
 exports.acceptText = function (req, res) {
     let body = req.body.Body;
     console.log(body);
-    let fromPhone = req.body.From;
+    let fromPhone = req.body.From.slice(-10);
     console.log(fromPhone);
     var twiml = new twilio.twiml.MessagingResponse();
 
     if (body === "yes") {
-        console.log("//////// response is yes");
+        console.log("response is yes");
 
-        // if body is yes && hasvolunteer is false , change lift model hasvolunteer to true and change volunteer number to formPhone
-        Lifts.find({ hasVolunteer: false, "volunteer.phone": fromPhone })
-            .then(item => {
-                console.log(item);
+        Volunteer.findOne({ phone: fromPhone }, function (err, vol) {
+            Lifts.find({ status: "posted", hasVolunteer: false, volunteer: vol._id })
+                .then(item => {
+                    console.log(item);
 
-                if (item.length === 0) {
-                    twiml.message(`Thanks but there is already a volunteer`);
-                    res.writeHead(200, { "Content-Type": "text/xml" });
-                    res.end(twiml.toString());
-                    return;
-                }
+                    if (item.length === 0) {
+                        twiml.message(`Thanks but there is already a volunteer`);
+                        //res.writeHead(200, { "Content-Type": "text/xml" });
+                        res.status(200).send(twiml.toString());
+                        return;
+                    }
 
-                let chosenVolunteer = item[0].volunteer.filter(vol => {
-                    return vol.phone === fromPhone;
+                    Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: vol })
+                        .then(ll => {
+                            console.log("updated");
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+
+                    twiml.message(
+                        `You have been confirmed as the volunteer at ${item[0].origin}`
+                    );
+                    //res.writeHead(200, { "Content-Type": "text/xml" });
+                    res.status(200).send(twiml.toString());
+                })
+                .catch(error => {
+                    console.log(error);
                 });
-
-                Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: chosenVolunteer })
-                    .then(ll => {
-                        console.log("updated");
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-
-                twiml.message(
-                    `You have been confirmed as the volunteer at ${item[0].origin}`
-                );
-                res.writeHead(200, { "Content-Type": "text/xml" });
-                res.end(twiml.toString());
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        });
+        // if body is yes && hasvolunteer is false , change lift model hasvolunteer to true and change volunteer number to formPhone
     } else {
         // volunteer said no they cant do the lift
         //   twiml.message('Got your response, replying you...');
         //   res.writeHead(200, {'Content-Type': 'text/xml'});
-        res.end(twiml.toString());
+        res.send({ message: "incorrect response" });
     }
 };
 
@@ -179,7 +162,7 @@ exports.findAll = function (req, res) {
     // Retrieve and return all volunteers (not deleted) from the database.
     let { page = 1, limit = 100 } = req.query;
 
-    Volunteer.paginate({ status: {'$ne': "deleted"} }, { page, limit }).then(volunteers => {
+    Volunteer.paginate({ status: { '$ne': "deleted" } }, { page, limit }).then(volunteers => {
         if (!volunteers)
             return res.status(404).send({ message: "No Volunteers found." });
         return res.status(200).send(volunteers);
@@ -193,8 +176,8 @@ exports.getOne = function (req, res) {
         } else {
             return res.status(200).send(volunteer);
         }
-    })
-}
+    });
+};
 
 exports.deleteVolunteer = function (req, res) {
     Volunteer.findByIdAndUpdate(req.params.id, { status: "deleted" })
@@ -204,7 +187,7 @@ exports.deleteVolunteer = function (req, res) {
         .catch(error => {
             console.log(error);
         });
-}
+};
 
 exports.unavailVolunteer = function (req, res) {
     Volunteer.findByIdAndUpdate(req.params.id, { status: "unavailable" })
@@ -214,7 +197,7 @@ exports.unavailVolunteer = function (req, res) {
         .catch(error => {
             console.log(error);
         });
-}
+};
 
 exports.availVolunteer = function (req, res) {
     Volunteer.findByIdAndUpdate(req.params.id, { status: "available" })
@@ -224,7 +207,7 @@ exports.availVolunteer = function (req, res) {
         .catch(error => {
             console.log(error);
         });
-}
+};
 
 exports.updateVolunteer = function (req, res) {
     let update = {}
@@ -267,5 +250,5 @@ exports.updateVolunteer = function (req, res) {
         })
         .catch(error => {
             console.log(error);
-        })
-}
+        });
+};
