@@ -10,6 +10,7 @@ module.exports = function (app) {
   app.get("/donor/:id", donor.findId);
   app.post("/donor", donor.create);
   app.post("/donor/:id/delete", donor.deleteDonor);
+  app.post("/donor/:id/update", donor.updateDonor);
 
   app.get("/lifts", lift.findAll);
   app.get("/lifts/requested", lift.findRequested);
