@@ -23,7 +23,7 @@ var VolunteerSchema = mongoose.Schema(
   },
     licensed: Boolean,
     hasVehicle: Boolean,
-    additionalNotes: [String],
+    additionalNotes: String,
     lifts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team2lifts' }],
     waiverSigned: Boolean,
     // available/ unavailable/ deleted
