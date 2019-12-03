@@ -75,8 +75,10 @@ exports.create = function (req, res) {
 
 
 exports.acceptText = function (req, res) {
-    let body = req.body.body;
-    let fromPhone = req.body.from;
+    let body = req.body.Body;
+    console.log(body);
+    let fromPhone = req.body.From;
+    console.log(fromPhone);
     var twiml = new twilio.twiml.MessagingResponse();
 
     if (body === "yes") {
@@ -119,7 +121,7 @@ exports.acceptText = function (req, res) {
         // volunteer said no they cant do the lift
         //   twiml.message('Got your response, replying you...');
         //   res.writeHead(200, {'Content-Type': 'text/xml'});
-        //   res.end(twiml.toString());
+        res.end(twiml.toString());
     }
 };
 

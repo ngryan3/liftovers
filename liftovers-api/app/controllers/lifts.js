@@ -174,7 +174,7 @@ exports.postLift = function (req, res) {
 
     let lift = Lifts.findById(liftId, function (err, ll) {
         if (err) {
-            return res.status(404).send({ message: "No lifts with given id found." });
+            return res.status(404).end({ message: "No lifts with given id found." });
         } else {
             return ll;
         }
@@ -214,44 +214,54 @@ exports.postLift = function (req, res) {
                     let pickupTime = parseInt(lift.pickupTime.hour.toString() +
                         lift.pickupTime.minute.toString());
 
-                    let volAvail = item.volunteer.availability;
-                    console.log(pickupTime);
-                    if (volAvail.day.toLowerCase() === weekday) {
-                        let volTimeStart = parseInt(volAvail.timeStart.hour.toString() +
-                            ("0" + volAvail.timeStart.minute.toString()).slice(-2));
-                        let volTimeFinish = parseInt(volAvail.timeFinish.hour.toString() +
-                            ("0" + volAvail.timeFinish.minute.toString()).slice(-2));
-                        console.log(volTimeStart);
-                        console.log(volTimeFinish);
-
-                        if (volTimeStart <= pickupTime && volTimeFinish >= pickupTime) {
-                            return true;
+                    item.volunteer.availability.forEach((volAvail) => {
+                        if (volAvail.day.toLowerCase() === weekday) {
+                            let volTimeStart = parseInt(volAvail.timeStart.hour.toString() +
+                                ("0" + volAvail.timeStart.minute.toString()).slice(-2));
+                            let volTimeFinish = parseInt(volAvail.timeFinish.hour.toString() +
+                                ("0" + volAvail.timeFinish.minute.toString()).slice(-2));
+    
+                            if (volTimeStart <= pickupTime && volTimeFinish >= pickupTime) {
+                                return true;
+                            }
                         }
-                    }
+                    })
                     return false;
                 })
 
                 console.log('timesorted', timeSorted)
 
-                let textPromises = timeSorted.map((item) => {
-                    return this.sendText(item.volunteer.phone, lift.address)
-                })
-
-                Promise.all(textPromises).then((promiseitem) => { }).catch((error) => {
-                    console.log(error)
-                })
-
-                volunteersTexted = timeSorted.map((item) => {
-                    return item.volunteer
-                })
-
-                Lifts.findOneAndUpdate({ _id: liftId }, { status: "posted", volunteer: volunteersTexted })
-                    .then(ll => {
-                        console.log("changed lift status to posted");
+                if (timeSorted == []) {
+                    Lifts.findOneAndUpdate({ _id: liftId }, { status: "problem", volunteer: volunteersTexted, message: "no available volunteer" })
+                        .then(ll => {
+                            console.log("changed lift status to problem");
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                    return res.status(200).send({message: "No available volunteers. Lift status is now problem."})
+                }
+                else {
+                    let textPromises = timeSorted.map((item) => {
+                        return this.sendText(item.volunteer.phone, lift.address)
                     })
-                    .catch(error => {
-                        console.log(error);
-                    });
+
+                    Promise.all(textPromises).then((promiseitem) => { }).catch((error) => {
+                        console.log(error)
+                    })
+
+                    volunteersTexted = timeSorted.map((item) => {
+                        return item.volunteer
+                    })
+
+                    Lifts.findOneAndUpdate({ _id: liftId }, { status: "posted", volunteer: volunteersTexted })
+                        .then(ll => {
+                            console.log("changed lift status to posted");
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
 
                 return res.status(200).send(timeSorted)
             })
@@ -269,13 +279,13 @@ exports.completeLift = function (req, res) {
         .then(lift => {
             console.log("changed lift status to completed");
 
-            Volunteers.findOneAndUpdate({ _id: lift.chosenVolunteer._id }, { $push: {lifts: lift} })
-            .then(vol => {
-                console.log("added lift to chosen volunteer's lifts list");
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            Volunteers.findOneAndUpdate({ _id: lift.chosenVolunteer._id }, { $push: { lifts: lift } })
+                .then(vol => {
+                    console.log("added lift to chosen volunteer's lifts list");
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         })
         .catch(error => {
             console.log(error);

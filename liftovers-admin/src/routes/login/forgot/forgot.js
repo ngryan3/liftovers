@@ -10,6 +10,7 @@ import {
     ClearLink
 } from "../../../components/styles";
 import Logo from "../../../assets/liftovers.jpg";
+import ApiUrl from "../../../api/config";
 import styled from "styled-components";
 const LogoHolder = styled.img`
   height: 100px !important;
@@ -28,7 +29,6 @@ class Forgot extends React.Component{
 
         this.update = this.update.bind(this);
         this.checkemail = this.checkemail.bind(this);
-        this.checkanswer = this.checkanswer.bind(this);
 
 
     }
@@ -53,7 +53,7 @@ class Forgot extends React.Component{
         var json = JSON.stringify(object);
         console.log(json);
 
-        fetch("http://localhost:7000/forgot", {
+        fetch(ApiUrl +"/forgot", {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -76,49 +76,6 @@ class Forgot extends React.Component{
 
     }
 
-    checkanswer(e) {
-        e.preventDefault();
-        let myForm = document.getElementById('myForm');
-        const data_myform = new FormData(myForm);
-        let mynextform = document.getElementById('mynextform');
-        const data = new FormData(mynextform);
-        var object = {};
-        data.forEach(function(value, key) {
-            object[key] = value;
-        });
-        data_myform.forEach(function (value, key) {
-            object[key] = value;
-        });
-        object['securityQuestion'] = this.state.securityQuestion;
-        var json = JSON.stringify(object);
-        console.log(json);
-
-        fetch("http://localhost:7000/forgot/check", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            body: json, // JSON.stringify
-        })
-            .then(response => {
-                if (response.status === 400) {
-                    alert('User does not exists in our database');
-                }
-                if (response.status === 500){
-                    alert('Security answer is incorrect. Please try again')
-                }
-                if (response.status === 300) {
-                    console.log(response);
-                    window.location.replace('http://localhost:3000/changepassword')
-                }
-                // return response.json()})
-            })
-            .catch(err => {
-                console.log("fetch error" + err);
-            });
-
-    }
 
     render() {
         return (
