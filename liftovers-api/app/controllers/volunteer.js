@@ -119,6 +119,7 @@ exports.findAll = function (req, res) {
     });
 };
 
+
 exports.getOne = function (req, res) {
     Volunteer.findById(req.params.id, function (err, volunteer) {
         if (err) {
@@ -129,38 +130,58 @@ exports.getOne = function (req, res) {
     });
 };
 
+
 exports.deleteVolunteer = function (req, res) {
     Volunteer.findByIdAndUpdate(req.params.id, { status: "deleted" })
-        .then(ll => {
-            console.log("changed volunteer status to deleted");
+        .then(vol => {
+            if (!vol) {
+                console.log("no volunteers with given id found");
+            }
+            else {
+                console.log("changed volunteer status to deleted");
+            }
         })
         .catch(error => {
             console.log(error);
         });
 };
+
 
 exports.unavailVolunteer = function (req, res) {
     Volunteer.findByIdAndUpdate(req.params.id, { status: "unavailable" })
-        .then(ll => {
-            console.log("changed volunteer status to unavailable");
+        .then(vol => {
+            if (!vol) {
+                console.log("no volunteers with given id found");
+            }
+            else {
+                console.log("changed volunteer status to unavailable");
+            }
         })
         .catch(error => {
             console.log(error);
         });
 };
+
 
 exports.availVolunteer = function (req, res) {
     Volunteer.findByIdAndUpdate(req.params.id, { status: "available" })
-        .then(ll => {
-            console.log("changed volunteer status to available");
+        .then(vol => {
+            if (!vol) {
+                console.log("no volunteers with given id found");
+            }
+            else {
+                console.log("changed volunteer status to available");
+            }
         })
         .catch(error => {
             console.log(error);
         });
 };
 
+
 exports.updateVolunteer = function (req, res) {
     let update = {}
+
     if (req.body.name) {
         update.name = req.body.name;
     }
@@ -194,14 +215,21 @@ exports.updateVolunteer = function (req, res) {
     if (req.body.hasVehicle) {
         update.hasVehicle = req.body.hasVehicle;
     }
+
     Volunteer.findByIdAndUpdate(req.params.id, update)
-        .then(ll => {
-            console.log("updated volunteer");
+        .then(vol => {
+            if (!vol) {
+                console.log("no volunteers with given id found");
+            }
+            else {
+                console.log("updated volunteer");
+            }
         })
         .catch(error => {
             console.log(error);
         });
 };
+
 
 exports.acceptText = function (req, res) {
     let body = req.body.Body;
