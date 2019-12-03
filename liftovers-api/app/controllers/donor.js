@@ -20,6 +20,7 @@ exports.create = function(req, res) {
     recurring: req.body.recurring,
     recurringTimes: req.body.recurringTimes,
     accessNotes: req.body.accessNotes,
+    status: req.body.status
   });
 
 
@@ -56,6 +57,16 @@ exports.findId = function(req, res) {
       return res.status(200).send(donors);
   });
 };
+
+exports.getOne = function (req, res) {
+    Donor.findById(req.params.id, function (err, donor) {
+        if (err) {
+            return res.status(404).send({ message: "No such donor." });
+        } else {
+            return res.status(200).send(donor);
+        }
+    })
+}
 
 
 exports.deleteDonor = function(req, res) {

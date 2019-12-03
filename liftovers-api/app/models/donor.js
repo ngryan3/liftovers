@@ -17,7 +17,7 @@ var DonorSchema = mongoose.Schema({
         },
     // active/ deleted
     status: {type: String, default: "active"},
-    typeOfFood: [String],
+    typeOfFood: String,
     recurring: Boolean,
     recurringTimes: {
         day: String,
@@ -26,7 +26,7 @@ var DonorSchema = mongoose.Schema({
             minute: Number,
             }
         },
-    accessNotes: [String],
+    accessNotes: String,
     },
     {
       timestamps: true
