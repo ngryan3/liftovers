@@ -59,56 +59,6 @@ exports.create = function (req, res) {
 };
 
 
-exports.acceptText = function (req, res) {
-    let body = req.body.Body;
-    console.log(body);
-    let fromPhone = req.body.From.slice(-10);
-    console.log(fromPhone);
-    var twiml = new twilio.twiml.MessagingResponse();
-
-    if (body === "yes") {
-        console.log("response is yes");
-
-        Volunteer.findOne({ phone: fromPhone }, function (err, vol) {
-            Lifts.find({ status: "posted", hasVolunteer: false, volunteer: vol._id })
-                .then(item => {
-                    console.log(item);
-
-                    if (item.length === 0) {
-                        twiml.message(`Thanks but there is already a volunteer`);
-                        //res.writeHead(200, { "Content-Type": "text/xml" });
-                        res.status(200).send(twiml.toString());
-                        return;
-                    }
-
-                    Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: vol })
-                        .then(ll => {
-                            console.log("updated");
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-
-                    twiml.message(
-                        `You have been confirmed as the volunteer at ${item[0].origin}`
-                    );
-                    //res.writeHead(200, { "Content-Type": "text/xml" });
-                    res.status(200).send(twiml.toString());
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        });
-        // if body is yes && hasvolunteer is false , change lift model hasvolunteer to true and change volunteer number to formPhone
-    } else {
-        // volunteer said no they cant do the lift
-        //   twiml.message('Got your response, replying you...');
-        //   res.writeHead(200, {'Content-Type': 'text/xml'});
-        res.send({ message: "incorrect response" });
-    }
-};
-
-
 exports.getDistanceBanks = function (req, res) {
     var postalCodes = [];
 
@@ -251,4 +201,55 @@ exports.updateVolunteer = function (req, res) {
         .catch(error => {
             console.log(error);
         });
+};
+
+exports.acceptText = function (req, res) {
+    let body = req.body.Body;
+    let fromPhone = req.body.From.slice(-10);
+    var twiml = new twilio.twiml.MessagingResponse();
+
+    if (body === "yes") {
+        console.log("response is yes");
+
+        Volunteer.findOne({ phone: fromPhone }, function (err, vol) {
+            if (err) {
+                console.log(err);
+                return res.status(404).send({ message: "no such volunteer" });
+            } else {
+                Lifts.find({ status: "posted", hasVolunteer: false, volunteer: vol._id })
+                    .then(item => {
+
+                        if (item.length === 0) {
+                            twiml.message(`Thanks but there is already a volunteer`);
+                            //res.writeHead(200, { "Content-Type": "text/xml" });
+                            res.status(200).send(twiml.toString());
+                            return;
+                        }
+
+                        Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: vol, status: "ongoing" })
+                            .then(ll => {
+                                console.log("updated");
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+
+                        twiml.message(
+                            `You have been confirmed as the volunteer at ${item[0].origin}`
+                        );
+                        //res.writeHead(200, { "Content-Type": "text/xml" });
+                        res.status(200).send(twiml.toString());
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        });
+        // if body is yes && hasvolunteer is false , change lift model hasvolunteer to true and change volunteer number to formPhone
+    } else {
+        // volunteer said no they cant do the lift
+        //   twiml.message('Got your response, replying you...');
+        //   res.writeHead(200, {'Content-Type': 'text/xml'});
+        res.send({ message: "incorrect response" });
+    }
 };

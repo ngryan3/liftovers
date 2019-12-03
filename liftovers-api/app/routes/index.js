@@ -49,7 +49,7 @@ module.exports = function (app) {
   app.post("/volunteer/:id/delete", volunteer.deleteVolunteer);
   app.post("/volunteer/:id/available", volunteer.availVolunteer);
   app.post("/volunteer/:id/unavailable", volunteer.unavailVolunteer);
-  app.post("/volunteer/availability", volunteer.acceptText);
   app.post("/volunteers/foodbank", volunteer.getDistanceBanks);
+  app.post("/volunteers/availability", volunteer.acceptText);
 };
 
