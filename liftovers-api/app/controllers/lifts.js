@@ -26,10 +26,10 @@ mapsCall = (origin, dest) => {
 };
 
 
-sendText = (phone, pickupAddress) => {
+sendText = (phone, pickupAddress, date) => {
     console.log('sendingg texttt', phone, pickupAddress)
     return client.messages.create({
-        body: `Can you pick up the food item at ${pickupAddress}, reply with yes or no`,
+        body: `Can you pick up the food item at ${pickupAddress}, on ${date}, reply with "yes" or "no"`,
         to: `+1${phone}`,  // Text this number
         from: '+16479301776' // From a valid Twilio number
     })
@@ -157,7 +157,7 @@ exports.requestLift = function (req, res) {
             console.log(err);
             res
                 .status(500)
-                .send({ message: "Some error occurred while creating the Volunteer." });
+                .send({ message: "Some error occurred while creating the Lift." });
         } else {
             res.send(data);
         }
@@ -171,6 +171,8 @@ exports.postLift = function (req, res) {
     let liftId = req.params.id;
     let distancevolunteers = this.getVolunteers();
     let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    let monthNames = ["January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"];
 
     let lift = Lifts.findById(liftId, function (err, ll) {
         if (err) {
@@ -213,6 +215,7 @@ exports.postLift = function (req, res) {
                     let weekday = weekdays[lift.date.getDay()];
                     let pickupTime = parseInt(lift.pickupTime.hour.toString() +
                         lift.pickupTime.minute.toString());
+                    let result = false;
 
                     item.volunteer.availability.forEach((volAvail) => {
                         if (volAvail.day.toLowerCase() === weekday) {
@@ -220,19 +223,18 @@ exports.postLift = function (req, res) {
                                 ("0" + volAvail.timeStart.minute.toString()).slice(-2));
                             let volTimeFinish = parseInt(volAvail.timeFinish.hour.toString() +
                                 ("0" + volAvail.timeFinish.minute.toString()).slice(-2));
-    
                             if (volTimeStart <= pickupTime && volTimeFinish >= pickupTime) {
-                                return true;
+                                result = true;
                             }
                         }
                     })
-                    return false;
+                    return result;
                 })
 
                 console.log('timesorted', timeSorted)
 
-                if (timeSorted == []) {
-                    Lifts.findOneAndUpdate({ _id: liftId }, { status: "problem", volunteer: volunteersTexted, message: "no available volunteer" })
+                if (timeSorted.length === 0) {
+                    Lifts.findOneAndUpdate({ _id: liftId }, { status: "problem", message: "no available volunteer" })
                         .then(ll => {
                             console.log("changed lift status to problem");
                         })
@@ -242,8 +244,10 @@ exports.postLift = function (req, res) {
                     return res.status(200).send({message: "No available volunteers. Lift status is now problem."})
                 }
                 else {
+                    let date = "" + monthNames[lift.date.getMonth()] + " " + lift.date.getDate() + 
+                        " at " + lift.pickupTime.hour.toString() + ":" + lift.pickupTime.minute.toString();
                     let textPromises = timeSorted.map((item) => {
-                        return this.sendText(item.volunteer.phone, lift.address)
+                        return this.sendText(item.volunteer.phone, lift.address, date)
                     })
 
                     Promise.all(textPromises).then((promiseitem) => { }).catch((error) => {
@@ -275,17 +279,22 @@ exports.postLift = function (req, res) {
 
 
 exports.completeLift = function (req, res) {
-    Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "completed" })
+    Lifts.findOneAndUpdate({ _id: req.params.id, status: "ongoing" }, { status: "completed" })
         .then(lift => {
-            console.log("changed lift status to completed");
+            if (!lift) {
+                console.log("no ongoing lifts with given id found");
+            }
+            else {
+                console.log("changed lift status to completed");
 
-            Volunteers.findOneAndUpdate({ _id: lift.chosenVolunteer._id }, { $push: { lifts: lift } })
-                .then(vol => {
-                    console.log("added lift to chosen volunteer's lifts list");
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+                Volunteers.findOneAndUpdate({ _id: lift.chosenVolunteer._id }, { $push: { lifts: lift } })
+                    .then(vol => {
+                        console.log("added lift to chosen volunteer's lifts list");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            }
         })
         .catch(error => {
             console.log(error);
@@ -295,8 +304,13 @@ exports.completeLift = function (req, res) {
 
 exports.cancelLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "cancelled" })
-        .then(ll => {
-            console.log("changed lift status to cancelled");
+        .then(lift => {
+            if (!lift) {
+                console.log("no lifts with given id found");
+            }
+            else {
+                console.log("changed lift status to cancelled");
+            }
         })
         .catch(error => {
             console.log(error);
@@ -306,8 +320,13 @@ exports.cancelLift = function (req, res) {
 
 exports.problemLift = function (req, res) {
     Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "problem" })
-        .then(ll => {
-            console.log("changed lift status to problem");
+        .then(lift => {
+            if (!lift) {
+                console.log("no lifts with given id found");
+            }
+            else {
+                console.log("changed lift status to problem");
+            }
         })
         .catch(error => {
             console.log(error);
@@ -356,8 +375,13 @@ exports.updateLift = function (req, res) {
     }
 
     Lifts.findByIdAndUpdate(req.params.id, update)
-        .then(ll => {
-            console.log("updated lifts");
+        .then(lift => {
+            if (!lift) {
+                console.log("no lifts with given id found");
+            }
+            else {
+                console.log("updated lifts");
+            }
         })
         .catch(error => {
             console.log(error);

@@ -1,28 +1,28 @@
-# YOUR PRODUCT/TEAM NAME
+# Web Application for lifTOvers/lifTOvers team 2 (Team #: 7)
 
-## Iteration XX
+## Iteration 03
 
- * Start date: 
- * End date: 
+ * Start date: November 23, 2019
+ * End date: December 1, 2019
 
 ### Changes from you `product.md`
 
 List the most significant changes you made to your product (if any). It's normal to change features mid-project or reduce the scope to meet timelines. 
 
+* Our partners requested that volunteers would be able to log in to the web application and upload images of their lifts (delivery of donated food). This is a significant change that we are foregoing due to time constraints to meet the deadline of the course. However, team members interested in continuing the project with lifTOvers will be trying to implement this feature in the future. 
+* Initially we detailed in D1 that we would have 3 user objects that would have login access to the web application: volunteers, admins, and superadmins. After realizing the 3 user objects shared many of the same fields (ex: name, surname, email, phone, preferred method of communication, etc.), we decided to make a user object with a role field that is filled with either "volunteer", "admin" or "superadmin". Then we also have a volunteer object that is associated with a user object if they volunteer that holds volunteer specific fields (ex: availability, are they licensed, if they own a vehicle, etc.). It actually saves redundant code since we have two user models instead of the exptected three! The tech lead from lifTOvers even commended on us for this decision, as he stated it was very standard in the industry to implement a similar practice. (A positive change!)
+ * As there is an existing algorithm to map the closest volunteers to the lift that needs to be picked up, as a group we agreed in the very initial planning stages that priority level to optimize the algorithm would be low on our task list. This was also discussed with our project partners, and they agreed that this would a very low priority item to complete. 
+ 
  * Start with the most significant change
  * Identify either a change in features or a reduction of your original scope
  * For each change, explain why you are making it and what you are hoping to achieve from it
 
- > *Note:* If you are not making (or haven't made) any changes to your product, it means you successfully scoped, planned and executed the development of your application.This is a very rare occurrence - describe what you believed enabled your team to do so and why. 
-
 ### Handoff plan
 
-Describe your plan for handing off your product and all technical assets to your partner
+ * We were transparent with our project partners and explained to them the re-scoping we did in the section above. Even though there is a due date for the course, a few of us stated that we would be interested in contining the project for lifTOvers if they would like us to. 
+ * We will be creating a .zip file with our client side liftovers-admin repository and liftovers-api repository and sending it to liftovers' tech lead for review. The MongoDB database we are using currently is a temporary one we agreed in the beginning would be for development purposes and in no way interacts with their actual database. The tech lead is aware of how to make the switch to their official database should he wish. 
+ * For their management, we will be sending them a link of our deployed product to review. If they have feedback/suggestions, we would be happy to make changes for their vision of the product. 
+ * As there is another lifTOvers team, the management at lifTOvers will be reviewing both and making a decision about the future of both projects. 
+ * Currently, lifTOvers has one tech person who is working remotely to maintain their current website at (https://liftovers.ca/). He works full-time and may be maintaining/developing our product in his spare time. To reiterate, a few of us on the team have communicated it to lifTOvers that we would be interested in maintaining/developing the product in our spare time/over winter break. 
+ * After lifTOvers' management has reviewed the deployed product and their tech lead has had a look at the code base and a decision has been made, we will have a meeting to discuss the future of our project. 
 
- * Will you have a handoff meeting? If so, what will be discussed?
- * What assets/artifacts will you be handing off to your partner (e.g. codebase, deployment tools, running application, task tracker, etc.)? 
- * How will you hand off these assets/artifacts?
- * Does your partner have the technical capacity to manage/maintain/develop your product? How will that impact how you handoff the product?
-
-
-> *Note:* This is one of the most important aspects of the project. Please consult with your partner, your TA and the instructors on how to successfully execute this. 
