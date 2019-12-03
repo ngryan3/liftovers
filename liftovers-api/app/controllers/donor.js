@@ -60,8 +60,13 @@ exports.findId = function(req, res) {
 
 exports.deleteDonor = function(req, res) {
   Donor.findOneAndUpdate({ _id: req.params.id }, { status: "deleted" })
-      .then(ll => {
+      .then(donor => {
+        if (!donor) {
+          console.log("no donors with given id found");
+        }
+        else {
           console.log("changed donor status to deleted");
+        }
       })
       .catch(error => {
           console.log(error);

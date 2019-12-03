@@ -157,7 +157,7 @@ exports.requestLift = function (req, res) {
             console.log(err);
             res
                 .status(500)
-                .send({ message: "Some error occurred while creating the Volunteer." });
+                .send({ message: "Some error occurred while creating the Lift." });
         } else {
             res.send(data);
         }
@@ -172,8 +172,7 @@ exports.postLift = function (req, res) {
     let distancevolunteers = this.getVolunteers();
     let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     let monthNames = ["January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December"
-]
+        "July", "August", "September", "October", "November", "December"];
 
     let lift = Lifts.findById(liftId, function (err, ll) {
         if (err) {

@@ -58,8 +58,13 @@ exports.findId = function(req, res) {
 
 exports.deleteProvider = function(req, res) {
   Provider.findOneAndUpdate({ _id: req.params.id }, { status: "deleted" })
-      .then(ll => {
+      .then(provider => {
+        if (!provider) {
+          console.log("no providers with given id found");
+        }
+        else {
           console.log("changed provider status to deleted");
+        }
       })
       .catch(error => {
           console.log(error);
