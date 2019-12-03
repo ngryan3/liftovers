@@ -71,9 +71,9 @@
  * Instructions for setting up and running the lifTOvers application:
   1) Clone the repository using (https://github.com/csc301-fall-2019/team-project-liftovers-team-2.git)
   2) Navigate to the liftovers-api directory (i.e. using `cd liftovers-api`) and then run `npm install` to install all necessary packages for the API. 
-  3) Run "npm start" to start the server. 
-  4) Navigate back to the root directory (i.e. using `cd ..`) and then to the liftovers-admin directory (i.e. using `cd liftovers-admin`). Run "npm install" to install all necessary packages for the client.
-  5) Run "npm start" to start the client on http://localhost:3000
+  3) Run `npm start` to start the server. 
+  4) Navigate back to the root directory (i.e. using `cd ..`) and then to the liftovers-admin directory (i.e. using `cd liftovers-admin`). Run `npm install` to install all necessary packages for the client.
+  5) Run `npm start` to start the client on http://localhost:3000
   6) OPTIONAL: For testing changes to the API, the server needs to be run locally. To do this, navigate to liftovers-admin/api/config.js and comment out the line: `export default "https://liftovers-api.herokuapp.com";` and then uncomment the line: `export default "http://localhost:7000";`. Then restart the server and client by running `npm start` in their respective directories. 
 
  ## Licenses 
