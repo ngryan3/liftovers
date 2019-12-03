@@ -280,17 +280,22 @@ exports.postLift = function (req, res) {
 
 
 exports.completeLift = function (req, res) {
-    Lifts.findOneAndUpdate({ _id: req.params.id }, { status: "completed" })
+    Lifts.findOneAndUpdate({ _id: req.params.id, status: "ongoing" }, { status: "completed" })
         .then(lift => {
-            console.log("changed lift status to completed");
+            if (!lift) {
+                console.log("no ongoing lifts found");
+            }
+            else {
+                console.log("changed lift status to completed");
 
-            Volunteers.findOneAndUpdate({ _id: lift.chosenVolunteer._id }, { $push: { lifts: lift } })
-                .then(vol => {
-                    console.log("added lift to chosen volunteer's lifts list");
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+                Volunteers.findOneAndUpdate({ _id: lift.chosenVolunteer._id }, { $push: { lifts: lift } })
+                    .then(vol => {
+                        console.log("added lift to chosen volunteer's lifts list");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            }
         })
         .catch(error => {
             console.log(error);
