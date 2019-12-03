@@ -76,7 +76,7 @@ class Login extends React.Component{
       var json = JSON.stringify(object);
       console.log(json);
 
-      fetch(ApiUrl + "/user/login", {
+      fetch(ApiUrl + "/login", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ class Login extends React.Component{
             } if (response.status === 500){
                 alert('Username and password do not match our records');
             }if (response.status === 300){
-              window.location.replace('http://localhost:3000')
+              window.location.replace('http://localhost:3000/dashboard')
             } 
             return response.json()})
           .then(data => {
