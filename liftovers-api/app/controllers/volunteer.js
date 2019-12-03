@@ -208,7 +208,7 @@ exports.acceptText = function (req, res) {
     let fromPhone = req.body.From.slice(-10);
     var twiml = new twilio.twiml.MessagingResponse();
 
-    if (body === "yes") {
+    if (body.toLowerCase() === "yes") {
         console.log("response is yes");
 
         Volunteer.findOne({ phone: fromPhone }, function (err, vol) {
@@ -235,7 +235,7 @@ exports.acceptText = function (req, res) {
                             });
 
                         twiml.message(
-                            `You have been confirmed as the volunteer at ${item[0].origin}`
+                            `You have been confirmed as the volunteer at ${item[0].address}`
                         );
                         //res.writeHead(200, { "Content-Type": "text/xml" });
                         res.status(200).send(twiml.toString());

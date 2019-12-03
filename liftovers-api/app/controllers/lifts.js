@@ -26,10 +26,10 @@ mapsCall = (origin, dest) => {
 };
 
 
-sendText = (phone, pickupAddress) => {
+sendText = (phone, pickupAddress, date) => {
     console.log('sendingg texttt', phone, pickupAddress)
     return client.messages.create({
-        body: `Can you pick up the food item at ${pickupAddress}, reply with yes or no`,
+        body: `Can you pick up the food item at ${pickupAddress}, on ${date}, reply with yes or no`,
         to: `+1${phone}`,  // Text this number
         from: '+16479301776' // From a valid Twilio number
     })
@@ -171,6 +171,9 @@ exports.postLift = function (req, res) {
     let liftId = req.params.id;
     let distancevolunteers = this.getVolunteers();
     let weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    let monthNames = ["January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"
+]
 
     let lift = Lifts.findById(liftId, function (err, ll) {
         if (err) {
@@ -242,8 +245,10 @@ exports.postLift = function (req, res) {
                     return res.status(200).send({message: "No available volunteers. Lift status is now problem."})
                 }
                 else {
+                    let date = "" + monthNames[lift.date.getMonth()] + " " + lift.date.getDate() + 
+                        " at " + lift.pickupTime.hour.toString() + ":" + lift.pickupTime.minute.toString();
                     let textPromises = timeSorted.map((item) => {
-                        return this.sendText(item.volunteer.phone, lift.address)
+                        return this.sendText(item.volunteer.phone, lift.address, date)
                     })
 
                     Promise.all(textPromises).then((promiseitem) => { }).catch((error) => {
