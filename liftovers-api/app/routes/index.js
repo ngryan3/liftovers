@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.get("/donor/:id", donor.getOne);
   app.post("/donor", donor.create);
   app.post("/donor/:id/delete", donor.deleteDonor);
-  app.post("/donor/:id/update", donor.updateDonor);
+  app.post("/donor/:id", donor.updateDonor);
 
   app.get("/lifts", lift.findAll);
   app.get("/lifts/requested", lift.findRequested);
@@ -28,10 +28,10 @@ module.exports = function (app) {
   app.post("/lift/:id/update", lift.updateLift);
 
   app.get("/provider", provider.findAll);
-  app.get("/provider/:id", provider.findId);
+  app.get("/provider/:id", provider.getOne);
   app.post("/provider", provider.create);
   app.post("/provider/:id/delete", provider.deleteProvider);
-  app.post("/provider/:id/update", provider.updateProvider);
+  app.post("/provider/:id", provider.updateProvider);
 
   app.get("/user", user.findAll);
   app.get("/user/waiting", user.findWait);

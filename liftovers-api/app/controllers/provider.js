@@ -55,6 +55,16 @@ exports.findId = function(req, res) {
   });
 };
 
+exports.getOne = function (req, res) {
+    Provider.findById(req.params.id, function (err, provider) {
+        if (err) {
+            return res.status(404).send({ message: "No such provider." });
+        } else {
+            return res.status(200).send(provider);
+        }
+    })
+}
+
 
 exports.deleteProvider = function(req, res) {
   Provider.findOneAndUpdate({ _id: req.params.id }, { status: "deleted" })
