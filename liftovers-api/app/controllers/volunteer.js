@@ -208,9 +208,7 @@ exports.acceptText = function (req, res) {
     let fromPhone = req.body.From.slice(-10);
     var twiml = new twilio.twiml.MessagingResponse();
 
-    if (body.toLowerCase() === "yes") {
-        console.log("response is yes");
-
+    if (body.toLowerCase() === "yes" || body.toLowerCase() === "no") {
         Volunteer.findOne({ phone: fromPhone }, function (err, vol) {
             if (err) {
                 console.log(err);
@@ -219,24 +217,55 @@ exports.acceptText = function (req, res) {
                 Lifts.find({ status: "posted", hasVolunteer: false, volunteer: vol._id })
                     .then(item => {
 
-                        if (item.length === 0) {
-                            twiml.message(`Thanks but there is already a volunteer`);
-                            //res.writeHead(200, { "Content-Type": "text/xml" });
-                            res.status(200).send(twiml.toString());
-                            return;
+                        if (body.toLowerCase() === "yes") {
+                            console.log("response is yes");
+                            if (item.length === 0) {
+                                twiml.message(`Thanks but there is already a volunteer`);
+                                //res.writeHead(200, { "Content-Type": "text/xml" });
+                                res.status(200).send(twiml.toString());
+                                return;
+                            }
+                            console.log("volunteer confirmed");
+                            Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: vol, status: "ongoing", "$pull": { "volunteer": vol._id } })
+                                .then(ll => {
+                                    console.log("updated");
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                });
+
+                            twiml.message(
+                                `You have been confirmed as the volunteer at ${item[0].address}`
+                            );
+                        } else {
+                            console.log("response is no");
+                            twiml.message(
+                                `Got your response.`
+                            );
+                            if (item.length === 0) {
+                                return res.status(200).send("no valid lift");
+                            } else {
+                                if (item[0].volunteer.length === 1) {
+                                    Lifts.findOneAndUpdate({ _id: item[0]._id }, { status: "problem", message: "no volunteer accepted", "$pull": { "volunteer": vol._id } })
+                                        .then(ll => {
+                                            console.log("No one accepted, changed lift status to problem");
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                        });
+                                    return res.status(200).send({ message: "No volunteer accepted. Lift status is now problem." })
+                                } else {
+                                    Lifts.findOneAndUpdate({ _id: item[0]._id }, { $pull: { volunteer: vol._id } })
+                                        .then(ll => {
+                                            console.log("updated");
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                        });
+                                }
+                            }
                         }
 
-                        Lifts.findOneAndUpdate({ _id: item[0]._id }, { hasVolunteer: true, chosenVolunteer: vol, status: "ongoing" })
-                            .then(ll => {
-                                console.log("updated");
-                            })
-                            .catch(error => {
-                                console.log(error);
-                            });
-
-                        twiml.message(
-                            `You have been confirmed as the volunteer at ${item[0].address}`
-                        );
                         //res.writeHead(200, { "Content-Type": "text/xml" });
                         res.status(200).send(twiml.toString());
                     })
@@ -248,7 +277,7 @@ exports.acceptText = function (req, res) {
         // if body is yes && hasvolunteer is false , change lift model hasvolunteer to true and change volunteer number to formPhone
     } else {
         // volunteer said no they cant do the lift
-        //   twiml.message('Got your response, replying you...');
+        // twiml.message('Got your response, replying you...');
         //   res.writeHead(200, {'Content-Type': 'text/xml'});
         res.send({ message: "incorrect response" });
     }
