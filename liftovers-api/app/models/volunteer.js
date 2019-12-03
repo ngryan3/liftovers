@@ -10,7 +10,7 @@ var VolunteerSchema = mongoose.Schema(
     methodOfCommunication: String,
     postalCode: String,
     secondaryPostalCode: String,
-    availability: {
+    availability: [{
       day: String,
       timeStart: {
         hour: Number,
@@ -20,7 +20,7 @@ var VolunteerSchema = mongoose.Schema(
         hour: Number,
         minute: Number
       }
-  },
+  }],
     licensed: Boolean,
     hasVehicle: Boolean,
     additionalNotes: [String],

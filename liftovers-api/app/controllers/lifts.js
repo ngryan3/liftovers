@@ -214,20 +214,18 @@ exports.postLift = function (req, res) {
                     let pickupTime = parseInt(lift.pickupTime.hour.toString() +
                         lift.pickupTime.minute.toString());
 
-                    let volAvail = item.volunteer.availability;
-                    console.log(pickupTime);
-                    if (volAvail.day.toLowerCase() === weekday) {
-                        let volTimeStart = parseInt(volAvail.timeStart.hour.toString() +
-                            ("0" + volAvail.timeStart.minute.toString()).slice(-2));
-                        let volTimeFinish = parseInt(volAvail.timeFinish.hour.toString() +
-                            ("0" + volAvail.timeFinish.minute.toString()).slice(-2));
-                        console.log(volTimeStart);
-                        console.log(volTimeFinish);
-
-                        if (volTimeStart <= pickupTime && volTimeFinish >= pickupTime) {
-                            return true;
+                    item.volunteer.availability.forEach((volAvail) => {
+                        if (volAvail.day.toLowerCase() === weekday) {
+                            let volTimeStart = parseInt(volAvail.timeStart.hour.toString() +
+                                ("0" + volAvail.timeStart.minute.toString()).slice(-2));
+                            let volTimeFinish = parseInt(volAvail.timeFinish.hour.toString() +
+                                ("0" + volAvail.timeFinish.minute.toString()).slice(-2));
+    
+                            if (volTimeStart <= pickupTime && volTimeFinish >= pickupTime) {
+                                return true;
+                            }
                         }
-                    }
+                    })
                     return false;
                 })
 
@@ -241,6 +239,7 @@ exports.postLift = function (req, res) {
                         .catch(error => {
                             console.log(error);
                         });
+                    return res.status(200).send({message: "No available volunteers. Lift status is now problem."})
                 }
                 else {
                     let textPromises = timeSorted.map((item) => {
