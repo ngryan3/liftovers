@@ -41,9 +41,7 @@
   3) Run "npm start" to start the server. 
   4) Navigate back to the root directory (i.e. using `cd ..`) and then to the liftovers-admin directory (i.e. using `cd liftovers-admin`). Run "npm install" to install all necessary packages for the client.
   5) Run "npm start" to start the client.
-  6) OPTIONAL: For testing changes to the API, the server needs to be run locally. To do this, navigate to liftovers-admin/api/config.js and comment out the line: `export default "https://liftovers-api.herokuapp.com";` and then uncomment the line: `export default "http://localhost:7000";`. Then restart the server and client by running `npm start` int he
-
-
+  6) OPTIONAL: For testing changes to the API, the server needs to be run locally. To do this, navigate to liftovers-admin/api/config.js and comment out the line: `export default "https://liftovers-api.herokuapp.com";` and then uncomment the line: `export default "http://localhost:7000";`. Then restart the server and client by running `npm start` in their respective directories. 
 
  ## Licenses 
 
