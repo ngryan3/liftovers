@@ -1,15 +1,20 @@
-# YOUR PRODUCT/TEAM NAME
+# Web Application for lifTOvers/lifTOvers team 2 (Team #: 7)
 
 > _Note:_ This document is intended to be relatively short. Be concise and precise. Assume the reader has no prior knowledge of your application and is non-technical. 
 
 ## Description 
- * Provide a high-level description of your application and it's value from an end-user's perspective
- * What is the problem you're trying to solve?
- * Is there any context required to understand **why** the application solves this problem?
+ * The administrative web application we have built for lifTOvers will allow their management to view/edit/delete information about all participating parties involved in their organization, as well as food deliveries (AKA lifts). They are also able to approve of new users and facilitate the flow of lifts from beginning to end by changing their statuses (requested/posted/ongoing/completed/cancelled/problem). A dashboard presents a cohesive view of items that require attention, and an overview of the state of their organization. 
+ * For volunteers, it serves as a platform where they can view their volunteer history through their past lifts, as well keep their profile updated with current, accurate personal information. 
+ * Their current site (https://liftovers.ca/) serves as the point where lifts are created. Our administrative web application integrates with it by recieving created lifts from the current site, setting their status to 'requested', and providing means to facilitate the flow from lifts to 'completed' by approving statuses. 
+ * Overall, the web app we are buliding is an administrative tool and allows its three types of users (volunteers, admins, superadmins) to monitor information they have access to, and edit/delete information they have permission to, providing lifTOvers with a clear representation of the current state of their organization. 
 
 ## Key Features
- * Described the key features in the application that the user can access
- * Feel free to provide a breakdown or detail for each feature that is most appropriate for your application
+ * As we have three types of users that will be accessing the system, we will split the key features that a user can access into their respective permissions
+ * Volunteer: A volunteer who's access has been approved by an admin/superadmin can log in and see lifts they participated in, as well as their own profile. They can edit their own profile. No other part of the administrative site is available for them to access. 
+ * Admin: An admin can view/edit/delete lifts, volunteers, donors, and providers, and only view/edit other admins and superadmins. 
+ * Superadmin: A super admin access all the features that the admin can, with the addition of a single feature: only superadmins may delete other admins and superadmins. 
+ * The following venn diagram provides a succint overview of features each type of user of the system has access to: 
+ <img src="https://github.com/csc301-fall-2019/team-project-liftovers-team-2/blob/master/d3/Screen%20Shot%202019-12-02%20at%209.25.39%20PM.png" />
 
 ## Instructions
  * Clear instructions for how to use the application from the end-user's perspective
