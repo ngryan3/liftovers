@@ -112,7 +112,7 @@ const columns = [
     { title: "Date", dataIndex: "date", key: "date" },
     { title: "Serve Time", dataIndex: "serveTime", key: "serveTime" },
     { title: "Pickup Time", dataIndex: "pickupTime", key: "pickupTime" },
-    { title: "Description", dataIndex: "description", key: "description" },
+    { title: "Message", dataIndex: "message", key: "message" },
     {   
         header: '',
         accessor: '_id',
