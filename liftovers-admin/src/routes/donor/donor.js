@@ -20,7 +20,40 @@ const columns = [
   { title: "Contact Name", dataIndex: "contactName", key: "name" },
   { title: "Contact Surname", dataIndex: "contactSurname", key: "surname"},
   { title: "Contact Phone", dataIndex: "contactPhone", key: "phone" },
-  { title: "Contact Email", dataIndex: "contactEmail", key: "email"}
+  { title: "Contact Email", dataIndex: "contactEmail", key: "email"},
+  {
+        header: '',
+        accessor: "_id",
+        dataIndex: "_id",
+        id: 'view-button',
+        render: accessor => (<Button>
+                                <a href={"/donors/view/" + accessor}>
+                                    View
+                                </a>
+                             </Button>)
+  },
+  {
+        header: '',
+        accessor: "_id",
+        dataIndex: "_id",
+        id: 'edit-button',
+        render: accessor => (<Button style={{background:"#A6CBFF"}}>
+                                <a href={"/donors/edit/" + accessor}>
+                                    Edit
+                                </a>
+                             </Button>)
+  },
+  {
+        header: '',
+        accessor: "_id",
+        dataIndex: "_id",
+        id: 'delete-button',
+        render: accessor => (<Button style={{background:"#FF8C83"}}>
+                                <a href={"/donors/delete/" + accessor}>
+                                    Delete
+                                </a>
+                              </Button>)
+  }
 ];
 const pageOptions = [
   { value: 10, label: "10 Rows" },
@@ -62,7 +95,7 @@ export const Donor = ({ getDonors, donors, loading }) => {
             <Boxed pad="0.2rem" align="right">
               <Button iconLeft>
                 <i className="icon-user-add" />
-                <a href="./donors/create">Create Donor</a>
+                <a href="/donors/create">Create Donor</a>
               </Button>
             </Boxed>
           </Grid>

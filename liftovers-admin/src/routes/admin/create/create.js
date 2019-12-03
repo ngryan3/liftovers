@@ -87,7 +87,10 @@ class CreateAdmin extends Component{
             ]}
             name="role" type="select" label="Admin Role" required forminput
             /><br/>
-          <Input type="submit" value="Submit" />
+            <br/>
+          <Button type="submit" value="Submit">
+            Submit
+          </Button>
           </Boxed>
         </form>
       );

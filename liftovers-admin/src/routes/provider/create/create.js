@@ -83,7 +83,10 @@ class CreateProvider extends Component{
           <Input name="location" type="text" label="Location" required forminput/><br/>
           <Input name="acceptedFoods" type="text" label="Accepted Foods" required forminput/><br/>
           <Input name="unacceptableFoods" type="text" label="Unacceptable Foods" required forminput/><br/>
-          <Input type="submit" value="Submit"/>
+          <br/>
+          <Button type="submit" value="Submit">
+            Submit
+          </Button>
         </Boxed>
         </form>
       );

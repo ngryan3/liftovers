@@ -81,15 +81,18 @@ class CreateDonor extends Component{
             name="methodOfCommunication" type="select" label="Preferred Method of Communication" required forminput
           /><br/>
           <Input name="location" type="text" label="Location" required forminput/><br/>
-          <Input nmae="typeOfFood" type="text" label="Type of Food Donation" required forminput/> <br/>
+          <Input name="typeOfFood" type="text" label="Type of Food Donation" required forminput/> <br/>
           <SimpleSelect
             options={[
             { value: "true", label: "Yes"},
             { value: "false", label: "No"}
             ]}
             name="recurring" type="select" label="Recurring Donation?" required forminput/><br/>
-          <Input name="accessNotes" type="text" label="Access Notes" required forminput/><br/>
-          <Input type="submit" value="Submit"/>
+          <Input name="accessNotes" type="text" label="Access Notes"/><br/>
+          <br/>
+          <Button type="submit" value="Submit">
+            Submit
+          </Button>
           </Boxed>
         </form>
       );

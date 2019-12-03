@@ -17,6 +17,9 @@ import DeleteAdmin from "./routes/admin/delete/delete";
 import Lifts from "./routes/lift";
 import Donors from "./routes/donor";
 import CreateDonor from "./routes/donor/create/create";
+import EditDonor from "./routes/donor/edit/edit";
+import ViewDonor from "./routes/donor/view/view";
+import DeleteDonor from "./routes/donor/delete/delete";
 import Providers from "./routes/provider";
 import CreateProvider from "./routes/provider/create/create";
 import { AdminLayout } from "./components/admin";
@@ -89,6 +92,15 @@ function App() {
             </Route>
             <Route exact path="/donors/create">
                 <CreateDonor />
+            </Route>
+            <Route path="/donors/view/:donor_id" component={Donors}>
+                <ViewDonor />
+            </Route>
+            <Route path="/donors/edit/:donor_id" component={Donors}>
+                <EditDonor />
+            </Route>
+            <Route path="/donors/delete/:donor_id" component={Donors}>
+                <DeleteDonor />
             </Route>
             <Route exact path="/providers">
                 <Providers />
