@@ -6,7 +6,8 @@ import {
     Loader,
     FlexiTable,
     FlexiPagination,
-    Button
+    Button,
+    Notify
 } from "flexibull";
 import {
     Header,
@@ -38,7 +39,7 @@ function handleApproveClick(accessor) {
     fetch(ApiUrl + "/user/" + accessor + "/approve", {
         method: 'POST'
       }).then(result => result.json())
-      window.location = "/dashboard"
+    window.location = "/dashboard"
     
 }
 
@@ -61,13 +62,22 @@ function handleCancelClick(accessor) {
 }
 
 function handlePostLiftClick(accessor) {
-    console.log(accessor)
+    console.log(accessor)    
+    Notify("Posting Lift")
     fetch(ApiUrl + "/lift/" + accessor + "/post", {
         method: 'POST'
       }).then(result => result.json())
-    window.location = "/dashboard"
+    // window.location.reload(true);
+    // window.location.href = window.location.href (works for adam)
+    // window.location = "/dashboard"
+    window.setTimeout(function() {
+        window.location.href = window.location.href;
+    }, 1000);
+    // window.location.replace("/dashboard");
    
 }
+
+
 
 
 const buttonColumns = [
@@ -112,7 +122,7 @@ const columns = [
     { title: "Date", dataIndex: "date", key: "date" },
     { title: "Serve Time", dataIndex: "serveTime", key: "serveTime" },
     { title: "Pickup Time", dataIndex: "pickupTime", key: "pickupTime" },
-    { title: "Message", dataIndex: "message", key: "message" },
+    { title: "Description", dataIndex: "description", key: "description" },
     {   
         header: '',
         accessor: '_id',
