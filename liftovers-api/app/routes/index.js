@@ -24,6 +24,7 @@ module.exports = function (app) {
   app.post("/lift/:id/complete", lift.completeLift);
   app.post("/lift/:id/cancel", lift.cancelLift);
   app.post("/lift/:id/problem", lift.problemLift);
+  app.post("/lift/:id/update", lift.updateLift);
 
   app.get("/provider", provider.findAll);
   app.get("/provider/:id", provider.findId);
@@ -34,7 +35,7 @@ module.exports = function (app) {
   app.get("/user/waiting", user.findWait);
   app.get("/user/:id", user.getOne);
   app.get("/reset/:token", user.reset);
-   app.post("/user/:id", user.updateUser);
+  app.post("/user/:id", user.updateUser);
   app.post("/user/:id/approve", user.approveUser);
   app.post("/user/:id/delete", user.deleteUser);
   app.post("/user", user.create);
