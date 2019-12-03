@@ -67,3 +67,55 @@ exports.deleteDonor = function(req, res) {
           console.log(error);
       });
 };
+
+
+exports.updateDonor = function (req, res) {
+  let update = {}
+
+  if (req.body.contactName) {
+      update.contactName = req.body.contactName
+  }
+  if (req.body.contactSurname) {
+      update.contactSurname = req.body.contactSurname
+  }
+  if (req.body.contactEmail) {
+      update.contactEmail = req.body.contactEmail
+  }
+  if (req.body.contactPhone) {
+      update.contactPhone = req.body.contactPhone
+  }
+  if (req.body.methodOfCommunication) {
+      update.methodOfCommunication = req.body.methodOfCommunication
+  }
+  if (req.body.location) {
+      update.location = req.body.location
+  }
+  if (req.body.hours) {
+      update.hours = req.body.hours
+  }
+  if (req.body.typeOfFood) {
+      update.typeOfFood = req.body.typeOfFood
+  }
+  if (req.body.recurring) {
+      update.recurring = req.body.recurring
+  }
+  if (req.body.recurringTimes) {
+      update.recurringTimes = req.body.recurringTimes
+  }
+  if (req.body.accessNotes) {
+      update.accessNotes = req.body.accessNotes
+  }
+
+  Donor.findByIdAndUpdate(req.params.id, update)
+      .then(donor => {
+          if (!donor) {
+              console.log("no donors with given id found");
+          }
+          else {
+              console.log("updated donors");
+          }
+      })
+      .catch(error => {
+          console.log(error);
+      });
+};
