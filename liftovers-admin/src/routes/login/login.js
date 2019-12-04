@@ -10,7 +10,6 @@ import {
   ClearLink
 } from "../../components/styles";
 import Logo from "../../assets/liftovers.jpg";
-import ApiUrl from "../../api/config";
 import styled from "styled-components";
 const LogoHolder = styled.img`
   height: 100px !important;
@@ -75,8 +74,7 @@ class Login extends React.Component{
       });
       var json = JSON.stringify(object);
       console.log(json);
-
-      fetch(ApiUrl + "/login", {
+      fetch("http://localhost:7000/login", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -94,7 +92,7 @@ class Login extends React.Component{
             } 
             return response.json()})
           .then(data => {
-            localStorage.setItem('currentUser', data.item[0])
+            localStorage.setItem('currentUserType', data.item[0].role)
             localStorage.setItem('currentUserID', data.item[0]._id)
             localStorage.setItem('currentUsername', data.item[0].name)
           })
