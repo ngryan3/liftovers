@@ -6,8 +6,7 @@ import {
     Loader,
     FlexiTable,
     FlexiPagination,
-    Button,
-    Notify
+    Button
 } from "flexibull";
 import {
     Header,
@@ -32,6 +31,28 @@ const pageOptions = [
     { value: 100, label: "100 Rows" }
 ];
 
+function Greeting() {
+    const name = localStorage.getItem('currentUsername');
+    if (name) {
+      let splice = name.slice(1)
+      const username = name[0] + splice.toLowerCase();
+      return <Boxed pad="5px 10px">
+      <Grid
+          default="auto 100px 100px 140px"
+          tablet="auto 100px 100px 140px"
+          mobile="1fr"
+          pad="10px"
+        >
+        <div>
+          
+            <h2 style={{marginLeft: '0px', color: '#5e5e5e' }}>Welcome {username}</h2>
+        </div>
+      </Grid>
+      </Boxed>;
+    }
+    return <br />
+}
+
 
 
 function handleApproveClick(accessor) {
@@ -39,7 +60,7 @@ function handleApproveClick(accessor) {
     fetch(ApiUrl + "/user/" + accessor + "/approve", {
         method: 'POST'
       }).then(result => result.json())
-    window.location = "/dashboard"
+      window.location = "/dashboard"
     
 }
 
@@ -62,22 +83,13 @@ function handleCancelClick(accessor) {
 }
 
 function handlePostLiftClick(accessor) {
-    console.log(accessor)    
-    Notify("Posting Lift")
+    console.log(accessor)
     fetch(ApiUrl + "/lift/" + accessor + "/post", {
         method: 'POST'
       }).then(result => result.json())
-    // window.location.reload(true);
-    // window.location.href = window.location.href (works for adam)
-    // window.location = "/dashboard"
-    window.setTimeout(function() {
-        window.location.href = window.location.href;
-    }, 1000);
-    // window.location.replace("/dashboard");
+    window.location = "/dashboard"
    
 }
-
-
 
 
 const buttonColumns = [
@@ -161,6 +173,23 @@ const userColumns = [
     },
 ]
 
+function isVolunteer(){
+    const userRole = localStorage.getItem('currentUserRole');  
+    console.log(userRole)
+    if (userRole == "volunter"){
+        return true
+    }
+    return false
+}
+
+function isAdmin(){
+    const userRole = localStorage.getItem('currentUserRole');  
+    console.log(userRole)
+    if (userRole == "admin"){
+        return true
+    }
+    return false
+}
 
 export const Dashboard = ({ getRequestedLifts, getPostedLifts, 
     postedLifts, requestedLifts, getProblemLifts, problemLifts, 
@@ -175,7 +204,6 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
     let { docs:secondDocs, totalDocs:secondTotalDocs, page:secondPage } =  postedLifts;
     let { docs:thirdDocs, totalDocs:thirdTotalDocs, page:thirdPage } =  problemLifts;
     let { docs:fourthDocs, totalDocs:fourthTotalDocs, page:fourthPage } =  unapprovedUsers;
-
 
     return (
         <div data-test="lift">
@@ -193,6 +221,7 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                     </Grid>
                 </Grid>
             </Boxed>
+            <Greeting />
             <Boxed pad="5px 0">
                 <PageTitle data-test="title">Lifts: Awaiting Approval</PageTitle>
             </Boxed>
@@ -235,11 +264,10 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                         </FlexiTable>
                     )}
             </Boxed>
-
-            <Boxed pad="5px 0">
+            { isAdmin() && <Boxed pad="5px 0">
                 <PageTitle data-test="title">Users Awaiting Approval</PageTitle>
-            </Boxed>
-            <Boxed>
+            </Boxed>}
+            { isAdmin() && <Boxed>
                 {loading ? (
                     <Loader />
                 ) : (
@@ -256,7 +284,7 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                             />
                         </FlexiTable>
                     )}
-            </Boxed>
+            </Boxed>}
 
             <Boxed pad="5px 0">
                 <PageTitle data-test="title">Lifts: Posted</PageTitle>
