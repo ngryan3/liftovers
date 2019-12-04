@@ -12,22 +12,20 @@ import {
 import Logo from "../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../api/config";
+import Select from 'react-select'
 const LogoHolder = styled.img`
   height: 100px !important;
 `;
-
 
 class Signup extends React.Component {
     constructor() {
         super();
         this.state = {
-            fields: {},
+            fields: {'avaliability' : []},
             errors: {}
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
-
     };
 
     handleChange(e) {
@@ -46,16 +44,20 @@ class Signup extends React.Component {
             //
             let myForm = document.getElementById('myForm');
             const data = new FormData(myForm);
-
             var object = {};
             data.forEach(function(value, key) {
-                object[key] = value;
+                if(key == "avaliability"){
+                    const x = []
+                    x.push(value)
+                    object[key] = x
+                }else{
+                    object[key] = value;
+                }
             });
             object['status'] = 'waitingApproval';
             var json = JSON.stringify(object);
             console.log(json);
-
-            fetch(ApiUrl + "/user", {
+            fetch("http://localhost:7000/user", {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -260,9 +262,42 @@ class Signup extends React.Component {
                                         ]}
                                         name="methodOfCommunication" type="select" label="Preferred Method of Communication" required forminput
                                     />
+                                    <br />
+                                    <h2 style={{fontSize: '11px', color: '#5e5e5e' }}>PLEASE CHOOSE AVALIABILITY:</h2>
+                                    <Form.Group row>
+                                    <Select
+                                        options = {[
+                                            { value: 'Monday', label: 'Monday' },
+                                            { value: 'Tuesday', label: 'Tuesday' },
+                                            { value: 'Wednesday', label: 'Wednesday' },
+                                            { value: 'Thursday', label: 'Thursday' },
+                                            { value: 'Friday', label: 'Friday' },
+                                            { value: 'Saturday', label: 'Saturday' },
+                                            { value: 'Sunday', label: 'Sunday' }
+                                          ]}
+                                        
+                                          name="avaliability" isMulti={true} name="avaliability" type="select"  required forminput
+                                    />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    </Form.Group>
+                                    <div class="fixed-bottom" >
                                     <Form.Group row>
                                         <Input  style={{ backgroundColor: '#00ffd9' }} to="/login" type="submit" className="button"  value="Register"/>
                                     </Form.Group>
+                                    </div>
                                     <br />
                                 </form>
                             </Boxed>
