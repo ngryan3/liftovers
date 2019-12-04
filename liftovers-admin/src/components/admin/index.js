@@ -10,11 +10,21 @@ import {
 } from "flexibull";
 import { StyledSideList, Square, Footer } from "./style";
 import styled from "styled-components";
+
 import NavigationList from "../../menu.js";
+import NavigationVoluntList from "../../volunteerMenu.js";
 
 const Logo = styled.img`
   height: 90px !important;
 `;
+function NavList() {
+  const userRole = localStorage.getItem('currentUserType');
+  if (userRole == "admin"){
+    return <SideListing links={NavigationList} collapse={false} NavLink />
+  }else{
+    return <SideListing links={NavigationVoluntList} collapse={false} NavLink/>
+  }
+}
 
 export class AdminLayout extends Component {
   constructor(props) {
@@ -43,11 +53,7 @@ export class AdminLayout extends Component {
                 height="90px"
               />
             </AppBrand>
-            <SideListing
-              links={NavigationList}
-              collapse={this.state.collapseMenu}
-              NavLink
-            />
+            <NavList />
           </SideNavigation>
         </StyledSideList>
         <Container>
