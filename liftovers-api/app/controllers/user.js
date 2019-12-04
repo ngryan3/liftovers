@@ -7,6 +7,7 @@ var crypto = require("crypto");
 // Create and Save a new Note
 exports.create = function (req, res) {
     // Create and Save a new Note
+    console.log(req.body.email)
     if (!req.body.name) {
         return res.status(400).send({ message: "Name can not be empty" });
     }
@@ -28,6 +29,7 @@ exports.create = function (req, res) {
                 // default will be volunteer when creating a user object
                 // role: req.body.role,
                 // waitingApproval/ active/ deleted
+                avaliability: req.body.avaliability,
                 status: req.body.status,
                 volunteerId: req.body.volunteerId
             });
@@ -49,20 +51,19 @@ exports.create = function (req, res) {
     })
 };
 
-exports.login = function (req, res) {
+exports.login = function(req, res) {
     // Retrieve and return all notes from the database.
+    console.log(req.body.email)
     if (!req.body.email) {
         return res.status(400).send({ message: "Email can not be empty" });
     }
-
     User.findOne({ email: req.body.email }, function (err, user_email) {
         if (err) {
             return callback(err)
         } if (user_email) {
-            User.find({ email: req.body.email })
+            User.find({email: req.body.email })
                 .then(item => {
                     let password = item[0].password;
-                    let auth = null;
                     bcrypt.compare(req.body.password, password, function (err, result) {
                         if (result) {
                             res.status(300).send({ item })
