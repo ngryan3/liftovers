@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Profile from "./routes/profile";
+import EditProfile from "./routes/profile/edit/edit";
 import Login from "./routes/login";
 import Signup from "./routes/signup";
 import Home from "./routes/home";
@@ -57,6 +58,9 @@ function App() {
           <AdminLayout>
           <Route exact path="/profile">
               <Profile />
+          </Route>
+          <Route exact path="/profile/edit">
+              <EditProfile />
           </Route>
           <Route exact path="/dashboard">
               <Dashboard />

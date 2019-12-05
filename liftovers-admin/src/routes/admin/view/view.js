@@ -62,6 +62,7 @@ class ViewAdmin extends Component{
               <b>Email:</b> { this.state.admin.email } <br />
               <b>Phone:</b> { this.state.admin.phone } <br />
               <b>Preferred Method of Communication: </b>  { this.state.admin.methodOfCommunication }<br />
+              <b>Role: </b> { this.state.admin.role } <br />
               <b>Last Updated: </b> { this.state.admin.updatedAt } <br />
               <br />
               <Button type="submit" value="Back">

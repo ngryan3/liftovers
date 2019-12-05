@@ -40,9 +40,6 @@ class Profile extends Component{
     getSelf() {
         const userId = localStorage.getItem('currentUserID');
 
-        // DUMMY
-        // const userId = '5dcf15df8ba6a8c1949e7adc';
-
         fetch(ApiUrl + "/user/" + userId, {
             method: "GET"
         }).then(result => result.json())
@@ -50,7 +47,24 @@ class Profile extends Component{
     }
 
     render() {
-      return (
+        // Conditional rendering for default values of the drop downs on the form
+        let roleLabel;
+        if (this.state.self.role === "superAdmin") {
+            roleLabel = "Super Administrator";
+        } else if (this.state.self.role == "admin") {
+            roleLabel = "Administrator";
+        } else {
+            roleLabel = "Volunteer";
+        }
+
+        let methodOfCommmunicationLabel;
+        if (this.state.self.methodOfCommunication === "email") {
+            methodOfCommmunicationLabel = "Email";
+        } else {
+            methodOfCommmunicationLabel = "Phone";
+        }
+
+        return (
         <div>
             <Boxed pad="5px 0">
             <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -62,11 +76,12 @@ class Profile extends Component{
                 <b>Surname:</b> { this.state.self.surname } <br />
                 <b>Email:</b> { this.state.self.email } <br />
                 <b>Phone:</b> { this.state.self.phone } <br />
-                <b>Preferred Method of Communication: </b>  { this.state.self.methodOfCommunication }<br />
+                <b>Preferred Method of Communication: </b>  { methodOfCommmunicationLabel }<br />
+                <b>Role: </b> { roleLabel } <br />
                 <b>Last Updated: </b> { this.state.self.updatedAt } <br />
                 <br />
             <Button style={{background:"#A6CBFF"}} type="submit" value="Edit">
-                <a href={"../edit/" + this.state.self._id } >
+                <a href={"/profile/edit/"} >
                     Edit
                 </a>
             </Button>
