@@ -16,12 +16,11 @@ exports.create = function(req, res) {
     contactPhone: req.body.contactPhone,
     methodOfCommunication: req.body.methodOfCommunication,
     location: req.body.location,
-    hours: req.body.hours.hours,
+    hours: req.body.hours,
     typeOfFood: req.body.typeOfFood,
     recurring: req.body.recurring,
     recurringTimes: req.body.recurringTimes,
-    accessNotes: req.body.accessNotes,
-    status: req.body.status
+    accessNotes: req.body.accessNotes
   });
 
 
