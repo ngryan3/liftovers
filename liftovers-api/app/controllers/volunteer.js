@@ -298,7 +298,6 @@ exports.acceptText = function (req, res) {
                                         .catch(error => {
                                             console.log(error);
                                         });
-                                    return res.status(200).send({ message: "No volunteer accepted. Lift status is now problem." })
                                 } else {
                                     Lifts.findOneAndUpdate({ _id: item[0]._id }, { $pull: { volunteer: vol._id } })
                                         .then(ll => {
