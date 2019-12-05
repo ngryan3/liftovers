@@ -72,6 +72,14 @@ function handleVolunteer(accessor) {
     }).then(result => result.json()).then(data => data.name)
 }
 
+function handleCompleteClick(accessor) {
+    console.log(accessor)
+    fetch(ApiUrl + "/lift/" + accessor + "/complete", {
+        method: 'POST'
+      }).then(result => result.json())
+      window.location = "/dashboard"
+    
+}
 
 function handleApproveClick(accessor) {
     console.log(accessor)
@@ -121,12 +129,12 @@ const buttonColumns = [
     { title: "Phone", dataIndex: "phone", key: "phone" },
     { title: "Pickup Address", dataIndex: "address", key: "address" },
     { title: "Date", dataIndex: "date", key: "date" },
-    // { title: "Serve Time", accessor: "serveTime", key: "serveTime",
-    // render: accessor => (handleServeTime(accessor))
-    // },
-    // { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
-    // render: accessor => (handlePickupTime(accessor))},
-    // { title: "Description", dataIndex: "description", key: "description" },
+    { title: "Serve Time", accessor: "serveTime", key: "serveTime",
+    render: accessor => (handleServeTime(accessor))
+    },
+    { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
+    render: accessor => (handlePickupTime(accessor))},
+    { title: "Description", dataIndex: "description", key: "description" },
     {
         header: '',
         id: 'post-button',
@@ -157,12 +165,12 @@ const columns = [
     { title: "Phone", dataIndex: "phone", key: "phone" },
     { title: "Pickup Address", dataIndex: "address", key: "address" },
     { title: "Date", dataIndex: "date", key: "date" },
-    // { title: "Serve Time", accessor: "serveTime", key: "serveTime",
-    // render: accessor => (handleServeTime(accessor))
-    // },
-    // { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
-    // render: accessor => (handlePickupTime(accessor))
-    // },
+    { title: "Serve Time", accessor: "serveTime", key: "serveTime",
+    render: accessor => (handleServeTime(accessor))
+    },
+    { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
+    render: accessor => (handlePickupTime(accessor))
+    },
     { title: "Description", dataIndex: "description", key: "description" },
     {   
         header: '',
@@ -182,15 +190,24 @@ const ongoingColumns = [
     { title: "Phone", dataIndex: "phone", key: "phone" },
     { title: "Pickup Address", dataIndex: "address", key: "address" },
     { title: "Date", dataIndex: "date", key: "date" },
-    // { title: "Serve Time", accessor: "serveTime", key: "serveTime",
-    // render: accessor => (handleServeTime(accessor))
-    // },
-    // { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
-    // render: accessor => (handlePickupTime(accessor))
-    // },
+    { title: "Serve Time", accessor: "serveTime", key: "serveTime",
+    render: accessor => (handleServeTime(accessor))
+    },
+    { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
+    render: accessor => (handlePickupTime(accessor))
+    },
     // { title: "Volunteer", accessor: "volunteer", key: "volunteer",
     // render: accessor => (Promise.resolve(handleVolunteer(accessor)))
     // },
+    {   
+        header: '',
+        accessor: '_id',
+        dataIndex: '_id',
+        render: accessor => (<Button 
+            onClick={
+                (e) => handleCompleteClick(accessor)
+            }>Complete</Button>)
+    },
     {   
         header: '',
         accessor: '_id',
