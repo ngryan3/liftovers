@@ -92,9 +92,6 @@ const Home = () => {
                     </ClearButton>
                     <LogInout />
                     <ClearButton>
-                        <ClearLink to="/dashboard">Dashboard</ClearLink>
-                    </ClearButton>
-                    <ClearButton>
                         <ClearLink to="/about">About</ClearLink>
                     </ClearButton>
                   </Grid>
