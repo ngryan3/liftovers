@@ -10,12 +10,14 @@ var DonorSchema = mongoose.Schema({
     methodOfCommunication: String,
     location: String,
     hours: {
-        day: String,
-        time: {
-            hour: Number,
-            minute: Number,
-            }
-        },
+            day: String,
+            time: {
+                openingHour: Number,
+                openingMinute: Number,
+                closingHour: Number,
+                closingMinute: Number,
+                }
+            },
     // active/ deleted
     status: {type: String, default: "active"},
     typeOfFood: String,

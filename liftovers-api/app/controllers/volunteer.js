@@ -131,6 +131,20 @@ exports.getOne = function (req, res) {
 };
 
 
+exports.ongoingLifts = function (req, res) {
+    Volunteer.findById(req.params.id, function (err, volunteer) {
+        if (err) {
+            return res.status(404).send({ message: "No such volunteer." });
+        } else {
+            Lifts.find({ status: "ongoing", chosenVolunteer: volunteer })
+                .then((lifts) => {
+                    return res.status(200).send(lifts);
+            });
+        }
+    });
+};
+
+
 exports.deleteVolunteer = function (req, res) {
     Volunteer.findByIdAndUpdate(req.params.id, { status: "deleted" })
         .then(vol => {
