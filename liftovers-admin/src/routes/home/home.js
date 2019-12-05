@@ -103,6 +103,19 @@ const Home = () => {
             </Boxed>
           </Contain>
         </Header>
+          <div id="main-container">
+              <Boxed pad="50px">
+                <h2 style={{marginLeft: '1px', color: '#5e5e5e' }}>lifTOvers</h2><br/>
+                <h3 style={{marginLeft: '1px', color: '#000000', fontSize: '12pt' }}>
+                We are a dedicated team of volunteers working around the clock to lift food to<br/>
+                those who need it most.
+                </h3>
+              </Boxed>
+              <br/><br/>
+              <div class="boxed">
+                <img src ='https://pbs.twimg.com/media/D5rGcOKWkAYYnAP?format=jpg' width="800"></img>
+              </div>
+          </div>
         <Greeting />
       </Wrapper>
     </Layout>
