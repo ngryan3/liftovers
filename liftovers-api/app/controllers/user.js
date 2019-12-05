@@ -8,7 +8,6 @@ var crypto = require("crypto");
 // Create and Save a new Note
 exports.create = function (req, res) {
     // Create and Save a new Note
-    console.log(req.body.email)
     if (!req.body.name) {
         return res.status(400).send({ message: "Name can not be empty" });
     }
@@ -24,8 +23,6 @@ exports.create = function (req, res) {
                 phone: req.body.phone,
                 methodOfCommunication: req.body.methodOfCommunication,
                 password: req.body.password,
-                securityQuestion: req.body.securityQuestion,
-                securityAnswer: req.body.securityAnswer,
                 // volunteer/ admin/ superAdmin
                 // default will be volunteer when creating a user object
                 // role: req.body.role,
@@ -54,7 +51,6 @@ exports.create = function (req, res) {
 
 exports.login = function (req, res) {
     // Retrieve and return all notes from the database.
-    console.log(req.body.email)
     if (!req.body.email) {
         return res.status(400).send({ message: "Email can not be empty" });
     }
@@ -120,7 +116,7 @@ exports.forgot = function (req, res, next) {
                 subject: 'Password Reset',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                    'http://localhost:3000/reset/' + token + '\n\n' +
+                    'https://liftovers-admin.herokuapp.com/reset/' + token + '\n\n' +
                     'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             smtpTransport.sendMail(mailOptions, function (err) {
