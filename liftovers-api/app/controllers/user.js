@@ -218,11 +218,13 @@ exports.getOne = function (req, res) {
 
 exports.deleteUser = function (req, res) {
     User.findByIdAndUpdate(req.params.id, { status: "deleted" })
-        .then(ll => {
+        .then(user => {
             console.log("changed user status to deleted");
+            return res.status(200).send(user);
         })
         .catch(error => {
             console.log(error);
+            return res.status(404).send(error);
         });
 }
 
@@ -245,6 +247,7 @@ exports.approveUser = function (req, res) {
                         return res.status(404).send({message: "No such user."});
                     } else {
                         console.log("changed user status to active");
+                        return res.status(200).send(user);
                     }
                 });
             });
@@ -270,11 +273,13 @@ exports.updateUser = function (req, res) {
         update.role = req.body.role;
     }
     User.findByIdAndUpdate(req.params.id, update)
-        .then(ll => {
+        .then(user => {
             console.log("updated user");
+            return res.status(200).send(user);
         })
         .catch(error => {
             console.log(error);
+            return res.status(404).send(error);
         })
 }
 
