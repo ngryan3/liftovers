@@ -54,7 +54,22 @@ function Greeting() {
     return <br />
 }
 
+function handleServeTime(accessor) {
+    var time = accessor.serveTime.hour.toString();
+    time += ":";
+    var minute = accessor.serveTime.minute.toString()
+    time += minute;
+    return time;   
+}
 
+function handlePickupTime(accessor) {
+    console.log(accessor)
+    var time = accessor.pickupTime.hour.toString();
+    time += ":";
+    var minute = accessor.pickupTime.minute.toString()
+    time += minute;
+    return time;   
+}
 
 function handleApproveClick(accessor) {
     console.log(accessor)
@@ -104,8 +119,11 @@ const buttonColumns = [
     { title: "Phone", dataIndex: "phone", key: "phone" },
     { title: "Pickup Address", dataIndex: "address", key: "address" },
     { title: "Date", dataIndex: "date", key: "date" },
-    { title: "Serve Time", dataIndex: "serveTime", key: "serveTime" },
-    { title: "Pickup Time", dataIndex: "pickupTime", key: "pickupTime" },
+    { title: "Serve Time", accessor: "serveTime", key: "serveTime",
+    render: accessor => (handleServeTime(accessor))
+    },
+    { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
+    render: accessor => (handlePickupTime(accessor))},
     { title: "Description", dataIndex: "description", key: "description" },
     {
         header: '',
@@ -136,8 +154,12 @@ const columns = [
     { title: "Phone", dataIndex: "phone", key: "phone" },
     { title: "Pickup Address", dataIndex: "address", key: "address" },
     { title: "Date", dataIndex: "date", key: "date" },
-    { title: "Serve Time", dataIndex: "serveTime", key: "serveTime" },
-    { title: "Pickup Time", dataIndex: "pickupTime", key: "pickupTime" },
+    { title: "Serve Time", accessor: "serveTime", key: "serveTime",
+    render: accessor => (handleServeTime(accessor))
+    },
+    { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
+    render: accessor => (handlePickupTime(accessor))
+    },
     { title: "Description", dataIndex: "description", key: "description" },
     {   
         header: '',
