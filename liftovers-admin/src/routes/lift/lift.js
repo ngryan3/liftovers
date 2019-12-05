@@ -25,7 +25,6 @@ const columns = [
   { title: "Email", dataIndex: "email", key: "email"},
   { title: "Postal Code", dataIndex: "postalCode", key: "postalCode" },
   { title: "Date", dataIndex: "date", key: "date"},
-  { title: "Volunteer", dataIndex: "volunteer", key: "volunteer"}
 ];
 const pageOptions = [
   { value: 10, label: "10 Rows" },
