@@ -283,13 +283,10 @@ exports.acceptText = function (req, res) {
                                 });
 
                             twiml.message(
-                                `You have been confirmed as the volunteer at ${item[0].address}`
+                                `You have been confirmed as the volunteer at ${item[0].address}.`
                             );
                         } else {
                             console.log("response is no");
-                            twiml.message(
-                                `Got your response.`
-                            );
                             if (item.length === 0) {
                                 return res.status(200).send("no valid lift");
                             } else {
@@ -312,6 +309,9 @@ exports.acceptText = function (req, res) {
                                         });
                                 }
                             }
+                            twiml.message(
+                                `Thank you for your response. You have refused the lift at ${item[0].address}.`
+                            );
                         }
 
                         //res.writeHead(200, { "Content-Type": "text/xml" });
