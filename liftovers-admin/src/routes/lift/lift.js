@@ -60,9 +60,6 @@ export const Lift = ({ getLifts, lifts, loading }) => {
             mobile="60% 40%"
             padHorizontal="0"
           >
-            <Boxed pad="0.2rem 0.15rem 0.2rem 0">
-              <Input type="search" />
-            </Boxed>
             <Boxed pad="0.2rem 0 0.2rem 0.15rem" />
           </Grid>
           <Grid default="100%" tablet="100%" mobile="100%">
