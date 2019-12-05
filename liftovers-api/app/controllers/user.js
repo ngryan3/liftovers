@@ -1,4 +1,5 @@
 var User = require("../models/user.js");
+var Volunteer = require("../models/volunteer.js");
 var bcrypt = require('bcryptjs');
 var async = require("async");
 var nodemailer = require("nodemailer");
@@ -29,7 +30,6 @@ exports.create = function (req, res) {
                 // default will be volunteer when creating a user object
                 // role: req.body.role,
                 // waitingApproval/ active/ deleted
-                avaliability: req.body.avaliability,
                 status: req.body.status,
                 volunteerId: req.body.volunteerId
             });
@@ -51,7 +51,7 @@ exports.create = function (req, res) {
     })
 };
 
-exports.login = function(req, res) {
+exports.login = function (req, res) {
     // Retrieve and return all notes from the database.
     console.log(req.body.email)
     if (!req.body.email) {
@@ -61,7 +61,7 @@ exports.login = function(req, res) {
         if (err) {
             return callback(err)
         } if (user_email) {
-            User.find({email: req.body.email })
+            User.find({ email: req.body.email })
                 .then(item => {
                     let password = item[0].password;
                     bcrypt.compare(req.body.password, password, function (err, result) {
@@ -82,30 +82,30 @@ exports.login = function(req, res) {
     })
 };
 
-exports.forgot = function(req, res, next){
+exports.forgot = function (req, res, next) {
     async.waterfall([
-        function(done) {
-            crypto.randomBytes(20, function(err, buf) {
+        function (done) {
+            crypto.randomBytes(20, function (err, buf) {
                 var token = buf.toString('hex');
                 done(err, token);
             });
         },
-        function(token, done) {
-            User.findOne({ email: req.body.email }, function(err, user) {
+        function (token, done) {
+            User.findOne({ email: req.body.email }, function (err, user) {
                 if (!user) {
-                    res.status(400).send({message: 'User does not exists in database'})
+                    res.status(400).send({ message: 'User does not exists in database' })
                     return
                 }
 
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
-                user.save(function(err) {
+                user.save(function (err) {
                     done(err, token, user);
                 });
             });
         },
-        function(token, user, done) {
+        function (token, user, done) {
             var smtpTransport = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
@@ -122,43 +122,43 @@ exports.forgot = function(req, res, next){
                     'http://localhost:3000/reset/' + token + '\n\n' +
                     'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
-            smtpTransport.sendMail(mailOptions, function(err) {
+            smtpTransport.sendMail(mailOptions, function (err) {
                 console.log('mail sent');
-                res.status(300).send({message: 'success An e-mail has been sent'});
+                res.status(300).send({ message: 'success An e-mail has been sent' });
                 done(err, 'done');
             });
         }
-    ], function(err) {
+    ], function (err) {
         if (err) return next(err);
     });
 };
 
-exports.reset = function(req, res, next){
-    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-        if (err){
+exports.reset = function (req, res, next) {
+    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
+        if (err) {
             callback(err)
         }
         if (!user) {
-            res.status(400).send({message: 'Password reset token is invalid or has expired.'});
+            res.status(400).send({ message: 'Password reset token is invalid or has expired.' });
             // return res.redirect('/forgot');
-        } else{
+        } else {
             console.log('token still valid');
-            res.status(200).send({message: 'Token is still valid'});
+            res.status(200).send({ message: 'Token is still valid' });
 
         }
     });
 };
 
-exports.changepassword = function(req, res, next){
-    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-        if (err){
+exports.changepassword = function (req, res, next) {
+    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
+        if (err) {
             callback(err)
         }
         if (!user) {
-            res.status(400).send({message: 'Password reset token is does not exists or has expired.'});
+            res.status(400).send({ message: 'Password reset token is does not exists or has expired.' });
             // return res.redirect('/forgot');
-        } else{
-            if (req.body.password === req.body.confpassword){
+        } else {
+            if (req.body.password === req.body.confpassword) {
                 console.log('token still valid');
                 user.password = req.body.password;
                 user.resetPasswordToken = undefined;
@@ -171,12 +171,12 @@ exports.changepassword = function(req, res, next){
                             .status(500)
                             .send({ message: "Some error occurred while changing password." });
                     } else {
-                        res.status(200).send({message: 'Token is still valid and password was changed'});
+                        res.status(200).send({ message: 'Token is still valid and password was changed' });
                     }
                 });
             } else {
                 console.log('passwords do not match');
-                res.status(401).send({ message: "Passwords do not match. Try again"})
+                res.status(401).send({ message: "Passwords do not match. Try again" })
             }
 
         }
@@ -187,19 +187,19 @@ getUsers = (origin, dest) => {
     return User.find();
 };
 
-exports.findAll = function(req, res) {
+exports.findAll = function (req, res) {
     // Retrieve and return all users (not deleted) from the database.
     let { page = 1, limit = 100 } = req.query;
-    User.paginate({ status: {'$ne': "deleted"} }, { page, limit }).then(users => {
+    User.paginate({ status: { '$ne': "deleted" } }, { page, limit }).then(users => {
         if (!users)
             return res.status(404).send({ message: "No Users found." });
         return res.status(200).send(users);
     });
 };
 
-exports.findWait = function(req, res) {
+exports.findWait = function (req, res) {
     let { page = 1, limit = 100 } = req.query;
-    User.paginate({status: "waitingApproval"}, { page, limit }).then(users => {
+    User.paginate({ status: "waitingApproval" }, { page, limit }).then(users => {
         if (!users)
             return res.status(404).send({ message: "No Users waiting for approval." });
         return res.status(200).send(users);
@@ -218,22 +218,41 @@ exports.getOne = function (req, res) {
 
 exports.deleteUser = function (req, res) {
     User.findByIdAndUpdate(req.params.id, { status: "deleted" })
-        .then(ll => {
+        .then(user => {
             console.log("changed user status to deleted");
+            return res.status(200).send(user);
         })
         .catch(error => {
             console.log(error);
+            return res.status(404).send(error);
         });
 }
 
 exports.approveUser = function (req, res) {
-    User.findByIdAndUpdate(req.params.id, { status: "active" })
-        .then(ll => {
-            console.log("changed user status to active");
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    User.findById(req.params.id, function (err, user) {
+        if (err) {
+            console.log(err);
+            return res.status(404).send({ message: "No such user." });
+        } else {
+            Volunteer.findOne({ email: user.email }, function (err, volunteer) {
+                user.status = "active";
+                if (err) {
+                    console.log("no associated volunteer found");
+                } else {
+                    user.volunteerId = volunteer;
+                }
+                user.save(function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        return res.status(404).send({message: "No such user."});
+                    } else {
+                        console.log("changed user status to active");
+                        return res.status(200).send(user);
+                    }
+                });
+            });
+        }
+    });
 }
 
 exports.updateUser = function (req, res) {
@@ -254,11 +273,13 @@ exports.updateUser = function (req, res) {
         update.role = req.body.role;
     }
     User.findByIdAndUpdate(req.params.id, update)
-        .then(ll => {
+        .then(user => {
             console.log("updated user");
+            return res.status(200).send(user);
         })
         .catch(error => {
             console.log(error);
+            return res.status(404).send(error);
         })
 }
 

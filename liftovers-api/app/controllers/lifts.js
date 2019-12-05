@@ -234,7 +234,7 @@ exports.postLift = function (req, res) {
                 console.log('timesorted', timeSorted)
 
                 if (timeSorted.length === 0) {
-                    Lifts.findOneAndUpdate({ _id: liftId }, { status: "problem", message: "no available volunteer" })
+                    Lifts.findOneAndUpdate({ _id: liftId, status: "requested" }, { status: "problem", message: "no available volunteer" })
                         .then(ll => {
                             console.log("changed lift status to problem");
                         })
@@ -258,7 +258,7 @@ exports.postLift = function (req, res) {
                         return item.volunteer
                     })
 
-                    Lifts.findOneAndUpdate({ _id: liftId }, { status: "posted", volunteer: volunteersTexted })
+                    Lifts.findOneAndUpdate({ _id: liftId, status: "requested" }, { status: "posted", volunteer: volunteersTexted })
                         .then(ll => {
                             console.log("changed lift status to posted");
                         })

@@ -15,8 +15,7 @@ var UserSchema = mongoose.Schema({
     status: String,
     volunteerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Team2volunteers' },
     resetPasswordToken: String,
-    resetPasswordExpires: String,
-    avaliability: Array
+    resetPasswordExpires: String
 }, {
     timestamps: true
 });

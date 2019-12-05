@@ -47,6 +47,7 @@ module.exports = function (app) {
 
   app.get("/volunteer", volunteer.findAll);
   app.get("/volunteer/:id", volunteer.getOne);
+  app.get("/volunteer/:id/ongoingLifts", volunteer.ongoingLifts);
   app.post("/volunteer", volunteer.create);
   app.post("/volunteer/:id", volunteer.updateVolunteer);
   app.post("/volunteer/:id/delete", volunteer.deleteVolunteer);
