@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Profile from "./routes/profile";
 import Login from "./routes/login";
 import Signup from "./routes/signup";
 import Home from "./routes/home";
@@ -54,6 +55,9 @@ function App() {
         <Switch>
           <Route path="/reset/:token" component={Reset}/>
           <AdminLayout>
+          <Route exact path="/profile">
+              <Profile />
+          </Route>
           <Route exact path="/dashboard">
               <Dashboard />
            </Route> 
