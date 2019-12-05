@@ -51,7 +51,7 @@ class Reset extends React.Component{
             .then(response => {
                 if (response.status === 400){
                     alert('Link is invalid')
-                    window.location.replace('http://localhost:3000')
+                    window.location.replace('https://liftovers-admin.herokuapp.com')
                 }
             })
     }
@@ -86,7 +86,7 @@ class Reset extends React.Component{
                     if (response.status === 200) {
                         alert('Password was changed');
                         console.log(response);
-                        window.location.replace('http://localhost:3000/')
+                        window.location.replace('https://liftovers-admin.herokuapp.com/')
                     }
                     if (response.status === 401) {
                         alert('Passwords do not match. Please try again');

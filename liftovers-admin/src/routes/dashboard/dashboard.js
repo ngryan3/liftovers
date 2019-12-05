@@ -209,20 +209,20 @@ const userColumns = [
     { title: "Role", dataIndex: "role", key: "role" },
     { title: "Email", dataIndex: "email", key: "email" },
     { title: "Phone", dataIndex: "phone", key: "phone" },
-    {   
+    {
         header: '',
         accessor: '_id',
         dataIndex: '_id',
-        render: accessor => (<Button 
+        render: accessor => (<Button
             onClick={
                 (e) => handleApproveClick(accessor)
             }>Approve</Button>)
     },
-    {   
+    {
         header: '',
         accessor: '_id',
         dataIndex: '_id',
-        render: accessor => (<Button 
+        render: accessor => (<Button
             onClick={
                 (e) => handleDeleteClick(accessor)
             }>Delete</Button>)

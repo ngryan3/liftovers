@@ -12,7 +12,7 @@ import {
 } from "flexibull";
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
-import { isAdmin } from "../../actions/admin"
+import { isAdmin, isSuperAdmin } from "../../actions/admin"
 import { isVolunteer } from "../../actions/volunteer"
 
 export const PageTitle = styled.h3`
@@ -47,8 +47,10 @@ const columns = [
                                   Edit
                               </a>
                            </Button>)
-      },
-    {
+      }
+];
+
+const delete_button =  {
       header: '',
       accessor: "_id",
       dataIndex: "_id",
@@ -57,9 +59,8 @@ const columns = [
                               <a href={"/admins/delete/" + accessor}>
                                   Delete
                               </a>
-                            </Button>)
-    }
-];
+                            </Button>)}
+
 const pageOptions = [
   { value: 10, label: "10 Rows" },
   { value: 20, label: "20 Rows" },
@@ -73,6 +74,12 @@ export const Admin = ({ getAdmins, admins, loading }) => {
   }, []);
   console.log(admins);
   let { docs, totalDocs, page } = admins;
+
+  // If super admin, append the delete button in the table to give delete access
+  if (isSuperAdmin()) {
+    columns.push(delete_button);
+  }
+
   return (
     <div data-test="admin">
       <Boxed pad="5px 0">
