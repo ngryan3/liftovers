@@ -82,17 +82,21 @@ class DeleteAdmin extends Component{
                             Delete Admin { this.state.admin.name } {this.state.admin.surname}
                         </PageTitle>
             </Boxed> }
-            { isAdmin() && <Boxed pad="50px">
+            { isSuperAdmin() && <Boxed pad="50px">
               <p> Are you sure you want to delete this administrator? </p>
               <Button type="submit" value="Cancel">
                 <a href="../">
                     Cancel
                 </a>
               </Button>
-                  { isSuperAdmin() && <Button onClick={this.deleteAdmin} style={{background:"#FF8C83"}} value="Submit">
+                  <Button onClick={this.deleteAdmin} style={{background:"#FF8C83"}} value="Submit">
                     Delete
-                  </Button> }
+                  </Button>
               </Boxed> }
+            { isAdmin() && !isSuperAdmin() && <Boxed pad="50px">
+                Only Super Administrators may delete other administrators.
+            </Boxed>
+            }
             </div>
           );
 

@@ -14,7 +14,7 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
-import { isAdmin } from "../../../actions/admin"
+import { isAdmin, isSuperAdmin } from "../../../actions/admin"
 import { isVolunteer } from "../../../actions/volunteer"
 
 export const PageTitle = styled.h3`
@@ -80,11 +80,11 @@ class ViewAdmin extends Component{
                     Edit
                 </a>
               </Button>
-              <Button style={{background:"#FF8C83"}} type="submit" value="Delete">
+              { isSuperAdmin() && <Button style={{background:"#FF8C83"}} type="submit" value="Delete">
                 <a href={"../delete/" + this.props.match.params.admin_id} >
                     Delete
                 </a>
-              </Button>
+              </Button> }
               </Boxed> }
         </div>
       );
