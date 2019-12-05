@@ -18,8 +18,8 @@ const Logo = styled.img`
   height: 90px !important;
 `;
 function NavList() {
-  const userRole = localStorage.getItem('currentUserType');
-  if (userRole == "admin"){
+  const userRole = localStorage.getItem('currentUserRole');
+  if (userRole == "admin" || userRole == "superAdmin"){
     return <SideListing links={NavigationList} collapse={false} NavLink />
   }else{
     return <SideListing links={NavigationVoluntList} collapse={false} NavLink/>

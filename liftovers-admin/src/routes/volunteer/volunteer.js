@@ -64,6 +64,24 @@ const pageOptions = [
   { value: 100, label: "100 Rows" }
 ];
 
+function isVolunteer(){
+    const userRole = localStorage.getItem('currentUserRole');
+    console.log(userRole);
+    if (userRole == "volunteer"){
+        return true
+    }
+    return false
+}
+
+function isAdmin(){
+    const userRole = localStorage.getItem('currentUserRole');
+    console.log(userRole);
+    if (userRole == "admin" || userRole == "superAdmin"){
+        return true
+    }
+    return false
+}
+
 export const Volunteer = ({ getVolunteers, volunteers, loading }) => {
   useEffect(() => {
     getVolunteers({ page: 1, limit: 10 });
@@ -74,7 +92,10 @@ export const Volunteer = ({ getVolunteers, volunteers, loading }) => {
       <Boxed pad="5px 0">
         <PageTitle data-test="title">Volunteers</PageTitle>
       </Boxed>
-      <Boxed>
+      { isVolunteer() && <Boxed>
+              You do not have access to this page!
+          </Boxed> }
+      { isAdmin() && <Boxed>
         <Grid
           default="50% 50%"
           tablet="60% 40%"
@@ -101,8 +122,8 @@ export const Volunteer = ({ getVolunteers, volunteers, loading }) => {
             </Boxed>
           </Grid>
         </Grid>
-      </Boxed>
-      <Boxed>
+      </Boxed> }
+      { isAdmin() && <Boxed>
         {loading ? (
           <Loader />
         ) : (
@@ -119,7 +140,7 @@ export const Volunteer = ({ getVolunteers, volunteers, loading }) => {
             />
           </FlexiTable>
         )}
-      </Boxed>
+      </Boxed> }
     </div>
   );
 };

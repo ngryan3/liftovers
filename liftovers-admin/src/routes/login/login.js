@@ -11,6 +11,7 @@ import {
 } from "../../components/styles";
 import Logo from "../../assets/liftovers.jpg";
 import styled from "styled-components";
+import ApiUrl from "../../api/config";
 const LogoHolder = styled.img`
   height: 100px !important;
 `;
@@ -73,8 +74,7 @@ class Login extends React.Component{
         object[key] = value;
       });
       var json = JSON.stringify(object);
-      console.log(json);
-      fetch("http://localhost:7000/login", {
+      fetch(ApiUrl + "/login", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -88,11 +88,11 @@ class Login extends React.Component{
             } if (response.status === 500){
                 alert('Username and password do not match our records');
             }if (response.status === 300){
-              window.location.replace('http://localhost:3000/dashboard')
-            } 
+                window.location.replace('/dashboard')
+            }
             return response.json()})
           .then(data => {
-            localStorage.setItem('currentUserType', data.item[0].role)
+            localStorage.setItem('currentUserRole', data.item[0].role)
             localStorage.setItem('currentUserID', data.item[0]._id)
             localStorage.setItem('currentUsername', data.item[0].name)
           })

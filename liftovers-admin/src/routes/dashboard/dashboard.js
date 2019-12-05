@@ -45,7 +45,6 @@ function Greeting() {
           pad="10px"
         >
         <div>
-          
             <h2 style={{marginLeft: '0px', color: '#5e5e5e' }}>Welcome,  {username}!</h2>
         </div>
       </Grid>
@@ -180,7 +179,7 @@ const userColumns = [
 function isVolunteer(){
     const userRole = localStorage.getItem('currentUserRole');  
     console.log(userRole)
-    if (userRole == "volunter"){
+    if (userRole == "volunteer"){
         return true
     }
     return false
@@ -189,7 +188,7 @@ function isVolunteer(){
 function isAdmin(){
     const userRole = localStorage.getItem('currentUserRole');  
     console.log(userRole)
-    if (userRole == "admin"){
+    if (userRole == "admin" || userRole == "superAdmin" ){
         return true
     }
     return false
