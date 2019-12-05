@@ -30,7 +30,6 @@ exports.create = function (req, res) {
                 // default will be volunteer when creating a user object
                 // role: req.body.role,
                 // waitingApproval/ active/ deleted
-                avaliability: req.body.avaliability,
                 status: req.body.status,
                 volunteerId: req.body.volunteerId
             });
