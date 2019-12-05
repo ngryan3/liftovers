@@ -88,7 +88,7 @@ class Login extends React.Component{
             } if (response.status === 500){
                 alert('Username and password do not match our records');
             }if (response.status === 300){
-                window.location.replace('/dashboard')
+                window.location.replace('https://liftovers-admin.herokuapp.com/profile')
             }
             return response.json()})
           .then(data => {
