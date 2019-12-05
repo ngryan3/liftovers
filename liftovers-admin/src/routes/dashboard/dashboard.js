@@ -209,20 +209,20 @@ const userColumns = [
     { title: "Role", dataIndex: "role", key: "role" },
     { title: "Email", dataIndex: "email", key: "email" },
     { title: "Phone", dataIndex: "phone", key: "phone" },
-    {
+    {   
         header: '',
         accessor: '_id',
         dataIndex: '_id',
-        render: accessor => (<Button
+        render: accessor => (<Button 
             onClick={
                 (e) => handleApproveClick(accessor)
             }>Approve</Button>)
     },
-    {
+    {   
         header: '',
         accessor: '_id',
         dataIndex: '_id',
-        render: accessor => (<Button
+        render: accessor => (<Button 
             onClick={
                 (e) => handleDeleteClick(accessor)
             }>Delete</Button>)
@@ -305,7 +305,7 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
             { isAdmin() && <Boxed pad="5px 0">
                 <PageTitle data-test="title">Lifts: Issues Found</PageTitle>
                             </Boxed> }
-            <Boxed>
+            { isAdmin() &&<Boxed>
                 {loading ? (
                     <Loader />
                 ) : (
@@ -322,7 +322,7 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                             />
                         </FlexiTable>
                     )}
-            </Boxed>
+            </Boxed> }
             { isAdmin() && <Boxed pad="5px 0">
                 <PageTitle data-test="title">Users Awaiting Approval</PageTitle>
             </Boxed>}
@@ -345,10 +345,10 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                     )}
             </Boxed>}
 
-            <Boxed pad="5px 0">
+            { isAdmin() && <Boxed pad="5px 0">
                 <PageTitle data-test="title">Lifts: Posted</PageTitle>
-            </Boxed>
-            <Boxed>
+                            </Boxed> }
+            { isAdmin() &&<Boxed>
                 {loading ? (
                     <Loader />
                 ) : (
@@ -365,12 +365,12 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                             />
                         </FlexiTable>
                     )}
-            </Boxed>
+            </Boxed> }
 
-            <Boxed pad="5px 0">
+            { isAdmin() && <Boxed pad="5px 0">
                 <PageTitle data-test="title">Lifts: Ongoing</PageTitle>
-            </Boxed>
-            <Boxed>
+                            </Boxed> }
+            { isAdmin() &&<Boxed>
                 {loading ? (
                     <Loader />
                 ) : (
@@ -387,7 +387,7 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                             />
                         </FlexiTable>
                     )}
-            </Boxed>
+        </Boxed> }
 
         </div>
 
