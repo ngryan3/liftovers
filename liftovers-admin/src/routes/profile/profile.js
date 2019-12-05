@@ -27,7 +27,7 @@ const LogoHolder = styled.img`
 
 function clearStorage(){
     localStorage.clear();
-    window.location.replace("http://localhost:3000")
+    window.location.replace("https://liftovers-admin.herokuapp.com/")
 }
 
 class Profile extends Component{
