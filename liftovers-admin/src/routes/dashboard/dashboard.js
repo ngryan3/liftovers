@@ -250,25 +250,19 @@ function isAdmin(){
 export const Dashboard = ({ getRequestedLifts, getPostedLifts, 
     postedLifts, requestedLifts, getProblemLifts, problemLifts, 
     unapprovedUsers, getUnapprovedUsers, 
-    ongoingLifts, getOngoingLifts, 
-    myLifts, getMyLifts, loading }) => {
+    ongoingLifts, getOngoingLifts, loading}) => {
     useEffect(() => {
         getRequestedLifts({ page: 1, limit: 10 });
         getPostedLifts({ page: 1, limit: 10 });
         getProblemLifts({ page: 1, limit: 10 });
         getUnapprovedUsers({ page: 1, limit: 10 });
         getOngoingLifts({ page: 1, limit: 10 });
-        getMyLifts({ page: 1, limit: 10 });
       }, []);
     let { docs, totalDocs, page } = requestedLifts;
     let { docs:secondDocs, totalDocs:secondTotalDocs, page:secondPage } =  postedLifts;
     let { docs:thirdDocs, totalDocs:thirdTotalDocs, page:thirdPage } =  problemLifts;
     let { docs:fourthDocs, totalDocs:fourthTotalDocs, page:fourthPage } =  unapprovedUsers;
     let { docs:fifthDocs, totalDocs:fifthTotalDocs, page:fifthPage } =  ongoingLifts;
-    let { docs:sixthDocs, totalDocs:sixthTotalDocs, page:sixthPage } =  myLifts;
-
-    console.log(getOngoingLifts());
-    console.log(getMyLifts());
 
     return (
         <div data-test="lift">
@@ -385,28 +379,6 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                                 total={fifthTotalDocs}
                                 onChange={fifthPage => getOngoingLifts({ fifthPage, limit: 10 })}
                                 current={fifthPage}
-                                pageCounts={pageOptions}
-                                pageSize={10}
-                                showTotal={(total, range) => {
-                                    return `${range[0]} - ${range[1]} of ${total} items`;
-                                }}
-                            />
-                        </FlexiTable>
-                    )}
-            </Boxed>
-
-            <Boxed pad="5px 0">
-                <PageTitle data-test="title">My Lifts</PageTitle>
-            </Boxed>
-            <Boxed>
-                {loading ? (
-                    <Loader />
-                ) : (
-                        <FlexiTable columns={columns} data={sixthDocs || []}>
-                            <FlexiPagination
-                                total={sixthTotalDocs}
-                                onChange={sixthPage => getMyLifts({ sixthPage, limit: 10 })}
-                                current={sixthPage}
                                 pageCounts={pageOptions}
                                 pageSize={10}
                                 showTotal={(total, range) => {

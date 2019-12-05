@@ -22,7 +22,6 @@ const allReducers = combineReducers({
   problemLifts: setProblemLifts,
   unapprovedUsers: setUnapprovedUsers,
   ongoingLifts: setOngoingLifts,
-  myLifts: setMyLifts,
   loading: setLoader
 });
 
