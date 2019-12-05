@@ -31,6 +31,7 @@ exports.create = function (req, res) {
                 // role: req.body.role,
                 // waitingApproval/ active/ deleted
                 status: req.body.status,
+                avaliability: req.body.avaliability,
                 volunteerId: req.body.volunteerId
             });
 
