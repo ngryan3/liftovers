@@ -25,6 +25,11 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
+function clearStorage(){
+    localStorage.clear();
+    window.location.replace("http://localhost:3000")
+}
+
 class Profile extends Component{
     constructor(props) {
         super(props);
@@ -85,6 +90,9 @@ class Profile extends Component{
                     Edit
                 </a>
             </Button>
+                <ClearButton>
+                    <ClearLink onClick={() => { clearStorage()}}  to="/login">Logout</ClearLink>
+                </ClearButton>
             </Boxed>
         </div>
       );
