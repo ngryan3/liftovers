@@ -9,6 +9,7 @@ exports.create = function(req, res) {
   }
 
   var provider = new Provider({
+    organizationName: req.body.organizationName,
     contactName: req.body.contactName,
     contactSurname: req.body.contactSurname,
     contactEmail: req.body.contactEmail,
@@ -84,7 +85,9 @@ exports.deleteProvider = function(req, res) {
 
 exports.updateProvider = function (req, res) {
   let update = {}
-
+  if (req.body.organizationName) {
+        update.organizationName = req.body.organizationName
+  }
   if (req.body.contactName) {
       update.contactName = req.body.contactName
   }

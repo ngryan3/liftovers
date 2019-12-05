@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 
 var DonorSchema = mongoose.Schema({
+    organizationName: String,
     contactName: String,
     contactSurname: String,
     contactEmail: String,
