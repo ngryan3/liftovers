@@ -9,13 +9,6 @@ import {
     Button,
     Notify
 } from "flexibull";
-import {
-    Header,
-    Contain,
-    ClearButton,
-    Wrapper,
-    Square
-} from "../../components/styles";
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
 
@@ -52,8 +45,10 @@ function Greeting() {
     }
     return <br />
 }
+var name;
 
 function handleServeTime(accessor) {
+    console.log(accessor)
     var time = accessor.serveTime.hour.toString();
     time += ":";
     var minute = accessor.serveTime.minute.toString()
@@ -69,6 +64,14 @@ function handlePickupTime(accessor) {
     time += minute;
     return time;   
 }
+
+function handleVolunteer(accessor) {
+    var id = accessor.volunteer[0]; 
+    return fetch(ApiUrl + "/volunteer/" + id, {
+        method: 'GET'
+    }).then(result => result.json()).then(data => data.name)
+}
+
 
 function handleApproveClick(accessor) {
     console.log(accessor)
@@ -118,12 +121,12 @@ const buttonColumns = [
     { title: "Phone", dataIndex: "phone", key: "phone" },
     { title: "Pickup Address", dataIndex: "address", key: "address" },
     { title: "Date", dataIndex: "date", key: "date" },
-    { title: "Serve Time", accessor: "serveTime", key: "serveTime",
-    render: accessor => (handleServeTime(accessor))
-    },
-    { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
-    render: accessor => (handlePickupTime(accessor))},
-    { title: "Description", dataIndex: "description", key: "description" },
+    // { title: "Serve Time", accessor: "serveTime", key: "serveTime",
+    // render: accessor => (handleServeTime(accessor))
+    // },
+    // { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
+    // render: accessor => (handlePickupTime(accessor))},
+    // { title: "Description", dataIndex: "description", key: "description" },
     {
         header: '',
         id: 'post-button',
@@ -146,6 +149,7 @@ const buttonColumns = [
 
 ];
 
+
 const columns = [
     { title: "First Name", dataIndex: "firstName", key: "firstName" },
     { title: "Last Name", dataIndex: "lastName", key: "lastName" },
@@ -153,13 +157,40 @@ const columns = [
     { title: "Phone", dataIndex: "phone", key: "phone" },
     { title: "Pickup Address", dataIndex: "address", key: "address" },
     { title: "Date", dataIndex: "date", key: "date" },
-    { title: "Serve Time", accessor: "serveTime", key: "serveTime",
-    render: accessor => (handleServeTime(accessor))
-    },
-    { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
-    render: accessor => (handlePickupTime(accessor))
-    },
+    // { title: "Serve Time", accessor: "serveTime", key: "serveTime",
+    // render: accessor => (handleServeTime(accessor))
+    // },
+    // { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
+    // render: accessor => (handlePickupTime(accessor))
+    // },
     { title: "Description", dataIndex: "description", key: "description" },
+    {   
+        header: '',
+        accessor: '_id',
+        dataIndex: '_id',
+        render: accessor => (<Button 
+            onClick={
+                (e) => handleCancelClick(accessor)
+            }>Cancel</Button>)
+    },
+];
+
+const ongoingColumns = [
+    { title: "First Name", dataIndex: "firstName", key: "firstName" },
+    { title: "Last Name", dataIndex: "lastName", key: "lastName" },
+    { title: "Email", dataIndex: "email", key: "email" },
+    { title: "Phone", dataIndex: "phone", key: "phone" },
+    { title: "Pickup Address", dataIndex: "address", key: "address" },
+    { title: "Date", dataIndex: "date", key: "date" },
+    // { title: "Serve Time", accessor: "serveTime", key: "serveTime",
+    // render: accessor => (handleServeTime(accessor))
+    // },
+    // { title: "Pickup Time", accessor: "pickupTime", key: "pickupTime",
+    // render: accessor => (handlePickupTime(accessor))
+    // },
+    // { title: "Volunteer", accessor: "volunteer", key: "volunteer",
+    // render: accessor => (Promise.resolve(handleVolunteer(accessor)))
+    // },
     {   
         header: '',
         accessor: '_id',
@@ -219,19 +250,25 @@ function isAdmin(){
 export const Dashboard = ({ getRequestedLifts, getPostedLifts, 
     postedLifts, requestedLifts, getProblemLifts, problemLifts, 
     unapprovedUsers, getUnapprovedUsers, 
-    ongoingLifts, getOngoingLifts, loading }) => {
+    ongoingLifts, getOngoingLifts, 
+    myLifts, getMyLifts, loading }) => {
     useEffect(() => {
         getRequestedLifts({ page: 1, limit: 10 });
         getPostedLifts({ page: 1, limit: 10 });
         getProblemLifts({ page: 1, limit: 10 });
         getUnapprovedUsers({ page: 1, limit: 10 });
         getOngoingLifts({ page: 1, limit: 10 });
+        getMyLifts({ page: 1, limit: 10 });
       }, []);
     let { docs, totalDocs, page } = requestedLifts;
     let { docs:secondDocs, totalDocs:secondTotalDocs, page:secondPage } =  postedLifts;
     let { docs:thirdDocs, totalDocs:thirdTotalDocs, page:thirdPage } =  problemLifts;
     let { docs:fourthDocs, totalDocs:fourthTotalDocs, page:fourthPage } =  unapprovedUsers;
     let { docs:fifthDocs, totalDocs:fifthTotalDocs, page:fifthPage } =  ongoingLifts;
+    let { docs:sixthDocs, totalDocs:sixthTotalDocs, page:sixthPage } =  myLifts;
+
+    console.log(getOngoingLifts());
+    console.log(getMyLifts());
 
     return (
         <div data-test="lift">
@@ -250,10 +287,10 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                 </Grid>
             </Boxed>
             <Greeting />
-            <Boxed pad="5px 0">
+            { isAdmin() && <Boxed pad="5px 0">
                 <PageTitle data-test="title">Lifts: Awaiting Approval</PageTitle>
-            </Boxed>
-            <Boxed>
+            </Boxed>}
+            { isAdmin() &&<Boxed>
                 {loading ? (
                     <Loader />
                 ) : (
@@ -270,10 +307,10 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                             />
                         </FlexiTable>
                     )}
-            </Boxed>
-            <Boxed pad="5px 0">
+            </Boxed>}
+            { isAdmin() && <Boxed pad="5px 0">
                 <PageTitle data-test="title">Lifts: Issues Found</PageTitle>
-            </Boxed>
+                            </Boxed> }
             <Boxed>
                 {loading ? (
                     <Loader />
@@ -343,11 +380,33 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                 {loading ? (
                     <Loader />
                 ) : (
-                        <FlexiTable columns={columns} data={fifthDocs || []}>
+                        <FlexiTable columns={ongoingColumns} data={fifthDocs || []}>
                             <FlexiPagination
                                 total={fifthTotalDocs}
                                 onChange={fifthPage => getOngoingLifts({ fifthPage, limit: 10 })}
                                 current={fifthPage}
+                                pageCounts={pageOptions}
+                                pageSize={10}
+                                showTotal={(total, range) => {
+                                    return `${range[0]} - ${range[1]} of ${total} items`;
+                                }}
+                            />
+                        </FlexiTable>
+                    )}
+            </Boxed>
+
+            <Boxed pad="5px 0">
+                <PageTitle data-test="title">My Lifts</PageTitle>
+            </Boxed>
+            <Boxed>
+                {loading ? (
+                    <Loader />
+                ) : (
+                        <FlexiTable columns={columns} data={sixthDocs || []}>
+                            <FlexiPagination
+                                total={sixthTotalDocs}
+                                onChange={sixthPage => getMyLifts({ sixthPage, limit: 10 })}
+                                current={sixthPage}
                                 pageCounts={pageOptions}
                                 pageSize={10}
                                 showTotal={(total, range) => {
