@@ -247,10 +247,10 @@ exports.approveUser = function (req, res) {
                     } else {
                         console.log("changed user status to active");
                     }
-                })
-            })
+                });
+            });
         }
-    })
+    });
 }
 
 exports.updateUser = function (req, res) {
