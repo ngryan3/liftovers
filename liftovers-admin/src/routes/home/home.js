@@ -113,7 +113,6 @@ const Home = () => {
                 <img src ='https://pbs.twimg.com/media/D5rGcOKWkAYYnAP?format=jpg' width="800"></img>
               </div>
           </div>
-        <Greeting />
       </Wrapper>
     </Layout>
   );
