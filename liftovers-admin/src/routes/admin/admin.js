@@ -50,16 +50,45 @@ const columns = [
       }
 ];
 
-const delete_button =  {
+const super_columns = [
+  { title: "Name", dataIndex: "name", key: "name" },
+  { title: "Surname", dataIndex: "surname", key: "surname"},
+  { title: "Phone", dataIndex: "phone", key: "phone" },
+  { title: "Role", dataIndex: "role", key: "role" },
+  { title: "Email", dataIndex: "email", key: "email"},
+  {
       header: '',
       accessor: "_id",
       dataIndex: "_id",
-      id: 'delete-button',
-      render: accessor => (<Button style={{background:"#FF8C83"}}>
-                              <a href={"/admins/delete/" + accessor}>
-                                  Delete
+      id: 'view-button',
+      render: accessor => (<Button>
+                              <a href={"/admins/view/" + accessor}>
+                                  View
                               </a>
-                            </Button>)}
+                           </Button>)
+      },
+    {
+      header: '',
+      accessor: "_id",
+      dataIndex: "_id",
+      id: 'edit-button',
+      render: accessor => (<Button style={{background:"#A6CBFF"}}>
+                              <a href={"/admins/edit/" + accessor}>
+                                  Edit
+                              </a>
+                           </Button>)
+      },
+      {
+            header: '',
+            accessor: "_id",
+            dataIndex: "_id",
+            id: 'delete-button',
+            render: accessor => (<Button style={{background:"#FF8C83"}}>
+                                    <a href={"/admins/delete/" + accessor}>
+                                        Delete
+                                    </a>
+                                  </Button>)}
+];
 
 const pageOptions = [
   { value: 10, label: "10 Rows" },
@@ -75,9 +104,11 @@ export const Admin = ({ getAdmins, admins, loading }) => {
   console.log(admins);
   let { docs, totalDocs, page } = admins;
 
-  // If super admin, append the delete button in the table to give delete access
+  let display_columns;
   if (isSuperAdmin()) {
-    columns.push(delete_button);
+    display_columns = super_columns;
+  } else {
+    display_columns = columns;
   }
 
   return (
@@ -117,7 +148,7 @@ export const Admin = ({ getAdmins, admins, loading }) => {
         {loading ? (
           <Loader />
         ) : (
-          <FlexiTable columns={columns} data={docs || []}>
+          <FlexiTable columns={display_columns} data={docs || []}>
             <FlexiPagination
               total={totalDocs}
               onChange={page => getAdmins({ page, limit: 10 })}
