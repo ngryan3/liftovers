@@ -1,6 +1,6 @@
 import { Dashboard } from "./dashboard";
 import { connect } from "react-redux";
-import { getRequestedLifts, getPostedLifts, getProblemLifts} from "../../actions/lifts";
+import { getRequestedLifts, getPostedLifts, getProblemLifts, getOngoingLifts} from "../../actions/lifts";
 import { getUnapprovedUsers } from "../../actions/users";
 
 function mapStateToProps(state) {
@@ -10,6 +10,7 @@ function mapStateToProps(state) {
     postedLifts: state.postedLifts,
     problemLifts: state.problemLifts,
     unapprovedUsers: state.unapprovedUsers,
+    ongoingLifts: state.ongoingLifts,
     loading: state.loading
   };
 }
@@ -20,6 +21,7 @@ function mapDispatchToProps(dispatch) {
     getPostedLifts: params => dispatch(getPostedLifts(params )),
     getProblemLifts: params => dispatch(getProblemLifts(params )),
     getUnapprovedUsers: params => dispatch(getUnapprovedUsers(params )),
+    getOngoingLifts: params => dispatch(getOngoingLifts(params )),
   };
 }
 

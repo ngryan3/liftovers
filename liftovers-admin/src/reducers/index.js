@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { setVolunteers } from "./volunteers";
-import { setLifts, setRequestedLifts, setPostedLifts, setProblemLifts } from "./lifts"
+import { setLifts, setRequestedLifts, setPostedLifts, setProblemLifts, setOngoingLifts } from "./lifts"
 import { setLoader } from "./auxilliary";
 import { setAdmins } from "./admins";
 import { setDonors } from "./donors";
@@ -21,6 +21,7 @@ const allReducers = combineReducers({
   postedLifts: setPostedLifts,
   problemLifts: setProblemLifts,
   unapprovedUsers: setUnapprovedUsers,
+  ongoingLifts: setOngoingLifts,
   loading: setLoader
 });
 

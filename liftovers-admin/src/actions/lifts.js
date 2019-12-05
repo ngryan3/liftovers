@@ -5,6 +5,7 @@ import { SET_LIFTS } from "../constants";
 import { SET_REQUESTED_LIFTS } from "../constants";
 import { SET_POSTED_LIFTS } from "../constants";
 import { SET_PROBLEM_LIFTS } from "../constants";
+import { SET_ONGOING_LIFTS } from "../constants";
 
 export function setLifts(lifts) {
   return {
@@ -83,7 +84,22 @@ export function getProblemLifts(params) {
   };
 }
 
-export function handleClick () {
-  axios.post('https://api.github.com/users/maecapozzi')
-    .then(response => console.log(response))
+export function setOngoingLifts(ongoingLifts) {
+  return {
+    type: SET_ONGOING_LIFTS,
+    payload: ongoingLifts
+  };
 }
+
+export function getOngoingLifts(params) {
+  console.log(params);
+  return function(dispatch) {
+    dispatch(toggleLoader(true));
+    return axios.get(`${ApiUrl}/lifts/ongoing`, { params }).then(({ data }) => {
+      dispatch(toggleLoader(false));
+      dispatch(setOngoingLifts(data));
+      console.log(data);
+    });
+  };
+}
+

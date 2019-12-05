@@ -6,7 +6,8 @@ import {
     Loader,
     FlexiTable,
     FlexiPagination,
-    Button
+    Button,
+    Notify
 } from "flexibull";
 import {
     Header,
@@ -84,10 +85,13 @@ function handleCancelClick(accessor) {
 
 function handlePostLiftClick(accessor) {
     console.log(accessor)
+    Notify("Posting Lift")
     fetch(ApiUrl + "/lift/" + accessor + "/post", {
         method: 'POST'
       }).then(result => result.json())
-    window.location = "/dashboard"
+    window.setTimeout(function() {
+        window.location.href = window.location.href;
+    }, 1000);
    
 }
 
@@ -193,17 +197,20 @@ function isAdmin(){
 
 export const Dashboard = ({ getRequestedLifts, getPostedLifts, 
     postedLifts, requestedLifts, getProblemLifts, problemLifts, 
-    unapprovedUsers, getUnapprovedUsers, loading }) => {
+    unapprovedUsers, getUnapprovedUsers, 
+    ongoingLifts, getOngoingLifts, loading }) => {
     useEffect(() => {
         getRequestedLifts({ page: 1, limit: 10 });
         getPostedLifts({ page: 1, limit: 10 });
         getProblemLifts({ page: 1, limit: 10 });
         getUnapprovedUsers({ page: 1, limit: 10 });
+        getOngoingLifts({ page: 1, limit: 10 });
       }, []);
     let { docs, totalDocs, page } = requestedLifts;
     let { docs:secondDocs, totalDocs:secondTotalDocs, page:secondPage } =  postedLifts;
     let { docs:thirdDocs, totalDocs:thirdTotalDocs, page:thirdPage } =  problemLifts;
     let { docs:fourthDocs, totalDocs:fourthTotalDocs, page:fourthPage } =  unapprovedUsers;
+    let { docs:fifthDocs, totalDocs:fifthTotalDocs, page:fifthPage } =  ongoingLifts;
 
     return (
         <div data-test="lift">
@@ -298,6 +305,28 @@ export const Dashboard = ({ getRequestedLifts, getPostedLifts,
                                 total={secondTotalDocs}
                                 onChange={secondPage => getPostedLifts({ secondPage, limit: 10 })}
                                 current={secondPage}
+                                pageCounts={pageOptions}
+                                pageSize={10}
+                                showTotal={(total, range) => {
+                                    return `${range[0]} - ${range[1]} of ${total} items`;
+                                }}
+                            />
+                        </FlexiTable>
+                    )}
+            </Boxed>
+
+            <Boxed pad="5px 0">
+                <PageTitle data-test="title">Lifts: Ongoing</PageTitle>
+            </Boxed>
+            <Boxed>
+                {loading ? (
+                    <Loader />
+                ) : (
+                        <FlexiTable columns={columns} data={fifthDocs || []}>
+                            <FlexiPagination
+                                total={fifthTotalDocs}
+                                onChange={fifthPage => getOngoingLifts({ fifthPage, limit: 10 })}
+                                current={fifthPage}
                                 pageCounts={pageOptions}
                                 pageSize={10}
                                 showTotal={(total, range) => {
