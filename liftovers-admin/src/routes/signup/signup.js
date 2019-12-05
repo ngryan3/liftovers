@@ -62,7 +62,7 @@ class Signup extends React.Component {
             object['status'] = 'waitingApproval';
             var json = JSON.stringify(object);
             console.log(json);
-            fetch("http://localhost:7000/user", {
+            fetch("https://liftovers-api.herokuapp.com/user", {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ class Signup extends React.Component {
                         alert('Some error occurred while creating the User');
                     }else{
                         alert('Successfully registered, please wait for one of our admins to review your registration');
-                        window.location.replace('http://localhost:3000')
+                        window.location.replace('https://liftovers-admin.herokuapp.com')
                     }
                     return response.json()})
                 .then(responseData => {console.log(responseData); return responseData})
