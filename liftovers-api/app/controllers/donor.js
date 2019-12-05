@@ -9,6 +9,7 @@ exports.create = function(req, res) {
   }
 
   var donor = new Donor({
+    organizationName: req.body.organizationName,
     contactName: req.body.contactName,
     contactSurname: req.body.contactSurname,
     contactEmail: req.body.contactEmail,
@@ -87,7 +88,9 @@ exports.deleteDonor = function(req, res) {
 
 exports.updateDonor = function (req, res) {
   let update = {}
-
+  if (req.body.organizationName) {
+        update.organizationName = req.body.organizationName
+  }
   if (req.body.contactName) {
       update.contactName = req.body.contactName
   }
