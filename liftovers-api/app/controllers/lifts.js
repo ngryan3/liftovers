@@ -175,7 +175,7 @@ exports.postLift = function (req, res) {
         "July", "August", "September", "October", "November", "December"];
 
     let lift = Lifts.findById(liftId, function (err, ll) {
-        if (err) {
+        if (!ll) {
             return res.status(404).end({ message: "No lifts with given id found." });
         } else {
             return ll;

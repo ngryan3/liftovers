@@ -208,50 +208,45 @@ exports.findWait = function (req, res) {
 
 exports.getOne = function (req, res) {
     User.findById(req.params.id, function (err, user) {
-        if (err) {
+        if (!user)
             return res.status(404).send({ message: "No such user." });
-        } else {
-            return res.status(200).send(user);
-        }
+        return res.status(200).send(user);
     })
 }
 
 exports.deleteUser = function (req, res) {
     User.findByIdAndUpdate(req.params.id, { status: "deleted" })
         .then(user => {
+            if (!user)
+                return res.status(404).send("No such user.");
             console.log("changed user status to deleted");
             return res.status(200).send(user);
         })
         .catch(error => {
             console.log(error);
-            return res.status(404).send(error);
+            return res.status(500).send(error);
         });
 }
 
 exports.approveUser = function (req, res) {
     User.findById(req.params.id, function (err, user) {
-        if (err) {
-            console.log(err);
+        if (!user)
             return res.status(404).send({ message: "No such user." });
-        } else {
-            Volunteer.findOne({ email: user.email }, function (err, volunteer) {
-                user.status = "active";
+
+        Volunteer.findOne({ email: user.email }, function (err, volunteer) {
+            user.status = "active";
+            if (volunteer)
+                user.volunteerId = volunteer;
+            user.save(function (err, data) {
                 if (err) {
-                    console.log("no associated volunteer found");
+                    console.log(err);
+                    return res.status(500).send({ message: "Some error occurred while aproving user." });
                 } else {
-                    user.volunteerId = volunteer;
+                    console.log("changed user status to active");
+                    return res.status(200).send(user);
                 }
-                user.save(function (err, data) {
-                    if (err) {
-                        console.log(err);
-                        return res.status(404).send({message: "No such user."});
-                    } else {
-                        console.log("changed user status to active");
-                        return res.status(200).send(user);
-                    }
-                });
             });
-        }
+        });
     });
 }
 
@@ -274,12 +269,14 @@ exports.updateUser = function (req, res) {
     }
     User.findByIdAndUpdate(req.params.id, update)
         .then(user => {
+            if (!user)
+                return res.status(404).send({message: "No such user."});
             console.log("updated user");
             return res.status(200).send(user);
         })
         .catch(error => {
             console.log(error);
-            return res.status(404).send(error);
+            return res.status(500).send(error);
         })
 }
 
