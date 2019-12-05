@@ -30,6 +30,7 @@ import DeleteProvider from "./routes/provider/delete/delete";
 import { AdminLayout } from "./components/admin";
 import Forgot from "./routes/login/forgot";
 import Reset from "./routes/login/resetpassword";
+import About from "./routes/about/about"
 
 const openPages = ["/", "/login", "/signup", "/forgot"];
 console.log(window.location.pathname);
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route exact path="/forgot">
             <Forgot />
+          </Route>
+          <Route exact path="/about">
+            <About />
           </Route>
         </Switch>
       ) : (

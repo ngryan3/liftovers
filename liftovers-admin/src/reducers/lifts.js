@@ -3,7 +3,7 @@ import { SET_REQUESTED_LIFTS } from "../constants";
 import { SET_POSTED_LIFTS } from "../constants";
 import { SET_PROBLEM_LIFTS } from "../constants";
 import { SET_ONGOING_LIFTS } from "../constants";
-
+import { SET_MY_LIFTS } from "../constants";
 
 export function setLifts(state = {}, action) {
   switch (action.type) {
@@ -44,6 +44,15 @@ export function setProblemLifts(state = {}, action) {
 export function setOngoingLifts(state = {}, action) {
   switch (action.type) {
     case SET_ONGOING_LIFTS:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+export function setMyLifts(state = {}, action) {
+  switch (action.type) {
+    case SET_MY_LIFTS:
       return action.payload;
     default:
       return state;

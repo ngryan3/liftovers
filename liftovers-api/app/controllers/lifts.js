@@ -175,7 +175,7 @@ exports.postLift = function (req, res) {
         "July", "August", "September", "October", "November", "December"];
 
     let lift = Lifts.findById(liftId, function (err, ll) {
-        if (err) {
+        if (!ll) {
             return res.status(404).end({ message: "No lifts with given id found." });
         } else {
             return ll;
@@ -283,6 +283,7 @@ exports.completeLift = function (req, res) {
         .then(lift => {
             if (!lift) {
                 console.log("no ongoing lifts with given id found");
+                return res.status(404).send({message: "No such lift"});
             }
             else {
                 console.log("changed lift status to completed");
@@ -294,6 +295,7 @@ exports.completeLift = function (req, res) {
                     .catch(err => {
                         console.log(err);
                     });
+                return res.status(200).send(lift);
             }
         })
         .catch(error => {
@@ -307,9 +309,11 @@ exports.cancelLift = function (req, res) {
         .then(lift => {
             if (!lift) {
                 console.log("no lifts with given id found");
+                return res.status(404).send({message: "No such lift"});
             }
             else {
                 console.log("changed lift status to cancelled");
+                return res.status(200).send(lift);
             }
         })
         .catch(error => {
@@ -323,9 +327,11 @@ exports.problemLift = function (req, res) {
         .then(lift => {
             if (!lift) {
                 console.log("no lifts with given id found");
+                return res.status(404).send({message: "No such lift"});
             }
             else {
                 console.log("changed lift status to problem");
+                return res.status(200).send(lift);
             }
         })
         .catch(error => {
@@ -378,9 +384,11 @@ exports.updateLift = function (req, res) {
         .then(lift => {
             if (!lift) {
                 console.log("no lifts with given id found");
+                return res.status(404).send({message: "No such lift"});
             }
             else {
                 console.log("updated lifts");
+                return res.status(200).send(lift);
             }
         })
         .catch(error => {

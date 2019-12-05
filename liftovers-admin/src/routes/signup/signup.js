@@ -22,10 +22,13 @@ class Signup extends React.Component {
         super();
         this.state = {
             fields: {'avaliability' : []},
-            errors: {}
-        }
+            errors: {},
+            avaliabilty : []
+        };
         this.handleChange = this.handleChange.bind(this);
         this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     };
 
     handleChange(e) {
@@ -37,19 +40,21 @@ class Signup extends React.Component {
 
     }
 
+    handleSelect = selectedOptions => {
+      this.setState({avaliabilty : selectedOptions});
+    };
+
     submituserRegistrationForm(e) {
-        var check = 0;
         e.preventDefault()
-        if (this.validateForm() || true) {
+        if (this.validateForm()) {
             //
             let myForm = document.getElementById('myForm');
             const data = new FormData(myForm);
+            let avb = this.state.avaliabilty;
             var object = {};
             data.forEach(function(value, key) {
                 if(key == "avaliability"){
-                    const x = []
-                    x.push(value)
-                    object[key] = x
+                    object[key] = avb
                 }else{
                     object[key] = value;
                 }
@@ -86,7 +91,6 @@ class Signup extends React.Component {
 
 
     validateForm() {
-
         let fields = this.state.fields;
         let errors = {};
         let formIsValid = true;
@@ -139,6 +143,25 @@ class Signup extends React.Component {
             }
         }
 
+
+        if (!fields["postalcode"]){
+            formIsValid = false;
+            errors["postalcode"] = "*Please enter postal code."
+        }
+
+        if (typeof fields["postalcode"] !== "undefined"){
+            if (!fields["postalcode"].match(/^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$/)){
+                formIsValid = false;
+                errors["postalcode"] = "*Please enter a valid Canadian postal code."
+            }
+        }
+        if (typeof  fields["secpostalcode"] !== "undefined") {
+            if (!fields["secpostalcode"].match(/^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$/)) {
+                formIsValid = false;
+                errors["secpostalcode"] = "*Please enter a valid Canadian postal code."
+            }
+        }
+
         if (!fields["password"]) {
             formIsValid = false;
             errors["password"] = "*Please enter your password.";
@@ -149,6 +172,18 @@ class Signup extends React.Component {
             //   formIsValid = false;
             //   errors["password"] = "*Please enter secure and strong password.";
             // }
+        }
+
+        if (!fields["passConf"]) {
+            formIsValid = false;
+            errors["passConf"] = "*Please confirm your password.";
+        }
+
+        if (typeof fields["passConf"] !== "undefined") {
+            if (fields["passConf"] !== fields["password"]){
+                formIsValid = false;
+                errors["passConf"] = "*Passwords do not match. Please try again."
+            }
         }
 
         this.setState({
@@ -196,7 +231,7 @@ class Signup extends React.Component {
                         <div id="register">
                             <Boxed pad="50px">
                                 <h2 style={{marginLeft: '1px', color: '#5e5e5e' }}>Sign up for liftovers</h2>
-                                <form id="myForm" name="userRegistrationForm"  onSubmit= {this.submituserRegistrationForm}>
+                                <form id="myForm" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm}>
                                     <br />
                                     <Form.Group>
                                         <Input  name="name" type="text" label="First Name"  value={this.state.fields.name} onChange={this.handleChange} required forminput/><br/>
@@ -226,6 +261,7 @@ class Signup extends React.Component {
                                         <Form.Text className="text-muted">
                                             We'll never share your Postal code with anyone else.
                                         </Form.Text>
+                                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.postalcode}</div>
                                         <br />
                                     </Form.Group>
                                     <Form.Group row>
@@ -233,6 +269,7 @@ class Signup extends React.Component {
                                         <Form.Text className="text-muted">
                                             Enter secondary postal code if needed.
                                         </Form.Text>
+                                        <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.secpostalcode}</div>
                                         <br />
                                     </Form.Group>
                                     <Form.Group row>
@@ -254,10 +291,11 @@ class Signup extends React.Component {
                                     <Form.Group row>
                                         <Input  label="Re-enter Password" type="text" name="passConf" onChange={this.handleChange} required forminput/>
                                     </Form.Group>
+                                    <div className="errorMsg" style={{ color: 'red' }}>{this.state.errors.passConf}</div>
                                     <br />
                                     <SimpleSelect
                                         options={[
-                                            { value: "email", label: "Email"},
+                                            { value: "email", label: "Email" } ,
                                             { value: "phone", label: "Phone"}
                                         ]}
                                         name="methodOfCommunication" type="select" label="Preferred Method of Communication" required forminput
@@ -265,37 +303,39 @@ class Signup extends React.Component {
                                     <br />
                                     <h2 style={{fontSize: '11px', color: '#5e5e5e' }}>PLEASE CHOOSE AVALIABILITY:</h2>
                                     <Form.Group row>
-                                    <Select
-                                        options = {[
-                                            { value: 'Monday', label: 'Monday' },
-                                            { value: 'Tuesday', label: 'Tuesday' },
-                                            { value: 'Wednesday', label: 'Wednesday' },
-                                            { value: 'Thursday', label: 'Thursday' },
-                                            { value: 'Friday', label: 'Friday' },
-                                            { value: 'Saturday', label: 'Saturday' },
-                                            { value: 'Sunday', label: 'Sunday' }
-                                          ]}
-                                        
-                                          name="avaliability" isMulti={true} name="avaliability" type="select"  required forminput
-                                    />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
+                                        <Select
+                                            options = {[
+                                                { value: 'Monday', label: 'Monday' },
+                                                { value: 'Tuesday', label: 'Tuesday' },
+                                                { value: 'Wednesday', label: 'Wednesday' },
+                                                { value: 'Thursday', label: 'Thursday' },
+                                                { value: 'Friday', label: 'Friday' },
+                                                { value: 'Saturday', label: 'Saturday' },
+                                                { value: 'Sunday', label: 'Sunday' }
+                                              ]}
+
+                                             value={this.state && this.state.avaliability}
+                                             onChange={(...args) => this.handleSelect(...args)}
+                                             isMulti={true} name="avaliability" type="select"  required forminput
+                                        />
                                     </Form.Group>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
                                     <div class="fixed-bottom" >
                                     <Form.Group row>
-                                        <Input  style={{ backgroundColor: '#00ffd9' }} to="/login" type="submit" className="button"  value="Register"/>
+                                        <Input  style={{ backgroundColor: '#00ffd9' }} to="/login" type="submit" className="button"  value="Register" onClick={this.validateForm}/>
                                     </Form.Group>
                                     </div>
                                     <br />

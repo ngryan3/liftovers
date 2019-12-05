@@ -122,25 +122,21 @@ exports.findAll = function (req, res) {
 
 exports.getOne = function (req, res) {
     Volunteer.findById(req.params.id, function (err, volunteer) {
-        if (err) {
+        if (!volunteer)
             return res.status(404).send({ message: "No such volunteer." });
-        } else {
-            return res.status(200).send(volunteer);
-        }
+        return res.status(200).send(volunteer);
     });
 };
 
 
 exports.ongoingLifts = function (req, res) {
     Volunteer.findById(req.params.id, function (err, volunteer) {
-        if (err) {
+        if (!volunteer) 
             return res.status(404).send({ message: "No such volunteer." });
-        } else {
-            Lifts.find({ status: "ongoing", chosenVolunteer: volunteer })
-                .then((lifts) => {
-                    return res.status(200).send(lifts);
-            });
-        }
+        Lifts.find({ status: "ongoing", chosenVolunteer: volunteer })
+            .then((lifts) => {
+                return res.status(200).send(lifts);
+        });
     });
 };
 
@@ -150,9 +146,11 @@ exports.deleteVolunteer = function (req, res) {
         .then(vol => {
             if (!vol) {
                 console.log("no volunteers with given id found");
+                return res.status(404).send({message: "No such volunteer."});
             }
             else {
                 console.log("changed volunteer status to deleted");
+                return res.status(200).send(vol);
             }
         })
         .catch(error => {
@@ -166,9 +164,11 @@ exports.unavailVolunteer = function (req, res) {
         .then(vol => {
             if (!vol) {
                 console.log("no volunteers with given id found");
+                return res.status(404).send({message: "No such volunteer."});
             }
             else {
                 console.log("changed volunteer status to unavailable");
+                return res.status(200).send(vol);
             }
         })
         .catch(error => {
@@ -182,9 +182,11 @@ exports.availVolunteer = function (req, res) {
         .then(vol => {
             if (!vol) {
                 console.log("no volunteers with given id found");
+                return res.status(404).send({message: "No such volunteer."});
             }
             else {
                 console.log("changed volunteer status to available");
+                return res.status(200).send(vol);
             }
         })
         .catch(error => {
@@ -234,9 +236,11 @@ exports.updateVolunteer = function (req, res) {
         .then(vol => {
             if (!vol) {
                 console.log("no volunteers with given id found");
+                return res.status(404).send({message: "No such volunteer."});
             }
             else {
                 console.log("updated volunteer");
+                return res.status(200).send(vol);
             }
         })
         .catch(error => {
@@ -254,8 +258,10 @@ exports.acceptText = function (req, res) {
         Volunteer.findOne({ phone: fromPhone }, function (err, vol) {
             if (err) {
                 console.log(err);
-                return res.status(404).send({ message: "no such volunteer" });
+                return res.status(500).send({ message: "Some error occurred." });
             } else {
+                if (!vol)
+                    return res.status(404).send({message: "Cannot find volunteer with given phone number."});
                 Lifts.find({ status: "posted", hasVolunteer: false, volunteer: vol._id })
                     .then(item => {
 
@@ -277,13 +283,10 @@ exports.acceptText = function (req, res) {
                                 });
 
                             twiml.message(
-                                `You have been confirmed as the volunteer at ${item[0].address}`
+                                `You have been confirmed as the volunteer at ${item[0].address}.`
                             );
                         } else {
                             console.log("response is no");
-                            twiml.message(
-                                `Got your response.`
-                            );
                             if (item.length === 0) {
                                 return res.status(200).send("no valid lift");
                             } else {
@@ -295,7 +298,6 @@ exports.acceptText = function (req, res) {
                                         .catch(error => {
                                             console.log(error);
                                         });
-                                    return res.status(200).send({ message: "No volunteer accepted. Lift status is now problem." })
                                 } else {
                                     Lifts.findOneAndUpdate({ _id: item[0]._id }, { $pull: { volunteer: vol._id } })
                                         .then(ll => {
@@ -306,6 +308,9 @@ exports.acceptText = function (req, res) {
                                         });
                                 }
                             }
+                            twiml.message(
+                                `Thank you for your response. You have refused the lift at ${item[0].address}.`
+                            );
                         }
 
                         //res.writeHead(200, { "Content-Type": "text/xml" });

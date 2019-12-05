@@ -6,6 +6,7 @@ import { SET_REQUESTED_LIFTS } from "../constants";
 import { SET_POSTED_LIFTS } from "../constants";
 import { SET_PROBLEM_LIFTS } from "../constants";
 import { SET_ONGOING_LIFTS } from "../constants";
+import { SET_MY_LIFTS } from "../constants";
 
 export function setLifts(lifts) {
   return {
@@ -19,7 +20,7 @@ export function getLifts(params) {
   console.log(params);
   return function(dispatch) {
     dispatch(toggleLoader(true));
-    return axios.get(`${ApiUrl}/lifts`, { params : {status: "requested"} }).then(({ data }) => {
+    return axios.get(`${ApiUrl}/lifts`, { params }).then(({ data }) => {
       dispatch(toggleLoader(false));
       dispatch(setLifts(data));
       console.log(data);
@@ -103,3 +104,29 @@ export function getOngoingLifts(params) {
   };
 }
 
+export function setMyLifts(myLifts) {
+  return {
+    type: SET_MY_LIFTS,
+    payload: myLifts
+  };
+}
+
+export function getMyLifts(params) {
+
+  return function(dispatch) {
+
+    dispatch(toggleLoader(true));
+
+    const id = localStorage.getItem('currentUserID');
+    console.log(id)
+    fetch(ApiUrl + "/user/" + id, {
+      method: 'GET'}).then(result => result.json()).
+      then(data => data.volunteerId).
+      then( volunteerId => { console.log(volunteerId); return axios.get(`${ApiUrl}/volunteer/${volunteerId}/ongoingLifts`, { params }).then(({ data }) => {
+        dispatch(toggleLoader(false));
+        dispatch(setOngoingLifts(data));
+        console.log(data);
+      }); })
+   
+  };
+}
