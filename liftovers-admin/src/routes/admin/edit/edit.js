@@ -14,6 +14,8 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+import { isAdmin } from "../../../actions/admin"
+import { isVolunteer } from "../../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -114,12 +116,15 @@ class EditAdmin extends Component{
 
       return (
         <form onSubmit={this.editAdmin}>
-        <Boxed pad="5px 0">
+        { isVolunteer() && <Boxed>
+                        You do not have access to this page!
+                    </Boxed> }
+        {isAdmin() && <Boxed pad="5px 0">
                     <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
                         Edit Administrator { this.state.admin.name } { this.state.admin.surname }
                     </PageTitle>
-        </Boxed>
-        <Boxed pad="50px">
+        </Boxed> }
+        { isAdmin() && <Boxed pad="50px">
           <Input name="name" type="text" label="First Name" onChange={this.handleChange.bind(this, 'name')} value={ this.state.admin.name }  required forminput/><br/>
           <Input name="surname" type="text" label="Last Name" onChange={this.handleChange.bind(this, 'surname')} value={ this.state.admin.surname } required forminput/><br/>
           <Input name="email" type="text" label="Email Address" onChange={this.handleChange.bind(this, 'email')} value={ this.state.admin.email } required forminput/><br/>
@@ -146,7 +151,7 @@ class EditAdmin extends Component{
           <Button type="submit" value="Submit">
             Save Changes
           </Button>
-          </Boxed>
+          </Boxed> }
         </form>
       );
     }

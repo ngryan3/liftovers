@@ -6,6 +6,8 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+import { isAdmin } from "../../../actions/admin"
+import { isVolunteer } from "../../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -97,12 +99,15 @@ class EditProvider extends Component{
 
       return (
         <form onSubmit={this.editProvider}>
-        <Boxed pad="5px 0">
+        { isVolunteer() && <Boxed>
+                        You do not have access to this page!
+                    </Boxed> }
+        { isAdmin() && <Boxed pad="5px 0">
                     <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
                         Edit Provider { this.state.provider.contactName } { this.state.provider.contactSurname }
                     </PageTitle>
-        </Boxed>
-        <Boxed pad="50px">
+        </Boxed> }
+        { isAdmin() && <Boxed pad="50px">
           <Input name="organizationName" type="text" label="Organization Name" onChange={this.handleChange.bind(this, 'organizationName')} value={ this.state.provider.organizationName } required forminput/><br/>
           <Input name="contactName" type="text" label="First Name" onChange={this.handleChange.bind(this, 'contactName')} value={ this.state.provider.contactName } required forminput/><br/>
           <Input name="contactSurname" type="text" label="Last Name" onChange={this.handleChange.bind(this, 'contactSurname')} value={ this.state.provider.contactSurname } required forminput/><br/>
@@ -126,7 +131,7 @@ class EditProvider extends Component{
           <Button type="submit" value="Submit">
             Save Changes
           </Button>
-          </Boxed>
+          </Boxed> }
         </form>
       );
     }

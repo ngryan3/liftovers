@@ -15,6 +15,8 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+import { isAdmin } from "../../../actions/admin"
+import { isVolunteer } from "../../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -65,10 +67,13 @@ class CreateProvider extends Component{
     render() {
       return (
         <form onSubmit={this.createProvider}>
-        <Boxed pad="5px 0">
+        { isVolunteer() && <Boxed>
+            You do not have access to this page!
+        </Boxed> }
+        { isAdmin() && <Boxed pad="5px 0">
                     <PageTitle data-test="title">Create Provider</PageTitle>
-        </Boxed>
-        <Boxed pad="50px">
+        </Boxed> }
+        { isAdmin() && <Boxed pad="50px">
           <Input name="organizationName" type="text" label="Organization Name" required forminput/><br/>
           <Input name="contactName" type="text" label="Contact's First Name" required forminput/><br/>
           <Input name="contactSurname" type="text" label="Contact's Last Name" required forminput/><br/>
@@ -88,7 +93,7 @@ class CreateProvider extends Component{
           <Button type="submit" value="Submit">
             Submit
           </Button>
-        </Boxed>
+        </Boxed> }
         </form>
       );
     }

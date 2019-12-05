@@ -16,6 +16,14 @@ export function setVolunteers(volunteers) {
   };
 }
 
+export function isVolunteer(){
+    const userRole = localStorage.getItem('currentUserRole');
+    if (userRole == "volunteer"){
+        return true
+    }
+    return false
+}
+
 export function getVolunteers(params) {
   console.log(params);
   return function(dispatch) {

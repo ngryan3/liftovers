@@ -20,3 +20,19 @@ export function getAdmins(params) {
     });
   };
 }
+
+export function isAdmin() {
+    const userRole = localStorage.getItem('currentUserRole');
+    if (userRole == "admin" || userRole == "superAdmin"){
+        return true
+    }
+        return false
+}
+
+export function isSuperAdmin() {
+    const userRole = localStorage.getItem('currentUserRole');
+    if (userRole == "superAdmin") {
+        return true;
+    }
+        return false;
+}

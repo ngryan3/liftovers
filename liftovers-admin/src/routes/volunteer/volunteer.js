@@ -11,6 +11,8 @@ import {
 } from "flexibull";
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
+import { isAdmin } from "../../actions/admin"
+import { isVolunteer } from "../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -63,24 +65,6 @@ const pageOptions = [
   { value: 50, label: "50 Rows" },
   { value: 100, label: "100 Rows" }
 ];
-
-function isVolunteer(){
-    const userRole = localStorage.getItem('currentUserRole');
-    console.log(userRole);
-    if (userRole == "volunteer"){
-        return true
-    }
-    return false
-}
-
-function isAdmin(){
-    const userRole = localStorage.getItem('currentUserRole');
-    console.log(userRole);
-    if (userRole == "admin" || userRole == "superAdmin"){
-        return true
-    }
-    return false
-}
 
 export const Volunteer = ({ getVolunteers, volunteers, loading }) => {
   useEffect(() => {

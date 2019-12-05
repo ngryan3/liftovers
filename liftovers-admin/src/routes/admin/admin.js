@@ -12,6 +12,8 @@ import {
 } from "flexibull";
 import { Theme } from "flexibull/build/theme";
 import styled from "styled-components";
+import { isAdmin } from "../../actions/admin"
+import { isVolunteer } from "../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -76,7 +78,10 @@ export const Admin = ({ getAdmins, admins, loading }) => {
       <Boxed pad="5px 0">
         <PageTitle data-test="title">Administrators</PageTitle>
       </Boxed>
-      <Boxed>
+      { isVolunteer() && <Boxed>
+                      You do not have access to this page!
+                  </Boxed> }
+      { isAdmin() && <Boxed>
         <Grid
           default="50% 50%"
           tablet="60% 40%"
@@ -103,8 +108,8 @@ export const Admin = ({ getAdmins, admins, loading }) => {
             </Boxed>
           </Grid>
         </Grid>
-      </Boxed>
-      <Boxed>
+      </Boxed> }
+      { isAdmin() && <Boxed>
         {loading ? (
           <Loader />
         ) : (
@@ -121,7 +126,7 @@ export const Admin = ({ getAdmins, admins, loading }) => {
             />
           </FlexiTable>
         )}
-      </Boxed>
+      </Boxed> }
     </div>
   );
 };

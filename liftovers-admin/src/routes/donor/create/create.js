@@ -15,6 +15,8 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+import { isAdmin } from "../../../actions/admin"
+import { isVolunteer } from "../../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -58,6 +60,8 @@ class CreateDonor extends Component{
         },
         method: 'POST',
         body: json, // JSON.stringify
+      }).catch(error => {
+        console.log(error);
       });
       window.location = "/donors"
     }
@@ -68,7 +72,10 @@ class CreateDonor extends Component{
         <Boxed pad="5px 0">
                     <PageTitle data-test="title">Create Donor</PageTitle>
         </Boxed>
-        <Boxed pad="50px">
+        { isVolunteer() && <Boxed>
+            You do not have access to this page!
+        </Boxed> }
+        { isAdmin() && <Boxed pad="50px">
           <Input name="organizationName" type="text" label="Organization Name" required forminput/><br/>
           <Input name="contactName" type="text" label="Contact's First Name" required forminput/><br/>
           <Input name="contactSurname" type="text" label="Contact's Last Name" required forminput/><br/>
@@ -94,7 +101,7 @@ class CreateDonor extends Component{
           <Button type="submit" value="Submit">
             Submit
           </Button>
-          </Boxed>
+          </Boxed> }
         </form>
       );
     }

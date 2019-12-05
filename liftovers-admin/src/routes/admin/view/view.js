@@ -14,6 +14,8 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+import { isAdmin } from "../../../actions/admin"
+import { isVolunteer } from "../../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -51,12 +53,15 @@ class ViewAdmin extends Component{
     render() {
       return (
         <div>
-            <Boxed pad="5px 0">
+        { isVolunteer() && <Boxed>
+                        You do not have access to this page!
+                    </Boxed> }
+            {isAdmin() && <Boxed pad="5px 0">
                         <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
                             Admin: { this.state.admin.name } { this.state.admin.surname }
                         </PageTitle>
-            </Boxed>
-            <Boxed pad="50px">
+            </Boxed> }
+            { isAdmin() && <Boxed pad="50px">
               <b>Name:</b> { this.state.admin.name } <br />
               <b>Surname:</b> { this.state.admin.surname } <br />
               <b>Email:</b> { this.state.admin.email } <br />
@@ -80,7 +85,7 @@ class ViewAdmin extends Component{
                     Delete
                 </a>
               </Button>
-              </Boxed>
+              </Boxed> }
         </div>
       );
     }
