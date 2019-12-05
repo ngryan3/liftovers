@@ -17,6 +17,7 @@ export const PageTitle = styled.h3`
   padding: 10px 0;
 `;
 const columns = [
+  { title: "Organization Name", dataIndex: "organizationName", key: "organization"},
   { title: "Contact Name", dataIndex: "contactName", key: "name" },
   { title: "Contact Surname", dataIndex: "contactSurname", key: "surname"},
   { title: "Contact Phone", dataIndex: "contactPhone", key: "phone" },

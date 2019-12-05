@@ -69,6 +69,7 @@ class CreateProvider extends Component{
                     <PageTitle data-test="title">Create Provider</PageTitle>
         </Boxed>
         <Boxed pad="50px">
+          <Input name="organizationName" type="text" label="Organization Name" required forminput/><br/>
           <Input name="contactName" type="text" label="Contact's First Name" required forminput/><br/>
           <Input name="contactSurname" type="text" label="Contact's Last Name" required forminput/><br/>
           <Input name="contactEmail" type="text" label="Contact's Email Address" required forminput/><br/>

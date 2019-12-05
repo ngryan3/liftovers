@@ -71,6 +71,7 @@ class ViewDonor extends Component{
                         </PageTitle>
             </Boxed>
             <Boxed pad="50px">
+              <b>Organization Name:</b> { this.state.donor.organizationName }<br />
               <b>Contact Name:</b> { this.state.donor.contactName }<br />
               <b>Contact Surname:</b> { this.state.donor.contactSurname } <br />
               <b>Contact Email:</b> { this.state.donor.contactEmail } <br />

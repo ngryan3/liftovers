@@ -17,10 +17,44 @@ export const PageTitle = styled.h3`
   padding: 10px 0;
 `;
 const columns = [
+  { title: "Organization Name", dataIndex: "organizationName", key: "organization"},
   { title: "Contact Name", dataIndex: "contactName", key: "name" },
   { title: "Contact Surname", dataIndex: "contactSurname", key: "surname"},
   { title: "Contact Phone", dataIndex: "contactPhone", key: "phone" },
-  { title: "Contact Email", dataIndex: "contactEmail", key: "email"}
+  { title: "Contact Email", dataIndex: "contactEmail", key: "email"},
+  {
+      header: '',
+      accessor: "_id",
+      dataIndex: "_id",
+      id: 'view-button',
+      render: accessor => (<Button>
+                              <a href={"/providers/view/" + accessor}>
+                                  View
+                              </a>
+                           </Button>)
+    },
+    {
+      header: '',
+      accessor: "_id",
+      dataIndex: "_id",
+      id: 'edit-button',
+      render: accessor => (<Button style={{background:"#A6CBFF"}}>
+                              <a href={"/providers/edit/" + accessor}>
+                                  Edit
+                              </a>
+                            </Button>)
+    },
+    {
+      header: '',
+      accessor: "_id",
+      dataIndex: "_id",
+      id: 'delete-button',
+      render: accessor => (<Button style={{background:"#FF8C83"}}>
+                              <a href={"/providers/delete/" + accessor}>
+                                  Delete
+                              </a>
+                           </Button>)
+    }
 ];
 const pageOptions = [
   { value: 10, label: "10 Rows" },

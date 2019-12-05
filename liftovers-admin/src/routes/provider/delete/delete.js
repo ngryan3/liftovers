@@ -25,16 +25,16 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
-class DeleteDonor extends Component{
+class DeleteProvider extends Component{
   constructor(props) {
       super(props);
       this.state = {
-        donor: {},
+        provider: {},
         requestFullfilled: false
       };
 
       this.handleChange = this.handleChange.bind(this);
-      this.deleteDonor = this.deleteDonor.bind(this);
+      this.deleteProvider = this.deleteProvider.bind(this);
     }
 
     handleChange(event) {
@@ -42,31 +42,31 @@ class DeleteDonor extends Component{
     }
 
     componentDidMount() {
-        this.getDonor();
+        this.getProvider();
     }
 
-    getDonor() {
+    getProvider() {
         // extract the id from the URL
-        const donorId = this.props.match.params.donor_id
-        console.log(donorId);
+        const providerId = this.props.match.params.provider_id
+        console.log(providerId);
 
-        fetch(ApiUrl + "/donor/" + donorId, {
+        fetch(ApiUrl + "/provider/" + providerId, {
             method: "GET"
         }).then(result => result.json())
-        .then (result => this.setState ({ donor: result }))
+        .then (result => this.setState ({ provider: result }))
 
     }
 
-    deleteDonor(event) {
+    deleteProvider(event) {
         event.preventDefault();
         // extract the id from the URL
-        const donorId = this.props.match.params.donor_id
+        const providerId = this.props.match.params.provider_id
 
-        fetch(ApiUrl + "/Donor/" + donorId + "/delete", {
+        fetch(ApiUrl + "/provider/" + providerId + "/delete", {
             method: 'POST'
         }).then(result => result.json())
 
-        window.location = "/donors"
+        window.location = "/providers"
     }
 
     render() {
@@ -74,17 +74,17 @@ class DeleteDonor extends Component{
         <div>
             <Boxed pad="5px 0">
                         <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
-                            Delete Donor { this.state.donor.contactName } { this.state.donor.contactSurname }
+                            Delete Provider { this.state.provider.contactName } { this.state.provider.contactSurname }
                         </PageTitle>
             </Boxed>
             <Boxed pad="50px">
-              <p> Are you sure you want to delete this donor? </p>
+              <p> Are you sure you want to delete this provider? </p>
               <Button type="submit" value="Cancel">
                 <a href="../">
                     Cancel
                 </a>
               </Button>
-              <Button onClick={this.deleteDonor} style={{background:"#FF8C83"}} value="Submit">
+              <Button onClick={this.deleteProvider} style={{background:"#FF8C83"}} value="Submit">
                 Delete
               </Button>
               </Boxed>
@@ -93,4 +93,4 @@ class DeleteDonor extends Component{
     }
 
 }
-export default withRouter (DeleteDonor);
+export default withRouter (DeleteProvider);

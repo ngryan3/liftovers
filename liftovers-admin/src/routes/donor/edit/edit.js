@@ -112,6 +112,7 @@ class EditDonor extends Component{
                     </PageTitle>
         </Boxed>
         <Boxed pad="50px">
+          <Input name="organizationName" type="text" label="Organization Name" onChange={this.handleChange.bind(this, 'organizationName')} value={ this.state.donor.organizationName } required forminput/><br/>
           <Input name="contactName" type="text" label="First Name" onChange={this.handleChange.bind(this, 'contactName')} value={ this.state.donor.contactName } required forminput/><br/>
           <Input name="contactSurname" type="text" label="Last Name" onChange={this.handleChange.bind(this, 'contactSurname')} value={ this.state.donor.contactSurname } required forminput/><br/>
           <Input name="contactEmail" type="text" label="Email Address" onChange={this.handleChange.bind(this, 'contactEmail')} value={ this.state.donor.contactEmail } required forminput/><br/>

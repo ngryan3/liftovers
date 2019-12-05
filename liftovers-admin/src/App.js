@@ -22,6 +22,9 @@ import ViewDonor from "./routes/donor/view/view";
 import DeleteDonor from "./routes/donor/delete/delete";
 import Providers from "./routes/provider";
 import CreateProvider from "./routes/provider/create/create";
+import EditProvider from "./routes/provider/edit/edit";
+import ViewProvider from "./routes/provider/view/view";
+import DeleteProvider from "./routes/provider/delete/delete";
 import { AdminLayout } from "./components/admin";
 import Forgot from "./routes/login/forgot";
 import Reset from "./routes/login/resetpassword";
@@ -107,6 +110,15 @@ function App() {
             </Route>
             <Route exact path="/providers/create">
                 <CreateProvider />
+            </Route>
+            <Route path="/providers/view/:provider_id" component={Providers}>
+                <ViewProvider />
+            </Route>
+            <Route path="/providers/edit/:provider_id" component={Providers}>
+                <EditProvider />
+            </Route>
+            <Route path="/providers/delete/:provider_id" component={Providers}>
+                <DeleteProvider />
             </Route>
             {/* <Route exact path="/lifts">
               <Lifts />
