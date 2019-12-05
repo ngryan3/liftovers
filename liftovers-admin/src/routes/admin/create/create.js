@@ -15,6 +15,8 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+import { isAdmin } from "../../../actions/admin"
+import { isVolunteer } from "../../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -65,10 +67,13 @@ class CreateAdmin extends Component{
     render() {
       return (
         <form onSubmit={this.createAdmin}>
-        <Boxed pad="5px 0">
+        { isVolunteer() && <Boxed>
+                        You do not have access to this page!
+                    </Boxed> }
+        { isAdmin() && <Boxed pad="5px 0">
                     <PageTitle data-test="title">Create Administrator</PageTitle>
-        </Boxed>
-        <Boxed pad="50px">
+        </Boxed> }
+        { isAdmin() && <Boxed pad="50px">
           <Input name="name" type="text" label="First Name" required forminput/><br/>
           <Input name="surname" type="text" label="Last Name" required forminput/><br/>
           <Input name="email" type="text" label="Email Address" required forminput/><br/>
@@ -91,7 +96,7 @@ class CreateAdmin extends Component{
           <Button type="submit" value="Submit">
             Submit
           </Button>
-          </Boxed>
+          </Boxed> }
         </form>
       );
     }

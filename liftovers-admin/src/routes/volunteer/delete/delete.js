@@ -14,6 +14,8 @@ import { AdminLayout } from "../../../components/admin";
 import Logo from "../../../assets/liftovers.jpg";
 import styled from "styled-components";
 import ApiUrl from "../../../api/config";
+import { isAdmin } from "../../../actions/admin"
+import { isVolunteer } from "../../../actions/volunteer"
 
 export const PageTitle = styled.h3`
   color: ${Theme.PrimaryFontColor};
@@ -24,9 +26,6 @@ export const PageTitle = styled.h3`
 const LogoHolder = styled.img`
   height: 100px !important;
 `;
-
-// Dummy
-var name = "Faye"
 
 class DeleteVolunteer extends Component{
   constructor(props) {
@@ -75,12 +74,15 @@ class DeleteVolunteer extends Component{
     render() {
       return (
         <div>
-            <Boxed pad="5px 0">
+            { isVolunteer() && <Boxed>
+                          You do not have access to this page!
+                      </Boxed> }
+            { isAdmin() && <Boxed pad="5px 0">
                         <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
                             Delete Volunteer { this.state.volunteer.name } { this.state.volunteer.surname }
                         </PageTitle>
-            </Boxed>
-            <Boxed pad="50px">
+            </Boxed> }
+            { isAdmin() && <Boxed pad="50px">
               <p> Are you sure you want to delete this volunteer? </p>
               <Button type="submit" value="Cancel">
                 <a href="../">
@@ -90,7 +92,7 @@ class DeleteVolunteer extends Component{
               <Button onClick={this.deleteVolunteer} style={{background:"#FF8C83"}} value="Submit">
                 Delete
               </Button>
-              </Boxed>
+              </Boxed> }
         </div>
       );
     }
