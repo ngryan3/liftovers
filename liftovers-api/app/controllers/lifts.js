@@ -198,18 +198,18 @@ exports.postLift = function (req, res) {
                         data: item.data.rows[0].elements[0],
                         volunteer: vol[index]
                     }
-                })
-                    .sort(function (a, b) {
-                        let itemA = a.data.duration.value // ignore upper and lowercase
-                        let itemB = b.data.duration.value // ignore upper and lowercase
-                        if (itemA < itemB) {
-                            return -1;
-                        }
-                        if (itemA > itemB) {
-                            return 1;
-                        }
-                        return 0;
-                    })
+                });
+                    // .sort(function (a, b) {
+                    //     let itemA = a.data.duration.value // ignore upper and lowercase
+                    //     let itemB = b.data.duration.value // ignore upper and lowercase
+                    //     if (itemA < itemB) {
+                    //         return -1;
+                    //     }
+                    //     if (itemA > itemB) {
+                    //         return 1;
+                    //     }
+                    //     return 0;
+                    // })
 
                 let timeSorted = valData.filter((item) => {
                     let weekday = weekdays[lift.date.getDay()];
