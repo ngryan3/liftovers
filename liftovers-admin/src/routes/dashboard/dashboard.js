@@ -46,7 +46,7 @@ function Greeting() {
         >
         <div>
           
-            <h2 style={{marginLeft: '0px', color: '#5e5e5e' }}>Welcome {username}</h2>
+            <h2 style={{marginLeft: '0px', color: '#5e5e5e' }}>Welcome,  {username}!</h2>
         </div>
       </Grid>
       </Boxed>;

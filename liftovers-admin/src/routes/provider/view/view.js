@@ -25,45 +25,53 @@ const LogoHolder = styled.img`
   height: 100px !important;
 `;
 
-class ViewAdmin extends Component{
+class ViewProvider extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            admin: {}
+            provider: {}
         };
     };
 
     componentDidMount() {
-        this.getAdmin();
+        this.getProvider();
     }
 
-    getAdmin() {
+    getProvider() {
         // extract the id from the URL
-        const adminId = this.props.match.params.admin_id
-        console.log(adminId);
+        const providerId = this.props.match.params.provider_id
+        console.log(providerId)
 
-        fetch(ApiUrl + "/user/" + adminId, {
+        fetch(ApiUrl + "/provider/" + providerId, {
             method: "GET"
         }).then(result => result.json())
-        .then (result => this.setState ({ admin: result }))
+        .then (result => this.setState ({ provider: result }))
     }
 
     render() {
+
+    console.log(this.state.provider);
+
+    // TODO: pretty display of hours
+
       return (
         <div>
             <Boxed pad="5px 0">
-                        <PageTitle data-test="title">&nbsp;&nbsp;&nbsp;&nbsp;
-                            Admin: { this.state.admin.name } { this.state.admin.surname }
+                        <PageTitle>&nbsp;&nbsp;&nbsp;&nbsp;
+                            Provider: { this.state.provider.contactName } { this.state.provider.contactSurname }
                         </PageTitle>
             </Boxed>
             <Boxed pad="50px">
-              <b>Name:</b> { this.state.admin.name } <br />
-              <b>Surname:</b> { this.state.admin.surname } <br />
-              <b>Email:</b> { this.state.admin.email } <br />
-              <b>Phone:</b> { this.state.admin.phone } <br />
-              <b>Preferred Method of Communication: </b>  { this.state.admin.methodOfCommunication }<br />
-              <b>Role: </b> { this.state.admin.role } <br />
-              <b>Last Updated: </b> { this.state.admin.updatedAt } <br />
+              <b>Organization Name:</b> { this.state.provider.organizationName } <br/>
+              <b>Contact Name:</b> { this.state.provider.contactName }<br />
+              <b>Contact Surname:</b> { this.state.provider.contactSurname } <br />
+              <b>Contact Email:</b> { this.state.provider.contactEmail } <br />
+              <b>Contact Phone:</b> { this.state.provider.contactPhone } <br />
+              <b>Preferred Method of Communication:</b> { this.state.provider.methodOfCommunication } <br />
+              <b>Location:</b> { this.state.provider.location } <br />
+              <b>Hours:</b> TODO <br />
+              <b>Acceptable Foods:</b> { this.state.provider.acceptedFoods } <br />
+              <b>Unacceptable Foods:</b> { this.state.provider.unacceptableFoods } <br />
               <br />
               <Button type="submit" value="Back">
                 <a href="../">
@@ -71,12 +79,12 @@ class ViewAdmin extends Component{
                 </a>
               </Button>
               <Button style={{background:"#A6CBFF"}} type="submit" value="Edit">
-                <a href={"../edit/" + this.props.match.params.admin_id} >
+                <a href={"../edit/" + this.props.match.params.provider_id} >
                     Edit
                 </a>
               </Button>
               <Button style={{background:"#FF8C83"}} type="submit" value="Delete">
-                <a href={"../delete/" + this.props.match.params.admin_id} >
+                <a href={"../delete/" + this.props.match.params.provider_id} >
                     Delete
                 </a>
               </Button>
@@ -86,4 +94,4 @@ class ViewAdmin extends Component{
     }
 
 }
-export default withRouter (ViewAdmin);
+export default withRouter (ViewProvider);
