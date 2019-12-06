@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
-app.use(cors({ origin: ["http://localhost:3000", "http://localhost:7000"] }));
+app.use(cors({ origin: ["http://localhost:3000", "http://localhost:7000", "https://liftovers-api.herokuapp.com", "https://liftovers-admin.herokuapp.com"] }));
 app.all("/*", function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
