@@ -1,5 +1,15 @@
 # Web Application for lifTOvers/lifTOvers team 2 (Team #: 7)
 
+## Deployed Website:
+https://liftovers-admin.herokuapp.com/
+
+(API: https://liftovers-api.herokuapp.com/)
+
+Accounts that can be used for testing:
+* Volunteer: 1092318026@qq.com; Password: 123
+* Volunteer: omisoretosin@yahoo.com; Password: 123
+* Volunteer: superAdmin@mail.com; Password: 123
+
 ## Description 
  * The administrative web application we have built for lifTOvers will allow their management to view/edit/delete information about all participating parties involved in their organization, as well as manage food deliveries (AKA lifts). They are also able to approve of new users and facilitate the flow of lifts from beginning to end by changing their statuses (requested/posted/ongoing/completed/cancelled/problem). A dashboard presents a cohesive view of items that require attention, and an overview of the state of their organization. 
  * For volunteers, it serves as a platform where they can view their volunteer history through their past lifts, as well keep their profile updated with current, accurate personal information. 
