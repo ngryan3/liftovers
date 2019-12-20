@@ -1,0 +1,11 @@
+D2
+- Your description on git and deployment is great but your branching strategy is unclear and/or not justified
+- The meeting highlights were slightly better than what was expected!
+- The readme didn’t follow the prescribed format and so marks were assigned based on whether or not you fulfilled the requirements semantically
+    - The APIs will be counted as a list of features - marks lost for the wrong format and description
+    - No real instructions for using the application 
+
+D3
+- Describe the purpose behind liftovers - you need to assume the reader doesn’t know what the organization or app is (like a real readme)
+- Generally better than expected features
+- Instructions don’t enable a TA to actually  test features (e.g. accounts need approval and you did not provide access credentials) - now remedied via video demo
